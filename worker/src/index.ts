@@ -66,9 +66,6 @@ const DEFAULT_ALLOWED_ORIGINS = new Set([
   "http://127.0.0.1:5174",
   "https://localhost:5173",
   "https://127.0.0.1:5173",
-  "https://kenichinomura.github.io",
-  "https://gearsxr.space",
-  "https://www.gearsxr.space",
 ]);
 const DEFAULT_MAX_ROOM_USERS = 6;
 const MAX_SURFACES = 6;

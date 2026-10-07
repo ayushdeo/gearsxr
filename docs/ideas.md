@@ -120,14 +120,19 @@ happened. Then Touch & Talk reuses them live.
 
 ## Keeping the fork separate
 
-- `origin` is `github.com/ayushdeo/gearsxr`. There is no `upstream` remote, so `git push`
-  can't reach the professor's repo.
+Nothing in this fork uses the upstream project's resources. Development is local only until
+we choose to ship our own production deployment.
+
+- `origin` is `github.com/ayushdeo/gearsxr`. There is no `upstream` remote.
 - **When opening a PR on GitHub, check the base repository.** GitHub defaults fork PRs to
-  target the *parent* repo. Pick `ayushdeo/gearsxr` as the base.
-- `.github/workflows/deploy.yml` is now manual-only (`workflow_dispatch`) and reads the
-  room server URL from the `COLLAB_WS_BASE` repo variable. Before this change, a deploy
-  pointed the app at the professor's Cloudflare Worker and R2 bucket.
-- `npm run worker:deploy` uses whichever Cloudflare account you're logged in to with
-  `wrangler`, so log in with your own. Add your Pages URL to `ALLOWED_ORIGINS` in
-  `wrangler.toml`.
-- Local `npm run dev` and `npm run worker:dev` touch nothing remote.
+  target the parent repo. Pick `ayushdeo/gearsxr`.
+- Removed: upstream's Cloudflare Web Analytics beacon (it reported every page view to their
+  account), the `gearsxr.space` CNAME, the demo URL on their hosted site, their origins in the
+  Worker allow-list, and the hardcoded URL of their room server.
+- The deploy workflow only runs by hand, only in `ayushdeo/gearsxr`, and only once the
+  `COLLAB_WS_BASE` repo variable names our own Worker.
+- The Worker and R2 bucket are renamed (`gearsxr-ayushdeo-room`, `gearsxr-ayushdeo-drops`) so
+  a deploy can never overwrite upstream's, even from a shared Cloudflare login.
+- Still contacted on purpose, as public third-party services rather than upstream's:
+  the Materials Project OPTIMADE API, and the share-link hosts (Drive, Dropbox, OneDrive,
+  GitHub), but only when you load from them.

@@ -47,6 +47,18 @@ interactive, VR-capable review loop and the open human-labeled benchmark.
 **MVP (about 1–2 weeks).** Bond-diff detector, timeline markers, accept/reject, and a
 JSON export. No LLM needed for the first demo.
 
+**Status: v1 implemented.**
+- `src/chapterDetect.ts` is the bond-diff detector. It applies a persistence filter, groups
+  related changes, and ignores atoms that jump (periodic-boundary wraps).
+- `src/chapterWorker.ts` runs detection in a Web Worker.
+- `src/chapterStore.ts` saves reviews in localStorage per file SHA-256 and builds the
+  `gearsxr-chapters` v1 JSON export.
+- `src/chaptersPanel.ts` and `src/chapterHighlight.ts` are the panel, the timeline markers
+  and the 3D halos (green = formed, red = broken).
+
+Next steps: room sync of reviews, review from inside VR, an import for labels, the LLM
+naming pass, and periodic-cell-aware bonds.
+
 ---
 
 ## 2. Touch & Talk: interactive MD with an agent that reasons over time

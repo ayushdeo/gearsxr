@@ -110,6 +110,54 @@
         color: #eee; background: rgba(255,255,255,0.08);
         border: 1px solid rgba(255,255,255,0.22); border-radius: 4px;
       }
+      #chapters {
+        position: fixed; right: 16px; top: 56px; z-index: 12;
+        width: min(340px, calc(100vw - 32px)); box-sizing: border-box;
+        max-height: 50vh; overflow-y: auto;
+        font-family: system-ui, sans-serif; color: #eee;
+        background: rgba(20,20,20,0.85); padding: 10px 12px;
+        border-radius: 8px;
+      }
+      #chapters h2 { font-size: 14px; margin: 0; font-weight: 600; }
+      #chapters.collapsed #chaptersContent { display: none; }
+      #chapters button { font-size: 12px; cursor: pointer; }
+      .chapterHeaderButtons { display: inline-flex; gap: 6px; }
+      #chaptersSummary { font-size: 11px; opacity: 0.85; margin: 6px 0; white-space: pre-line; }
+      .chapterNav { flex-wrap: wrap; font-size: 12px; }
+      .chapterNav label { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; }
+      .chapterNav input { width: 44px; }
+      #chaptersList { margin-top: 6px; }
+      .chapterRow { border-radius: 4px; margin-top: 3px; }
+      .chapterRow.selected { background: rgba(255,255,255,0.08); outline: 1px solid rgba(255,255,255,0.25); }
+      .chapterHead { display: flex; align-items: center; gap: 6px; padding: 3px 4px; cursor: pointer; font-size: 12px; }
+      .chapterHead:hover { background: rgba(255,255,255,0.06); }
+      .chapterDot { flex: 0 0 8px; height: 8px; border-radius: 50%; background: #f5b041; }
+      .chapterRow.accepted .chapterDot { background: #4cd07d; }
+      .chapterRow.rejected .chapterDot { background: #777; }
+      .chapterRow.rejected .chapterTitle { text-decoration: line-through; opacity: 0.6; }
+      .chapterTitle { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .chapterFrames { flex: 0 0 auto; font-size: 11px; opacity: 0.7; font-variant-numeric: tabular-nums; }
+      .chapterEditor { padding: 4px 6px 8px; display: flex; flex-direction: column; gap: 4px; }
+      .chapterDetail { font-size: 11px; opacity: 0.75; white-space: pre-line; }
+      .chapterEditor input, .chapterEditor textarea {
+        width: 100%; box-sizing: border-box; font-size: 12px; font-family: inherit;
+        color: #eee; background: #0b1119; border: 1px solid #61738a; border-radius: 3px; padding: 2px 4px;
+      }
+      .chapterActions { display: flex; gap: 6px; flex-wrap: wrap; }
+      .chapterActions .review-accepted { color: #0b2a17; background: #4cd07d; border: 0; border-radius: 3px; padding: 2px 8px; }
+      .chapterActions .review-rejected { color: #fff; background: #a33; border: 0; border-radius: 3px; padding: 2px 8px; }
+      #chapterTrack { position: relative; height: 12px; margin: 2px 0 0; }
+      #chapterTrack:empty { display: none; }
+      .chapterMarker {
+        position: absolute; top: 0; width: 6px; height: 12px; margin: 0 0 0 -3px !important; padding: 0;
+        border: 0; border-radius: 2px; cursor: pointer; background: #f5b041;
+      }
+      .chapterMarker.accepted { background: #4cd07d; }
+      .chapterMarker.rejected { background: #666; }
+      .chapterMarker.selected { outline: 2px solid #fff; z-index: 1; }
+      @media (max-width: 760px) {
+        #chapters { top: auto; bottom: 140px; max-height: 35vh; }
+      }
       #vrEntry {
         position: fixed; top: 12px; right: 16px; z-index: 20;
         margin: 0; pointer-events: auto;
@@ -175,6 +223,7 @@
     <div id="playback" style="display:none">
       <label>Frame: <span id="frameLabel">0 / 0</span></label>
       <input id="frameSlider" type="range" min="0" max="0" value="0" />
+      <div id="chapterTrack"></div>
       <div class="playbackControls">
         <button id="playBtn">Play</button>
         <button id="stepBack">&lt;</button>
@@ -194,6 +243,28 @@
       </div>
       <div id="isoList"></div>
       <div id="isoHint">Each row: color, isovalue, opacity, visibility. Use a negative isovalue for the opposite orbital lobe.</div>
+    </div>
+    <div id="chapters" style="display:none">
+      <div class="panelHeader">
+        <h2>Chapters</h2>
+        <span class="chapterHeaderButtons">
+          <button id="chaptersDetectBtn" type="button" title="Re-run bond-change detection">Re-detect</button>
+          <button id="chaptersExportBtn" type="button" title="Download labels as JSON">Export</button>
+          <button id="toggleChaptersBtn" type="button">Hide</button>
+        </span>
+      </div>
+      <div id="chaptersContent">
+        <div id="chaptersSummary"></div>
+        <div class="row chapterNav">
+          <button id="chapterPrevBtn" type="button">◀ Prev</button>
+          <button id="chapterNextBtn" type="button">Next ▶</button>
+          <label title="Frames a new bond state must hold to count as an event">Persist
+            <input id="chaptersPersist" type="number" min="1" max="100" />
+          </label>
+        </div>
+        <div id="chaptersList"></div>
+        <div class="roomHint">Click an event or a timeline marker to jump to it. Keys: [ ] prev/next · A accept · R reject · U undo. Halos mark the atoms; green lines are bonds formed, red are bonds broken.</div>
+      </div>
     </div>
     <div id="vrEntry"></div>
     <script type="module" src="/src/main.ts"></script>

@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
+# Fork: deploy only when triggered by hand, so pushes never publish anything.
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -24,7 +24,8 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          VITE_COLLAB_WS_BASE: wss://vr-md-viewer-room.kenichi-nomura.workers.dev
+          # Set the COLLAB_WS_BASE repo variable to your own Worker's wss:// URL.
+          VITE_COLLAB_WS_BASE: ${{ vars.COLLAB_WS_BASE }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

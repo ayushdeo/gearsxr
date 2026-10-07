@@ -15,6 +15,8 @@ concurrency:
 
 jobs:
   build-and-deploy:
+    # Never deploy from anywhere but this fork, and never without our own Worker URL.
+    if: github.repository == 'ayushdeo/gearsxr' && vars.COLLAB_WS_BASE != ''
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

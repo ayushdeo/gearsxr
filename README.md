@@ -2,8 +2,12 @@
 
 GEARS XR (Extended Reality) is a browser-based molecular dynamics trajectory viewer for extended XYZ files, with desktop controls and WebXR support for virtual reality headsets.
 
-- **[Open the viewer](https://gearsxr.space/)**
-- **[Read the tutorial](https://gearsxr.space/tutorial.html)** — a friendly, step-by-step guide with illustrations
+> **Fork notice.** This is `ayushdeo/gearsxr`, an independent fork used for local development of new
+> features (see [docs/ideas.md](docs/ideas.md)). It uses none of the upstream project's hosted
+> site, room server, storage, or analytics. Everything runs locally until this fork has its own
+> production deployment.
+
+- Tutorial: `public/tutorial.html` (served at `/tutorial.html` by the dev server)
 
 ![GEARS XR screenshot](docs/screenshot.png)
 
@@ -21,11 +25,11 @@ GEARS XR (Extended Reality) is a browser-based molecular dynamics trajectory vie
 
 ## Quick Start
 
-1. Open [gearsxr.space](https://gearsxr.space/) — the URL field is prefilled with a demo trajectory.
+1. Run `npm run dev` and open the printed local URL — the URL field is prefilled with the bundled demo trajectory.
 2. Click **Load URL**.
 3. Click **Play** in the bottom-left playback panel.
 
-Everything else — loading your own files, multiuser rooms, VR controls, measurements — is covered in the [tutorial](https://gearsxr.space/tutorial.html).
+Everything else — loading your own files, multiuser rooms, VR controls, measurements — is covered in the tutorial (`/tutorial.html`).
 
 ## File Format
 
@@ -55,17 +59,20 @@ npm run worker:dev   # room server (Cloudflare Worker) on :8787
 npm run worker:deploy  # deploy the room server
 ```
 
-The frontend deploys to GitHub Pages ([gearsxr.space](https://gearsxr.space/)) on every push to `main`. The multiuser room server is a Cloudflare Worker with a Durable Object per room, deployed at:
+Local only for now: `npm run dev` plus `npm run worker:dev` gives you the viewer and a local room
+server on `ws://127.0.0.1:8787` with no remote services involved.
 
-```text
-wss://vr-md-viewer-room.kenichi-nomura.workers.dev
-```
+When this fork is ready for production, the GitHub Pages workflow is run by hand (Actions →
+Deploy → Run workflow). It refuses to run until the `COLLAB_WS_BASE` repository variable holds
+this fork's own Worker URL. The Worker (`gearsxr-ayushdeo-room`) and R2 bucket
+(`gearsxr-ayushdeo-drops`) deploy to whichever Cloudflare account `wrangler` is logged in to;
+add the production page's origin to `ALLOWED_ORIGINS` in `wrangler.toml` first.
 
 The Worker also provides a `/proxy` route that fetches trajectories from known cloud-storage hosts when a provider blocks direct browser downloads (Google Drive usually does).
 
 ## Troubleshooting
 
-Common issues (share-link permissions, room connection, VR support) are covered in the [tutorial's help section](https://gearsxr.space/tutorial.html#troubleshooting).
+Common issues (share-link permissions, room connection, VR support) are covered in the tutorial's help section (`/tutorial.html#troubleshooting`).
 
 ## License
 

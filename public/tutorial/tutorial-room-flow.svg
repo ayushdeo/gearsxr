@@ -28,7 +28,7 @@
   </defs>
   <rect class="page" width="1100" height="560"/>
   <text x="54" y="62" fill="#0f172a" style="font: 800 28px system-ui, sans-serif;">Share one short code, watch the same molecule</text>
-  <text x="54" y="88" fill="#64748b" style="font: 16px system-ui, sans-serif;">Both of you open gearsxr.space. One person shares a room code with the other.</text>
+  <text x="54" y="88" fill="#64748b" style="font: 16px system-ui, sans-serif;">Both of you open the viewer. One person shares a room code with the other.</text>
 
   <!-- Your browser -->
   <g transform="translate(54 150)">

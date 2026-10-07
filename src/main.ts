@@ -45,6 +45,8 @@ const collaborationEl = $("collaboration");
 const toggleRoomBtn = $<HTMLButtonElement>("toggleRoomBtn");
 const fileInput = $<HTMLInputElement>("fileInput");
 const urlInput = $<HTMLInputElement>("urlInput");
+// Prefill the bundled demo from wherever this page is served, not a hosted site.
+if (location.protocol.startsWith("http")) urlInput.value = new URL("samples/tobe.xyz", location.href).href;
 const loadUrlBtn = $<HTMLButtonElement>("loadUrlBtn");
 const backgroundSelect = $<HTMLSelectElement>("backgroundSelect");
 const vrEntryEl = $("vrEntry");

@@ -8,6 +8,8 @@ import { MoleculeRenderer } from "./moleculeRenderer";
 import { IsosurfacePanel } from "./isosurfacePanel";
 import { VRObjectManipulator } from "./vrInteraction";
 import { MeasurementTool } from "./measurement";
+import { ChapterHighlight } from "./chapterHighlight";
+import { ChaptersPanel } from "./chaptersPanel";
 import { Playback } from "./playback";
 import {
   BACKGROUND_PRESETS,
@@ -190,6 +192,30 @@ const measurementTool = new MeasurementTool((text) => {
   statusEl.textContent = text;
 });
 scene.add(measurementTool.group);
+
+// Simulation Chapters: bond-change events on the timeline, reviewed by a human.
+const chapterHighlight = new ChapterHighlight();
+const chaptersPanel = new ChaptersPanel({
+  panelEl: $("chapters"),
+  toggleBtn: $<HTMLButtonElement>("toggleChaptersBtn"),
+  listEl: $("chaptersList"),
+  summaryEl: $("chaptersSummary"),
+  trackEl: $("chapterTrack"),
+  detectBtn: $<HTMLButtonElement>("chaptersDetectBtn"),
+  exportBtn: $<HTMLButtonElement>("chaptersExportBtn"),
+  prevBtn: $<HTMLButtonElement>("chapterPrevBtn"),
+  nextBtn: $<HTMLButtonElement>("chapterNextBtn"),
+  persistInput: $<HTMLInputElement>("chaptersPersist"),
+  highlight: chapterHighlight,
+  seek: (frame) => {
+    if (!playback) return;
+    playback.playing = false;
+    syncPlayButton();
+    playback.setFrame(frame);
+    markPresenterStateDirty(true);
+  },
+  annotator: () => userNameInput.value.trim() || "anonymous",
+});
 
 // Isosurface controls (shown only for cube files). Idle status restores the
 // cube's "Loaded …" summary once extraction finishes.
@@ -648,6 +674,10 @@ renderer.domElement.addEventListener("pointercancel", () => {
 });
 
 window.addEventListener("keydown", (e) => {
+  if (chaptersPanel.handleKey(e)) {
+    e.preventDefault();
+    return;
+  }
   if (e.key === "c" || e.key === "C") measurementTool.clear();
 });
 
@@ -702,6 +732,7 @@ function mountMolecule(trajectory: Trajectory, sourceUrl: string | null) {
   }
   moleculeRenderer = new MoleculeRenderer(trajectory);
   moleculeRoot.add(moleculeRenderer.group);
+  moleculeRenderer.group.add(chapterHighlight.group);
   moleculeRoot.position.set(0, 0, 0);
   moleculeRoot.quaternion.identity();
   moleculeRoot.scale.set(1, 1, 1);
@@ -759,6 +790,7 @@ async function loadCubeVolume(
 
   // A cube is a single structure — no trajectory frames.
   playback = null;
+  chaptersPanel.hide();
   playbackEl.style.display = "none";
   document.body.classList.remove("has-playback");
 
@@ -825,6 +857,7 @@ async function loadTrajectoryFile(
 
     playback = new Playback(trajectory.numFrames, (frame) => {
       moleculeRenderer?.setFrame(frame);
+      chaptersPanel.onFrame(frame);
       frameSlider.value = String(frame);
       frameLabel.textContent = `${frame} / ${trajectory.numFrames - 1}`;
       markPresenterStateDirty();
@@ -841,6 +874,8 @@ async function loadTrajectoryFile(
     document.body.classList.add("has-playback");
 
     statusEl.textContent = `Loaded ${trajectory.numAtoms} atoms x ${trajectory.numFrames} frames`;
+    const fileName = sourceUrl ? decodeURIComponent(new URL(sourceUrl).pathname.split("/").pop() || "") : lastLocalName;
+    void chaptersPanel.setTrajectory(trajectory, file, fileName || "trajectory.xyz");
     if (broadcastState) markPresenterStateDirty(true);
     if (broadcastState && !sourceUrl) void ensureLocalTrajectoryShared();
   } catch (err) {

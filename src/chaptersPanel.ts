@@ -1,6 +1,7 @@
 // Simulation Chapters panel: runs bond-change detection on the loaded
 // trajectory, lists the events, marks them on the playback timeline, and lets
-// a scientist accept / reject / relabel each one and export the labels.
+// a scientist accept / reject / relabel each one and export the labels. An
+// optional local LLM (Ollama) suggests names and flags likely artifacts.
 
 import ChapterWorker from "./chapterWorker?worker&inline";
 import { DEFAULT_DETECT_OPTIONS, type DetectOptions, type DetectedEvent } from "./chapterDetect";
@@ -14,6 +15,7 @@ import {
   type ReviewStatus,
   type TrajectoryInfo,
 } from "./chapterStore";
+import { listModels, loadLlmSettings, saveLlmSettings, suggestChapterLabels, type LlmSettings } from "./chapterAI";
 import type { ChapterHighlight } from "./chapterHighlight";
 import type { Trajectory } from "./xyzParser";
 
@@ -28,6 +30,11 @@ export interface ChaptersPanelOptions {
   prevBtn: HTMLButtonElement;
   nextBtn: HTMLButtonElement;
   persistInput: HTMLInputElement;
+  aiBtn: HTMLButtonElement;
+  aiEndpointInput: HTMLInputElement;
+  aiModelSelect: HTMLSelectElement;
+  aiRefreshBtn: HTMLButtonElement;
+  aiStatusEl: HTMLElement;
   highlight: ChapterHighlight;
   /** Jump playback to a frame (and pause). */
   seek: (frame: number) => void;
@@ -50,6 +57,9 @@ export class ChaptersPanel {
   private worker: Worker | null = null;
   private token = 0;
   private detectOptions: DetectOptions = { ...DEFAULT_DETECT_OPTIONS };
+  private llm: LlmSettings = loadLlmSettings();
+  private aiRun: AbortController | null = null;
+  private modelsLoaded = false;
 
   constructor(opts: ChaptersPanelOptions) {
     this.opts = opts;
@@ -60,6 +70,23 @@ export class ChaptersPanel {
     opts.toggleBtn.addEventListener("click", () => {
       const collapsed = opts.panelEl.classList.toggle("collapsed");
       opts.toggleBtn.textContent = collapsed ? "Show" : "Hide";
+    });
+    opts.aiEndpointInput.value = this.llm.endpoint;
+    opts.aiEndpointInput.addEventListener("change", () => {
+      this.llm.endpoint = opts.aiEndpointInput.value.trim() || "http://localhost:11434";
+      opts.aiEndpointInput.value = this.llm.endpoint;
+      saveLlmSettings(this.llm);
+      void this.refreshModels();
+    });
+    opts.aiModelSelect.addEventListener("change", () => {
+      this.llm.model = opts.aiModelSelect.value;
+      saveLlmSettings(this.llm);
+    });
+    opts.aiRefreshBtn.addEventListener("click", () => void this.refreshModels());
+    opts.aiBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // it sits in the settings <summary>; don't toggle it
+      if (this.aiRun) this.aiRun.abort();
+      else void this.runAi();
     });
     opts.persistInput.value = String(this.detectOptions.minPersistFrames);
     opts.persistInput.addEventListener("change", () => {
@@ -83,6 +110,7 @@ export class ChaptersPanel {
       return;
     }
     this.opts.panelEl.style.display = "block";
+    if (!this.modelsLoaded) void this.refreshModels();
     this.render();
     const token = this.token;
     const sha256 = await fingerprint(file);
@@ -136,6 +164,7 @@ export class ChaptersPanel {
   }
 
   private cancel() {
+    this.aiRun?.abort();
     this.token++;
     this.worker?.terminate();
     this.worker = null;
@@ -193,6 +222,73 @@ export class ChaptersPanel {
     });
   }
 
+  private async refreshModels() {
+    const { aiModelSelect, aiStatusEl } = this.opts;
+    aiStatusEl.textContent = "Looking for Ollama models…";
+    let models: string[];
+    try {
+      models = await listModels(this.llm.endpoint, AbortSignal.timeout(5000));
+    } catch (err) {
+      aiStatusEl.textContent = (err as Error).message;
+      return;
+    }
+    this.modelsLoaded = true;
+    aiModelSelect.replaceChildren(
+      ...models.map((name) => {
+        const option = document.createElement("option");
+        option.value = option.textContent = name;
+        return option;
+      }),
+    );
+    if (!models.includes(this.llm.model)) {
+      // Prefer models that follow a JSON schema well, in this order.
+      const preferred = [/qwen2\.5/, /gemma/, /llama3/].map((re) => models.find((m) => re.test(m))).find(Boolean);
+      this.llm.model = preferred ?? models[0] ?? "";
+      saveLlmSettings(this.llm);
+    }
+    aiModelSelect.value = this.llm.model;
+    aiStatusEl.textContent = models.length
+      ? `${models.length} model${models.length === 1 ? "" : "s"} available.`
+      : "Ollama is running but has no models. Try `ollama pull qwen2.5:7b`.";
+  }
+
+  private async runAi() {
+    const trajectory = this.trajectory;
+    if (!trajectory || this.chapters.length === 0) return;
+    const { aiBtn, aiStatusEl } = this.opts;
+    const run = new AbortController();
+    this.aiRun = run;
+    const chapters = this.chapters;
+    aiBtn.textContent = "■ Stop AI";
+    aiStatusEl.textContent = `Asking ${this.llm.model || "model"}…`;
+    const started = performance.now();
+    try {
+      const named = await suggestChapterLabels(
+        this.llm,
+        trajectory,
+        chapters,
+        (done, total) => {
+          if (run.signal.aborted || chapters !== this.chapters) return;
+          aiStatusEl.textContent = `Asking ${this.llm.model}… ${done}/${total}`;
+          this.persist();
+          this.render();
+        },
+        run.signal,
+      );
+      const seconds = ((performance.now() - started) / 1000).toFixed(1);
+      aiStatusEl.textContent = `${this.llm.model} named ${named}/${chapters.length} events in ${seconds}s. Suggestions only; you decide.`;
+    } catch (err) {
+      aiStatusEl.textContent = run.signal.aborted ? "AI run stopped." : `AI error: ${(err as Error).message}`;
+    } finally {
+      if (this.aiRun === run) this.aiRun = null;
+      aiBtn.textContent = "✨ AI name";
+      if (chapters === this.chapters) {
+        this.persist();
+        this.render();
+      }
+    }
+  }
+
   private select(index: number) {
     if (index < 0 || index >= this.chapters.length) return;
     this.selectedIndex = index;
@@ -247,6 +343,7 @@ export class ChaptersPanel {
     this.renderList();
     const empty = this.chapters.length === 0;
     this.opts.exportBtn.disabled = empty;
+    this.opts.aiBtn.disabled = empty && !this.aiRun;
     this.opts.prevBtn.disabled = empty;
     this.opts.nextBtn.disabled = empty;
   }
@@ -275,7 +372,7 @@ export class ChaptersPanel {
       marker.className = `chapterMarker ${chapter.status}${index === this.selectedIndex ? " selected" : ""}`;
       // Matches the range input's thumb inset so markers line up with frames.
       marker.style.left = `calc(8px + (100% - 16px) * ${chapter.startFrame / lastFrame})`;
-      marker.title = `Frame ${chapter.startFrame}: ${chapter.humanLabel ?? chapter.label}`;
+      marker.title = `Frame ${chapter.startFrame}: ${displayLabel(chapter)}`;
       marker.addEventListener("click", () => this.select(index));
       track.append(marker);
     });
@@ -287,6 +384,7 @@ export class ChaptersPanel {
     this.chapters.forEach((chapter, index) => {
       const row = document.createElement("div");
       row.className = `chapterRow ${chapter.status}${index === this.selectedIndex ? " selected" : ""}`;
+      if (chapter.ai?.artifact && chapter.humanLabel === null) row.classList.add("aiArtifact");
 
       const head = document.createElement("div");
       head.className = "chapterHead";
@@ -295,7 +393,8 @@ export class ChaptersPanel {
       dot.className = "chapterDot";
       const title = document.createElement("span");
       title.className = "chapterTitle";
-      title.textContent = `${KIND_ICON[chapter.kind]} ${chapter.humanLabel ?? chapter.label}`;
+      title.textContent = `${KIND_ICON[chapter.kind]} ${displayLabel(chapter)}`;
+      if (chapter.ai) title.title = `AI (${chapter.ai.model}): ${chapter.ai.rationale}`;
       const frames = document.createElement("span");
       frames.className = "chapterFrames";
       frames.textContent =
@@ -319,6 +418,24 @@ export class ChaptersPanel {
     if (chapter.formed.length) parts.push(`Formed: ${pairs(chapter.formed)}`);
     if (chapter.broken.length) parts.push(`Broken: ${pairs(chapter.broken)}`);
     detail.textContent = parts.join("\n");
+
+    const ai = chapter.ai;
+    const aiBox = document.createElement("div");
+    aiBox.className = "chapterAi";
+    if (ai) {
+      const text = document.createElement("div");
+      const flag = ai.artifact ? " · likely artifact" : "";
+      text.textContent = `AI (${ai.model}, ${ai.category}, ${Math.round(ai.confidence * 100)}%${flag}): ${ai.label}${ai.rationale ? ` — ${ai.rationale}` : ""}`;
+      const use = document.createElement("button");
+      use.type = "button";
+      use.textContent = "Use AI label";
+      use.addEventListener("click", () => {
+        chapter.humanLabel = ai.label;
+        this.persist();
+        this.render();
+      });
+      aiBox.append(text, use);
+    }
 
     const label = document.createElement("input");
     label.type = "text";
@@ -351,7 +468,16 @@ export class ChaptersPanel {
     };
     actions.append(button("✓ Accept (A)", "accepted"), button("✗ Reject (R)", "rejected"), button("Undo (U)", "pending"));
 
-    editor.append(detail, label, note, actions);
+    editor.append(detail);
+    if (ai) editor.append(aiBox);
+    editor.append(label, note, actions);
     return editor;
   }
+}
+
+/** Human label wins, then the AI suggestion, then the detector's label. */
+function displayLabel(chapter: Chapter): string {
+  if (chapter.humanLabel) return chapter.humanLabel;
+  if (chapter.ai) return `${chapter.ai.artifact ? "⚠ " : ""}${chapter.ai.label}`;
+  return chapter.label;
 }

@@ -143,6 +143,17 @@
         width: 100%; box-sizing: border-box; font-size: 12px; font-family: inherit;
         color: #eee; background: #0b1119; border: 1px solid #61738a; border-radius: 3px; padding: 2px 4px;
       }
+      #chaptersAi { font-size: 12px; margin-top: 6px; }
+      #chaptersAi summary { cursor: pointer; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+      #chaptersAiStatus { font-size: 11px; opacity: 0.8; flex: 1 1 140px; }
+      #chaptersAi label { display: block; font-size: 11px; margin: 6px 0 2px; opacity: 0.85; }
+      #chaptersAi input, #chaptersAi select {
+        width: 100%; box-sizing: border-box; font-size: 12px;
+        color: #eee; background: #0b1119; border: 1px solid #61738a; border-radius: 3px;
+      }
+      #chaptersAi .row select { flex: 1; min-width: 0; }
+      .chapterAi { font-size: 11px; color: #c9b6ff; display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
+      .chapterRow.aiArtifact .chapterTitle { color: #c9a35a; }
       .chapterActions { display: flex; gap: 6px; flex-wrap: wrap; }
       .chapterActions .review-accepted { color: #0b2a17; background: #4cd07d; border: 0; border-radius: 3px; padding: 2px 8px; }
       .chapterActions .review-rejected { color: #fff; background: #a33; border: 0; border-radius: 3px; padding: 2px 8px; }
@@ -262,6 +273,16 @@
             <input id="chaptersPersist" type="number" min="1" max="100" />
           </label>
         </div>
+        <details id="chaptersAi">
+          <summary><button id="chaptersAiBtn" type="button" title="Ask a local model to name events and flag likely artifacts">✨ AI name</button> <span id="chaptersAiStatus"></span></summary>
+          <label for="chaptersAiEndpoint">Ollama endpoint</label>
+          <input id="chaptersAiEndpoint" type="text" spellcheck="false" />
+          <label for="chaptersAiModel">Model</label>
+          <div class="row">
+            <select id="chaptersAiModel"></select>
+            <button id="chaptersAiRefresh" type="button">Refresh</button>
+          </div>
+        </details>
         <div id="chaptersList"></div>
         <div class="roomHint">Click an event or a timeline marker to jump to it. Keys: [ ] prev/next · A accept · R reject · U undo. Halos mark the atoms; green lines are bonds formed, red are bonds broken.</div>
       </div>

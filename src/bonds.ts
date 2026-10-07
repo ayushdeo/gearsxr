@@ -6,7 +6,7 @@ export interface Bond {
 }
 
 // Bonded if distance <= sum of covalent radii * tolerance.
-const TOLERANCE = 1.2;
+export const BOND_TOLERANCE = 1.2;
 
 /**
  * Computes bonds for a single frame using a uniform spatial hash grid so
@@ -26,7 +26,7 @@ export function computeBonds(
     radii[i] = r;
     if (r > maxRadius) maxRadius = r;
   }
-  const cellSize = Math.max(maxRadius * 2 * TOLERANCE, 0.1);
+  const cellSize = Math.max(maxRadius * 2 * BOND_TOLERANCE, 0.1);
 
   const cellOf = (x: number, y: number, z: number) =>
     `${Math.floor(x / cellSize)},${Math.floor(y / cellSize)},${Math.floor(z / cellSize)}`;
@@ -66,7 +66,7 @@ export function computeBonds(
             const ddy = yi - positions[offj + 1];
             const ddz = zi - positions[offj + 2];
             const distSq = ddx * ddx + ddy * ddy + ddz * ddz;
-            const cutoff = (radii[i] + radii[j]) * TOLERANCE;
+            const cutoff = (radii[i] + radii[j]) * BOND_TOLERANCE;
             if (distSq <= cutoff * cutoff) {
               bonds.push({ a: i, b: j });
             }

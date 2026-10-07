@@ -206,6 +206,11 @@ const chaptersPanel = new ChaptersPanel({
   prevBtn: $<HTMLButtonElement>("chapterPrevBtn"),
   nextBtn: $<HTMLButtonElement>("chapterNextBtn"),
   persistInput: $<HTMLInputElement>("chaptersPersist"),
+  aiBtn: $<HTMLButtonElement>("chaptersAiBtn"),
+  aiEndpointInput: $<HTMLInputElement>("chaptersAiEndpoint"),
+  aiModelSelect: $<HTMLSelectElement>("chaptersAiModel"),
+  aiRefreshBtn: $<HTMLButtonElement>("chaptersAiRefresh"),
+  aiStatusEl: $("chaptersAiStatus"),
   highlight: chapterHighlight,
   seek: (frame) => {
     if (!playback) return;

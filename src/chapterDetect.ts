@@ -65,11 +65,15 @@ function frameSymbols(trajectory: Trajectory, frame: number): string[] {
   return out.length === n ? out : trajectory.symbols;
 }
 
-/** Atoms whose displacement from the previous frame exceeds the threshold. */
+/**
+ * Atoms that moved more than the threshold since the previous frame, or whose
+ * element changed (files without stable atom IDs reuse indices for different
+ * atoms). Either way the index no longer tracks one continuous atom.
+ */
 function jumpedAtoms(trajectory: Trajectory, frame: number, threshold: number): Set<number> {
   const jumped = new Set<number>();
   if (frame === 0) return jumped;
-  const { positions, numAtoms } = trajectory;
+  const { positions, numAtoms, frameSymbols: species } = trajectory;
   const cur = frame * numAtoms * 3;
   const prev = cur - numAtoms * 3;
   const limitSq = threshold * threshold;
@@ -78,6 +82,7 @@ function jumpedAtoms(trajectory: Trajectory, frame: number, threshold: number): 
     const dy = positions[cur + i * 3 + 1] - positions[prev + i * 3 + 1];
     const dz = positions[cur + i * 3 + 2] - positions[prev + i * 3 + 2];
     if (dx * dx + dy * dy + dz * dz > limitSq) jumped.add(i);
+    else if (species[frame * numAtoms + i] !== species[(frame - 1) * numAtoms + i]) jumped.add(i);
   }
   return jumped;
 }
@@ -227,10 +232,11 @@ export function detectBondEvents(
 ): DetectedEvent[] {
   if (trajectory.numFrames < 2 || trajectory.numAtoms < 2) return [];
   const changes = detectBondChanges(trajectory, options, onProgress);
-  const symbols = trajectory.symbols;
 
   return groupChanges(changes, options.groupWindowFrames)
     .map((group) => {
+      // Name atoms by their element at the event, not in frame 0.
+      const symbols = frameSymbols(trajectory, Math.min(...group.map((c) => c.frame)));
       const atoms = new Set<number>();
       for (const c of group) {
         atoms.add(c.a);

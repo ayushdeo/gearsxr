@@ -11,6 +11,7 @@ import {
   type DetectOptions,
   type DetectedEvent,
 } from "./chapterDetect";
+import type { AiSuggestion } from "./chapterAI";
 
 export type ReviewStatus = "pending" | "accepted" | "rejected";
 
@@ -21,6 +22,8 @@ export interface Chapter extends DetectedEvent {
   humanLabel: string | null;
   note: string;
   reviewedAt: string | null;
+  /** Model suggestion (label, category, artifact flag); never sets status. */
+  ai: AiSuggestion | null;
 }
 
 export interface TrajectoryInfo {
@@ -49,6 +52,7 @@ export interface ChaptersExport {
     formed: BondPair[];
     broken: BondPair[];
     detectorLabel: string;
+    ai: AiSuggestion | null;
     humanLabel: string | null;
     status: ReviewStatus;
     note: string;
@@ -73,6 +77,7 @@ export function toChapters(events: DetectedEvent[]): Chapter[] {
     humanLabel: null,
     note: "",
     reviewedAt: null,
+    ai: null,
   }));
 }
 
@@ -91,13 +96,13 @@ function storageKey(info: TrajectoryInfo) {
   return STORAGE_PREFIX + (info.sha256 ?? `${info.name}:${info.sizeBytes}:${info.numAtoms}x${info.numFrames}`);
 }
 
-type SavedReview = Pick<Chapter, "status" | "humanLabel" | "note" | "reviewedAt">;
+type SavedReview = Pick<Chapter, "status" | "humanLabel" | "note" | "reviewedAt" | "ai">;
 
 export function saveReviews(info: TrajectoryInfo, chapters: Chapter[]) {
   const reviews: Record<string, SavedReview> = {};
   for (const c of chapters) {
-    if (c.status === "pending" && c.humanLabel === null && !c.note) continue;
-    reviews[c.id] = { status: c.status, humanLabel: c.humanLabel, note: c.note, reviewedAt: c.reviewedAt };
+    if (c.status === "pending" && c.humanLabel === null && !c.note && !c.ai) continue;
+    reviews[c.id] = { status: c.status, humanLabel: c.humanLabel, note: c.note, reviewedAt: c.reviewedAt, ai: c.ai };
   }
   try {
     if (Object.keys(reviews).length === 0) localStorage.removeItem(storageKey(info));
@@ -118,7 +123,7 @@ export function restoreReviews(info: TrajectoryInfo, chapters: Chapter[]): numbe
   for (const c of chapters) {
     const saved = reviews[c.id];
     if (!saved) continue;
-    Object.assign(c, saved);
+    Object.assign(c, { ...saved, ai: saved.ai ?? null });
     restored++;
   }
   return restored;
@@ -149,6 +154,7 @@ export function buildExport(
       formed: c.formed,
       broken: c.broken,
       detectorLabel: c.label,
+      ai: c.ai,
       humanLabel: c.humanLabel,
       status: c.status,
       note: c.note,

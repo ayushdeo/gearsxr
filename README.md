@@ -8,6 +8,7 @@ GEARS XR (Extended Reality) is a browser-based molecular dynamics trajectory vie
 > production deployment.
 
 - Tutorial: `public/tutorial.html` (served at `/tutorial.html` by the dev server)
+- Simulation Chapters with a local AI model: [docs/local-ai.md](docs/local-ai.md)
 
 ![GEARS XR screenshot](docs/screenshot.png)
 

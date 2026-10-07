@@ -55,9 +55,12 @@ JSON export. No LLM needed for the first demo.
   `gearsxr-chapters` v1 JSON export.
 - `src/chaptersPanel.ts` and `src/chapterHighlight.ts` are the panel, the timeline markers
   and the 3D halos (green = formed, red = broken).
+- `src/chapterAI.ts` is the LLM naming pass. It runs on a local Ollama during beta (see
+  [local-ai.md](local-ai.md)), suggests labels and categories, and flags cutoff artifacts.
+  It never decides a review.
 
-Next steps: room sync of reviews, review from inside VR, an import for labels, the LLM
-naming pass, and periodic-cell-aware bonds.
+Next steps: room sync of reviews, review from inside VR, an import for labels, a hosted-model
+route through our own Worker, and periodic-cell-aware bonds.
 
 ---
 

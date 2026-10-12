@@ -59,6 +59,10 @@ JSON export. No LLM needed for the first demo.
   [local-ai.md](local-ai.md)), suggests labels and categories, and flags cutoff artifacts.
   It never decides a review.
 
+- `tools/benchmark/` is the known-answer benchmark built from Transition1x reactions. It
+  scores the detector and each local model with no hand labeling; see
+  [benchmark.md](benchmark.md).
+
 Next steps: room sync of reviews, review from inside VR, an import for labels, a hosted-model
 route through our own Worker, and periodic-cell-aware bonds.
 

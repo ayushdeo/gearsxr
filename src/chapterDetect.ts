@@ -7,6 +7,9 @@
 // held for `minPersistFrames` consecutive frames. Committed changes that share
 // an atom and fall within `groupWindowFrames` of each other are merged into one
 // event, so e.g. a proton transfer reads as one chapter, not a break + a form.
+// A transfer can take longer than that window (the atom sits unbound between
+// partners), so an atom's bond break also links to its next bond formation
+// within `transferWindowFrames`.
 
 import { computeBonds } from "./bonds";
 import type { Trajectory } from "./xyzParser";
@@ -19,6 +22,8 @@ export interface DetectOptions {
   minPersistFrames: number;
   /** Changes sharing an atom within this many frames merge into one event. */
   groupWindowFrames: number;
+  /** An atom's break links to its next formation within this many frames. */
+  transferWindowFrames: number;
   /**
    * Per-frame displacement (Å) above which an atom is treated as having
    * jumped (periodic-boundary wrap or a discontinuous trajectory) rather than
@@ -30,6 +35,7 @@ export interface DetectOptions {
 export const DEFAULT_DETECT_OPTIONS: DetectOptions = {
   minPersistFrames: 3,
   groupWindowFrames: 5,
+  transferWindowFrames: 30,
   jumpThreshold: 2.5,
 };
 
@@ -155,7 +161,7 @@ function detectBondChanges(trajectory: Trajectory, options: DetectOptions, onPro
 }
 
 /** Union-find grouping: changes sharing an atom within the window form one event. */
-function groupChanges(changes: BondChange[], windowFrames: number): BondChange[][] {
+function groupChanges(changes: BondChange[], windowFrames: number, transferWindowFrames: number): BondChange[][] {
   const parent = changes.map((_, i) => i);
   const find = (i: number): number => {
     while (parent[i] !== i) {
@@ -172,8 +178,16 @@ function groupChanges(changes: BondChange[], windowFrames: number): BondChange[]
 
   // Changes are produced in frame order; per atom, link to recent changes.
   const recentByAtom = new Map<number, number[]>();
+  const lastByAtom = new Map<number, number>();
   changes.forEach((change, i) => {
     for (const atom of [change.a, change.b]) {
+      // Transfer: this atom's previous change was a break, and now it binds again.
+      const last = lastByAtom.get(atom);
+      if (change.formed && last !== undefined && !changes[last].formed && change.frame - changes[last].frame <= transferWindowFrames) {
+        union(i, last);
+      }
+      lastByAtom.set(atom, i);
+
       const recent = (recentByAtom.get(atom) ?? []).filter((j) => change.frame - changes[j].frame <= windowFrames);
       for (const j of recent) union(i, j);
       recent.push(i);
@@ -233,7 +247,7 @@ export function detectBondEvents(
   if (trajectory.numFrames < 2 || trajectory.numAtoms < 2) return [];
   const changes = detectBondChanges(trajectory, options, onProgress);
 
-  return groupChanges(changes, options.groupWindowFrames)
+  return groupChanges(changes, options.groupWindowFrames, options.transferWindowFrames)
     .map((group) => {
       // Name atoms by their element at the event, not in frame 0.
       const symbols = frameSymbols(trajectory, Math.min(...group.map((c) => c.frame)));

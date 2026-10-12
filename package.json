@@ -13,12 +13,16 @@
     "worker:dev:https": "XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs wrangler dev --ip 0.0.0.0 --port 8787 --inspector-port 0 --local-protocol=https",
     "worker:deploy": "XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs wrangler deploy",
     "worker:secret": "XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs wrangler secret put SHARE_SIGNING_KEY",
-    "worker:secrets": "XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs wrangler secret list"
+    "worker:secrets": "XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs wrangler secret list",
+    "bench": "tsx tools/benchmark/evaluate.ts",
+    "typecheck": "tsc --noEmit -p . && tsc --noEmit -p tools"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260626.1",
+    "@types/node": "^22.20.5",
     "@types/three": "^0.185.0",
     "@vitejs/plugin-basic-ssl": "^1.2.0",
+    "tsx": "^4.23.15",
     "typescript": "^5.6.0",
     "vite": "^5.4.0",
     "vite-plugin-singlefile": "^2.0.3",

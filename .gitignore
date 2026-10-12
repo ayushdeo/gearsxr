@@ -4,3 +4,7 @@ dist/
 .claude/
 .wrangler/
 .dev.vars
+
+# Benchmark data and reports (generated locally)
+bench/
+*.h5

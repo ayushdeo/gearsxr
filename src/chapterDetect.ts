@@ -7,22 +7,24 @@
 // held for `minPersistFrames` consecutive frames. Committed changes that share
 // an atom and fall within `groupWindowFrames` of each other are merged into one
 // event, so e.g. a proton transfer reads as one chapter, not a break + a form.
-// A transfer can take longer than that window (the atom sits unbound between
-// partners), so an atom's bond break also links to its next bond formation
-// within `transferWindowFrames`.
+// An exchange can take longer than that window (an atom sits between
+// partners), so an atom's consecutive changes in opposite directions (a break
+// then a formation, or a formation then a break) link within
+// `transferWindowFrames`.
 
 import { computeBonds } from "./bonds";
+import { classifyChapter, localGraph, type ChapterCategory } from "./chapterChemistry";
 import type { Trajectory } from "./xyzParser";
 
 export const DETECTOR_NAME = "bond-diff";
-export const DETECTOR_VERSION = 1;
+export const DETECTOR_VERSION = 2;
 
 export interface DetectOptions {
   /** Frames a new bond state must hold before it counts as a change. */
   minPersistFrames: number;
   /** Changes sharing an atom within this many frames merge into one event. */
   groupWindowFrames: number;
-  /** An atom's break links to its next formation within this many frames. */
+  /** An atom's break and next formation (either order) link within this many frames. */
   transferWindowFrames: number;
   /**
    * Per-frame displacement (Å) above which an atom is treated as having
@@ -54,6 +56,8 @@ export interface DetectedEvent {
   formed: BondPair[];
   broken: BondPair[];
   label: string;
+  /** Rule-based reaction category from the local bond graph (see chapterChemistry). */
+  category: ChapterCategory;
 }
 
 interface BondChange {
@@ -181,9 +185,10 @@ function groupChanges(changes: BondChange[], windowFrames: number, transferWindo
   const lastByAtom = new Map<number, number>();
   changes.forEach((change, i) => {
     for (const atom of [change.a, change.b]) {
-      // Transfer: this atom's previous change was a break, and now it binds again.
+      // Exchange: this atom's previous change went the other way (lost a
+      // partner and now binds one, or bound one and now loses another).
       const last = lastByAtom.get(atom);
-      if (change.formed && last !== undefined && !changes[last].formed && change.frame - changes[last].frame <= transferWindowFrames) {
+      if (last !== undefined && changes[last].formed !== change.formed && change.frame - changes[last].frame <= transferWindowFrames) {
         union(i, last);
       }
       lastByAtom.set(atom, i);
@@ -222,10 +227,11 @@ function describe(group: BondChange[], symbols: string[]): { kind: ChapterKind; 
     if (shared !== undefined) {
       const from = k.a === shared ? k.b : k.a;
       const to = f.a === shared ? f.b : f.a;
-      return {
-        kind: "transfer",
-        label: `${atomName(symbols, shared)} transfer ${atomName(symbols, from)} → ${atomName(symbols, to)}`,
-      };
+      const label =
+        symbols[shared] === "H"
+          ? `${atomName(symbols, shared)} transfer ${atomName(symbols, from)} → ${atomName(symbols, to)}`
+          : `${atomName(symbols, shared)} swaps ${atomName(symbols, from)} for ${atomName(symbols, to)}`;
+      return { kind: "transfer", label };
     }
   }
   if (group.length === 1) {
@@ -256,14 +262,15 @@ export function detectBondEvents(
         atoms.add(c.a);
         atoms.add(c.b);
       }
-      return {
-        ...describe(group, symbols),
+      const geometry = {
         startFrame: Math.min(...group.map((c) => c.frame)),
         endFrame: Math.max(...group.map((c) => c.frame)),
         atoms: [...atoms].sort((x, y) => x - y),
         formed: group.filter((c) => c.formed).map((c): BondPair => [c.a, c.b]),
         broken: group.filter((c) => !c.formed).map((c): BondPair => [c.a, c.b]),
       };
+      const category = classifyChapter(trajectory, geometry, localGraph(trajectory, geometry, options.minPersistFrames));
+      return { ...describe(group, symbols), ...geometry, category };
     })
     .sort((x, y) => x.startFrame - y.startFrame || x.atoms[0] - y.atoms[0]);
 }

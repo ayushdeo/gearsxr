@@ -12,6 +12,7 @@ import {
   type DetectedEvent,
 } from "./chapterDetect";
 import type { AiSuggestion } from "./chapterAI";
+import type { ChapterCategory } from "./chapterChemistry";
 
 export type ReviewStatus = "pending" | "accepted" | "rejected";
 
@@ -46,6 +47,7 @@ export interface ChaptersExport {
   events: Array<{
     id: string;
     kind: ChapterKind;
+    category: ChapterCategory;
     startFrame: number;
     endFrame: number;
     atoms: number[];
@@ -148,6 +150,7 @@ export function buildExport(
     events: chapters.map((c) => ({
       id: c.id,
       kind: c.kind,
+      category: c.category,
       startFrame: c.startFrame,
       endFrame: c.endFrame,
       atoms: c.atoms,

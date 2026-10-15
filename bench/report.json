@@ -5,7 +5,10 @@
   "transferWindowFrames": 30,
   "jumpThreshold": 2.5
  },
- "models": [],
+ "models": [
+  "gemma2:9b",
+  "qwen2.5:7b"
+ ],
  "results": [
   {
    "id": "C5H5NO_rxn5691",
@@ -32,7 +35,26 @@
      "label": "N6 swaps C4 for O0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 binds to N6, breaking the C4-N6 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 15.9507517
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N6 swaps C4 for O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 9.626042999999997
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn9925",
@@ -60,7 +82,26 @@
      "label": "Rearrangement: 3 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 bonds C5, C1-N6 bond forms, O0-C1 breaks",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.270735700000001
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C5 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.397207399999999
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1826",
@@ -89,7 +130,26 @@
      "label": "Rearrangement: 3 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.172500100000004
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.488119199999994
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5697",
@@ -116,7 +176,26 @@
      "label": "H7 transfer C3 → C2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C3 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 9.883699
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C3 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.211959799999997
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7953",
@@ -144,7 +223,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 and N6 form a bond, C1-C2 breaks, forming a 5-membered ring.",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.4741354
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-N6 bond forms, C1-C2 bond breaks",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.4810392
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4111",
@@ -171,7 +269,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 and H10 form H2, breaking bonds with C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.804441500000001
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 and H10 form H2, C4 loses bonds",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.228635599999994
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1788",
@@ -198,7 +315,26 @@
      "label": "C2 swaps N3 for O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2 binds to O5, breaking its bond with N3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.994647600000011
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N3 swaps C2 for O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.355951400000006
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7061",
@@ -225,7 +361,26 @@
      "label": "H11 transfer C4 → O0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H11 transfers from C4 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 9.981984700000002
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H11 moves from C4 to O0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.347298999999999
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0892",
@@ -252,7 +407,26 @@
      "label": "H8 transfer C0 → N2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C0 to N2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.252424900000012
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C0 to N2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.365552800000005
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1083",
@@ -280,7 +454,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to N0, forming N0-C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.973275700000027
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to C1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.3921538
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2548",
@@ -309,7 +502,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from C0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 10.678790200000018
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O5-H6 forms, N3-O5 breaks",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.336526200000022
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6196",
@@ -336,7 +548,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C2 to C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.700176999999996
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C2 to C5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.388242300000012
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1790",
@@ -366,7 +597,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C2 to O0, forming O0-H9",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 10.442414000000019
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from N3 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.736404600000009
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7547",
@@ -393,7 +643,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C3 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.124425000000018
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C3 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.422197999999975
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1283",
@@ -421,7 +690,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O2 forms a bond with O5, breaking C4-O5 and C3-O5 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.847671199999983
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O2 forms a new bond with O5, opening a ring",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.601968399999984
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1792",
@@ -448,7 +736,26 @@
      "label": "H10 transfer C4 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.233956600000004
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.448124199999991
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7060",
@@ -477,7 +784,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 binds to C5, breaking its bond with C1 and C3 binds to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.375805300000007
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0 swaps C5 for C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.509395799999998
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7946",
@@ -504,7 +830,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.055341199999965
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to N6",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.410944200000027
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4519",
@@ -532,7 +877,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 and H8 break from N0 and C1, forming H2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.251171199999982
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7-H8 form H2, N0 swaps H7 for H8",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.454375999999989
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn9592",
@@ -561,7 +925,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C3 and C5 bond, forming a 5-membered ring, breaking C5-N6 and C1-C4 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.760798499999975
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C5-C3 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.4,
+     "seconds": 5.644663699999976
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1320",
@@ -589,7 +972,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from O0 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.488373300000037
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from O0 to C2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.337097200000018
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1063",
@@ -616,7 +1018,26 @@
      "label": "H7 transfer C0 → O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C0 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.01704429999995
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C0 to O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.37368100000004
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6194",
@@ -643,7 +1064,26 @@
      "label": "C2 swaps C3 for C4"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2 switches bonding partner from C3 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.774565199999953
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2 swaps C3 for C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.400909600000014
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5694",
@@ -670,7 +1110,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C4 to C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.729805599999963
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C4 to C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.394416200000036
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2556",
@@ -697,7 +1156,26 @@
      "label": "H9 transfer N3 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from N3 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.9260772
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from N3 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.401009200000029
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8838",
@@ -724,7 +1202,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 accepts a proton from H7, bonding to it",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 10.237503399999987
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C2 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.378042799999996
+    }
+   ]
   },
   {
    "id": "C2HNO_rxn4441",
@@ -751,7 +1248,27 @@
      "label": "C1 swaps C2 for N3"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.0096608,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1 swaps N3 for C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.392373799999943
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8829",
@@ -779,7 +1296,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C5 to C6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.88209970000002
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C5 to C6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.480376700000023
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7063",
@@ -808,7 +1344,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 forms a bond with N6, breaking bonds with C4 and C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 10.995754199999967
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-N6 bond closes ring, C1-C4 and C3-C5 bonds break",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.764765699999989
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1279",
@@ -835,7 +1390,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.270576099999948
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.431535099999979
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1152",
@@ -861,7 +1435,26 @@
      "label": "Bond broken C1–C2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1-C2 bond breaks, opening a ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.378475800000015
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C2 bond opens a ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.335930999999983
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2557",
@@ -889,7 +1482,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C0 binds to O5, breaking N3-C1 and C0-C1 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.160402300000074
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N3 swaps C1 for O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.753234800000093
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4523",
@@ -917,7 +1529,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from N0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.49675119999994
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from N0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.371091599999927
+    }
+   ]
   },
   {
    "id": "C2HNO_rxn4442",
@@ -944,7 +1575,26 @@
      "label": "C2 swaps C1 for O0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 binds to C2, breaking the C1-C2 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.747255599999917
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0 swaps C1 for C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.430444600000047
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6193",
@@ -973,7 +1623,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H11 transfers from C4 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 10.307715800000006
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H11 moves from C4 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.55316109999991
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1147",
@@ -1000,7 +1669,26 @@
      "label": "C1 swaps C2 for O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 binds to O5, breaking its bond with C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.764170700000017
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1 swaps O0 for O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 5.374344800000079
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4499",
@@ -1027,7 +1715,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 and H8 form H2, breaking from C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.584963899999973
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 and H8 form H2, C3 loses bonds",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.498999699999928
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4522",
@@ -1055,7 +1762,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 forms a bond with O3, breaking bonds with C1 and C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.729636900000042
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N0 swaps C1 for O3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.372870600000024
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8825",
@@ -1082,7 +1808,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C5 to N0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.391245799999917
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C5 to N0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.413611600000062
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7943",
@@ -1109,7 +1854,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H11 transfers from C4 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.287891500000027
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H11 moves from C4 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.484813300000038
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1786",
@@ -1138,7 +1902,26 @@
      "label": "Rearrangement: 4 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1, O0, and O5 form a new 5-membered ring, breaking N3-O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.511256200000062
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O5-C1 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.460052400000044
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1062",
@@ -1167,7 +1950,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C0 to C1, breaking C0-H7 and forming C1-H7",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 11.253363300000085
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C0 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.435888000000036
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4120",
@@ -1195,7 +1997,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C3 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.510909999999916
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C3 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.824277899999986
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0106",
@@ -1222,7 +2043,26 @@
      "label": "H7 transfer C2 → N0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C2 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.061568800000009
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C2 to N0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.3561097999999765
+    }
+   ]
   },
   {
    "id": "C3H8N2O_rxn4063",
@@ -1249,7 +2089,26 @@
      "label": "H12 transfer N5 → O4"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H12 transfers from N5 to O4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.633493600000046
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H12 moves from N5 to O4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.472050400000065
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1094",
@@ -1278,7 +2137,27 @@
      "label": "Rearrangement: 3 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.0024939,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O2-C1 bond breaks, 4-membered ring forms",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.482433100000024
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1287",
@@ -1305,7 +2184,26 @@
      "label": "H8 transfer C3 → O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C3 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.112206999999938
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C3 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.3874288000001105
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1061",
@@ -1333,7 +2231,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N5 leaves C4 and binds to C1, breaking C1-O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.046352299999912
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N5 swaps C1 for C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 5.457515600000042
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4116",
@@ -1363,7 +2280,26 @@
      "label": "Rearrangement: 1 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 and H10 form H2, breaking bonds with N2 and C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 10.979373699999996
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to N2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.397655800000066
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1090",
@@ -1393,7 +2329,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from N0 to O5, C4 gains H7",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8333333333333334,
+     "seconds": 13.804670500000007
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from N0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.497251500000013
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5690",
@@ -1421,7 +2376,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C4 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.94245069999993
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C4 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.39636269999994
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn9246",
@@ -1448,7 +2422,26 @@
      "label": "C4 swaps N3 for O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O2 binds to C4, breaking N3-C4 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.215505700000096
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N3 swaps C4 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 5.385835899999831
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4521",
@@ -1475,7 +2468,26 @@
      "label": "H8 transfer C1 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C1 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.173326499999966
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C1 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.988371499999892
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8835",
@@ -1502,7 +2514,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C5 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.15615270000021
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C5 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.336147800000152
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7948",
@@ -1533,7 +2564,26 @@
      "label": "Rearrangement: 3 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 binds to C5, breaking its bond with H7 and C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 10.844683200000087
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0 swaps C2 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.554078399999998
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4109",
@@ -1563,7 +2613,26 @@
      "label": "Rearrangement: 1 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C3 to C4, breaking C4-O5 and C3-H8 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 12.525560400000074
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C3 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.548393799999961
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1277",
@@ -1591,7 +2660,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C3 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.867330199999968
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C3 to N0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.581153200000059
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1829",
@@ -1618,7 +2706,26 @@
      "label": "H10 transfer C4 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.9737071
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to O5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.402036300000036
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8843",
@@ -1645,7 +2752,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C1 to C6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.641522499999963
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C1 to C6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.474151200000197
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0347",
@@ -1672,7 +2798,26 @@
      "label": "H6 transfer O0 → N1"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from O0 to N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.909449900000123
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from O0 to N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.441715499999933
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4520",
@@ -1700,7 +2845,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1-C2 bond breaks, C1-O5 and C2-C4 form a new ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.284702800000087
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C2 bond breaks, C2-C4 bond forms",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.559002199999988
+    }
+   ]
   },
   {
    "id": "C3HNO2_rxn8946",
@@ -1727,7 +2891,26 @@
      "label": "C1 swaps C2 for O3"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 exchanges O3 for C2, breaking the C1-C2 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.525608899999876
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1 swaps O3 for C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.551173299999908
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1286",
@@ -1754,7 +2937,26 @@
      "label": "H9 transfer C4 → O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C4 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.76628609999991
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C4 to O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.423372500000056
+    }
+   ]
   },
   {
    "id": "C2H5NO2_rxn3685",
@@ -1781,7 +2983,26 @@
      "label": "H7 transfer C3 → O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C3 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.118574500000104
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C3 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.345122399999993
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1095",
@@ -1810,7 +3031,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0, C1, and O5 form a 5-membered ring, breaking the C3-O2 bond.",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.584358699999983
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O2 forms a bond with C1, opening a ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.4,
+     "seconds": 5.461863600000041
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5687",
@@ -1837,7 +3077,26 @@
      "label": "H8 transfer C4 → N6"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C4 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.452123499999987
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C4 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.379760100000072
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0101",
@@ -1864,7 +3123,26 @@
      "label": "C4 swaps O5 for N0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 binds to C4, breaking C4-O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.403718399999896
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N1 swaps C4 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.3333333333333333,
+     "seconds": 5.399588100000051
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2550",
@@ -1893,7 +3171,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from C0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 10.215682999999961
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from C0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.559405700000003
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn3108",
@@ -1920,7 +3217,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C2 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.63973499999987
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C2 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.2868545999999625
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1318",
@@ -1947,7 +3263,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C2 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.526820599999978
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C2 to C1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.27693200000003
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0896",
@@ -1983,7 +3318,26 @@
      "label": "Bond formed N2–O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 and C4 bond forms, closing a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "seconds": 13.95515469999984
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C4 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "seconds": 6.6091293999999765
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1149",
@@ -2011,7 +3365,26 @@
      "label": "2 bonds broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1-C2 bond breaks, N3-C4 bond weakens, forming a smaller ring",
+     "confidence": 0.9,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.575144700000063
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C2 and N3-C4 distances increase",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.459175599999958
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7548",
@@ -2039,7 +3412,26 @@
      "label": "Rearrangement: 1 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1, C2, and C5-N6 bonds break, forming a new C2-C5 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.83777270000009
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2-C5 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.403591399999801
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4105",
@@ -2068,7 +3460,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from N1 to C0, breaking C0-N1 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 12.3832294999999
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N1 moves from C0 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.594992499999935
+    }
+   ]
   },
   {
    "id": "C2H3N3O2_rxn8548",
@@ -2095,7 +3506,26 @@
      "label": "H9 transfer N6 → N0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from N6 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.582292100000195
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from N6 to N0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.436305599999847
+    }
+   ]
   },
   {
    "id": "C3H8N2O_rxn4060",
@@ -2123,7 +3553,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H13 transfers from N5 to N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.269617599999998
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H13 moves from N5 to N1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.384776100000134
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6192",
@@ -2151,7 +3600,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "Proton transfer from O0 to C3, H7 moves to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.052290499999886
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from O0 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.486869799999986
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1785",
@@ -2181,7 +3649,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from N3 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 11.235531399999978
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from N3 to O0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.370155099999858
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn3103",
@@ -2211,7 +3698,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from O0 to C2, breaking C2-O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 11.947104600000195
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from O0 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.517863900000229
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0345",
@@ -2239,7 +3745,27 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.00393299999996,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C5 to N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.512631999999983
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1151",
@@ -2266,7 +3792,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.31407349999994
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.498828800000018
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5689",
@@ -2295,7 +3840,26 @@
      "label": "Rearrangement: 1 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2 and C5 form a bond, breaking C5-N6, C1-C4, and C1-C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.434180700000143
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C5-C2 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.4,
+     "seconds": 5.5915768999999855
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8830",
@@ -2322,7 +3886,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C4 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.448353300000075
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C4 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.40859309999994
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn9303",
@@ -2352,7 +3935,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0's H10 and H6 form H2, breaking bonds with O3 and O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 10.772768700000132
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0-H10 and H6-H9 form H2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 5.356775400000159
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7945",
@@ -2380,7 +3982,27 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.01814740000013,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2 swaps C4 for N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.740148899999912
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn3101",
@@ -2407,7 +4029,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C2 to N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.515697600000072
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C2 to N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 6.016631199999945
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2554",
@@ -2435,7 +4076,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.95767650000006
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.730846600000048
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8826",
@@ -2462,7 +4122,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C4 to C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.598206599999918
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C4 to C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.509024999999907
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1156",
@@ -2489,7 +4168,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.172108699999983
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to C2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.272251200000057
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn9059",
@@ -2518,7 +4216,26 @@
      "label": "Rearrangement: 3 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 accepts a proton from H6, bonding to C4 and O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 12.588859799999977
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from N0 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.466497099999804
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1066",
@@ -2547,7 +4264,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C0 to N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 11.02045840000012
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C0 to N5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.332831400000025
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7477",
@@ -2575,7 +4311,26 @@
      "label": "Rearrangement: 2 formed, 4 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 and C5 form a bond, C2-C5 and C2-C4 break, closing a 5-membered ring.",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.24363599999994
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2 swaps C4 for C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 5.611282099999953
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4117",
@@ -2603,7 +4358,26 @@
      "label": "Rearrangement: 3 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C4 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.417128400000045
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C4 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.54988860000018
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8833",
@@ -2631,7 +4405,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C4 to C6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.22708620000002
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C4 to C6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.562892700000201
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1317",
@@ -2659,7 +4452,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from N5 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.799465100000146
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from N5 to O3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.38570299999998
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8842",
@@ -2695,7 +4507,26 @@
      "label": "Bond formed N4–C6"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 and C2 break their bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "seconds": 13.163003000000026
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C2 bond breaks",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "seconds": 6.708248299999861
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1275",
@@ -2722,7 +4553,26 @@
      "label": "H9 transfer C3 → O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C3 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.286659500000066
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C3 to O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.358421300000045
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8836",
@@ -2751,7 +4601,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C5 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 11.0602043000001
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C5 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.514473200000124
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1143",
@@ -2778,7 +4647,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C2 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.588774399999995
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C2 to C1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.286973400000017
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1148",
@@ -2805,7 +4693,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.882601899999893
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.467229599999962
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2555",
@@ -2832,7 +4739,26 @@
      "label": "C0 swaps C1 for O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C0 exchanges O2 for C1, breaking the C0-C1 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.508563799999887
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C0 swaps O2 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.362124799999874
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7950",
@@ -2860,7 +4786,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 and H8 form a bond, breaking from C1 and C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.777207400000188
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 and H8 form H2, C1 and C2 break bonds",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.384981299999636
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8831",
@@ -2888,7 +4833,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C5 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.312137600000016
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C5 to O3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.3491418999996965
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1065",
@@ -2915,7 +4879,26 @@
      "label": "C0 swaps C1 for O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C0 exchanges O2 for C1, breaking the C0-C1 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.59218349999981
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C0 swaps O2 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.35681520000007
+    }
+   ]
   },
   {
    "id": "C3H8N2O_rxn4003",
@@ -2943,7 +4926,27 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.00817249999987,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from N4 to O3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.514552199999802
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1281",
@@ -2970,7 +4973,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C3 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.917792200000026
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C3 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.327282500000205
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4103",
@@ -2997,7 +5019,26 @@
      "label": "C0 swaps N1 for O3"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C0 binds O3, breaking its bond with N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.068853899999988
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N1 swaps C0 for O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.423164800000377
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0251",
@@ -3024,7 +5065,26 @@
      "label": "C0 swaps C1 for O4"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C0 exchanges O4 for C1, breaking the C0-C1 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.704891199999954
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C0 swaps O4 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.578886899999809
+    }
+   ]
   },
   {
    "id": "C3HNO2_rxn0110",
@@ -3052,7 +5112,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from C1 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.503325399999973
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from C1 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.633032800000161
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6190",
@@ -3080,7 +5159,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 switches from bonding with C1 to C3, breaking the C2-C3 bond.",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.839888900000137
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0 swaps C2 for C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.623076400000136
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1827",
@@ -3107,7 +5205,26 @@
      "label": "H7 transfer C0 → N1"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C0 to N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.318059000000357
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C0 to N1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 6.053583000000101
+    }
+   ]
   },
   {
    "id": "C2HNO_rxn4440",
@@ -3134,7 +5251,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H4 transfers from C1 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.65946710000001
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H4 moves from C1 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.483747899999842
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1278",
@@ -3161,7 +5297,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C3 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.22256669999985
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C3 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.362724200000055
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1091",
@@ -3188,7 +5343,26 @@
      "label": "C3 swaps O2 for N0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 binds to C3, breaking O2-C3 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.550709700000006
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N0 swaps C3 for O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.484717699999921
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4497",
@@ -3215,7 +5389,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C3 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.074567400000058
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C3 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.359367999999784
+    }
+   ]
   },
   {
    "id": "C2H3N3O2_rxn8549",
@@ -3242,7 +5435,26 @@
      "label": "H7 transfer N0 → N2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from N0 to N2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.675622500000056
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from N0 to N2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.46193600000022
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1285",
@@ -3271,7 +5483,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 and H8 form H2, breaking bonds with N0 and C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 10.9494216
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 and H8 leave N0 and C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 5.619496799999848
+    }
+   ]
   },
   {
    "id": "C2H5NO2_rxn3682",
@@ -3298,7 +5529,26 @@
      "label": "C3 swaps C1 for O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O2 binds to C3, breaking C1-C3 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.596783499999903
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O2 swaps C1 for C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.527332999999635
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7949",
@@ -3336,7 +5586,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C3 and C5 form a bond, closing a ring, breaking bonds between C2-C3 and C4-C5",
+     "confidence": 0.85,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 14.68559129999997
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C3-C5 bond forms, C2-C3 and C4-C5 bonds break, 5-membered ring forms",
+     "confidence": 0.9,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 7.78142230000021
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1321",
@@ -3364,7 +5633,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C2 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.605044000000227
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C2 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.483233700000215
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0249",
@@ -3391,7 +5679,26 @@
      "label": "C3 swaps C1 for O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O2 binds to C3, breaking C1-C3 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.565750299999957
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C3 swaps O2 for N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 5.502975699999835
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5688",
@@ -3417,7 +5724,26 @@
      "label": "Bond broken C4–C5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C4 and C5 break their bond, forming a ring opening",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.491858499999624
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C4-C5 bond opens a ring",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.296822799999733
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8839",
@@ -3444,7 +5770,26 @@
      "label": "H8 transfer C1 → C5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C1 to C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.847818899999838
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C1 to C5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.394350999999792
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4518",
@@ -3471,7 +5816,26 @@
      "label": "N0 swaps C1 for O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 binds to O5, breaking its bond with C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.658562200000045
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N0 swaps C1 for O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.502931700000074
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn9661",
@@ -3499,7 +5863,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C2 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.941649300000165
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C2 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.481831400000025
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4513",
@@ -3527,7 +5910,26 @@
      "label": "2 bonds broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1-C4 bond breaks, C2-O3 bond breaks, ring opens",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.055637600000017
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C4 bond opens a 4-membered ring",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.449515399999917
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn3104",
@@ -3555,7 +5957,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 and H8 form H2, breaking bonds with O0 and C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.81961549999984
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from O0 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.543813500000164
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1086",
@@ -3584,7 +6005,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "Proton transfer from C3-H10 to N0, breaking C3-O2 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 11.62486679999996
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N0 proton moves to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.4,
+     "seconds": 5.357718099999707
+    }
+   ]
   },
   {
    "id": "C2H5NO2_rxn1961",
@@ -3611,7 +6051,26 @@
      "label": "H9 transfer N4 → O3"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from N4 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.536375900000333
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from N4 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.566739300000016
+    }
+   ]
   },
   {
    "id": "C3H8N2O_rxn4002",
@@ -3638,7 +6097,26 @@
      "label": "H7 transfer C0 → N1"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C0 to N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.185493300000205
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C0 to N1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.535398399999831
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4515",
@@ -3665,7 +6143,27 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.01090249999984,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C1 to C2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.464257900000084
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1322",
@@ -3692,7 +6190,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.125420400000177
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to C2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.4456680000000635
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5693",
@@ -3719,7 +6236,26 @@
      "label": "C2 swaps C1 for O0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 binds to C2, breaking the C1-C2 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.656982600000221
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0 swaps C2 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.497006899999921
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn9083",
@@ -3747,7 +6283,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 and H7 break from C1 and O0, forming H2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.935473000000231
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 and H7 form H2, C1-H7 breaks",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.584497300000396
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0253",
@@ -3774,7 +6329,26 @@
      "label": "C1 swaps C3 for O4"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 exchanges C3 for O4 as a ligand",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.474922699999995
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1 swaps O2 for O4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 5.66759909999976
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5967",
@@ -3801,7 +6375,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C5 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.262502499999943
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C5 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.539135099999607
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6189",
@@ -3829,7 +6422,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C2 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.51508049999969
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C2 to O0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.45006100000022
+    }
+   ]
   },
   {
    "id": "C2H5NO2_rxn1962",
@@ -3857,7 +6469,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from N4 to O1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.973708300000057
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from N4 to O1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.64574990000017
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0100",
@@ -3884,7 +6515,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 and H8 form H2, breaking bonds with C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.155135300000198
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 and H7 form H2, C2 loses bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.624783299999777
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4110",
@@ -3912,7 +6562,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C3 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.207649100000038
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C3 to O5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.391616599999834
+    }
+   ]
   },
   {
    "id": "C2HNO_rxn4439",
@@ -3939,7 +6608,26 @@
      "label": "H4 transfer C1 → O0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H4 transfers from C1 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.590519199999981
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H4 moves from C1 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.581043999999761
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4123",
@@ -3966,7 +6654,26 @@
      "label": "H8 transfer C3 → O0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C3 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.571595799999777
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C3 to O0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.394085400000215
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8832",
@@ -3994,7 +6701,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 and C6 bond to form a 6-membered ring, breaking C1-C2 and C4-C6 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.756465400000103
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1-C6 bond closes ring",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.495896600000095
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0107",
@@ -4023,7 +6749,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 binds to C2, breaking C2-O3 and C4-O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.939378299999982
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N0 swaps C2 for C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.5941902999999
+    }
+   ]
   },
   {
    "id": "C2HNO3_rxn1883",
@@ -4051,7 +6796,26 @@
      "label": "2 bonds broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O2-C3 bond breaks, C1-O5 bond breaks, ring opens",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.291817100000102
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O2-C3 and C1-O5 bond lengths increase",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.407022900000214
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1830",
@@ -4079,7 +6843,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C0 binds to O3, breaking its bond with N1 and C2's bond with O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.55007979999995
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N1 swaps C0 for C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.440546999999787
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8884",
@@ -4106,7 +6889,26 @@
      "label": "C1 swaps C5 for N6"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 exchanges C5 for N6 as a ligand",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.608202000000048
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1 swaps C5 for N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.4640007000002075
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1064",
@@ -4133,7 +6935,26 @@
      "label": "H9 transfer C4 → N5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C4 to N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.350749499999917
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C4 to N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.556901899999939
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1784",
@@ -4160,7 +6981,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to N3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.34381110000005
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to N3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.518057499999646
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7960",
@@ -4188,7 +7028,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 and H11 form a bond, breaking from C1 and C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.200307899999897
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 and H11 form H2, C1 loses H7, C4 loses H11",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.637821100000292
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8834",
@@ -4215,7 +7074,27 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.01309279999975,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C5 to C6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.547717500000261
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1153",
@@ -4243,7 +7122,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from N3 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.882595200000331
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from N3 to C1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.463785500000231
+    }
+   ]
   },
   {
    "id": "C2H3N3O2_rxn8551",
@@ -4270,7 +7168,26 @@
      "label": "H9 transfer N6 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from N6 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.526195100000129
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from N6 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.4793703999998975
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7954",
@@ -4299,7 +7216,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 bonds C5, C4-N6 bond forms, C2-C4 breaks",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.49963320000004
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0-C5 bond forms, C4-N6 bond forms, C2-C4 bond breaks",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.632822900000028
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn10053",
@@ -4329,7 +7265,27 @@
      "label": "Rearrangement: 3 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.00690060000028,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H11 moves from C6 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.596185300000012
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn8885",
@@ -4357,7 +7313,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1-N6 bond forms, C1-O2 breaks, closing a 5-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.635530900000129
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O2-C5 bond forms, C1-N6 bond forms",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.429564599999693
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7936",
@@ -4385,7 +7360,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 and N6 form a bond, C1-C5 bond closes a ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.777988799999934
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0 swaps C1 for C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.450065399999731
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn3105",
@@ -4412,7 +7406,26 @@
      "label": "C2 swaps C4 for N5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2 exchanges C4 for N5 as a ligand",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.634730599999893
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N5 swaps C4 for C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.573197300000116
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0252",
@@ -4439,7 +7452,26 @@
      "label": "H6 transfer C0 → O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from C0 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.255722000000066
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from C0 to O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.3871808000002055
+    }
+   ]
   },
   {
    "id": "C3HNO2_rxn0109",
@@ -4466,7 +7498,26 @@
      "label": "C2 swaps C4 for N5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2 exchanges bond with N5, breaking C2-C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.607783600000198
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2 swaps N5 for C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.449959500000347
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7550",
@@ -4494,7 +7545,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2 and C5 bond, forming a 5-membered ring, breaking C4-C5 and C2-C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.27309489999991
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2-C5 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.587630399999674
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0103",
@@ -4522,7 +7592,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 and O3 bond to form a 5-membered ring, breaking C2-O3.",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.509254999999888
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N0 swaps C2 for O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.55675270000007
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1319",
@@ -4549,7 +7638,26 @@
      "label": "H6 transfer O0 → N5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from O0 to N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.026788100000005
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from O0 to N5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.473439900000114
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7941",
@@ -4576,7 +7684,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.92887249999959
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to C2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.433424600000028
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2553",
@@ -4604,7 +7731,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to O2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.409622700000181
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.591060300000012
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn9079",
@@ -4631,7 +7777,26 @@
      "label": "C3 swaps C4 for O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C3 exchanges bond with O5, breaking bond with C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.647662200000138
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C3 swaps C4 for O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.459105399999768
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4122",
@@ -4658,7 +7823,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to C3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.111991199999583
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to C3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.422765300000086
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1828",
@@ -4686,7 +7870,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C2 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.445803599999753
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C2 to O5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.347879799999762
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn5696",
@@ -4716,7 +7919,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H11 transfers from N6 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 11.343429699999746
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H11 moves from N6 to O0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.416605200000108
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1092",
@@ -4752,7 +7974,26 @@
      "label": "Bond formed N0–O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O2 and C3 bond breaks, distance increases",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "seconds": 13.419896699999924
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C3 bond breaks with O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "seconds": 7.116333700000308
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1144",
@@ -4779,7 +8020,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 and C4 form a bond, breaking C1-C4 and O0-C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.57286120000016
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0-C1 bond breaks, C1-C4 bond breaks, O0-C4 bond forms",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.694566399999895
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7959",
@@ -4806,7 +8066,26 @@
      "label": "H10 transfer C3 → N6"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C3 to N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.301064499999862
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C3 to N6",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.594757200000342
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1154",
@@ -4833,7 +8112,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C1 binds to N3, breaking bonds with C4 and N3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.985306599999777
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N3 swaps C1 for C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.531511500000023
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4108",
@@ -4861,7 +8159,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from N1 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.062438500000164
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from N1 to C4",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.429506499999668
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1789",
@@ -4889,7 +8206,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 and H10 form H2, breaking bonds with N3 and C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.972810500000138
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9-H10 form H2, N3-C4 bond breaks",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.528404300000053
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn9082",
@@ -4917,7 +8253,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to O3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.360232300000265
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to O3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.472007000000216
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7957",
@@ -4947,7 +8302,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to C5, breaking C1-H7 and forming C5-H7",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 11.584308500000276
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 6.170958499999717
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6198",
@@ -4975,7 +8349,26 @@
      "label": "Rearrangement: 2 formed, 1 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O0 bonds C4, C1 bonds C3, breaking O0-C1 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 12.011677000000141
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O0-C1 bond breaks, C1-C3 bond forms",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.473464999999851
+    }
+   ]
   },
   {
    "id": "C2H5NO2_rxn3684",
@@ -5003,7 +8396,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from O4 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 11.452009200000203
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C3 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.551084299999755
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0895",
@@ -5030,7 +8442,26 @@
      "label": "H10 transfer C4 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.649283499999903
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.55718600000022
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0346",
@@ -5057,7 +8488,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C5 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.688575100000016
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C5 to C2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.466262199999765
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn9080",
@@ -5084,7 +8534,26 @@
      "label": "C3 swaps C1 for O2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O2 binds to C3, breaking C1-C3 bond",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.509493799999822
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C3 swaps O2 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.589836700000334
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0104",
@@ -5111,7 +8580,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H9 transfers from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.163370500000195
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H9 moves from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.883097700000275
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn0099",
@@ -5138,7 +8626,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C2 to C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.430736900000367
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C2 to C1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.4891723000002095
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn3102",
@@ -5165,7 +8672,26 @@
      "label": "O3 swaps C2 for N5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "O3 binds to N5, breaking its bond with C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.575698900000193
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N5 swaps O3 for C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.5441452999999745
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1150",
@@ -5192,7 +8718,27 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "seconds": 120.00394949999964,
+     "error": "Can't reach Ollama at http://localhost:11434. Is `ollama serve` running? If this page isn't on localhost, set OLLAMA_ORIGINS to its origin and OLLAMA_HOST=0.0.0.0."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from N3 to C2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.69594160000002
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn8967",
@@ -5220,7 +8766,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 and H9 form H2, breaking bonds with C3 and C5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.960310499999672
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 and H9 form H2, C3-H8 and C5-H9 break",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.600721100000199
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7942",
@@ -5249,7 +8814,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to N6, breaking C1-H7 and C1-C2 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 11.66631650000019
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to N6",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "seconds": 5.527883199999574
+    }
+   ]
   },
   {
    "id": "C2H5NO2_rxn3683",
@@ -5276,7 +8860,26 @@
      "label": "H7 transfer C3 → N0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C3 to N0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.799478199999779
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C3 to N0",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.436797600000165
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn10054",
@@ -5304,7 +8907,26 @@
      "label": "2 bonds broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2-O3 bond breaks, C4-C6 bond breaks, ring opens",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.990425000000279
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O3 moves from C2 to C4",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.51962620000029
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7478",
@@ -5332,7 +8954,26 @@
      "label": "3 bonds broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C2-O6 and C3-C4 bonds break, opening a ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.602700100000016
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2-C4 bond closes a 4-membered ring",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.627095500000287
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1084",
@@ -5359,7 +9000,26 @@
      "label": "H10 transfer C4 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.437024799999781
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to O5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.48559250000026
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7940",
@@ -5386,7 +9046,26 @@
      "label": "H7 transfer C1 → O0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from C1 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 11.183488200000022
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from C1 to O0",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.457616500000004
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7475",
@@ -5413,7 +9092,26 @@
      "label": "C2 swaps C1 for N0"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "N0 switches bonding partner from C1 to C2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.92028280000016
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N0 swaps C2 for C1",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.516918300000019
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4121",
@@ -5440,7 +9138,26 @@
      "label": "H10 transfer C4 → N2"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H10 transfers from C4 to N2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.661676000000444
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H10 moves from C4 to N2",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.553705199999735
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn6197",
@@ -5470,7 +9187,26 @@
      "label": "Rearrangement: 2 formed, 3 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H7 transfers from O0 to C3, breaking C2-C3 and O0-H7 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "seconds": 14.204439100000076
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H7 moves from O0 to C3",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "seconds": 5.380083600000479
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn1787",
@@ -5497,7 +9233,26 @@
      "label": "H8 transfer C2 → O5"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H8 transfers from C2 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.47655439999979
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 moves from C2 to O5",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.526093600000255
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn4498",
@@ -5525,7 +9280,26 @@
      "label": "Rearrangement: 1 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 transfers from N0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 10.977159200000576
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 moves from N0 to O5",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "seconds": 5.443582899999805
+    }
+   ]
   },
   {
    "id": "C5H5NO_rxn7059",
@@ -5552,7 +9326,26 @@
      "label": "C3 swaps C5 for N6"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "C3 exchanges C5 for N6 as a ligand",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 10.417000400000251
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C3 swaps C5 for N6",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "seconds": 5.530429800000042
+    }
+   ]
   },
   {
    "id": "C3H5NO2_rxn2551",
@@ -5581,7 +9374,26 @@
      "label": "Rearrangement: 2 formed, 2 broken"
     }
    ],
-   "models": []
+   "models": [
+    {
+     "model": "gemma2:9b",
+     "label": "H6 and H9 form H2, breaking bonds with C0 and N3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 11.254958300000057
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H6 and H9 leave C0 and N3",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "seconds": 5.5965842000003905
+    }
+   ]
   }
  ]
 }

@@ -17,7 +17,9 @@
    "P": 1.07,
    "S": 1.05,
    "Cl": 1.02
-  }
+  },
+  "hhBondedBelow": 0.8,
+  "hhUnbondedAbove": 1.0
  },
  "path": {
   "hold": 5,
@@ -217,7 +219,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     9,
+     10
+    ]
+   ],
    "broken": [
     [
      4,
@@ -229,7 +236,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C3H5NO2_rxn1788",
@@ -677,7 +684,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     7,
+     8
+    ]
+   ],
    "broken": [
     [
      0,
@@ -689,7 +701,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C5H5NO_rxn9592",
@@ -1278,7 +1290,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     7,
+     8
+    ]
+   ],
    "broken": [
     [
      3,
@@ -1290,7 +1307,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C3H5NO2_rxn4522",
@@ -1430,7 +1447,12 @@
     ]
    ],
    "broken": [],
-   "ambiguous": [],
+   "ambiguous": [
+    [
+     1,
+     4
+    ]
+   ],
    "category": "ring-change"
   },
   {
@@ -1693,7 +1715,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     6,
+     10
+    ]
+   ],
    "broken": [
     [
      1,
@@ -1709,7 +1736,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "ring-change"
+   "category": "h2-elimination"
   },
   {
    "id": "C3H5NO2_rxn1090",
@@ -2931,6 +2958,10 @@
     [
      0,
      10
+    ],
+    [
+     6,
+     9
     ]
    ],
    "broken": [
@@ -2948,7 +2979,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "proton-transfer"
+   "category": "h2-elimination"
   },
   {
    "id": "C5H5NO_rxn7945",
@@ -3234,7 +3265,12 @@
      5
     ]
    ],
-   "ambiguous": [],
+   "ambiguous": [
+    [
+     2,
+     4
+    ]
+   ],
    "category": "ring-change"
   },
   {
@@ -3570,7 +3606,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     7,
+     8
+    ]
+   ],
    "broken": [
     [
      1,
@@ -3582,7 +3623,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C5H5NO_rxn8831",
@@ -4075,6 +4116,10 @@
     [
      2,
      3
+    ],
+    [
+     6,
+     8
     ]
    ],
    "broken": [
@@ -4088,7 +4133,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "ring-change"
+   "category": "h2-elimination"
   },
   {
    "id": "C2H5NO2_rxn3682",
@@ -4400,7 +4445,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     6,
+     8
+    ]
+   ],
    "broken": [
     [
      0,
@@ -4412,7 +4462,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C3H5NO2_rxn1086",
@@ -4642,7 +4692,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     6,
+     7
+    ]
+   ],
    "broken": [
     [
      0,
@@ -4654,7 +4709,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C3H5NO2_rxn0253",
@@ -4814,7 +4869,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     7,
+     8
+    ]
+   ],
    "broken": [
     [
      2,
@@ -4826,7 +4886,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C3H5NO2_rxn4110",
@@ -5177,7 +5237,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     7,
+     11
+    ]
+   ],
    "broken": [
     [
      1,
@@ -5189,7 +5254,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C5H5NO_rxn8834",
@@ -6060,7 +6125,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     9,
+     10
+    ]
+   ],
    "broken": [
     [
      3,
@@ -6072,7 +6142,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C3H5NO2_rxn9082",
@@ -6480,7 +6550,12 @@
     "H",
     "H"
    ],
-   "formed": [],
+   "formed": [
+    [
+     8,
+     9
+    ]
+   ],
    "broken": [
     [
      3,
@@ -6492,7 +6567,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "bond-cleavage"
+   "category": "h2-elimination"
   },
   {
    "id": "C5H5NO_rxn7942",
@@ -6632,7 +6707,12 @@
      4
     ]
    ],
-   "ambiguous": [],
+   "ambiguous": [
+    [
+     2,
+     4
+    ]
+   ],
    "category": "ring-change"
   },
   {
@@ -6932,6 +7012,10 @@
     [
      0,
      2
+    ],
+    [
+     6,
+     9
     ]
    ],
    "broken": [
@@ -6945,7 +7029,7 @@
     ]
    ],
    "ambiguous": [],
-   "category": "ring-change"
+   "category": "h2-elimination"
   }
  ]
 }

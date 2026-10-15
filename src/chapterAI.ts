@@ -9,8 +9,7 @@
 // Transition1x benchmark; the model gets the category and the bonding around
 // each atom as context, so its label and its artifact call are grounded.
 
-import { BOND_TOLERANCE } from "./bonds";
-import { getElementInfo } from "./elements";
+import { BOND_TOLERANCE, HH_BOND_CUTOFF, bondCutoff } from "./bonds";
 import { localGraph, neighborContext } from "./chapterChemistry";
 import { DEFAULT_DETECT_OPTIONS } from "./chapterDetect";
 import type { Chapter } from "./chapterStore";
@@ -103,7 +102,7 @@ function describeEvent(trajectory: Trajectory, chapter: Chapter, key: string) {
   const before = Math.max(chapter.startFrame - 1, 0);
   const after = Math.min(chapter.endFrame + settle - 1, trajectory.numFrames - 1);
   const bond = ([a, b]: [number, number]) => {
-    const cutoff = (getElementInfo(symbol(a)).radius + getElementInfo(symbol(b)).radius) * BOND_TOLERANCE;
+    const cutoff = bondCutoff(symbol(a), symbol(b));
     return {
       pair: `${name(a)}-${name(b)}`,
       before_A: +distance(trajectory, before, a, b).toFixed(2),
@@ -122,9 +121,9 @@ function describeEvent(trajectory: Trajectory, chapter: Chapter, key: string) {
 }
 
 const SYSTEM_PROMPT = `You are a computational chemist naming events that a detector found in a molecular simulation trajectory.
-Bonds are inferred from distance: two atoms are bonded when closer than cutoff_A (sum of covalent radii x ${BOND_TOLERANCE}).
+Bonds are inferred from distance: two atoms are bonded when closer than cutoff_A (sum of covalent radii x ${BOND_TOLERANCE}; ${HH_BOND_CUTOFF} Å for H-H).
 Each event gives:
-- category: computed from the bond graph and reliable. proton-transfer = an H moves from one partner to another; ring-change = a ring forms or opens; ligand-exchange = an atom swaps one bonding partner for another; bond-formation / bond-cleavage = bonds only form / only break.
+- category: computed from the bond graph and reliable. h2-elimination = two H atoms leave their partners and form H2; proton-transfer = an H moves from one partner to another; ring-change = a ring forms or opens; ligand-exchange = an atom swaps one bonding partner for another; bond-formation / bond-cleavage = bonds only form / only break.
 - formed / broken: the bonds that changed, with distances before and after.
 - atoms: each involved atom's bonded neighbors before and after.
 For every event return:

@@ -129,7 +129,7 @@ Each event gives:
 - formed / broken: the bonds that changed, with distances before and after.
 - atoms: each involved atom's bonded neighbors before and after.
 For every event return:
-- label: at most 12 words saying what happens, consistent with the category and with the formed / broken lists. Only state a bond as formed or broken if it is in those lists, and keep the roles in the summary when it names them. Use the atom names given.
+- label: at most 12 words saying what happens, always naming atoms by their given names (H7, C2), never just "hydrogen" or "nitrogen", consistent with the category and with the formed / broken lists. Only state a bond as formed or broken if it is in those lists, and keep the roles in the summary when it names them. Use the atom names given.
 - artifact: true only if this is probably not chemistry, e.g. two atoms of the same element touching in a dense phase, or distances barely crossing the cutoff and staying near it. Ordinary reactions in small molecules are not artifacts.
 - confidence: 0 to 1, how sure you are the label is right.
 - rationale: one short sentence citing distances or neighbors.
@@ -198,12 +198,14 @@ function retryable(err: Error): Error {
 }
 
 async function chatOnce(settings: LlmSettings, userContent: string, signal: AbortSignal): Promise<RawSuggestion[]> {
+  // Each attempt gets its own time limit, so a retry isn't born already expired.
+  const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
   let response: Response;
   try {
     response = await fetch(`${baseUrl(settings.endpoint)}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      signal,
+      signal: AbortSignal.any([signal, timeout]),
       body: JSON.stringify({
         model: settings.model,
         stream: false,
@@ -216,8 +218,12 @@ async function chatOnce(settings: LlmSettings, userContent: string, signal: Abor
       }),
     });
   } catch (err) {
-    const error = unreachable(settings.endpoint, err);
-    throw error.name === "AbortError" ? error : retryable(error);
+    if (signal.aborted) throw err; // the user stopped the run
+    if (timeout.aborted) {
+      // Usually the model is still loading into GPU memory, so try again.
+      throw retryable(new Error(`${settings.model} didn't answer within ${REQUEST_TIMEOUT_MS / 1000} s.`));
+    }
+    throw retryable(unreachable(settings.endpoint, err));
   }
   if (!response.ok) {
     const text = await response.text().catch(() => "");
@@ -252,12 +258,7 @@ export async function suggestChapterLabels(
   for (let start = 0; start < chapters.length; start += BATCH_SIZE) {
     const batch = chapters.slice(start, start + BATCH_SIZE);
     const events = batch.map((chapter, i) => describeEvent(trajectory, chapter, `e${start + i}`));
-    const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
-    const results = await chat(
-      settings,
-      `${header}\nEvents:\n${JSON.stringify(events)}`,
-      AbortSignal.any([signal, timeout]),
-    );
+    const results = await chat(settings, `${header}\nEvents:\n${JSON.stringify(events)}`, signal);
 
     results.forEach((raw, i) => {
       // Match by id; fall back to position when the model mangles ids.

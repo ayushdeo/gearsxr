@@ -1,0 +1,6951 @@
+{
+ "format": "gearsxr-benchmark",
+ "version": 1,
+ "source": "Transition1x",
+ "split": "test",
+ "seed": 0,
+ "bondRule": {
+  "bondedBelow": 1.15,
+  "unbondedAbove": 1.25,
+  "radii": {
+   "H": 0.31,
+   "C": 0.76,
+   "N": 0.71,
+   "O": 0.66,
+   "F": 0.57,
+   "Si": 1.11,
+   "P": 1.07,
+   "S": 1.05,
+   "Cl": 1.02
+  }
+ },
+ "path": {
+  "hold": 5,
+  "steps": 15
+ },
+ "reactions": [
+  {
+   "id": "C5H5NO_rxn5691",
+   "file": "reactions/C5H5NO_rxn5691.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn9925",
+   "file": "reactions/C5H5NO_rxn9925.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1826",
+   "file": "reactions/C3H5NO2_rxn1826.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn5697",
+   "file": "reactions/C5H5NO_rxn5697.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7953",
+   "file": "reactions/C5H5NO_rxn7953.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn4111",
+   "file": "reactions/C3H5NO2_rxn4111.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     4,
+     9
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C3H5NO2_rxn1788",
+   "file": "reactions/C3H5NO2_rxn1788.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn7061",
+   "file": "reactions/C5H5NO_rxn7061.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     11
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     11
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0892",
+   "file": "reactions/C3H5NO2_rxn0892.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "N",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1083",
+   "file": "reactions/C3H5NO2_rxn1083.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn2548",
+   "file": "reactions/C3H5NO2_rxn2548.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn6196",
+   "file": "reactions/C5H5NO_rxn6196.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1790",
+   "file": "reactions/C3H5NO2_rxn1790.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7547",
+   "file": "reactions/C5H5NO_rxn7547.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     6,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     6
+    ],
+    [
+     3,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1283",
+   "file": "reactions/C3H5NO2_rxn1283.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     5
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1792",
+   "file": "reactions/C3H5NO2_rxn1792.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7060",
+   "file": "reactions/C5H5NO_rxn7060.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ],
+    [
+     3,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn7946",
+   "file": "reactions/C5H5NO_rxn7946.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     6
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4519",
+   "file": "reactions/C3H5NO2_rxn4519.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C5H5NO_rxn9592",
+   "file": "reactions/C5H5NO_rxn9592.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     4
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1320",
+   "file": "reactions/C3H5NO2_rxn1320.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1063",
+   "file": "reactions/C3H5NO2_rxn1063.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn6194",
+   "file": "reactions/C5H5NO_rxn6194.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn5694",
+   "file": "reactions/C5H5NO_rxn5694.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn2556",
+   "file": "reactions/C3H5NO2_rxn2556.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8838",
+   "file": "reactions/C5H5NO_rxn8838.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2HNO_rxn4441",
+   "file": "reactions/C2HNO_rxn4441.xyz",
+   "formula": "C2HNO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn8829",
+   "file": "reactions/C5H5NO_rxn8829.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     6,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7063",
+   "file": "reactions/C5H5NO_rxn7063.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     4
+    ],
+    [
+     3,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1279",
+   "file": "reactions/C3H5NO2_rxn1279.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1152",
+   "file": "reactions/C3H5NO2_rxn1152.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn2557",
+   "file": "reactions/C3H5NO2_rxn2557.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4523",
+   "file": "reactions/C3H5NO2_rxn4523.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2HNO_rxn4442",
+   "file": "reactions/C2HNO_rxn4442.xyz",
+   "formula": "C2HNO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn6193",
+   "file": "reactions/C5H5NO_rxn6193.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     5
+    ],
+    [
+     6,
+     11
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     11
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1147",
+   "file": "reactions/C3H5NO2_rxn1147.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4499",
+   "file": "reactions/C3H5NO2_rxn4499.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     3,
+     7
+    ],
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C3H5NO2_rxn4522",
+   "file": "reactions/C3H5NO2_rxn4522.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn8825",
+   "file": "reactions/C5H5NO_rxn8825.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ],
+    [
+     0,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     5,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7943",
+   "file": "reactions/C5H5NO_rxn7943.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     11
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     11
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1786",
+   "file": "reactions/C3H5NO2_rxn1786.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "broken": [],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1062",
+   "file": "reactions/C3H5NO2_rxn1062.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4120",
+   "file": "reactions/C3H5NO2_rxn4120.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0106",
+   "file": "reactions/C3H5NO2_rxn0106.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H8N2O_rxn4063",
+   "file": "reactions/C3H8N2O_rxn4063.xyz",
+   "formula": "C3H8N2O",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     12
+    ]
+   ],
+   "broken": [
+    [
+     5,
+     12
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1094",
+   "file": "reactions/C3H5NO2_rxn1094.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1287",
+   "file": "reactions/C3H5NO2_rxn1287.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1061",
+   "file": "reactions/C3H5NO2_rxn1061.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4116",
+   "file": "reactions/C3H5NO2_rxn4116.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1090",
+   "file": "reactions/C3H5NO2_rxn1090.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     7
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn5690",
+   "file": "reactions/C5H5NO_rxn5690.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     4
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn9246",
+   "file": "reactions/C3H5NO2_rxn9246.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4521",
+   "file": "reactions/C3H5NO2_rxn4521.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8835",
+   "file": "reactions/C5H5NO_rxn8835.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7948",
+   "file": "reactions/C5H5NO_rxn7948.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4109",
+   "file": "reactions/C3H5NO2_rxn4109.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     3,
+     8
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1277",
+   "file": "reactions/C3H5NO2_rxn1277.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     3,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1829",
+   "file": "reactions/C3H5NO2_rxn1829.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8843",
+   "file": "reactions/C5H5NO_rxn8843.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "N",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     6,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0347",
+   "file": "reactions/C3H5NO2_rxn0347.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4520",
+   "file": "reactions/C3H5NO2_rxn4520.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3HNO2_rxn8946",
+   "file": "reactions/C3HNO2_rxn8946.xyz",
+   "formula": "C3HNO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn1286",
+   "file": "reactions/C3H5NO2_rxn1286.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2H5NO2_rxn3685",
+   "file": "reactions/C2H5NO2_rxn3685.xyz",
+   "formula": "C2H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1095",
+   "file": "reactions/C3H5NO2_rxn1095.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn5687",
+   "file": "reactions/C5H5NO_rxn5687.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     6,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0101",
+   "file": "reactions/C3H5NO2_rxn0101.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn2550",
+   "file": "reactions/C3H5NO2_rxn2550.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     4
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn3108",
+   "file": "reactions/C3H5NO2_rxn3108.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1318",
+   "file": "reactions/C3H5NO2_rxn1318.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0896",
+   "file": "reactions/C3H5NO2_rxn0896.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "N",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1149",
+   "file": "reactions/C3H5NO2_rxn1149.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn7548",
+   "file": "reactions/C5H5NO_rxn7548.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn4105",
+   "file": "reactions/C3H5NO2_rxn4105.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2H3N3O2_rxn8548",
+   "file": "reactions/C2H3N3O2_rxn8548.xyz",
+   "formula": "C2H3N3O2",
+   "symbols": [
+    "N",
+    "C",
+    "N",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     6,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H8N2O_rxn4060",
+   "file": "reactions/C3H8N2O_rxn4060.xyz",
+   "formula": "C3H8N2O",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     13
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ],
+    [
+     5,
+     13
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn6192",
+   "file": "reactions/C5H5NO_rxn6192.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     3
+    ],
+    [
+     4,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1785",
+   "file": "reactions/C3H5NO2_rxn1785.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     9
+    ],
+    [
+     5,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn3103",
+   "file": "reactions/C3H5NO2_rxn3103.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     8
+    ],
+    [
+     3,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     8
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0345",
+   "file": "reactions/C3H5NO2_rxn0345.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     5,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1151",
+   "file": "reactions/C3H5NO2_rxn1151.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn5689",
+   "file": "reactions/C5H5NO_rxn5689.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     5,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn8830",
+   "file": "reactions/C5H5NO_rxn8830.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn9303",
+   "file": "reactions/C3H5NO2_rxn9303.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7945",
+   "file": "reactions/C5H5NO_rxn7945.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn3101",
+   "file": "reactions/C3H5NO2_rxn3101.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn2554",
+   "file": "reactions/C3H5NO2_rxn2554.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8826",
+   "file": "reactions/C5H5NO_rxn8826.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1156",
+   "file": "reactions/C3H5NO2_rxn1156.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn9059",
+   "file": "reactions/C3H5NO2_rxn9059.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1066",
+   "file": "reactions/C3H5NO2_rxn1066.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7477",
+   "file": "reactions/C5H5NO_rxn7477.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn4117",
+   "file": "reactions/C3H5NO2_rxn4117.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     9
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8833",
+   "file": "reactions/C5H5NO_rxn8833.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     6,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     6
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1317",
+   "file": "reactions/C3H5NO2_rxn1317.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     5,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8842",
+   "file": "reactions/C5H5NO_rxn8842.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "N",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "other"
+  },
+  {
+   "id": "C3H5NO2_rxn1275",
+   "file": "reactions/C3H5NO2_rxn1275.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8836",
+   "file": "reactions/C5H5NO_rxn8836.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     6
+    ],
+    [
+     5,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1143",
+   "file": "reactions/C3H5NO2_rxn1143.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1148",
+   "file": "reactions/C3H5NO2_rxn1148.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn2555",
+   "file": "reactions/C3H5NO2_rxn2555.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn7950",
+   "file": "reactions/C5H5NO_rxn7950.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C5H5NO_rxn8831",
+   "file": "reactions/C5H5NO_rxn8831.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     5,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1065",
+   "file": "reactions/C3H5NO2_rxn1065.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H8N2O_rxn4003",
+   "file": "reactions/C3H8N2O_rxn4003.xyz",
+   "formula": "C3H8N2O",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "N",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1281",
+   "file": "reactions/C3H5NO2_rxn1281.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4103",
+   "file": "reactions/C3H5NO2_rxn4103.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn0251",
+   "file": "reactions/C3H5NO2_rxn0251.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3HNO2_rxn0110",
+   "file": "reactions/C3HNO2_rxn0110.xyz",
+   "formula": "C3HNO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn6190",
+   "file": "reactions/C5H5NO_rxn6190.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn1827",
+   "file": "reactions/C3H5NO2_rxn1827.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2HNO_rxn4440",
+   "file": "reactions/C2HNO_rxn4440.xyz",
+   "formula": "C2HNO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1278",
+   "file": "reactions/C3H5NO2_rxn1278.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1091",
+   "file": "reactions/C3H5NO2_rxn1091.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4497",
+   "file": "reactions/C3H5NO2_rxn4497.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2H3N3O2_rxn8549",
+   "file": "reactions/C2H3N3O2_rxn8549.xyz",
+   "formula": "C2H3N3O2",
+   "symbols": [
+    "N",
+    "C",
+    "N",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1285",
+   "file": "reactions/C3H5NO2_rxn1285.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C2H5NO2_rxn3682",
+   "file": "reactions/C2H5NO2_rxn3682.xyz",
+   "formula": "C2H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn7949",
+   "file": "reactions/C5H5NO_rxn7949.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1321",
+   "file": "reactions/C3H5NO2_rxn1321.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0249",
+   "file": "reactions/C3H5NO2_rxn0249.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn5688",
+   "file": "reactions/C5H5NO_rxn5688.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn8839",
+   "file": "reactions/C5H5NO_rxn8839.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "N",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4518",
+   "file": "reactions/C3H5NO2_rxn4518.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn9661",
+   "file": "reactions/C5H5NO_rxn9661.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4513",
+   "file": "reactions/C3H5NO2_rxn4513.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     4
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn3104",
+   "file": "reactions/C3H5NO2_rxn3104.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C3H5NO2_rxn1086",
+   "file": "reactions/C3H5NO2_rxn1086.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ],
+    [
+     3,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2H5NO2_rxn1961",
+   "file": "reactions/C2H5NO2_rxn1961.xyz",
+   "formula": "C2H5NO2",
+   "symbols": [
+    "C",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H8N2O_rxn4002",
+   "file": "reactions/C3H8N2O_rxn4002.xyz",
+   "formula": "C3H8N2O",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "N",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4515",
+   "file": "reactions/C3H5NO2_rxn4515.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1322",
+   "file": "reactions/C3H5NO2_rxn1322.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn5693",
+   "file": "reactions/C5H5NO_rxn5693.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn9083",
+   "file": "reactions/C3H5NO2_rxn9083.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C3H5NO2_rxn0253",
+   "file": "reactions/C3H5NO2_rxn0253.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn5967",
+   "file": "reactions/C5H5NO_rxn5967.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn6189",
+   "file": "reactions/C5H5NO_rxn6189.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2H5NO2_rxn1962",
+   "file": "reactions/C2H5NO2_rxn1962.xyz",
+   "formula": "C2H5NO2",
+   "symbols": [
+    "C",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     4,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0100",
+   "file": "reactions/C3H5NO2_rxn0100.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     2,
+     7
+    ],
+    [
+     2,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C3H5NO2_rxn4110",
+   "file": "reactions/C3H5NO2_rxn4110.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     7
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2HNO_rxn4439",
+   "file": "reactions/C2HNO_rxn4439.xyz",
+   "formula": "C2HNO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4123",
+   "file": "reactions/C3H5NO2_rxn4123.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8832",
+   "file": "reactions/C5H5NO_rxn8832.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     4,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn0107",
+   "file": "reactions/C3H5NO2_rxn0107.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C2HNO3_rxn1883",
+   "file": "reactions/C2HNO3_rxn1883.xyz",
+   "formula": "C2HNO3",
+   "symbols": [
+    "O",
+    "C",
+    "O",
+    "C",
+    "N",
+    "O",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1830",
+   "file": "reactions/C3H5NO2_rxn1830.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn8884",
+   "file": "reactions/C5H5NO_rxn8884.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn1064",
+   "file": "reactions/C3H5NO2_rxn1064.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1784",
+   "file": "reactions/C3H5NO2_rxn1784.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7960",
+   "file": "reactions/C5H5NO_rxn7960.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     1,
+     7
+    ],
+    [
+     4,
+     11
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C5H5NO_rxn8834",
+   "file": "reactions/C5H5NO_rxn8834.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     6,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1153",
+   "file": "reactions/C3H5NO2_rxn1153.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     4
+    ],
+    [
+     3,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2H3N3O2_rxn8551",
+   "file": "reactions/C2H3N3O2_rxn8551.xyz",
+   "formula": "C2H3N3O2",
+   "symbols": [
+    "N",
+    "C",
+    "N",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     6,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7954",
+   "file": "reactions/C5H5NO_rxn7954.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ],
+    [
+     4,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn10053",
+   "file": "reactions/C5H5NO_rxn10053.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     11
+    ],
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     6
+    ],
+    [
+     4,
+     6
+    ],
+    [
+     6,
+     11
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn8885",
+   "file": "reactions/C5H5NO_rxn8885.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     6
+    ],
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn7936",
+   "file": "reactions/C5H5NO_rxn7936.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn3105",
+   "file": "reactions/C3H5NO2_rxn3105.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn0252",
+   "file": "reactions/C3H5NO2_rxn0252.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3HNO2_rxn0109",
+   "file": "reactions/C3HNO2_rxn0109.xyz",
+   "formula": "C3HNO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C5H5NO_rxn7550",
+   "file": "reactions/C5H5NO_rxn7550.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn0103",
+   "file": "reactions/C3H5NO2_rxn0103.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1319",
+   "file": "reactions/C3H5NO2_rxn1319.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7941",
+   "file": "reactions/C5H5NO_rxn7941.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn2553",
+   "file": "reactions/C3H5NO2_rxn2553.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn9079",
+   "file": "reactions/C3H5NO2_rxn9079.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4122",
+   "file": "reactions/C3H5NO2_rxn4122.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     4
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1828",
+   "file": "reactions/C3H5NO2_rxn1828.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn5696",
+   "file": "reactions/C5H5NO_rxn5696.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     11
+    ],
+    [
+     1,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     5,
+     9
+    ],
+    [
+     6,
+     11
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1092",
+   "file": "reactions/C3H5NO2_rxn1092.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "other"
+  },
+  {
+   "id": "C3H5NO2_rxn1144",
+   "file": "reactions/C3H5NO2_rxn1144.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn7959",
+   "file": "reactions/C5H5NO_rxn7959.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     6,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1154",
+   "file": "reactions/C3H5NO2_rxn1154.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     4
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4108",
+   "file": "reactions/C3H5NO2_rxn4108.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1789",
+   "file": "reactions/C3H5NO2_rxn1789.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     3,
+     9
+    ],
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C3H5NO2_rxn9082",
+   "file": "reactions/C3H5NO2_rxn9082.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     7
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7957",
+   "file": "reactions/C5H5NO_rxn7957.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     4,
+     6
+    ],
+    [
+     5,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     7
+    ],
+    [
+     2,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn6198",
+   "file": "reactions/C5H5NO_rxn6198.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     4
+    ],
+    [
+     1,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     1
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C2H5NO2_rxn3684",
+   "file": "reactions/C2H5NO2_rxn3684.xyz",
+   "formula": "C2H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ],
+    [
+     4,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0895",
+   "file": "reactions/C3H5NO2_rxn0895.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "N",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0346",
+   "file": "reactions/C3H5NO2_rxn0346.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     5
+    ],
+    [
+     5,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn9080",
+   "file": "reactions/C3H5NO2_rxn9080.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     3
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn0104",
+   "file": "reactions/C3H5NO2_rxn0104.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     9
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn0099",
+   "file": "reactions/C3H5NO2_rxn0099.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     1,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     2,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn3102",
+   "file": "reactions/C3H5NO2_rxn3102.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "O",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     5
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn1150",
+   "file": "reactions/C3H5NO2_rxn1150.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     3,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn8967",
+   "file": "reactions/C3H5NO2_rxn8967.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     3,
+     8
+    ],
+    [
+     5,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "bond-cleavage"
+  },
+  {
+   "id": "C5H5NO_rxn7942",
+   "file": "reactions/C5H5NO_rxn7942.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     5
+    ],
+    [
+     6,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C2H5NO2_rxn3683",
+   "file": "reactions/C2H5NO2_rxn3683.xyz",
+   "formula": "C2H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     7
+    ]
+   ],
+   "ambiguous": [
+    [
+     0,
+     1
+    ]
+   ],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn10054",
+   "file": "reactions/C5H5NO_rxn10054.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "O",
+    "C",
+    "C",
+    "C",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     2,
+     3
+    ],
+    [
+     4,
+     6
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C5H5NO_rxn7478",
+   "file": "reactions/C5H5NO_rxn7478.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [],
+   "broken": [
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     4
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  },
+  {
+   "id": "C3H5NO2_rxn1084",
+   "file": "reactions/C3H5NO2_rxn1084.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7940",
+   "file": "reactions/C5H5NO_rxn7940.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     7
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7475",
+   "file": "reactions/C5H5NO_rxn7475.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "N",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ]
+   ],
+   "broken": [
+    [
+     1,
+     2
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn4121",
+   "file": "reactions/C3H5NO2_rxn4121.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "N",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     10
+    ]
+   ],
+   "broken": [
+    [
+     4,
+     10
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn6197",
+   "file": "reactions/C5H5NO_rxn6197.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     2,
+     9
+    ],
+    [
+     3,
+     7
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     7
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     2,
+     3
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn1787",
+   "file": "reactions/C3H5NO2_rxn1787.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     8
+    ]
+   ],
+   "broken": [
+    [
+     2,
+     8
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C3H5NO2_rxn4498",
+   "file": "reactions/C3H5NO2_rxn4498.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "N",
+    "C",
+    "O",
+    "C",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     5,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     1,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "proton-transfer"
+  },
+  {
+   "id": "C5H5NO_rxn7059",
+   "file": "reactions/C5H5NO_rxn7059.xyz",
+   "formula": "C5H5NO",
+   "symbols": [
+    "O",
+    "C",
+    "C",
+    "C",
+    "C",
+    "C",
+    "N",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     3,
+     6
+    ]
+   ],
+   "broken": [
+    [
+     3,
+     5
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ligand-exchange"
+  },
+  {
+   "id": "C3H5NO2_rxn2551",
+   "file": "reactions/C3H5NO2_rxn2551.xyz",
+   "formula": "C3H5NO2",
+   "symbols": [
+    "C",
+    "C",
+    "O",
+    "N",
+    "C",
+    "O",
+    "H",
+    "H",
+    "H",
+    "H",
+    "H"
+   ],
+   "formed": [
+    [
+     0,
+     2
+    ]
+   ],
+   "broken": [
+    [
+     0,
+     6
+    ],
+    [
+     3,
+     9
+    ]
+   ],
+   "ambiguous": [],
+   "category": "ring-change"
+  }
+ ]
+}

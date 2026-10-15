@@ -1,0 +1,280 @@
+5
+Properties=species:S:1:pos:R:3 frame=0 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.27808 -0.97829 0.06306
+C -0.60153 0.01479 0.05570
+C 0.86946 -0.03199 -0.08093
+N 2.02148 -0.03853 -0.18638
+H -1.01176 1.03355 0.14858
+5
+Properties=species:S:1:pos:R:3 frame=1 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.27808 -0.97829 0.06306
+C -0.60153 0.01479 0.05570
+C 0.86946 -0.03199 -0.08093
+N 2.02148 -0.03853 -0.18638
+H -1.01176 1.03355 0.14858
+5
+Properties=species:S:1:pos:R:3 frame=2 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.27808 -0.97829 0.06306
+C -0.60153 0.01479 0.05570
+C 0.86946 -0.03199 -0.08093
+N 2.02148 -0.03853 -0.18638
+H -1.01176 1.03355 0.14858
+5
+Properties=species:S:1:pos:R:3 frame=3 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.27808 -0.97829 0.06306
+C -0.60153 0.01479 0.05570
+C 0.86946 -0.03199 -0.08093
+N 2.02148 -0.03853 -0.18638
+H -1.01176 1.03355 0.14858
+5
+Properties=species:S:1:pos:R:3 frame=4 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.27808 -0.97829 0.06306
+C -0.60153 0.01479 0.05570
+C 0.86946 -0.03199 -0.08093
+N 2.02148 -0.03853 -0.18638
+H -1.01176 1.03355 0.14858
+5
+Properties=species:S:1:pos:R:3 frame=5 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.28013 -0.98995 0.00721
+C -0.63400 0.00716 0.02473
+C 0.87528 -0.01158 -0.04643
+N 2.02373 -0.02298 -0.11920
+H -0.98903 1.02073 0.13853
+5
+Properties=species:S:1:pos:R:3 frame=6 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.28217 -1.00161 -0.04865
+C -0.66646 -0.00046 -0.00624
+C 0.88110 0.00883 -0.01194
+N 2.02598 -0.00742 -0.05202
+H -0.96631 1.00791 0.12849
+5
+Properties=species:S:1:pos:R:3 frame=7 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.28421 -1.01327 -0.10451
+C -0.69892 -0.00809 -0.03722
+C 0.88693 0.02923 0.02256
+N 2.02823 0.00814 0.01516
+H -0.94358 0.99509 0.11844
+5
+Properties=species:S:1:pos:R:3 frame=8 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.28626 -1.02492 -0.16036
+C -0.73138 -0.01572 -0.06819
+C 0.89275 0.04964 0.05705
+N 2.03048 0.02369 0.08235
+H -0.92086 0.98227 0.10840
+5
+Properties=species:S:1:pos:R:3 frame=9 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.28830 -1.03658 -0.21622
+C -0.76384 -0.02334 -0.09916
+C 0.89857 0.07005 0.09155
+N 2.03273 0.03925 0.14953
+H -0.89813 0.96945 0.09835
+5
+Properties=species:S:1:pos:R:3 frame=10 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.29035 -1.04824 -0.27208
+C -0.79630 -0.03097 -0.13014
+C 0.90440 0.09045 0.12604
+N 2.03498 0.05480 0.21671
+H -0.87541 0.95663 0.08831
+5
+Properties=species:S:1:pos:R:3 frame=11 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.29239 -1.05990 -0.32793
+C -0.82876 -0.03860 -0.16111
+C 0.91022 0.11086 0.16053
+N 2.03723 0.07036 0.28389
+H -0.85268 0.94381 0.07826
+5
+Properties=species:S:1:pos:R:3 frame=12 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.29443 -1.07155 -0.38379
+C -0.86122 -0.04622 -0.19208
+C 0.91605 0.13127 0.19503
+N 2.03948 0.08592 0.35107
+H -0.82996 0.93099 0.06822
+5
+Properties=species:S:1:pos:R:3 frame=13 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.29648 -1.08321 -0.43964
+C -0.89368 -0.05385 -0.22306
+C 0.92187 0.15167 0.22952
+N 2.04173 0.10147 0.41826
+H -0.80724 0.91817 0.05817
+5
+Properties=species:S:1:pos:R:3 frame=14 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.29852 -1.09487 -0.49550
+C -0.92615 -0.06148 -0.25403
+C 0.92769 0.17208 0.26402
+N 2.04398 0.11703 0.48544
+H -0.78451 0.90535 0.04812
+5
+Properties=species:S:1:pos:R:3 frame=15 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.30056 -1.10653 -0.55136
+C -0.95861 -0.06910 -0.28500
+C 0.93352 0.19249 0.29851
+N 2.04623 0.13258 0.55262
+H -0.76179 0.89253 0.03808
+5
+Properties=species:S:1:pos:R:3 frame=16 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.30261 -1.11818 -0.60721
+C -0.99107 -0.07673 -0.31598
+C 0.93934 0.21289 0.33301
+N 2.04848 0.14814 0.61980
+H -0.73906 0.87971 0.02803
+5
+Properties=species:S:1:pos:R:3 frame=17 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.30465 -1.12984 -0.66307
+C -1.02353 -0.08436 -0.34695
+C 0.94516 0.23330 0.36750
+N 2.05073 0.16370 0.68699
+H -0.71634 0.86689 0.01799
+5
+Properties=species:S:1:pos:R:3 frame=18 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.30670 -1.14150 -0.71893
+C -1.05599 -0.09198 -0.37792
+C 0.95099 0.25371 0.40200
+N 2.05298 0.17925 0.75417
+H -0.69361 0.85408 0.00794
+5
+Properties=species:S:1:pos:R:3 frame=19 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.30874 -1.15316 -0.77478
+C -1.08845 -0.09961 -0.40889
+C 0.95681 0.27411 0.43649
+N 2.05523 0.19481 0.82135
+H -0.67089 0.84126 -0.00210
+5
+Properties=species:S:1:pos:R:3 frame=20 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.38866 -1.16893 -0.78749
+C -1.12043 -0.15094 -0.42186
+C 0.98176 0.30551 0.44225
+N 2.07061 0.26710 0.82588
+H -0.59674 0.80168 0.01006
+5
+Properties=species:S:1:pos:R:3 frame=21 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.46857 -1.18471 -0.80019
+C -1.15240 -0.20227 -0.43482
+C 1.00670 0.33690 0.44800
+N 2.08599 0.33939 0.83041
+H -0.52260 0.76211 0.02222
+5
+Properties=species:S:1:pos:R:3 frame=22 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.54849 -1.20048 -0.81290
+C -1.18438 -0.25361 -0.44779
+C 1.03165 0.36830 0.45376
+N 2.10137 0.41168 0.83495
+H -0.44846 0.72254 0.03439
+5
+Properties=species:S:1:pos:R:3 frame=23 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.62840 -1.21626 -0.82560
+C -1.21635 -0.30494 -0.46075
+C 1.05659 0.39969 0.45951
+N 2.11675 0.48397 0.83948
+H -0.37431 0.68297 0.04655
+5
+Properties=species:S:1:pos:R:3 frame=24 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.70832 -1.23204 -0.83831
+C -1.24833 -0.35627 -0.47372
+C 1.08154 0.43109 0.46527
+N 2.13213 0.55625 0.84401
+H -0.30017 0.64339 0.05872
+5
+Properties=species:S:1:pos:R:3 frame=25 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.78824 -1.24781 -0.85101
+C -1.28030 -0.40760 -0.48668
+C 1.10648 0.46248 0.47102
+N 2.14751 0.62854 0.84855
+H -0.22602 0.60382 0.07088
+5
+Properties=species:S:1:pos:R:3 frame=26 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.86815 -1.26359 -0.86371
+C -1.31228 -0.45893 -0.49965
+C 1.13143 0.49388 0.47678
+N 2.16289 0.70083 0.85308
+H -0.15188 0.56425 0.08304
+5
+Properties=species:S:1:pos:R:3 frame=27 source=Transition1x formula=C2HNO rxn=rxn4440
+O -1.94807 -1.27936 -0.87642
+C -1.34425 -0.51027 -0.51261
+C 1.15637 0.52527 0.48253
+N 2.17827 0.77312 0.85761
+H -0.07774 0.52468 0.09521
+5
+Properties=species:S:1:pos:R:3 frame=28 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.02798 -1.29514 -0.88912
+C -1.37623 -0.56160 -0.52558
+C 1.18132 0.55667 0.48829
+N 2.19365 0.84541 0.86214
+H -0.00359 0.48511 0.10737
+5
+Properties=species:S:1:pos:R:3 frame=29 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.10790 -1.31091 -0.90183
+C -1.40820 -0.61293 -0.53854
+C 1.20626 0.58806 0.49404
+N 2.20903 0.91770 0.86668
+H 0.07055 0.44553 0.11954
+5
+Properties=species:S:1:pos:R:3 frame=30 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.18782 -1.32669 -0.91453
+C -1.44018 -0.66426 -0.55151
+C 1.23121 0.61945 0.49980
+N 2.22441 0.98999 0.87121
+H 0.14470 0.40596 0.13170
+5
+Properties=species:S:1:pos:R:3 frame=31 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.26773 -1.34247 -0.92724
+C -1.47215 -0.71559 -0.56447
+C 1.25615 0.65085 0.50555
+N 2.23979 1.06228 0.87574
+H 0.21884 0.36639 0.14386
+5
+Properties=species:S:1:pos:R:3 frame=32 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.34765 -1.35824 -0.93994
+C -1.50413 -0.76693 -0.57744
+C 1.28110 0.68224 0.51131
+N 2.25517 1.13457 0.88027
+H 0.29299 0.32682 0.15603
+5
+Properties=species:S:1:pos:R:3 frame=33 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.42757 -1.37402 -0.95265
+C -1.53610 -0.81826 -0.59040
+C 1.30604 0.71364 0.51706
+N 2.27055 1.20686 0.88481
+H 0.36713 0.28724 0.16819
+5
+Properties=species:S:1:pos:R:3 frame=34 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.50748 -1.38979 -0.96535
+C -1.56808 -0.86959 -0.60337
+C 1.33099 0.74503 0.52282
+N 2.28593 1.27915 0.88934
+H 0.44127 0.24767 0.18036
+5
+Properties=species:S:1:pos:R:3 frame=35 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.50748 -1.38979 -0.96535
+C -1.56808 -0.86959 -0.60337
+C 1.33099 0.74503 0.52282
+N 2.28593 1.27915 0.88934
+H 0.44127 0.24767 0.18036
+5
+Properties=species:S:1:pos:R:3 frame=36 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.50748 -1.38979 -0.96535
+C -1.56808 -0.86959 -0.60337
+C 1.33099 0.74503 0.52282
+N 2.28593 1.27915 0.88934
+H 0.44127 0.24767 0.18036
+5
+Properties=species:S:1:pos:R:3 frame=37 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.50748 -1.38979 -0.96535
+C -1.56808 -0.86959 -0.60337
+C 1.33099 0.74503 0.52282
+N 2.28593 1.27915 0.88934
+H 0.44127 0.24767 0.18036
+5
+Properties=species:S:1:pos:R:3 frame=38 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.50748 -1.38979 -0.96535
+C -1.56808 -0.86959 -0.60337
+C 1.33099 0.74503 0.52282
+N 2.28593 1.27915 0.88934
+H 0.44127 0.24767 0.18036
+5
+Properties=species:S:1:pos:R:3 frame=39 source=Transition1x formula=C2HNO rxn=rxn4440
+O -2.50748 -1.38979 -0.96535
+C -1.56808 -0.86959 -0.60337
+C 1.33099 0.74503 0.52282
+N 2.28593 1.27915 0.88934
+H 0.44127 0.24767 0.18036

@@ -1,0 +1,6614 @@
+{
+ "options": {
+  "minPersistFrames": 3,
+  "groupWindowFrames": 5,
+  "transferWindowFrames": 30,
+  "jumpThreshold": 2.5
+ },
+ "models": [
+  "qwen2.5:7b",
+  "gemma2:9b"
+ ],
+ "results": [
+  {
+   "id": "C5H5NO_rxn5691",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-N6 forms, C4-N6 breaks",
+     "seconds": 44.9021541
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0 forms bond with N6, breaking C4-N6",
+     "seconds": 29.097002400000004
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn9925",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "O0-C1 bond breaks, C1-C5 bond lengthens",
+     "seconds": 9.171420299999998
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "C1-C5 distance fluctuates near cutoff",
+     "seconds": 18.08721990000001
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1826",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H7 and C0-C4 bonds form, O3-O5 and C0-H7 bonds break",
+     "seconds": 7.215099400000007
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "other",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0,
+     "label": "Complex rearrangement with proton transfer",
+     "seconds": 14.051724900000002
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5697",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-H7 forms, C3-H7 breaks",
+     "seconds": 5.552685700000001
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C3 to C2",
+     "seconds": 10.42712490000001
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7953",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1-N6 bond forms, C1-C2 bond breaks",
+     "seconds": 5.56347510000001
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1 bonds N6, C1 breaks C2 bond",
+     "seconds": 10.292286300000008
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4111",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H9-H10 bond fluctuates",
+     "seconds": 7.06770239999998
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 bonds to H10, breaks C4-H9, C4-H10",
+     "seconds": 14.741391499999997
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1788",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-O5 forms, C2-N3 breaks",
+     "seconds": 5.759570099999983
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with O5, breaks with N3",
+     "seconds": 10.935642099999997
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7061",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-H11 forms, C4-H11 breaks",
+     "seconds": 5.859261399999989
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H11 transfers from C4 to O0",
+     "seconds": 10.430646800000018
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0892",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N2-H8 forms, C0-H8 breaks",
+     "seconds": 5.696963699999993
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C0 to N2",
+     "seconds": 10.328116399999999
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1083",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-C4 forms, C1-H10 bonds",
+     "seconds": 5.5808793
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "N0 forms bond with C4, C4-H10 breaks",
+     "seconds": 10.776228100000008
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2548",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "label": "N3-O5 bond breaks, O5-H6 forms",
+     "seconds": 5.866905300000013
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "label": "N3-O5 bond breaks, C1-N3 breaks",
+     "seconds": 10.386838099999993
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6196",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C5-H10 forms, C2-H10 and C2-C5 break",
+     "seconds": 6.084407800000015
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C2 to C5",
+     "seconds": 10.5560049
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1790",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C1-H8 forms, C2-H8 breaks",
+     "seconds": 7.080486700000009
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "H8 transfers from C2 to C1",
+     "seconds": 14.81736579999997
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7547",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N6-H9 bond shortens",
+     "seconds": 5.4388389000000315
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N6 forms bond with H9, breaking C3-H9, C3-N6",
+     "seconds": 11.311190000000002
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1283",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-O5 bond forms, C4-O5 and C3-O5 bonds break",
+     "seconds": 5.7109028000000395
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2 forms bond with O5, breaking C4-O5 and C3-O5",
+     "seconds": 10.71654449999996
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1792",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H10 forms, C4-H10 breaks",
+     "seconds": 5.569965099999973
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C4 to O5",
+     "seconds": 10.47001680000004
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7060",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 4,
+   "events": 1,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "label": "O0-C5 forms, C3-N6 forms",
+     "seconds": 5.516425400000007
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0 binds C5, C3 binds N6, breaking O0-C1, C3-C5",
+     "seconds": 11.73495299999998
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7946",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N6-H7 forms, C1-N6 shortens",
+     "seconds": 5.605074999999953
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N6 forms bond with H7, C1-H7 breaks",
+     "seconds": 10.499274399999996
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4519",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "H7-H8 bond fluctuates",
+     "seconds": 6.987137099999993
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 forms bond with H8, breaking C1-H8 and N0-H7",
+     "seconds": 14.548834600000003
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn9592",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C3-C5 bond forms, C5-N6 bond breaks",
+     "seconds": 7.211234100000001
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C3 bonds C5, C5 breaks bond with N6",
+     "seconds": 13.524563399999984
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1320",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C2-H6 bond formation, C1-C2 bond breakage",
+     "seconds": 5.585442800000019
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C2 bonds H6, C1-C2 breaks",
+     "seconds": 10.420357000000019
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1063",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-H7 bonds, C0-H7 stretches",
+     "seconds": 5.689886299999954
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C0 to O2",
+     "seconds": 10.757411200000032
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6194",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-C4 bond forms, C2-C3 bond breaks",
+     "seconds": 5.575139699999999
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with C4, breaking C2-C3",
+     "seconds": 10.329005500000028
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5694",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 1,
+     "label": "C5-H8 forms, C4-H8 breaks",
+     "seconds": 6.986724899999972
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 1,
+     "label": "H8 transfers from C4 to C5",
+     "seconds": 13.476051800000016
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2556",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H9 bonds, N3-H9 breaks",
+     "seconds": 5.696970400000049
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from N3 to O5",
+     "seconds": 10.38210560000001
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8838",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-H7 forms, C2-H7 breaks",
+     "seconds": 5.854095600000001
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms bond with H7, breaks with C2",
+     "seconds": 10.609613500000036
+    }
+   ]
+  },
+  {
+   "id": "C2HNO_rxn4441",
+   "formula": "C2HNO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-N3 bond forms, C1-C2 bond breaks",
+     "seconds": 5.5410817000000385
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 forms bond with N3, breaking C1-C2",
+     "seconds": 10.463753099999973
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8829",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "C6-H10 forms, C5-H10 breaks",
+     "seconds": 6.894561400000006
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "H10 transfers from C5 to C6",
+     "seconds": 13.47855839999998
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7063",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C1-N6 bond forms, C1-C4 bond breaks",
+     "seconds": 7.208325100000017
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C1 forms bond with N6, breaks C1-C4",
+     "seconds": 13.71863049999997
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1279",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-H10 forms, C4-H10 breaks, C3-C4 lengthens",
+     "seconds": 5.893421399999992
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C4 to C3",
+     "seconds": 10.10640029999998
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1152",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 1,
+   "events": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-C2 bond cleavage",
+     "seconds": 5.373584299999988
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-C2 bond breaks",
+     "seconds": 10.419700399999972
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2557",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "N3-O5 bond forms, C0-O5 bond forms",
+     "seconds": 5.689630800000042
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C0 forms bond with O5, N3-O5 breaks",
+     "seconds": 10.394755300000076
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4523",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "N0-H7 breaks, O5-H7 forms",
+     "seconds": 5.553764399999985
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H7 transfers from N0 to O5",
+     "seconds": 10.322593699999969
+    }
+   ]
+  },
+  {
+   "id": "C2HNO_rxn4442",
+   "formula": "C2HNO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "O0-C2 bond forms",
+     "seconds": 6.606598499999964
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.3333333333333333,
+     "label": "O1 forms a bond with C2",
+     "seconds": 13.905601200000033
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6193",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.4,
+     "label": "N6-H11 proton transfer",
+     "seconds": 6.992600700000068
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "H11 transfers from C4 to N6",
+     "seconds": 14.370457599999964
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1147",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-O5 bond forms, C1-C2 bond breaks",
+     "seconds": 5.8555761000000635
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 forms bond with O5, breaking C1-C2",
+     "seconds": 10.951309800000047
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4499",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H7-H8 bond fluctuates",
+     "seconds": 7.001637800000026
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 and H8 form a bond, C3-H7 and C3-H8 break",
+     "seconds": 15.667423200000078
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4522",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-O3 bond forms, N0-C1 and O3-C4 break",
+     "seconds": 6.163814699999988
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "N0 forms bond with O3, breaks N0-C1",
+     "seconds": 10.784233400000026
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8825",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-H10 forms, N0-C5 shortens",
+     "seconds": 6.032457599999965
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms bond with H10, C5",
+     "seconds": 11.943922599999933
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7943",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-H11 bond forms, C4-H11 bond breaks, C3-C4 bond stretches",
+     "seconds": 5.92151800000004
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H11 transfers from C4 to C3",
+     "seconds": 10.421433799999999
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1786",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0,
+   "exact": false,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "N3-O5 bond breaks, C1-O5 forms",
+     "seconds": 8.403907699999982
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "N3-O5 bond breaks, C1-O5 forms",
+     "seconds": 17.44823789999995
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1062",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 1,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "label": "C1-H7 forms, C0-N5 forms",
+     "seconds": 5.663298499999917
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "label": "C1 forms bond with H7, breaks with O3",
+     "seconds": 10.587625699999975
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4120",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-H8 forms, C3-H8 and C1-N2 break",
+     "seconds": 5.815871299999999
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1 forms bond with H8, breaks with N2",
+     "seconds": 10.5803591
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0106",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-H7 forms, C2-H7 breaks",
+     "seconds": 5.860930900000036
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C2 to N0",
+     "seconds": 11.01122769999993
+    }
+   ]
+  },
+  {
+   "id": "C3H8N2O_rxn4063",
+   "formula": "C3H8N2O",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O4-H12 forms, N5-H12 breaks",
+     "seconds": 5.97517499999993
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H12 transfers from N5 to O4",
+     "seconds": 11.121391199999955
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1094",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-O5 bond forms, O2-C4 bond weakens",
+     "seconds": 7.733551499999943
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "O5-H10 bond breaks, C1-O5 forms",
+     "seconds": 10.965758399999933
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1287",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-H8 forms, C3-H8 breaks",
+     "seconds": 5.665271999999997
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C3 to O2",
+     "seconds": 11.091459599999943
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1061",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N5-H9 bond formation, C1-N5 bond cleavage",
+     "seconds": 5.999444000000017
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N5-H9 bond breaks, C1-N5 forms",
+     "seconds": 10.905689400000032
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4116",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 2,
+     "realEvents": 3,
+     "atomMention": 0.3333333333333333,
+     "label": "C4-H10 bond forms",
+     "seconds": 8.147542900000001
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 3,
+     "atomMention": 0.3333333333333333,
+     "label": "C4-H10 bond breaks at frame 15",
+     "seconds": 17.602460300000036
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1090",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C4-H7 forms, C1-H7 breaks",
+     "seconds": 7.144569600000046
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "H7 transfers from C1 to C4",
+     "seconds": 14.089392200000002
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5690",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "C3-H8 forms, C4-H8 breaks",
+     "seconds": 7.010408999999985
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "H8 transfers from C4 to C3",
+     "seconds": 13.937548100000015
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn9246",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-C4 bonds, N3-C4 breaks",
+     "seconds": 5.55819180000003
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2 forms bond with C4, N3-C4 breaks",
+     "seconds": 11.182323600000004
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4521",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H8 bonds, C1-H8 breaks",
+     "seconds": 5.554068799999892
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C1 to O5",
+     "seconds": 10.477532699999982
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8835",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 bonds to C4, C5 breaks",
+     "seconds": 5.861289800000028
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from C5 to C4",
+     "seconds": 10.04647490000003
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7948",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 4,
+   "events": 3,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "O0-C5 bond forms, O0-H7 and C4-C5 bonds break",
+     "seconds": 8.560671500000055
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "coordination-change",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "O0 binds C5, breaking O0-H7 and C4-C5",
+     "seconds": 17.267105700000073
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4109",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "C4-H8 forms, C4-O5 and C3-H8 break",
+     "seconds": 7.14051239999989
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "C4 forms bond with H8, breaks with O5, H8 breaks with C3",
+     "seconds": 13.77445949999988
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1277",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "N0-C1 breaks",
+     "seconds": 6.906944900000002
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "N0 forms bond with H9, breaking C3-H9",
+     "seconds": 10.895875400000019
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1829",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H10 forms, C4-H10 breaks",
+     "seconds": 5.535098600000143
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C4 to O5",
+     "seconds": 10.561706800000044
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8843",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-C6 bond elongates, C1-H8 bond breaks",
+     "seconds": 5.816988099999959
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-H8 bond breaks, C6-H8 forms",
+     "seconds": 10.586697200000053
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0347",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N1-H6 forms, O0-H6 breaks",
+     "seconds": 5.440226800000063
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H6 transfers from O0 to N1",
+     "seconds": 10.657362999999895
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4520",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1-C2 bond breaks, C2-C4 forms",
+     "seconds": 5.785614199999952
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1 forms bond with O5, C1-C2 breaks",
+     "seconds": 10.271172699999996
+    }
+   ]
+  },
+  {
+   "id": "C3HNO2_rxn8946",
+   "formula": "C3HNO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-O3 bond forms, C1-C2 bond breaks",
+     "seconds": 5.7955123999998905
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 forms bond with O3, breaking C1-C2",
+     "seconds": 10.496988499999977
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1286",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-H9 bonds, C4-H9 stretches",
+     "seconds": 5.762834599999944
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from C4 to O2",
+     "seconds": 10.49746669999999
+    }
+   ]
+  },
+  {
+   "id": "C2H5NO2_rxn3685",
+   "formula": "C2H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-H7 forms, C3-H7 breaks",
+     "seconds": 5.773523400000064
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C3 to O2",
+     "seconds": 10.632634400000097
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1095",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "N0-O2 bond forms, O2-C3 bond breaks",
+     "seconds": 7.248510800000047
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "N0 forms bond with O2, breaking O2-C3",
+     "seconds": 13.920886100000004
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5687",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N6-H8 forms, C4-H8 breaks",
+     "seconds": 5.6371156000001355
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N6 forms bond with H8, C4-H8 breaks",
+     "seconds": 10.736770199999912
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0101",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms C4 bond, C4-O5 breaks",
+     "seconds": 5.532708399999887
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms bond with C4, breaking C4-O5",
+     "seconds": 11.006791399999987
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2550",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.4,
+     "label": "O5-H6 bond fluctuates",
+     "seconds": 6.884510800000047
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "H6 transfers from C0 to O5",
+     "seconds": 13.691797599999932
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn3108",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-H9 breaks, C4-H9 forms",
+     "seconds": 5.552370200000005
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from C2 to C4",
+     "seconds": 10.420722099999898
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1318",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-H9 bond forms, C1-C2 and C2-H9 break",
+     "seconds": 5.634658500000136
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 forms bond with H9, breaks C1-C2, C2-H9",
+     "seconds": 10.46105119999987
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0896",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C1-C4 bond forms",
+     "seconds": 6.773322200000053
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C1 forms a bond with C4",
+     "seconds": 13.76556019999995
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1149",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C1-C2 bond weakens",
+     "seconds": 6.676296700000065
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C1-C2 bond breaks in frame 9",
+     "seconds": 14.008896500000033
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7548",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C5-N6 bond breaks, C2-C5 forms",
+     "seconds": 5.535172499999869
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C5-N6 bond breaks, C1-C2 breaks",
+     "seconds": 10.182204499999992
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4105",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 5,
+   "events": 1,
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0-N1 breaks, N1-H9 breaks, C2-C4 breaks",
+     "seconds": 7.146186400000006
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "label": "C0 bonds H9, N1-C4 forms, C0-N1 breaks",
+     "seconds": 11.17105469999998
+    }
+   ]
+  },
+  {
+   "id": "C2H3N3O2_rxn8548",
+   "formula": "C2H3N3O2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-H9 forms, N6-H9 breaks",
+     "seconds": 5.459943100000033
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from N6 to N0",
+     "seconds": 10.445960500000044
+    }
+   ]
+  },
+  {
+   "id": "C3H8N2O_rxn4060",
+   "formula": "C3H8N2O",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "N1-H13 forms, N5-H13 breaks",
+     "seconds": 5.792208799999906
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "N1 forms bond with H13, breaks with C3",
+     "seconds": 10.182595100000036
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6192",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-C3 bond forms, C4-H7 bond breaks",
+     "seconds": 5.517286400000099
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "O0 forms bond with C3, breaking O0-H7",
+     "seconds": 10.28995719999983
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1785",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.3333333333333333,
+     "label": "O2-H9 forms, N3-H9 breaks",
+     "seconds": 6.856392199999886
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "H9 transfers from N3 to O0",
+     "seconds": 14.571179400000023
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn3103",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 5,
+   "events": 1,
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "O3-H6 forms, C2-H8 forms",
+     "seconds": 5.542545799999964
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "other",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.3333333333333333,
+     "label": "C1-H8 weakens slightly",
+     "seconds": 17.585534800000023
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0345",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "C2-H9 bond forms, C5-H9 bond breaks",
+     "seconds": 7.648556700000074
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "H9 transfers from C5 to C2",
+     "seconds": 15.008456799999811
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1151",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "O0-C1 bond fluctuates",
+     "seconds": 8.605181199999992
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C1 to O0",
+     "seconds": 10.790142500000075
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5689",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 4,
+   "events": 1,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "label": "C2-C5 bond forms, C5-N6 bond breaks",
+     "seconds": 5.904137800000142
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 bonds to C5, breaking C5-N6, C1-C4, C1-C2",
+     "seconds": 11.246512600000017
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8830",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C4-H8 bond forms",
+     "seconds": 8.720634100000142
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C4 to O3",
+     "seconds": 10.637543500000145
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn9303",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.3333333333333333,
+     "label": "O0-H10 bond fluctuates",
+     "seconds": 6.996690399999963
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "H10 transfers from O3 to O0",
+     "seconds": 13.933824299999978
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7945",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C2-C5 bond forms, C2-N6 bond forms",
+     "seconds": 5.649967300000135
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bonds with N6, breaks C2-C4",
+     "seconds": 10.38436499999999
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn3101",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N5-H9 bond formation",
+     "seconds": 5.504160200000042
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N5 forms bond with H9, breaks C2-H9",
+     "seconds": 10.801410799999955
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2554",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-H10 forms, C1-N3 and C4-H10 break",
+     "seconds": 5.74528190000006
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1 forms bond with H10, breaks with N3",
+     "seconds": 10.751432599999942
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8826",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C5-H8 bond forms, C4-C5 and C4-H8 bonds break",
+     "seconds": 6.085860499999952
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C5 forms bond with H8, breaking C4-C5 and C4-H8",
+     "seconds": 10.859843300000065
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1156",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C1-H7 bond breaks",
+     "seconds": 8.69150770000019
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with H7, breaking C1-C2, C1-H7",
+     "seconds": 11.422421600000002
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn9059",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "coordination-change",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.8,
+     "label": "N0 repositions, forming N0-C4 and N0-O5, breaking N0-H6",
+     "seconds": 7.054331000000006
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "other",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "N0 rearranges bonds with C4 and O5",
+     "seconds": 15.088087499999906
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1066",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.4,
+     "label": "N5-H7 proton transfer",
+     "seconds": 6.872168999999994
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "H7 transfers from C0 to N5",
+     "seconds": 14.104176100000041
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7477",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 1,
+   "fn": 0,
+   "exact": false,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C2-C4 bond lengthens, C1-C2 bond lengthens",
+     "seconds": 7.391491000000155
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 bonds C5, C2-C4 breaks",
+     "seconds": 10.343033199999947
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4117",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "O0-H9 bond-forms, C1-H9 bond-stays",
+     "seconds": 8.939894399999874
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1 forms bonds with C4 and H9",
+     "seconds": 10.55233219999983
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8833",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C4-C6 bond lengthens",
+     "seconds": 9.194372800000012
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-C4 bond breaks, C6-H8 forms",
+     "seconds": 10.613462499999907
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1317",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "N5-H10 bond breaks",
+     "seconds": 8.359632899999852
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H10 transfers from N5 to O3",
+     "seconds": 10.868217899999815
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8842",
+   "formula": "C5H5NO",
+   "truthCategory": "other",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C1-C2 bond reopens",
+     "seconds": 6.767873900000006
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C1-C2 bond breaks in frame 13",
+     "seconds": 14.454319699999877
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1275",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-H9 forms, C3-H9 breaks",
+     "seconds": 5.813764900000067
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from C3 to O2",
+     "seconds": 10.853440599999857
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8836",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "N0-H10 forms, C5-H10 breaks",
+     "seconds": 7.0383365999998055
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "Proton transfer from C5-H10 to N0",
+     "seconds": 14.415644499999937
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1143",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-H9 bond forms, C1-C2 bond breaks",
+     "seconds": 5.650194200000027
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 forms bond with H9, breaks C1-C2",
+     "seconds": 10.876158800000091
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1148",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H7 forms C4-H7 bond",
+     "seconds": 5.520922999999952
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C4 forms bond with H7, breaking C1-H7 and C1-C4",
+     "seconds": 11.027607299999799
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2555",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0-O2 bond forms, C0-C1 bond breaks",
+     "seconds": 5.794973299999954
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0 forms bond with O2, breaking C0-C1",
+     "seconds": 10.619402699999977
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7950",
+   "formula": "C5H5NO",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "H7-H8 bond fluctuates",
+     "seconds": 6.9978714000000615
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H7 breaks C1 bond, forms H7-H8 bond",
+     "seconds": 13.718236000000033
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8831",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "O3-H10 bond formation",
+     "seconds": 5.578569900000002
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H10 transfers from O3 to C5",
+     "seconds": 10.549835600000108
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1065",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0-O2 bond forms, C0-C1 bond breaks",
+     "seconds": 5.759410499999998
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0 forms bond with O2, breaks with C1",
+     "seconds": 10.607255699999863
+    }
+   ]
+  },
+  {
+   "id": "C3H8N2O_rxn4003",
+   "formula": "C3H8N2O",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N1-O3 bond breaks, O3-H10 forms",
+     "seconds": 5.7879103999999355
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N1-O3 bond breaks, O3-H10 forms",
+     "seconds": 10.586282099999954
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1281",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-H8 breaks, C4-H8 forms",
+     "seconds": 5.532670500000007
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C3 to C4",
+     "seconds": 10.195092699999922
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4103",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0-O3 bond forms, C0-N1 bond breaks",
+     "seconds": 5.823406100000022
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0 forms bond with O3, breaks with N1",
+     "seconds": 10.980248399999924
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0251",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0-O4 bond forms, C0-C1 bond breaks",
+     "seconds": 5.834435399999842
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C0 forms bond with O4, breaking C0-C1",
+     "seconds": 11.154063199999975
+    }
+   ]
+  },
+  {
+   "id": "C3HNO2_rxn0110",
+   "formula": "C3HNO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O3-H6 bond forms, C1-C2 bond breaks",
+     "seconds": 5.894457200000063
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O3 forms bond with H6, C1-C2 breaks",
+     "seconds": 11.0348563000001
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6190",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-C3 bond forms, O0-C1 and C2-C3 break",
+     "seconds": 6.096182700000005
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0 forms bond with C3, breaking O0-C1 and C2-C3",
+     "seconds": 11.31262639999995
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1827",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N1-H7 forms, C0-H7 breaks",
+     "seconds": 5.529774399999995
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C0 to N1",
+     "seconds": 10.719014800000004
+    }
+   ]
+  },
+  {
+   "id": "C2HNO_rxn4440",
+   "formula": "C2HNO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-H4 bond forms, C1-C2 bond breaks",
+     "seconds": 5.798185200000182
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 bonds with H4, breaking C1-C2 and C1-H4",
+     "seconds": 11.229491800000192
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1278",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "O5-H8 bond forms",
+     "seconds": 5.439580599999987
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C3 to O5",
+     "seconds": 10.547482399999863
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1091",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N0 forms C3 bond",
+     "seconds": 5.3310066999997945
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms bond with C3, breaking O2-C3",
+     "seconds": 10.599929800000043
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4497",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-C4 breaks, C3-H8 forms",
+     "seconds": 5.706138499999884
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C4 bonds H8, breaking C3-C4 and C3-H8",
+     "seconds": 10.95619140000036
+    }
+   ]
+  },
+  {
+   "id": "C2H3N3O2_rxn8549",
+   "formula": "C2H3N3O2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N2-H7 forms, N0-H7 breaks",
+     "seconds": 5.58920259999996
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from N0 to N2",
+     "seconds": 10.546959799999836
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1285",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "O2-C3 bond forms, C3-H8 bond breaks",
+     "seconds": 7.86237770000007
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "O2 forms bond with C3, H8 detaches",
+     "seconds": 14.074219899999909
+    }
+   ]
+  },
+  {
+   "id": "C2H5NO2_rxn3682",
+   "formula": "C2H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-C3 bond forms, C1-C3 bond breaks",
+     "seconds": 5.955929999999702
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3 forms bond with O2, breaking C1-C3",
+     "seconds": 10.736971400000154
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7949",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-C5 bond forms, C2-C3 and C4-C5 bonds break",
+     "seconds": 8.43244150000019
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-C5 bond forms, C2-C3 and C4-C5 break",
+     "seconds": 17.856222699999808
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1321",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-H9 bond forms, C2-H9 and O0-C1 break",
+     "seconds": 5.683108099999838
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H9 transfers from C2 to O0",
+     "seconds": 10.16215460000001
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0249",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "O2-C3 bond forms",
+     "seconds": 6.781500199999661
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "O2 forms a bond with C3",
+     "seconds": 13.825350700000302
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5688",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 1,
+   "events": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C4-C5 bond elongates",
+     "seconds": 5.5085540999998335
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C4-C5 bond breaks",
+     "seconds": 9.997100000000094
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8839",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C5-H8 forms, C1-H8 breaks",
+     "seconds": 5.599986699999776
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C1 to C5",
+     "seconds": 10.43497120000003
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4518",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N0 donates to O5",
+     "seconds": 5.499417300000321
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms bond with O5, breaking N0-C1",
+     "seconds": 11.157887600000016
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn9661",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 2,
+     "realEvents": 2,
+     "atomMention": 0.3333333333333333,
+     "label": "C3-H10 bond fluctuates",
+     "seconds": 7.026371799999848
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "H10 transfers from C2 to C3",
+     "seconds": 13.975593200000002
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4513",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C2-O3 bond cleavage",
+     "seconds": 7.336909299999941
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C2-O3 bond breaks in frame 11",
+     "seconds": 13.912419900000096
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn3104",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": true,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.25,
+     "label": "H6 switches bonds",
+     "seconds": 5.492118300000206
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H6 moves from C1 to O0",
+     "seconds": 13.665811900000088
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1086",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C3-H10 bond forms, C3-O2 bond breaks",
+     "seconds": 7.241423599999863
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.8,
+     "label": "C3 forms bond with H10, breaking O2-C3 and C4-H10",
+     "seconds": 14.347930299999659
+    }
+   ]
+  },
+  {
+   "id": "C2H5NO2_rxn1961",
+   "formula": "C2H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O3-H9 bonds, N4-H9 stretches",
+     "seconds": 5.7229133000001315
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from N4 to O3",
+     "seconds": 10.689551499999594
+    }
+   ]
+  },
+  {
+   "id": "C3H8N2O_rxn4002",
+   "formula": "C3H8N2O",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N1-H7 forms, C0-H7 breaks",
+     "seconds": 5.572139800000005
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C0 to N1",
+     "seconds": 10.884621299999766
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4515",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-H8 bond forms, C1-C2 bond breaks",
+     "seconds": 5.8806011999999175
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with H8, breaking C1-C2",
+     "seconds": 11.118394600000233
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1322",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C1-H7 bond formation",
+     "seconds": 9.066961600000038
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with H7, C1-H7 breaks",
+     "seconds": 10.603720999999902
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5693",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "O0 bonds to C2",
+     "seconds": 6.895850199999753
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "O0 forms a bond with C2",
+     "seconds": 14.02658729999978
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn9083",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": true,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H6 switches from C1 to O0",
+     "seconds": 7.099820800000336
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H6 detaches from O0, bonds to H7",
+     "seconds": 18.117762099999933
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0253",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "C1-O4 bond forms",
+     "seconds": 6.728507900000084
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6666666666666666,
+     "label": "C1 forms a bond with O4",
+     "seconds": 13.22429920000024
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5967",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C4-H10 bond forms",
+     "seconds": 5.513072399999946
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C4 forms bond with H10, breaks with C5",
+     "seconds": 10.703217000000178
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6189",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "O0-H10 bond forms, C2-H10 bond breaks",
+     "seconds": 5.766925499999895
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H10 transfers from C2 to O0",
+     "seconds": 10.648597399999852
+    }
+   ]
+  },
+  {
+   "id": "C2H5NO2_rxn1962",
+   "formula": "C2H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O1-H8 bonds, N4-H8 stretches, O1-C2 stretches",
+     "seconds": 5.677859300000128
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H8 transfers from N4 to O1",
+     "seconds": 10.38697240000032
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0100",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H7-H8 bond fluctuates",
+     "seconds": 7.0442873999997975
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 and H8 form a bond, C2-H8 and C2-H7 break",
+     "seconds": 15.234553899999709
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4110",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H7 bond forms, C4-O5 and C3-H7 break",
+     "seconds": 6.105882200000342
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H7 transfers from C3 to O5",
+     "seconds": 10.701548599999864
+    }
+   ]
+  },
+  {
+   "id": "C2HNO_rxn4439",
+   "formula": "C2HNO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-H4 forms, C1-H4 breaks",
+     "seconds": 6.054399900000076
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H4 transfers from C1 to O1",
+     "seconds": 10.481853899999987
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4123",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-H8 forms, C3-H8 breaks",
+     "seconds": 5.756834600000176
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C3 to O0",
+     "seconds": 10.61205839999998
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8832",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "C1-C6 bond forms, C4-C6 bond breaks",
+     "seconds": 6.916473600000143
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "C1 bonds to C6, breaking C4-C6",
+     "seconds": 13.511524900000076
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0107",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "N0-C2 bond formation, C2-O3 bond break",
+     "seconds": 7.55894430000009
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "N0 forms bond with C2, breaking C2-O3",
+     "seconds": 14.884568899999838
+    }
+   ]
+  },
+  {
+   "id": "C2HNO3_rxn1883",
+   "formula": "C2HNO3",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "O2-C3 bond cleavage",
+     "seconds": 6.9033145999996925
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "O2 breaks bond with C3",
+     "seconds": 13.12159070000006
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1830",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C0-O3 bond forms, C0-N1 bond breaks",
+     "seconds": 5.858349599999841
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C0 forms bond with O3, breaks with N1",
+     "seconds": 10.873711899999995
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8884",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.3333333333333333,
+     "label": "C1 forms C-N bond",
+     "seconds": 5.476843499999959
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 forms bond with N6, breaking C1-C5",
+     "seconds": 10.81044570000004
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1064",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N5-H9 forms, C4-H9 stretches",
+     "seconds": 5.852115699999966
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from C4 to N5",
+     "seconds": 10.538185599999968
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1784",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N3 donates to H10",
+     "seconds": 5.491534699999727
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N3 forms bond with H10, breaking N3-C4 and C4-H10",
+     "seconds": 10.921651199999731
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7960",
+   "formula": "C5H5NO",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "H7-H11 bond fluctuates",
+     "seconds": 5.319772699999623
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 and H11 form a bond, breaking C1-H7 and C4-H11",
+     "seconds": 10.715618800000287
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8834",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H9 switches to C6",
+     "seconds": 5.105419199999887
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from C5 to C6",
+     "seconds": 9.983727899999824
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1153",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "C1-H10 bond forms, C1-C4 and C4-H10 bonds break",
+     "seconds": 6.97331660000002
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "C1-H10 bond forms, C1-C4 breaks",
+     "seconds": 13.253076400000136
+    }
+   ]
+  },
+  {
+   "id": "C2H3N3O2_rxn8551",
+   "formula": "C2H3N3O2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H9 forms, N6-H9 breaks",
+     "seconds": 5.396621999999974
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9 transfers from N6 to O5",
+     "seconds": 9.691223200000357
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7954",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C4-N6 bond forms, C2-C4 bond breaks",
+     "seconds": 6.606505399999675
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C4 forms bond with N6, breaking C2-C4",
+     "seconds": 12.848804099999834
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn10053",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 6,
+   "events": 1,
+   "tp": 6,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-H11 forms, C2-C4 shortens, C1-C6 shortens",
+     "seconds": 5.433967300000135
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N0 forms bond with H11, C2-C4 breaks",
+     "seconds": 9.80824990000017
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn8885",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-C5 bond forms, C1-N6 bond forms",
+     "seconds": 5.256718600000255
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "O2 binds C5, C1-O2 breaks",
+     "seconds": 9.650116899999789
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7936",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-C5 bond forms, O0-N6 bond forms",
+     "seconds": 5.313087400000077
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1 bonds O0, C5 forms with C1",
+     "seconds": 10.112135999999941
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn3105",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-N5 bond forms, C2-C4 bond breaks",
+     "seconds": 5.2517672999999485
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with N5, breaks with C4",
+     "seconds": 9.791040099999867
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0252",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-H6 bond forms, C0-H6 bond breaks",
+     "seconds": 5.386295500000007
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H62 transfers from C0 to O2",
+     "seconds": 10.073522900000215
+    }
+   ]
+  },
+  {
+   "id": "C3HNO2_rxn0109",
+   "formula": "C3HNO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-N5 bond forms, C2-C4 bond breaks",
+     "seconds": 5.208408499999903
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with N5, breaks C2-C4",
+     "seconds": 9.874992099999917
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7550",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C2-C5 bond forms, C4-C5 bond breaks",
+     "seconds": 5.3963478999999355
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-C5 bond forms, C4-C5 breaks, C2-C3 breaks",
+     "seconds": 10.368078499999829
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0103",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C2-O3 bond breaks, N0-C2 forms",
+     "seconds": 5.407741200000047
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1 forms bond with O3, breaking C2-O3",
+     "seconds": 9.584127400000114
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1319",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N5-H6 forms, O0-H6 breaks",
+     "seconds": 5.412295099999755
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H6 transfers from O0 to N5",
+     "seconds": 9.735588699999731
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7941",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H7 switches to C2",
+     "seconds": 5.066359199999831
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 bonds H7, C1-C2 breaks",
+     "seconds": 9.662800499999896
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2553",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-H10 bonds, C4-H10 breaks, N3-C4 breaks",
+     "seconds": 5.565712100000121
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H10 transfers from C4 to O2",
+     "seconds": 9.786687100000213
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn9079",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-O5 bond forms, C3-C4 bond stretches",
+     "seconds": 5.321345100000035
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3 forms bond with O5, breaks C3-C4",
+     "seconds": 9.921019799999893
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4122",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-H10 forms, C3-C4 and C4-H10 break",
+     "seconds": 5.38500549999997
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3 forms bond with H10, breaking C3-C4",
+     "seconds": 9.979886000000405
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1828",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "O5-H9 forms, C2-H9 breaks",
+     "seconds": 6.469756099999882
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.75,
+     "label": "H9 transfers from C2 to O5",
+     "seconds": 12.512358000000008
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn5696",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "O0-H11 forms, N6-H11 breaks",
+     "seconds": 7.337517500000074
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "H11 transfers from N6 to O0",
+     "seconds": 14.043160800000187
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1092",
+   "formula": "C3H5NO2",
+   "truthCategory": "other",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "O2-C3 bond cleavage",
+     "seconds": 6.82444430000009
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "O2-C3 bond breaks in frame 11",
+     "seconds": 13.4424822999998
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1144",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 1,
+     "label": "O0-C4 bond forms, C1-C4 bond breaks",
+     "seconds": 7.009212700000033
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 1,
+     "label": "O0 forms bond with C4, breaking C1-C4",
+     "seconds": 13.141364800000098
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7959",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "N6 donates to H10",
+     "seconds": 5.307758799999952
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C3 to N6",
+     "seconds": 9.974263499999884
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1154",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-N3 bond forms, C1-C4 and N3-C4 bonds break",
+     "seconds": 5.459345000000205
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1 forms bond with N3, breaking C1-C4",
+     "seconds": 9.851048399999737
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4108",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C4-H9 forms, C2-C4 and N1-H9 break",
+     "seconds": 5.675486700000241
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C4 bonds H9, breaking C2-C4 and N1-H9",
+     "seconds": 9.71671089999983
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1789",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "cutoff-artifact",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "H9-H10 bond fluctuates",
+     "seconds": 6.820443000000436
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H9-H10 bond forms, C4-H10 and N3-H9 break",
+     "seconds": 13.624256599999963
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn9082",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "C1-H7 bond breaks",
+     "seconds": 8.334167900000233
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H7 transfers from C1 to O3",
+     "seconds": 9.562525600000285
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7957",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 2,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C5-H7 forms, C1-H7 breaks",
+     "seconds": 6.681429900000338
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "H7 transfers from C1 to C5",
+     "seconds": 13.246695999999996
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6198",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "O0-C1 breaks, O0-C4 forms",
+     "seconds": 5.5054663999998015
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "O0 forms bond with C4, breaks O0-C1",
+     "seconds": 9.637381200000178
+    }
+   ]
+  },
+  {
+   "id": "C2H5NO2_rxn3684",
+   "formula": "C2H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1-H9 forms, C3-H9 elongates",
+     "seconds": 5.280836199999787
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "C1-H9 bond forms, C1-C3 breaks",
+     "seconds": 9.537643699999899
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0895",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H10 bonds, C4-H10 stretches",
+     "seconds": 5.547512299999594
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C4 to O5",
+     "seconds": 9.794203699999954
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0346",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-H10 forms, C5-H10 breaks, C2-C5 stretches",
+     "seconds": 5.714365000000224
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C5 to C2",
+     "seconds": 9.438160399999935
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn9080",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2-C3 bond forms, C1-C3 bond breaks",
+     "seconds": 5.428685699999798
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O2 forms bond with C3, C1-C3 breaks",
+     "seconds": 10.495363700000103
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0104",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C4-H9 bond forms",
+     "seconds": 8.44094579999987
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5 forms bond with H9, C4-H9 breaks",
+     "seconds": 10.338084700000007
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn0099",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C1-H7 forms, C2-H7 and C1-C2 break",
+     "seconds": 5.414052600000054
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C2 to C1",
+     "seconds": 9.239898099999875
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn3102",
+   "formula": "C3H5NO2",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "C2-O3 bond breaks",
+     "seconds": 6.517548299999907
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O3 forms bond with N5, breaking C2-O3",
+     "seconds": 9.872123900000005
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1150",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2-H10 forms, N3-H10 breaks",
+     "seconds": 5.4953724000002255
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C2 forms bond with H10, breaks with N3",
+     "seconds": 9.840930199999828
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn8967",
+   "formula": "C3H5NO2",
+   "truthCategory": "bond-cleavage",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0,
+   "exact": false,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8-H9 bond forms, C3-H8 and C5-H9 break",
+     "seconds": 5.334535900000017
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 bonds H9, breaks C3-H8 and C5-H9",
+     "seconds": 9.631432399999817
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7942",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 4,
+   "events": 1,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "label": "C1-H7 breaks, C1-C2 lengthens",
+     "seconds": 6.815269400000107
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6,
+     "label": "C2 and C5 form bond, C1-C2 breaks",
+     "seconds": 12.562970600000117
+    }
+   ]
+  },
+  {
+   "id": "C2H5NO2_rxn3683",
+   "formula": "C2H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0-H7 forms, C3-H7 breaks",
+     "seconds": 5.306583500000182
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C3 to N0",
+     "seconds": 9.664470900000072
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn10054",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C4-C6 bond reopens",
+     "seconds": 6.2959398000002835
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C4-C6 bond breaks in frame 13",
+     "seconds": 13.141615299999714
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7478",
+   "formula": "C5H5NO",
+   "truthCategory": "ring-change",
+   "truthChanges": 2,
+   "events": 2,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0,
+   "exact": false,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C2-O6 bond breaks",
+     "seconds": 6.421080400000326
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "label": "C2 breaks bond with O6",
+     "seconds": 12.533092200000304
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1084",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H10 bonds, C4-H10 stretches",
+     "seconds": 5.203431899999734
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C4 to O5",
+     "seconds": 9.856157099999953
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7940",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O0-H7 bond forms, C1-H7 bond breaks",
+     "seconds": 5.176603600000031
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H7 transfers from C1 to O0",
+     "seconds": 9.659823199999984
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7475",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms C2 bond, C1-C2 stretches",
+     "seconds": 5.262217900000047
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N0 forms bond with C2, breaking C1-C2",
+     "seconds": 9.316683799999765
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4121",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "N2-H10 forms, C4-H10 breaks",
+     "seconds": 5.184386900000274
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H10 transfers from C4 to N2",
+     "seconds": 9.711643800000195
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn6197",
+   "formula": "C5H5NO",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 5,
+   "events": 1,
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "label": "H7-H9 forms, C3-C2 stretches",
+     "seconds": 5.246744099999778
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.3333333333333333,
+     "label": "C2 forms new bond with H9",
+     "seconds": 15.577079600000289
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn1787",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "O5-H8 forms, C2-H8 breaks",
+     "seconds": 5.352491299999878
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "H8 transfers from C2 to O5",
+     "seconds": 9.690222800000106
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn4498",
+   "formula": "C3H5NO2",
+   "truthCategory": "proton-transfer",
+   "truthChanges": 3,
+   "events": 1,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-cleavage",
+     "categoryCorrect": false,
+     "falseArtifacts": 1,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "label": "N0-H6 bond cleavage",
+     "seconds": 7.868755100000184
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "proton-transfer",
+     "categoryCorrect": true,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.75,
+     "label": "H6 transfers from N0 to O5",
+     "seconds": 9.432852899999823
+    }
+   ]
+  },
+  {
+   "id": "C5H5NO_rxn7059",
+   "formula": "C5H5NO",
+   "truthCategory": "ligand-exchange",
+   "truthChanges": 2,
+   "events": 1,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3-N6 forms, C3-C5 breaks",
+     "seconds": 5.089158299999777
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "label": "C3 forms bond with N6, breaking C3-C5",
+     "seconds": 9.567192500000354
+    }
+   ]
+  },
+  {
+   "id": "C3H5NO2_rxn2551",
+   "formula": "C3H5NO2",
+   "truthCategory": "ring-change",
+   "truthChanges": 3,
+   "events": 2,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "exact": true,
+   "models": [
+    {
+     "model": "qwen2.5:7b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C0-O2 bond forms, C0-H6 bond breaks",
+     "seconds": 7.297036099999677
+    },
+    {
+     "model": "gemma2:9b",
+     "category": "bond-formation",
+     "categoryCorrect": false,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.6,
+     "label": "C0 forms bond with O2, breaks with H6",
+     "seconds": 13.327426800000016
+    }
+   ]
+  }
+ ]
+}

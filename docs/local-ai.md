@@ -13,9 +13,13 @@ description of each event, in batches of 6:
 - the bonding cutoff
 - the system's composition
 
-For each event it returns a short label, a category (for example `proton-transfer` or
-`cutoff-artifact`), an "artifact" flag, a confidence and a one-line rationale. Ollama
-enforces the response format with a JSON schema.
+Each event also carries its reaction category, computed from the bond graph by
+`src/chapterChemistry.ts` rather than by the model, plus each atom's bonded neighbors before
+and after. For each event the model returns a short label, an "artifact" flag, a confidence
+and a one-line rationale. Ollama enforces the response format with a JSON schema.
+
+On the Transition1x benchmark, the models picked the right category only 5% (qwen2.5:7b) and
+33% (gemma2:9b) of the time, so that job moved to rules (see [benchmark.md](benchmark.md)).
 
 The model only **suggests**:
 - Its label appears in the list in purple. Events it flags as likely artifacts are shown in

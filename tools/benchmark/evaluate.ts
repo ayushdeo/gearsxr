@@ -1,8 +1,8 @@
 // Scores Simulation Chapters against a known-answer benchmark made by
-// t1x_to_benchmark.py. It runs the viewer's own detector and AI code, so the
-// numbers describe exactly what the viewer does.
+// t1x_to_benchmark.py. It runs the viewer's own detector, category rules and
+// AI code, so the numbers describe exactly what the viewer does.
 //
-//   npm run bench -- bench/                               # detector only
+//   npm run bench -- bench/                               # detector + rules
 //   npm run bench -- bench/ --models qwen2.5:7b,gemma2:9b # plus local models
 //
 // Options: --models a,b  --endpoint http://localhost:11434  --limit N  --persist N
@@ -10,7 +10,8 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { listModels, suggestChapterLabels, type AiCategory } from "../../src/chapterAI";
+import { listModels, suggestChapterLabels } from "../../src/chapterAI";
+import { CHAPTER_CATEGORIES } from "../../src/chapterChemistry";
 import { DEFAULT_DETECT_OPTIONS, detectBondEvents, type DetectedEvent } from "../../src/chapterDetect";
 import { toChapters } from "../../src/chapterStore";
 import { parseExtendedXYZ } from "../../src/xyzParser";
@@ -23,20 +24,19 @@ interface Answer {
   formed: [number, number][];
   broken: [number, number][];
   ambiguous: [number, number][];
-  category: AiCategory;
+  category: string;
 }
 
 interface ModelResult {
   model: string;
-  /** AI category for the event that best matches the true reaction. */
-  category: string | null;
-  categoryCorrect: boolean;
+  /** Label of the chapter that best matches the true reaction. */
+  label: string | null;
+  confidence: number | null;
   /** Real events the model called artifacts. */
   falseArtifacts: number;
   realEvents: number;
   /** Fraction of truly changed atoms the main label names (e.g. "H5"). */
-  atomMention: number;
-  label: string | null;
+  atomMention: number | null;
   seconds: number;
   error?: string;
 }
@@ -51,6 +51,10 @@ interface ReactionResult {
   fp: number;
   fn: number;
   exact: boolean;
+  /** Rule category of the chapter that best matches the true reaction. */
+  category: string | null;
+  categoryCorrect: boolean;
+  chapters: Array<{ startFrame: number; endFrame: number; atoms: number[]; category: string; label: string }>;
   models: ModelResult[];
 }
 
@@ -89,8 +93,22 @@ function netChanges(events: DetectedEvent[]): Map<string, "formed" | "broken"> {
   return net;
 }
 
-function eventPairs(event: DetectedEvent): string[] {
-  return [...event.formed, ...event.broken].map(([a, b]) => pairKey(a, b));
+function overlap(event: DetectedEvent, truthPairs: Set<string>): number {
+  return [...event.formed, ...event.broken].filter(([a, b]) => truthPairs.has(pairKey(a, b))).length;
+}
+
+/** The chapter sharing the most bond changes with the true reaction. */
+function mainIndex(events: DetectedEvent[], truthPairs: Set<string>): number {
+  let best = -1;
+  let bestOverlap = 0;
+  events.forEach((event, i) => {
+    const n = overlap(event, truthPairs);
+    if (n > bestOverlap) {
+      bestOverlap = n;
+      best = i;
+    }
+  });
+  return best;
 }
 
 async function evaluateModel(
@@ -102,7 +120,7 @@ async function evaluateModel(
   truthPairs: Set<string>,
 ): Promise<ModelResult> {
   const result: ModelResult = {
-    model, category: null, categoryCorrect: false, falseArtifacts: 0, realEvents: 0, atomMention: 0, label: null, seconds: 0,
+    model, label: null, confidence: null, falseArtifacts: 0, realEvents: 0, atomMention: null, seconds: 0,
   };
   if (events.length === 0) return result;
   const chapters = toChapters(events);
@@ -114,26 +132,19 @@ async function evaluateModel(
   }
   result.seconds = (performance.now() - started) / 1000;
 
-  let main = null as (typeof chapters)[number] | null;
-  let bestOverlap = 0;
   for (const chapter of chapters) {
-    const overlap = eventPairs(chapter).filter((p) => truthPairs.has(p)).length;
-    if (overlap === 0) continue;
+    if (overlap(chapter, truthPairs) === 0) continue;
     result.realEvents++;
     if (chapter.ai?.artifact) result.falseArtifacts++;
-    if (overlap > bestOverlap) {
-      bestOverlap = overlap;
-      main = chapter;
-    }
   }
-  if (main?.ai) {
-    result.category = main.ai.category;
-    result.categoryCorrect = main.ai.category === answer.category;
-    result.label = main.ai.label;
+  const main = chapters[mainIndex(chapters, truthPairs)]?.ai;
+  if (main) {
+    result.label = main.label;
+    result.confidence = main.confidence;
     const changed = new Set([...answer.formed, ...answer.broken].flat());
     const names = [...changed].map((atom) => `${answer.symbols[atom]}${atom}`);
-    const mentioned = names.filter((name) => new RegExp(`\\b${name}\\b`).test(main!.ai!.label)).length;
-    result.atomMention = names.length ? mentioned / names.length : 0;
+    const mentioned = names.filter((name) => new RegExp(`\\b${name}\\b`).test(main.label)).length;
+    result.atomMention = names.length ? mentioned / names.length : null;
   }
   return result;
 }
@@ -142,18 +153,26 @@ function pct(n: number, d: number) {
   return d === 0 ? "–" : `${((100 * n) / d).toFixed(1)}%`;
 }
 
+function median(values: number[]) {
+  if (!values.length) return NaN;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
 function summarize(results: ReactionResult[], models: string[], persist: number): string {
+  const n = results.length;
   const sum = (f: (r: ReactionResult) => number) => results.reduce((s, r) => s + f(r), 0);
   const tp = sum((r) => r.tp), fp = sum((r) => r.fp), fn = sum((r) => r.fn);
   const precision = tp / Math.max(tp + fp, 1);
   const recall = tp / Math.max(tp + fn, 1);
   const f1 = (2 * precision * recall) / Math.max(precision + recall, 1e-9);
-  const single = results.filter((r) => r.events === 1).length;
+  const scored = results.filter((r) => r.category !== null);
 
   const lines = [
     `# Chapters benchmark`,
     ``,
-    `${results.length} reactions · detector bond-diff (persist ${persist} frames)`,
+    `${n} reactions · detector bond-diff (persist ${persist} frames)`,
     ``,
     `## Detector`,
     ``,
@@ -162,42 +181,68 @@ function summarize(results: ReactionResult[], models: string[], persist: number)
     `| Bond-change precision | ${(precision * 100).toFixed(1)}% (${tp} of ${tp + fp} detected) |`,
     `| Bond-change recall | ${(recall * 100).toFixed(1)}% (${tp} of ${tp + fn} true) |`,
     `| F1 | ${(f1 * 100).toFixed(1)}% |`,
-    `| Reactions found exactly | ${pct(results.filter((r) => r.exact).length, results.length)} |`,
-    `| Reactions as a single chapter | ${pct(single, results.length)} |`,
-    `| Mean chapters per reaction | ${(sum((r) => r.events) / Math.max(results.length, 1)).toFixed(2)} |`,
+    `| Reactions found exactly | ${pct(results.filter((r) => r.exact).length, n)} |`,
+    `| Reactions as a single chapter | ${pct(results.filter((r) => r.events === 1).length, n)} |`,
+    `| Mean chapters per reaction | ${(sum((r) => r.events) / Math.max(n, 1)).toFixed(2)} |`,
+    `| Category accuracy (rules, main chapter) | ${pct(scored.filter((r) => r.categoryCorrect).length, scored.length)} |`,
   ];
+
+  // Category confusion: rows are the truth, columns what the rules said.
+  const truthCats = [...new Set(results.map((r) => r.truthCategory))].sort();
+  const predicted = CHAPTER_CATEGORIES.filter((c) => results.some((r) => r.category === c));
+  lines.push(``, `### Category confusion (rows: truth, columns: rules)`, ``);
+  lines.push(`| Truth \\ rules | n | ${predicted.join(" | ")} | accuracy |`, `|---|---|${predicted.map(() => "---|").join("")}---|`);
+  for (const truth of truthCats) {
+    const rows = scored.filter((r) => r.truthCategory === truth);
+    const cells = predicted.map((c) => String(rows.filter((r) => r.category === c).length));
+    lines.push(`| ${truth} | ${rows.length} | ${cells.join(" | ")} | ${pct(rows.filter((r) => r.categoryCorrect).length, rows.length)} |`);
+  }
+
+  // Why reactions split: how far apart their chapters start, and whether they share atoms.
+  const split = results.filter((r) => r.events > 1);
+  if (split.length) {
+    const gaps: number[] = [];
+    let sharing = 0;
+    for (const r of split) {
+      const sorted = [...r.chapters].sort((a, b) => a.startFrame - b.startFrame);
+      for (let i = 1; i < sorted.length; i++) gaps.push(sorted[i].startFrame - sorted[i - 1].endFrame);
+      const seen = new Set<number>();
+      let shares = false;
+      for (const c of sorted) {
+        if (c.atoms.some((a) => seen.has(a))) shares = true;
+        c.atoms.forEach((a) => seen.add(a));
+      }
+      if (shares) sharing++;
+    }
+    lines.push(
+      ``,
+      `### Split reactions`,
+      ``,
+      `${split.length} reactions became more than one chapter. Median gap between consecutive chapters: ${median(gaps)} frames (range ${Math.min(...gaps)}–${Math.max(...gaps)}). Chapters share an atom in ${pct(sharing, split.length)} of them.`,
+    );
+  }
 
   if (models.length) {
     lines.push(
       ``,
       `## Models`,
       ``,
-      `Category is scored on the chapter that best matches the true reaction. A false artifact is a real event the model dismissed.`,
+      `Labels are scored on the chapter that best matches the true reaction. A false artifact is a real event the model dismissed.`,
       ``,
-      `| Model | Category accuracy | False-artifact rate | Atoms named in label | Errors | Seconds / reaction |`,
+      `| Model | False-artifact rate | Atoms named in label | Mean confidence | Errors | Seconds / reaction |`,
       `|---|---|---|---|---|---|`,
     );
     for (const model of models) {
       const rows = results.map((r) => r.models.find((m) => m.model === model)!).filter(Boolean);
-      const scored = rows.filter((m) => m.category !== null);
+      const labeled = rows.filter((m) => m.atomMention !== null);
       const real = rows.reduce((s, m) => s + m.realEvents, 0);
       const falseArtifacts = rows.reduce((s, m) => s + m.falseArtifacts, 0);
-      const mention = scored.reduce((s, m) => s + m.atomMention, 0) / Math.max(scored.length, 1);
+      const mention = labeled.reduce((s, m) => s + (m.atomMention ?? 0), 0) / Math.max(labeled.length, 1);
+      const confidence = labeled.reduce((s, m) => s + (m.confidence ?? 0), 0) / Math.max(labeled.length, 1);
       const seconds = rows.reduce((s, m) => s + m.seconds, 0) / Math.max(rows.length, 1);
       lines.push(
-        `| ${model} | ${pct(scored.filter((m) => m.categoryCorrect).length, scored.length)} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
+        `| ${model} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${confidence.toFixed(2)} | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
       );
-    }
-
-    const categories = [...new Set(results.map((r) => r.truthCategory))].sort();
-    lines.push(``, `### Category accuracy by true category`, ``, `| True category | n | ${models.join(" | ")} |`, `|---|---|${models.map(() => "---|").join("")}`);
-    for (const category of categories) {
-      const rows = results.filter((r) => r.truthCategory === category);
-      const cells = models.map((model) => {
-        const scored = rows.map((r) => r.models.find((m) => m.model === model)).filter((m) => m && m.category !== null);
-        return pct(scored.filter((m) => m!.categoryCorrect).length, scored.length);
-      });
-      lines.push(`| ${category} | ${rows.length} | ${cells.join(" | ")} |`);
     }
   }
   return lines.join("\n") + "\n";
@@ -233,6 +278,7 @@ async function main() {
     const truth = new Map<string, "formed" | "broken">();
     for (const [a, b] of answer.formed) truth.set(pairKey(a, b), "formed");
     for (const [a, b] of answer.broken) truth.set(pairKey(a, b), "broken");
+    const truthPairs = new Set(truth.keys());
     const ambiguous = new Set(answer.ambiguous.map(([a, b]) => pairKey(a, b)));
 
     let tp = 0, fp = 0;
@@ -241,16 +287,19 @@ async function main() {
       if (truth.get(key) === kind) tp++;
       else fp++;
     }
-    const fn = truth.size - tp;
+    const main = events[mainIndex(events, truthPairs)];
 
     const models: ModelResult[] = [];
     for (const model of args.models) {
-      models.push(await evaluateModel(model, args.endpoint, trajectory, events, answer, new Set(truth.keys())));
+      models.push(await evaluateModel(model, args.endpoint, trajectory, events, answer, truthPairs));
     }
 
     results.push({
       id: answer.id, formula: answer.formula, truthCategory: answer.category, truthChanges: truth.size,
-      events: events.length, tp, fp, fn, exact: fp === 0 && fn === 0, models,
+      events: events.length, tp, fp, fn: truth.size - tp, exact: fp === 0 && tp === truth.size,
+      category: main?.category ?? null, categoryCorrect: main?.category === answer.category,
+      chapters: events.map((e) => ({ startFrame: e.startFrame, endFrame: e.endFrame, atoms: e.atoms, category: e.category, label: e.label })),
+      models,
     });
     process.stdout.write(`\r${index + 1}/${answers.length} reactions`);
   }

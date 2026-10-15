@@ -414,7 +414,7 @@ export class ChaptersPanel {
     const detail = document.createElement("div");
     detail.className = "chapterDetail";
     const pairs = (list: [number, number][]) => list.map(([a, b]) => `${a}–${b}`).join(", ");
-    const parts = [`Detector: ${chapter.label}`];
+    const parts = [`Detector: ${chapter.label}`, `Category: ${chapter.category}`];
     if (chapter.formed.length) parts.push(`Formed: ${pairs(chapter.formed)}`);
     if (chapter.broken.length) parts.push(`Broken: ${pairs(chapter.broken)}`);
     detail.textContent = parts.join("\n");
@@ -425,7 +425,7 @@ export class ChaptersPanel {
     if (ai) {
       const text = document.createElement("div");
       const flag = ai.artifact ? " · likely artifact" : "";
-      text.textContent = `AI (${ai.model}, ${ai.category}, ${Math.round(ai.confidence * 100)}%${flag}): ${ai.label}${ai.rationale ? ` — ${ai.rationale}` : ""}`;
+      text.textContent = `AI (${ai.model}, ${Math.round(ai.confidence * 100)}%${flag}): ${ai.label}${ai.rationale ? ` — ${ai.rationale}` : ""}`;
       const use = document.createElement("button");
       use.type = "button";
       use.textContent = "Use AI label";

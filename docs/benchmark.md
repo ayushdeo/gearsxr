@@ -9,8 +9,10 @@ the true answer, so the benchmark can score:
 
 - **The detector:** did it find the bonds that really formed and broke (precision, recall,
   F1)? Did it show each reaction as one chapter?
-- **Each local model:** did it get the reaction category right? How often did it dismiss a
-  real reaction as an "artifact"? Does its label name the atoms that actually changed?
+- **The category rules** (`src/chapterChemistry.ts`): did each chapter get the right
+  reaction type? The report includes a confusion table.
+- **Each local model:** how often did it dismiss a real reaction as an "artifact"? Does its
+  label name the atoms that actually changed? How confident was it?
 
 ## Run it on your laptop
 
@@ -69,3 +71,32 @@ broke from its donor, then bound to its acceptor 15 frames later, outside the 5-
 grouping window. The detector now links an atom's bond break to its next bond formation
 within 30 frames (`transferWindowFrames`). This is the kind of fix the benchmark is meant to
 drive.
+
+## First real run (200 reactions, Oct 2026)
+
+| | Result |
+|---|---|
+| Bond-change recall / precision | 100% / 99.2% |
+| Reactions found exactly | 98% |
+| Reactions as a single chapter | 73.5% |
+| Category accuracy, qwen2.5:7b / gemma2:9b | 5% / 32.5% |
+| False-artifact rate, qwen2.5:7b / gemma2:9b | 13.5% / 2.0% |
+
+What we changed in response:
+
+- **Categories come from rules now, not the model.** The confusion tables showed the models
+  mostly echoing whether a bond formed or broke, which they were shown as a hint. They also
+  had no way to see rings, and scored 0% on ring changes. `chapterChemistry.ts` now computes
+  the category from the local bond graph, using the same rules as the answer key. The model
+  receives that category plus each atom's neighbors before and after, and only writes the
+  label, the rationale and the artifact call.
+- **Exchanges link in either order.** A bond forming first and the old one breaking later
+  (associative substitution) used to split into two chapters. Opposite-direction changes on
+  the same atom now link within `transferWindowFrames`.
+- **Split diagnostics.** The report now shows how far apart split chapters are and whether
+  they share atoms. That tells us whether the remaining splits are concerted changes on
+  different atoms, or a frame-spacing effect of the interpolated path.
+
+The category accuracy in the next run measures the rules, not a model. Since the rules
+mirror the answer key, expect it to be high. Misses point to detector or grouping errors
+(a split reaction leaves the main chapter with only part of the change), not to the rules.

@@ -1,30 +1,23 @@
 // AI naming pass for Simulation Chapters. The browser talks straight to a
 // local Ollama server (default http://localhost:11434), so beta testing needs
 // no API key and nothing leaves the machine. The model only *suggests*: it
-// names each detected event, picks a category, and flags likely cutoff
-// artifacts; the scientist still accepts or rejects every chapter.
+// names and explains each detected event and flags likely cutoff artifacts;
+// the scientist still accepts or rejects every chapter.
+//
+// The reaction category is not the model's job. It comes from geometry rules
+// (chapterChemistry.ts), which beat qwen2.5:7b (5%) and gemma2:9b (33%) on the
+// Transition1x benchmark; the model gets the category and the bonding around
+// each atom as context, so its label and its artifact call are grounded.
 
 import { BOND_TOLERANCE } from "./bonds";
 import { getElementInfo } from "./elements";
+import { localGraph, neighborContext } from "./chapterChemistry";
+import { DEFAULT_DETECT_OPTIONS } from "./chapterDetect";
 import type { Chapter } from "./chapterStore";
 import type { Trajectory } from "./xyzParser";
 
-export const AI_CATEGORIES = [
-  "proton-transfer",
-  "bond-cleavage",
-  "bond-formation",
-  "ligand-exchange",
-  "coordination-change",
-  "ring-change",
-  "cutoff-artifact",
-  "other",
-] as const;
-
-export type AiCategory = (typeof AI_CATEGORIES)[number];
-
 export interface AiSuggestion {
   label: string;
-  category: AiCategory;
   /** True when the model judges this a distance-cutoff artifact, not chemistry. */
   artifact: boolean;
   confidence: number;
@@ -106,8 +99,9 @@ function describeEvent(trajectory: Trajectory, chapter: Chapter, key: string) {
   const offset = chapter.startFrame * trajectory.numAtoms;
   const symbol = (atom: number) => trajectory.frameSymbols[offset + atom] ?? trajectory.symbols[atom] ?? "X";
   const name = (atom: number) => `${symbol(atom)}${atom}`;
+  const settle = DEFAULT_DETECT_OPTIONS.minPersistFrames;
   const before = Math.max(chapter.startFrame - 1, 0);
-  const after = Math.min(chapter.endFrame + 2, trajectory.numFrames - 1);
+  const after = Math.min(chapter.endFrame + settle - 1, trajectory.numFrames - 1);
   const bond = ([a, b]: [number, number]) => {
     const cutoff = (getElementInfo(symbol(a)).radius + getElementInfo(symbol(b)).radius) * BOND_TOLERANCE;
     return {
@@ -120,21 +114,24 @@ function describeEvent(trajectory: Trajectory, chapter: Chapter, key: string) {
   return {
     id: key,
     frames: chapter.endFrame > chapter.startFrame ? `${chapter.startFrame}-${chapter.endFrame}` : `${chapter.startFrame}`,
-    detector_kind: chapter.kind,
+    category: chapter.category,
     formed: chapter.formed.map(bond),
     broken: chapter.broken.map(bond),
+    atoms: neighborContext(trajectory, chapter, localGraph(trajectory, chapter, settle)),
   };
 }
 
-const SYSTEM_PROMPT = `You are a computational chemist reviewing events that a simple detector flagged in a molecular dynamics trajectory.
-Bonds are inferred only from distance: two atoms are bonded when their distance is below cutoff_A (sum of covalent radii x ${BOND_TOLERANCE}).
-So some events are cutoff artifacts rather than chemistry, e.g. same-element contacts such as O-O or H-H in condensed phases, or a distance hovering right at the cutoff.
-For every event, return:
-- label: at most 8 words, chemically specific, using the given atom names (e.g. "H62 hops from O12 to O7").
-- category: one of ${AI_CATEGORIES.join(", ")}.
-- artifact: true if this is probably not real chemistry.
-- confidence: 0 to 1.
-- rationale: one short sentence citing the distances.
+const SYSTEM_PROMPT = `You are a computational chemist naming events that a detector found in a molecular simulation trajectory.
+Bonds are inferred from distance: two atoms are bonded when closer than cutoff_A (sum of covalent radii x ${BOND_TOLERANCE}).
+Each event gives:
+- category: computed from the bond graph and reliable. proton-transfer = an H moves from one partner to another; ring-change = a ring forms or opens; ligand-exchange = an atom swaps one bonding partner for another; bond-formation / bond-cleavage = bonds only form / only break.
+- formed / broken: the bonds that changed, with distances before and after.
+- atoms: each involved atom's bonded neighbors before and after.
+For every event return:
+- label: at most 10 words saying what happens, consistent with the category, using the atom names given. Examples: "H5 moves from O2 to C1", "C0-C3 bond closes a 4-membered ring", "N4 swaps C2 for C6".
+- artifact: true only if this is probably not chemistry, e.g. two atoms of the same element touching in a dense phase, or distances barely crossing the cutoff and staying near it. Ordinary reactions in small molecules are not artifacts.
+- confidence: 0 to 1, how sure you are the label is right.
+- rationale: one short sentence citing distances or neighbors.
 Return one entry per input event, keeping its id.`;
 
 const RESPONSE_SCHEMA = {
@@ -147,12 +144,11 @@ const RESPONSE_SCHEMA = {
         properties: {
           id: { type: "string" },
           label: { type: "string" },
-          category: { type: "string", enum: [...AI_CATEGORIES] },
           artifact: { type: "boolean" },
           confidence: { type: "number" },
           rationale: { type: "string" },
         },
-        required: ["id", "label", "category", "artifact", "confidence", "rationale"],
+        required: ["id", "label", "artifact", "confidence", "rationale"],
       },
     },
   },
@@ -162,7 +158,6 @@ const RESPONSE_SCHEMA = {
 interface RawSuggestion {
   id?: unknown;
   label?: unknown;
-  category?: unknown;
   artifact?: unknown;
   confidence?: unknown;
   rationale?: unknown;
@@ -171,12 +166,10 @@ interface RawSuggestion {
 /** Validates one model output entry; small models drift, so be forgiving. */
 function toSuggestion(raw: RawSuggestion, model: string): AiSuggestion | null {
   if (typeof raw.label !== "string" || !raw.label.trim()) return null;
-  const category = AI_CATEGORIES.includes(raw.category as AiCategory) ? (raw.category as AiCategory) : "other";
   const confidence = Number(raw.confidence);
   return {
     label: raw.label.trim().slice(0, 120),
-    category,
-    artifact: raw.artifact === true || raw.artifact === "true" || category === "cutoff-artifact",
+    artifact: raw.artifact === true || raw.artifact === "true",
     confidence: Number.isFinite(confidence) ? Math.min(Math.max(confidence, 0), 1) : 0.5,
     rationale: typeof raw.rationale === "string" ? raw.rationale.trim().slice(0, 400) : "",
     model,

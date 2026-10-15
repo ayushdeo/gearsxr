@@ -11,6 +11,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { listModels, suggestChapterLabels } from "../../src/chapterAI";
+import { checkClaims } from "./claims";
 import { CHAPTER_CATEGORIES } from "../../src/chapterChemistry";
 import { DEFAULT_DETECT_OPTIONS, detectBondEvents, type DetectedEvent } from "../../src/chapterDetect";
 import { toChapters } from "../../src/chapterStore";
@@ -37,6 +38,10 @@ interface ModelResult {
   realEvents: number;
   /** Fraction of truly changed atoms the main label names (e.g. "H5"). */
   atomMention: number | null;
+  /** Claims in the main label checked against the answer key (see claims.ts). */
+  claims: number;
+  claimsCorrect: number;
+  wrongClaims: string[];
   seconds: number;
   error?: string;
 }
@@ -121,7 +126,8 @@ async function evaluateModel(
   truthPairs: Set<string>,
 ): Promise<ModelResult> {
   const result: ModelResult = {
-    model, label: null, confidence: null, falseArtifacts: 0, realEvents: 0, atomMention: null, seconds: 0,
+    model, label: null, confidence: null, falseArtifacts: 0, realEvents: 0, atomMention: null,
+    claims: 0, claimsCorrect: 0, wrongClaims: [], seconds: 0,
   };
   if (events.length === 0) return result;
   const chapters = toChapters(events);
@@ -146,6 +152,10 @@ async function evaluateModel(
     const names = [...changed].map((atom) => `${answer.symbols[atom]}${atom}`);
     const mentioned = names.filter((name) => new RegExp(`\\b${name}\\b`).test(main.label)).length;
     result.atomMention = names.length ? mentioned / names.length : null;
+    const check = checkClaims(main.label, answer.formed, answer.broken);
+    result.claims = check.claims;
+    result.claimsCorrect = check.correct;
+    result.wrongClaims = check.wrong;
   }
   return result;
 }
@@ -228,10 +238,10 @@ function summarize(results: ReactionResult[], models: string[], persist: number,
       ``,
       `## Models`,
       ``,
-      `Labels are scored on the chapter that best matches the true reaction. A false artifact is a real event the model dismissed.`,
+      `Labels are scored on the chapter that best matches the true reaction. A false artifact is a real event the model dismissed. "Labels fully correct" reads each label's claims (X moves from A to B, A-B breaks, X binds to Y, X swaps A for B, ...) and checks every one against the answer key; it covers labels with at least one recognizable claim.`,
       ``,
-      `| Model | False-artifact rate | Atoms named in label | Mean confidence | Errors | Seconds / reaction |`,
-      `|---|---|---|---|---|---|`,
+      `| Model | Labels fully correct | Labels with a false claim | Checkable labels | False-artifact rate | Atoms named in label | Mean confidence | Errors | Seconds / reaction |`,
+      `|---|---|---|---|---|---|---|---|---|`,
     );
     for (const model of models) {
       const rows = results.map((r) => r.models.find((m) => m.model === model)!).filter(Boolean);
@@ -241,9 +251,25 @@ function summarize(results: ReactionResult[], models: string[], persist: number,
       const mention = labeled.reduce((s, m) => s + (m.atomMention ?? 0), 0) / Math.max(labeled.length, 1);
       const confidence = labeled.reduce((s, m) => s + (m.confidence ?? 0), 0) / Math.max(labeled.length, 1);
       const seconds = rows.reduce((s, m) => s + m.seconds, 0) / Math.max(rows.length, 1);
+      const checkable = rows.filter((m) => m.claims > 0);
+      const fullyCorrect = checkable.filter((m) => m.claimsCorrect === m.claims).length;
       lines.push(
-        `| ${model} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${confidence.toFixed(2)} | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
+        `| ${model} | ${pct(fullyCorrect, checkable.length)} | ${checkable.length - fullyCorrect} | ${checkable.length} of ${labeled.length} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${confidence.toFixed(2)} | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
       );
+    }
+  }
+  if (models.length) {
+    const categories = [...new Set(results.map((r) => r.truthCategory))].sort();
+    lines.push(``, `### Labels fully correct, by true category`, ``, `| True category | ${models.join(" | ")} |`, `|---|${models.map(() => "---|").join("")}`);
+    for (const category of categories) {
+      const cells = models.map((model) => {
+        const rows = results
+          .filter((r) => r.truthCategory === category)
+          .map((r) => r.models.find((m) => m.model === model))
+          .filter((m): m is ModelResult => !!m && m.claims > 0);
+        return `${rows.filter((m) => m.claimsCorrect === m.claims).length}/${rows.length}`;
+      });
+      lines.push(`| ${category} | ${cells.join(" | ")} |`);
     }
   }
   return lines.join("\n") + "\n";

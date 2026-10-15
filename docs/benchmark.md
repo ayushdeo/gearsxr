@@ -137,4 +137,30 @@ Still open:
 - In a fully bonded network such as a crystal, every bond change counts as a ring change,
   and the generic distance rule bonds metal pairs like Ca–Ca. The rules are validated on
   small gas-phase molecules. Solids need their own bonding rules.
-- The model numbers in this report are absent until the next laptop run.
+
+## Third run: models with bonding context (Oct 2026)
+
+With the rule category and each atom's neighbors in the prompt:
+
+| | gemma2:9b | qwen2.5:7b |
+|---|---|---|
+| False-artifact rate (was 2.0% / 13.5%) | 0% | 0% |
+| Atoms named in label (was 84.1% / 80.5%) | 91.0% | 84.3% |
+| **Labels fully correct** (new check, scored offline from this run) | **96.7%** (147/152) | 77.0% (147/191) |
+| Ligand exchanges described correctly | 20/21 | 7/36 |
+| Seconds per reaction | 15.9 | 5.5 |
+
+- "Atoms named" was too generous. A label can name the right atoms in the wrong roles.
+  `tools/benchmark/claims.ts` now reads each label's claims ("X moves from A to B",
+  "A-B breaks", "X binds to Y", "X swaps A for B", "X and Y form H2") and checks every one
+  against the answer key. gemma is clearly more accurate. qwen mostly fails on exchanges,
+  writing "X swaps A for B" with the wrong atoms; that wording came from an example in
+  the prompt.
+- Changes: the prompt now includes the detector's own summary, which names the exact roles
+  for single transfers and swaps. The copyable example is gone, and the model is told to
+  claim only bonds that appear in the formed / broken lists.
+- gemma's 9 errors were Ollama dropping the connection, not model failures. Requests now
+  retry twice (after 2 s and 5 s) on a dropped connection or a 5xx.
+- **Caveats.** The benchmark has no real artifacts, so a 0% false-artifact rate only shows
+  the models don't dismiss real chemistry. It doesn't show they can spot an artifact; that
+  needs decoy events. Confidence is ~0.95 on everything, so it says nothing yet.

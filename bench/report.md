@@ -27,3 +27,12 @@
 ### Split reactions
 
 4 reactions became more than one chapter. Median gap between consecutive chapters: 9 frames (range -5–14). Chapters share an atom in 0.0% of them.
+
+## Models
+
+Labels are scored on the chapter that best matches the true reaction. A false artifact is a real event the model dismissed.
+
+| Model | False-artifact rate | Atoms named in label | Mean confidence | Errors | Seconds / reaction |
+|---|---|---|---|---|---|
+| gemma2:9b | 0.0% | 91.0% | 0.95 | 9 | 15.9 |
+| qwen2.5:7b | 0.0% | 84.3% | 0.97 | 0 | 5.5 |

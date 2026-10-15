@@ -42,6 +42,8 @@ interface ModelResult {
   claims: number;
   claimsCorrect: number;
   wrongClaims: string[];
+  /** The label names no atoms at all ("Nitrogen gains hydrogen"). */
+  vague: boolean;
   seconds: number;
   error?: string;
 }
@@ -127,7 +129,7 @@ async function evaluateModel(
 ): Promise<ModelResult> {
   const result: ModelResult = {
     model, label: null, confidence: null, falseArtifacts: 0, realEvents: 0, atomMention: null,
-    claims: 0, claimsCorrect: 0, wrongClaims: [], seconds: 0,
+    claims: 0, claimsCorrect: 0, wrongClaims: [], vague: false, seconds: 0,
   };
   if (events.length === 0) return result;
   const chapters = toChapters(events);
@@ -156,6 +158,7 @@ async function evaluateModel(
     result.claims = check.claims;
     result.claimsCorrect = check.correct;
     result.wrongClaims = check.wrong;
+    result.vague = check.vague;
   }
   return result;
 }
@@ -240,7 +243,7 @@ function summarize(results: ReactionResult[], models: string[], persist: number,
       ``,
       `Labels are scored on the chapter that best matches the true reaction. A false artifact is a real event the model dismissed. "Labels fully correct" reads each label's claims (X moves from A to B, A-B breaks, X binds to Y, X swaps A for B, ...) and checks every one against the answer key; it covers labels with at least one recognizable claim.`,
       ``,
-      `| Model | Labels fully correct | Labels with a false claim | Checkable labels | False-artifact rate | Atoms named in label | Mean confidence | Errors | Seconds / reaction |`,
+      `| Model | Labels fully correct | Labels with a false claim | Checkable labels | Vague (no atom names) | False-artifact rate | Atoms named in label | Errors | Seconds / reaction |`,
       `|---|---|---|---|---|---|---|---|---|`,
     );
     for (const model of models) {
@@ -249,12 +252,11 @@ function summarize(results: ReactionResult[], models: string[], persist: number,
       const real = rows.reduce((s, m) => s + m.realEvents, 0);
       const falseArtifacts = rows.reduce((s, m) => s + m.falseArtifacts, 0);
       const mention = labeled.reduce((s, m) => s + (m.atomMention ?? 0), 0) / Math.max(labeled.length, 1);
-      const confidence = labeled.reduce((s, m) => s + (m.confidence ?? 0), 0) / Math.max(labeled.length, 1);
       const seconds = rows.reduce((s, m) => s + m.seconds, 0) / Math.max(rows.length, 1);
       const checkable = rows.filter((m) => m.claims > 0);
       const fullyCorrect = checkable.filter((m) => m.claimsCorrect === m.claims).length;
       lines.push(
-        `| ${model} | ${pct(fullyCorrect, checkable.length)} | ${checkable.length - fullyCorrect} | ${checkable.length} of ${labeled.length} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${confidence.toFixed(2)} | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
+        `| ${model} | ${pct(fullyCorrect, checkable.length)} | ${checkable.length - fullyCorrect} | ${checkable.length} of ${rows.filter((m) => m.label).length} | ${rows.filter((m) => m.vague).length} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
       );
     }
   }
@@ -302,6 +304,12 @@ async function main() {
     }
   }
 
+  const inputs: Array<{
+    trajectory: Awaited<ReturnType<typeof parseExtendedXYZ>>;
+    events: DetectedEvent[];
+    answer: Answer;
+    truthPairs: Set<string>;
+  }> = [];
   for (const [index, answer] of answers.entries()) {
     const trajectory = await parseExtendedXYZ(new Blob([readFileSync(join(args.dir, answer.file))]) as File, () => {});
     const events = detectBondEvents(trajectory, options);
@@ -320,21 +328,28 @@ async function main() {
     }
     const main = events[mainIndex(events, truthPairs)];
 
-    const models: ModelResult[] = [];
-    for (const model of args.models) {
-      models.push(await evaluateModel(model, args.endpoint, trajectory, events, answer, truthPairs));
-    }
-
     results.push({
       id: answer.id, formula: answer.formula, truthCategory: answer.category, truthChanges: truth.size,
       events: events.length, tp, fp, fn: truth.size - tp, exact: fp === 0 && tp === truth.size,
       category: main?.category ?? null, categoryCorrect: main?.category === answer.category,
       chapters: events.map((e) => ({ startFrame: e.startFrame, endFrame: e.endFrame, atoms: e.atoms, category: e.category, label: e.label })),
-      models,
+      models: [],
     });
-    process.stdout.write(`\r${index + 1}/${answers.length} reactions`);
+    inputs.push({ trajectory, events, answer, truthPairs });
+    process.stdout.write(`\rdetector ${index + 1}/${answers.length} reactions`);
   }
   process.stdout.write("\n");
+
+  // One model at a time over every reaction: alternating models makes Ollama
+  // swap them in and out of GPU memory on each call, which on an 8 GB laptop
+  // GPU took over 2 minutes per request and caused the timeouts.
+  for (const model of args.models) {
+    for (const [index, { trajectory, events, answer, truthPairs }] of inputs.entries()) {
+      results[index].models.push(await evaluateModel(model, args.endpoint, trajectory, events, answer, truthPairs));
+      process.stdout.write(`\r${model} ${index + 1}/${inputs.length} reactions`);
+    }
+    process.stdout.write("\n");
+  }
 
   const report = summarize(results, args.models, options.minPersistFrames, options.groupWindowFrames);
   writeFileSync(join(args.dir, "report.json"), JSON.stringify({ options, models: args.models, results }, null, 1));

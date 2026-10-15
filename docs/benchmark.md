@@ -164,3 +164,35 @@ With the rule category and each atom's neighbors in the prompt:
 - **Caveats.** The benchmark has no real artifacts, so a 0% false-artifact rate only shows
   the models don't dismiss real chemistry. It doesn't show they can spot an artifact; that
   needs decoy events. Confidence is ~0.95 on everything, so it says nothing yet.
+
+## Fourth run: role summary in the prompt (Oct 2026)
+
+The claim checker was widened (transfers written as "proton transfer from N1-H9 to C0",
+"N6 accepts a proton from C1", "C0 transfers H7 to C1", swaps written as "exchanges bonding
+partner from A to B", bond lists after "breaking"/"forming", ring paths skipped). It's now
+covered by 27 test cases, and spot checks against the answer key confirmed the flagged
+labels. Both runs were re-scored with it:
+
+| | gemma2:9b run 3 | gemma2:9b run 4 | qwen2.5:7b run 3 | qwen2.5:7b run 4 |
+|---|---|---|---|---|
+| Labels fully correct | 90.2% (166/184) | 87.3% (110/126) | 76.8% (149/194) | 86.9% (133/153) |
+| Labels with a false claim | 18 | 16 | 45 | 20 |
+| Vague (no atom names) | 0 | 0 | 0 | 16 |
+| Ligand exchanges correct | 25/33 | 18/18 | 7/36 | 24/28 |
+| Errors | 9 | 72 | 0 | 0 |
+
+On the 123 reactions gemma labeled in both runs, it was correct 104 → 106 times and wrong
+14 → 15 times, so the prompt change made no difference to gemma. qwen's false claims more
+than halved, mostly on exchanges, but it got vaguer: 47 labels had nothing checkable, up
+from 6.
+
+Why gemma had 72 errors and took 51 s per reaction: the evaluator alternated models on every
+reaction. On an 8 GB GPU the two models don't fit together, so Ollama reloaded one on every
+call and some requests passed the 120 s limit. The retry inherited the already-expired
+timer, so it couldn't help, and the error wrongly said "Can't reach Ollama".
+
+Fixes:
+- `npm run bench` now runs each model over every reaction before starting the next.
+- Each attempt gets its own time limit, and a timeout says so.
+- The prompt requires atom names (H7, C2) rather than "hydrogen" or "nitrogen".
+- The report has a "Vague" column.

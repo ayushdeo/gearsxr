@@ -5,7 +5,7 @@
 //   npm run bench -- bench/                               # detector + rules
 //   npm run bench -- bench/ --models qwen2.5:7b,gemma2:9b # plus local models
 //
-// Options: --models a,b  --endpoint http://localhost:11434  --limit N  --persist N
+// Options: --models a,b  --endpoint http://localhost:11434  --limit N  --persist N  --window N
 // Writes bench/report.json (every reaction) and bench/report.md (summary).
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -59,17 +59,18 @@ interface ReactionResult {
 }
 
 function parseArgs(argv: string[]) {
-  const args = { dir: "", models: [] as string[], endpoint: "http://localhost:11434", limit: Infinity, persist: 0 };
+  const args = { dir: "", models: [] as string[], endpoint: "http://localhost:11434", limit: Infinity, persist: 0, window: 0 };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--models") args.models = argv[++i].split(",").map((m) => m.trim()).filter(Boolean);
     else if (a === "--endpoint") args.endpoint = argv[++i];
     else if (a === "--limit") args.limit = Number(argv[++i]);
     else if (a === "--persist") args.persist = Number(argv[++i]);
+    else if (a === "--window") args.window = Number(argv[++i]);
     else if (!a.startsWith("--")) args.dir = a;
   }
   if (!args.dir) {
-    console.error("Usage: npm run bench -- <benchmark dir> [--models a,b] [--endpoint URL] [--limit N] [--persist N]");
+    console.error("Usage: npm run bench -- <benchmark dir> [--models a,b] [--endpoint URL] [--limit N] [--persist N] [--window N]");
     process.exit(1);
   }
   return args;
@@ -160,7 +161,7 @@ function median(values: number[]) {
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 }
 
-function summarize(results: ReactionResult[], models: string[], persist: number): string {
+function summarize(results: ReactionResult[], models: string[], persist: number, window: number): string {
   const n = results.length;
   const sum = (f: (r: ReactionResult) => number) => results.reduce((s, r) => s + f(r), 0);
   const tp = sum((r) => r.tp), fp = sum((r) => r.fp), fn = sum((r) => r.fn);
@@ -172,7 +173,7 @@ function summarize(results: ReactionResult[], models: string[], persist: number)
   const lines = [
     `# Chapters benchmark`,
     ``,
-    `${n} reactions · detector bond-diff (persist ${persist} frames)`,
+    `${n} reactions · detector bond-diff (persist ${persist} frames, group window ${window} frames)`,
     ``,
     `## Detector`,
     ``,
@@ -252,7 +253,11 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const manifest = JSON.parse(readFileSync(join(args.dir, "answers.json"), "utf8"));
   const answers: Answer[] = manifest.reactions.slice(0, args.limit);
-  const options = { ...DEFAULT_DETECT_OPTIONS, ...(args.persist ? { minPersistFrames: args.persist } : {}) };
+  const options = {
+    ...DEFAULT_DETECT_OPTIONS,
+    ...(args.persist ? { minPersistFrames: args.persist } : {}),
+    ...(args.window ? { groupWindowFrames: args.window } : {}),
+  };
   const results: ReactionResult[] = [];
 
   if (args.models.length) {
@@ -305,7 +310,7 @@ async function main() {
   }
   process.stdout.write("\n");
 
-  const report = summarize(results, args.models, options.minPersistFrames);
+  const report = summarize(results, args.models, options.minPersistFrames, options.groupWindowFrames);
   writeFileSync(join(args.dir, "report.json"), JSON.stringify({ options, models: args.models, results }, null, 1));
   writeFileSync(join(args.dir, "report.md"), report);
   console.log(report);

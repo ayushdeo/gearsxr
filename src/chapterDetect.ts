@@ -7,6 +7,9 @@
 // held for `minPersistFrames` consecutive frames. Committed changes that share
 // an atom and fall within `groupWindowFrames` of each other are merged into one
 // event, so e.g. a proton transfer reads as one chapter, not a break + a form.
+// Concerted changes on bonded neighbors (a ring opening while an adjacent H
+// shifts) also merge within that window; neighbors come from the bond graph,
+// so separate molecules that merely touch never merge.
 // An exchange can take longer than that window (an atom sits between
 // partners), so an atom's consecutive changes in opposite directions (a break
 // then a formation, or a formation then a break) link within
@@ -36,7 +39,7 @@ export interface DetectOptions {
 
 export const DEFAULT_DETECT_OPTIONS: DetectOptions = {
   minPersistFrames: 3,
-  groupWindowFrames: 5,
+  groupWindowFrames: 10,
   transferWindowFrames: 30,
   jumpThreshold: 2.5,
 };
@@ -65,6 +68,8 @@ interface BondChange {
   a: number;
   b: number;
   formed: boolean;
+  /** Atoms bonded to a or b when the change was committed. */
+  neighbors: number[];
 }
 
 export type DetectProgress = (framesDone: number, totalFrames: number) => void;
@@ -123,6 +128,22 @@ function detectBondChanges(trajectory: Trajectory, options: DetectOptions, onPro
     const current = bondKeys(frame);
     const jumped = jumpedAtoms(trajectory, frame, options.jumpThreshold);
 
+    // Adjacency over bonds held before or at this frame, built only when a
+    // change commits here (rare compared with frames).
+    let adjacency: Map<number, number[]> | null = null;
+    const neighborsOf = (a: number, b: number) => {
+      if (!adjacency) {
+        adjacency = new Map();
+        for (const key of new Set([...stable, ...current])) {
+          const x = Math.floor(key / numAtoms);
+          const y = key % numAtoms;
+          (adjacency.get(x) ?? adjacency.set(x, []).get(x)!).push(y);
+          (adjacency.get(y) ?? adjacency.set(y, []).get(y)!).push(x);
+        }
+      }
+      return [...new Set([...(adjacency.get(a) ?? []), ...(adjacency.get(b) ?? [])])].filter((n) => n !== a && n !== b);
+    };
+
     const candidates = new Set<number>(pending.keys());
     for (const key of current) if (!stable.has(key)) candidates.add(key);
     for (const key of stable) if (!current.has(key)) candidates.add(key);
@@ -151,7 +172,7 @@ function detectBondChanges(trajectory: Trajectory, options: DetectOptions, onPro
         pending.set(key, since);
       }
       if (frame - since + 1 >= options.minPersistFrames) {
-        changes.push({ frame: since, a, b, formed: observed });
+        changes.push({ frame: since, a, b, formed: observed, neighbors: neighborsOf(a, b) });
         if (observed) stable.add(key);
         else stable.delete(key);
         pending.delete(key);
@@ -182,8 +203,21 @@ function groupChanges(changes: BondChange[], windowFrames: number, transferWindo
 
   // Changes are produced in frame order; per atom, link to recent changes.
   const recentByAtom = new Map<number, number[]>();
+  const recentByNeighbor = new Map<number, number[]>();
   const lastByAtom = new Map<number, number>();
+  const inWindow = (list: number[] | undefined, frame: number) =>
+    (list ?? []).filter((j) => frame - changes[j].frame <= windowFrames);
   changes.forEach((change, i) => {
+    // Bonded-neighbor links: an earlier change touched one of this change's
+    // neighbors, or listed one of this change's atoms as its neighbor.
+    for (const atom of change.neighbors) for (const j of inWindow(recentByAtom.get(atom), change.frame)) union(i, j);
+    for (const atom of [change.a, change.b]) for (const j of inWindow(recentByNeighbor.get(atom), change.frame)) union(i, j);
+    for (const atom of change.neighbors) {
+      const recent = inWindow(recentByNeighbor.get(atom), change.frame);
+      recent.push(i);
+      recentByNeighbor.set(atom, recent);
+    }
+
     for (const atom of [change.a, change.b]) {
       // Exchange: this atom's previous change went the other way (lost a
       // partner and now binds one, or bound one and now loses another).
@@ -224,6 +258,10 @@ function describe(group: BondChange[], symbols: string[]): { kind: ChapterKind; 
     const f = formed[0];
     const k = broken[0];
     const shared = [f.a, f.b].find((atom) => atom === k.a || atom === k.b);
+    const samePair = Math.min(f.a, f.b) === Math.min(k.a, k.b) && Math.max(f.a, f.b) === Math.max(k.a, k.b);
+    if (samePair) {
+      return { kind: "rearrangement", label: `Transient ${pair(k)} break and re-form` };
+    }
     if (shared !== undefined) {
       const from = k.a === shared ? k.b : k.a;
       const to = f.a === shared ? f.b : f.a;

@@ -11,6 +11,7 @@ import type { BondPair } from "./chapterDetect";
 import type { Trajectory } from "./xyzParser";
 
 export const CHAPTER_CATEGORIES = [
+  "h2-elimination",
   "proton-transfer",
   "ring-change",
   "bond-formation",
@@ -104,7 +105,12 @@ export function classifyChapter(
 ): ChapterCategory {
   const { formed, broken } = event;
   const symbol = (atom: number) => symbolAt(trajectory, event.startFrame, atom);
+  const brokenAtoms = new Set(broken.flat());
 
+  // Two H atoms leave their partners and bond to each other.
+  if (formed.some(([a, b]) => symbol(a) === "H" && symbol(b) === "H" && brokenAtoms.has(a) && brokenAtoms.has(b))) {
+    return "h2-elimination";
+  }
   for (const [a, b] of broken) {
     for (const h of [a, b]) {
       if (symbol(h) !== "H") continue;
@@ -115,7 +121,6 @@ export function classifyChapter(
   if (cyclomatic(graph.atoms, graph.before) !== cyclomatic(graph.atoms, graph.after)) return "ring-change";
   if (formed.length && !broken.length) return "bond-formation";
   if (broken.length && !formed.length) return "bond-cleavage";
-  const brokenAtoms = new Set(broken.flat());
   if (formed.some(([a, b]) => brokenAtoms.has(a) || brokenAtoms.has(b))) return "ligand-exchange";
   return "other";
 }

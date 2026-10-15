@@ -15,12 +15,16 @@ a pair counts as bonded below 1.15x the radius sum and unbonded above 1.25x.
 Pairs that end between those bounds are listed as "ambiguous" and left out of
 scoring, so borderline geometry can't make a detector look right or wrong.
 
+H-H pairs get their own thresholds (bonded below 0.80 Å, unbonded above 1.00 Å):
+H2's 0.74 Å bond sits inside the generic band, which hid H2 eliminations.
+
 The interpolated path isn't real dynamics. It only gives each reaction a
 continuous trajectory whose start and end are exact.
 
 Usage:
   pip install h5py numpy
   python tools/benchmark/t1x_to_benchmark.py Transition1x.h5 bench/ --limit 200
+  python tools/benchmark/t1x_to_benchmark.py --rekey bench/   # rebuild answers.json from bench/reactions
 """
 
 import argparse
@@ -37,6 +41,9 @@ SYMBOLS = {1: "H", 6: "C", 7: "N", 8: "O", 9: "F", 14: "Si", 15: "P", 16: "S", 1
 RADII = {"H": 0.31, "C": 0.76, "N": 0.71, "O": 0.66, "F": 0.57, "Si": 1.11, "P": 1.07, "S": 1.05, "Cl": 1.02}
 BONDED_BELOW = 1.15
 UNBONDED_ABOVE = 1.25
+# Absolute bounds (Å) for H-H, whose 0.74 Å bond is 1.19x the radius sum.
+HH_BONDED_BELOW = 0.80
+HH_UNBONDED_ABOVE = 1.00
 
 
 def bond_states(symbols, positions):
@@ -46,10 +53,13 @@ def bond_states(symbols, positions):
     for i in range(n):
         for j in range(i + 1, n):
             limit = RADII.get(symbols[i], 0.7) + RADII.get(symbols[j], 0.7)
+            bonded, unbonded = BONDED_BELOW * limit, UNBONDED_ABOVE * limit
+            if symbols[i] == "H" and symbols[j] == "H":
+                bonded, unbonded = HH_BONDED_BELOW, HH_UNBONDED_ABOVE
             d = float(np.linalg.norm(positions[i] - positions[j]))
-            if d < BONDED_BELOW * limit:
+            if d < bonded:
                 states[(i, j)] = True
-            elif d > UNBONDED_ABOVE * limit:
+            elif d > unbonded:
                 states[(i, j)] = False
             else:
                 states[(i, j)] = None
@@ -73,7 +83,12 @@ def cyclomatic(n_atoms, bonds):
 
 
 def categorize(symbols, formed, broken, rings_before, rings_after):
-    """Reaction category, using the same names as src/chapterAI.ts."""
+    """Reaction category, using the same names and order as src/chapterChemistry.ts."""
+    broken_atoms = {x for pair in broken for x in pair}
+    # Two H atoms leave their partners and bond to each other.
+    for a, b in formed:
+        if symbols[a] == "H" and symbols[b] == "H" and a in broken_atoms and b in broken_atoms:
+            return "h2-elimination"
     for a, b in broken:
         for h in (a, b):
             if symbols[h] != "H":
@@ -88,7 +103,6 @@ def categorize(symbols, formed, broken, rings_before, rings_after):
         return "bond-formation"
     if broken and not formed:
         return "bond-cleavage"
-    broken_atoms = {x for pair in broken for x in pair}
     if any(x in broken_atoms for pair in formed for x in pair):
         return "ligand-exchange"
     return "other"
@@ -101,7 +115,8 @@ def answer_key(symbols, reactant, product):
     for pair, was in before.items():
         now = after[pair]
         if was is None or now is None:
-            if was != now and (was or now):
+            # Any change into or out of the band, e.g. unbonded -> band.
+            if was != now:
                 ambiguous.append(list(pair))
         elif was != now:
             (formed if now else broken).append(list(pair))
@@ -136,7 +151,57 @@ def geometry(group, name):
     return positions[0] if positions.ndim == 3 else positions
 
 
+def read_xyz_endpoints(path):
+    """First and last frame of a trajectory written by write_xyz."""
+    with open(path) as f:
+        lines = f.read().splitlines()
+    n = int(lines[0])
+    stride = n + 2
+    frames = len(lines) // stride
+
+    def frame(k):
+        rows = [line.split() for line in lines[k * stride + 2 : k * stride + 2 + n]]
+        return [r[0] for r in rows], np.array([[float(v) for v in r[1:4]] for r in rows])
+
+    symbols, first = frame(0)
+    _, last = frame(frames - 1)
+    return symbols, first, last
+
+
+def rekey(out):
+    """Recompute every answer from the reactant/product frames already on disk."""
+    path = out / "answers.json"
+    manifest = json.loads(path.read_text())
+    kept = []
+    for answer in manifest["reactions"]:
+        symbols, reactant, product = read_xyz_endpoints(out / answer["file"])
+        key = answer_key(symbols, reactant, product)
+        if key["formed"] or key["broken"]:
+            kept.append({**answer, "symbols": symbols, **key})
+    manifest["reactions"] = kept
+    manifest["bondRule"] = {
+        "bondedBelow": BONDED_BELOW, "unbondedAbove": UNBONDED_ABOVE, "radii": RADII,
+        "hhBondedBelow": HH_BONDED_BELOW, "hhUnbondedAbove": HH_UNBONDED_ABOVE,
+    }
+    path.write_text(json.dumps(manifest, indent=1))
+    return kept
+
+
+def summarize(answers, out, skipped):
+    counts = {}
+    for a in answers:
+        counts[a["category"]] = counts.get(a["category"], 0) + 1
+    print(f"Wrote {len(answers)} reactions to {out} (skipped {skipped}). Categories: {counts}")
+
+
 def main():
+    if len(sys.argv) == 3 and sys.argv[1] == "--rekey":
+        out = Path(sys.argv[2])
+        before = len(json.loads((out / "answers.json").read_text())["reactions"])
+        kept = rekey(out)
+        summarize(kept, out, before - len(kept))
+        return
+
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("h5", help="path to Transition1x.h5")
     parser.add_argument("out", help="output directory")
@@ -191,15 +256,15 @@ def main():
         "source": "Transition1x",
         "split": args.split,
         "seed": args.seed,
-        "bondRule": {"bondedBelow": BONDED_BELOW, "unbondedAbove": UNBONDED_ABOVE, "radii": RADII},
+        "bondRule": {
+            "bondedBelow": BONDED_BELOW, "unbondedAbove": UNBONDED_ABOVE, "radii": RADII,
+            "hhBondedBelow": HH_BONDED_BELOW, "hhUnbondedAbove": HH_UNBONDED_ABOVE,
+        },
         "path": {"hold": args.hold, "steps": args.steps},
         "reactions": answers,
     }
     (out / "answers.json").write_text(json.dumps(manifest, indent=1))
-    counts = {}
-    for a in answers:
-        counts[a["category"]] = counts.get(a["category"], 0) + 1
-    print(f"Wrote {len(answers)} reactions to {out} (skipped {skipped}). Categories: {counts}")
+    summarize(answers, out, skipped)
 
 
 if __name__ == "__main__":

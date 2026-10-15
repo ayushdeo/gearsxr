@@ -7,6 +7,16 @@ export interface Bond {
 
 // Bonded if distance <= sum of covalent radii * tolerance.
 export const BOND_TOLERANCE = 1.2;
+// H2's bond (0.74 Å) sits right at 1.2 x the H radius sum (0.744 Å), so the
+// generic rule drew H2 only intermittently. Non-bonded H...H contacts are
+// well above 1.5 Å, so a fixed H-H cutoff is safe.
+export const HH_BOND_CUTOFF = 0.85;
+
+/** Distance (Å) below which two atoms count as bonded. */
+export function bondCutoff(symbolA: string, symbolB: string): number {
+  if (symbolA === "H" && symbolB === "H") return HH_BOND_CUTOFF;
+  return (getElementInfo(symbolA).radius + getElementInfo(symbolB).radius) * BOND_TOLERANCE;
+}
 
 /**
  * Computes bonds for a single frame using a uniform spatial hash grid so
@@ -26,7 +36,7 @@ export function computeBonds(
     radii[i] = r;
     if (r > maxRadius) maxRadius = r;
   }
-  const cellSize = Math.max(maxRadius * 2 * BOND_TOLERANCE, 0.1);
+  const cellSize = Math.max(maxRadius * 2 * BOND_TOLERANCE, HH_BOND_CUTOFF);
 
   const cellOf = (x: number, y: number, z: number) =>
     `${Math.floor(x / cellSize)},${Math.floor(y / cellSize)},${Math.floor(z / cellSize)}`;
@@ -66,7 +76,8 @@ export function computeBonds(
             const ddy = yi - positions[offj + 1];
             const ddz = zi - positions[offj + 2];
             const distSq = ddx * ddx + ddy * ddy + ddz * ddz;
-            const cutoff = (radii[i] + radii[j]) * BOND_TOLERANCE;
+            const cutoff =
+              symbols[i] === "H" && symbols[j] === "H" ? HH_BOND_CUTOFF : (radii[i] + radii[j]) * BOND_TOLERANCE;
             if (distSq <= cutoff * cutoff) {
               bonds.push({ a: i, b: j });
             }

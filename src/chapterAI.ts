@@ -114,6 +114,7 @@ function describeEvent(trajectory: Trajectory, chapter: Chapter, key: string) {
     id: key,
     frames: chapter.endFrame > chapter.startFrame ? `${chapter.startFrame}-${chapter.endFrame}` : `${chapter.startFrame}`,
     category: chapter.category,
+    summary: chapter.label,
     formed: chapter.formed.map(bond),
     broken: chapter.broken.map(bond),
     atoms: neighborContext(trajectory, chapter, localGraph(trajectory, chapter, settle)),
@@ -124,10 +125,11 @@ const SYSTEM_PROMPT = `You are a computational chemist naming events that a dete
 Bonds are inferred from distance: two atoms are bonded when closer than cutoff_A (sum of covalent radii x ${BOND_TOLERANCE}; ${HH_BOND_CUTOFF} Å for H-H).
 Each event gives:
 - category: computed from the bond graph and reliable. h2-elimination = two H atoms leave their partners and form H2; proton-transfer = an H moves from one partner to another; ring-change = a ring forms or opens; ligand-exchange = an atom swaps one bonding partner for another; bond-formation / bond-cleavage = bonds only form / only break.
+- summary: the detector's own description. For a single transfer or swap it states exactly which atom moved between which partners; for larger rearrangements it only counts bonds.
 - formed / broken: the bonds that changed, with distances before and after.
 - atoms: each involved atom's bonded neighbors before and after.
 For every event return:
-- label: at most 10 words saying what happens, consistent with the category, using the atom names given. Examples: "H5 moves from O2 to C1", "C0-C3 bond closes a 4-membered ring", "N4 swaps C2 for C6".
+- label: at most 12 words saying what happens, consistent with the category and with the formed / broken lists. Only state a bond as formed or broken if it is in those lists, and keep the roles in the summary when it names them. Use the atom names given.
 - artifact: true only if this is probably not chemistry, e.g. two atoms of the same element touching in a dense phase, or distances barely crossing the cutoff and staying near it. Ordinary reactions in small molecules are not artifacts.
 - confidence: 0 to 1, how sure you are the label is right.
 - rationale: one short sentence citing distances or neighbors.
@@ -176,7 +178,26 @@ function toSuggestion(raw: RawSuggestion, model: string): AiSuggestion | null {
   };
 }
 
+const RETRY_DELAYS_MS = [2000, 5000];
+
+/** One request, retried after a dropped connection or a 5xx (Ollama reloading a model). */
 async function chat(settings: LlmSettings, userContent: string, signal: AbortSignal): Promise<RawSuggestion[]> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await chatOnce(settings, userContent, signal);
+    } catch (err) {
+      const retryable = (err as { retryable?: boolean }).retryable === true;
+      if (!retryable || attempt >= RETRY_DELAYS_MS.length || signal.aborted) throw err;
+      await new Promise((resolve) => setTimeout(resolve, RETRY_DELAYS_MS[attempt]));
+    }
+  }
+}
+
+function retryable(err: Error): Error {
+  return Object.assign(err, { retryable: true });
+}
+
+async function chatOnce(settings: LlmSettings, userContent: string, signal: AbortSignal): Promise<RawSuggestion[]> {
   let response: Response;
   try {
     response = await fetch(`${baseUrl(settings.endpoint)}/api/chat`, {
@@ -195,11 +216,13 @@ async function chat(settings: LlmSettings, userContent: string, signal: AbortSig
       }),
     });
   } catch (err) {
-    throw unreachable(settings.endpoint, err);
+    const error = unreachable(settings.endpoint, err);
+    throw error.name === "AbortError" ? error : retryable(error);
   }
   if (!response.ok) {
     const text = await response.text().catch(() => "");
-    throw new Error(`Ollama returned HTTP ${response.status}${text ? `: ${text.slice(0, 200)}` : ""}`);
+    const error = new Error(`Ollama returned HTTP ${response.status}${text ? `: ${text.slice(0, 200)}` : ""}`);
+    throw response.status >= 500 ? retryable(error) : error;
   }
   const body = (await response.json()) as { message?: { content?: string } };
   try {

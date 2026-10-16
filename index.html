@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GEARS XR</title>
-    <!-- Cloudflare Web Analytics -->
-    <!-- End Cloudflare Web Analytics -->
     <style>
       html, body { margin: 0; padding: 0; overflow: hidden; background: #111; }
       #app { width: 100vw; height: 100vh; }
@@ -110,64 +108,162 @@
         color: #eee; background: rgba(255,255,255,0.08);
         border: 1px solid rgba(255,255,255,0.22); border-radius: 4px;
       }
+      /* ---- Chapters ---------------------------------------------------- */
       #chapters {
         position: fixed; right: 16px; top: 56px; z-index: 12;
-        width: min(340px, calc(100vw - 32px)); box-sizing: border-box;
-        max-height: 50vh; overflow-y: auto;
-        font-family: system-ui, sans-serif; color: #eee;
-        background: rgba(20,20,20,0.85); padding: 10px 12px;
-        border-radius: 8px;
+        width: min(372px, calc(100vw - 32px)); box-sizing: border-box;
+        max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain;
+        padding: 14px 14px 10px;
       }
-      #chapters h2 { font-size: 14px; margin: 0; font-weight: 600; }
+      #chapters.collapsed { padding-bottom: 14px; }
       #chapters.collapsed #chaptersContent { display: none; }
-      #chapters button { font-size: 12px; cursor: pointer; }
-      .chapterHeaderButtons { display: inline-flex; gap: 6px; }
-      #chaptersSummary { font-size: 11px; opacity: 0.85; margin: 6px 0; white-space: pre-line; }
-      .chapterNav { flex-wrap: wrap; font-size: 12px; }
-      .chapterNav label { display: inline-flex; align-items: center; gap: 4px; margin-left: auto; }
-      .chapterNav input { width: 44px; }
-      #chaptersList { margin-top: 6px; }
-      .chapterRow { border-radius: 4px; margin-top: 3px; }
-      .chapterRow.selected { background: rgba(255,255,255,0.08); outline: 1px solid rgba(255,255,255,0.25); }
-      .chapterHead { display: flex; align-items: center; gap: 6px; padding: 3px 4px; cursor: pointer; font-size: 12px; }
-      .chapterHead:hover { background: rgba(255,255,255,0.06); }
-      .chapterDot { flex: 0 0 8px; height: 8px; border-radius: 50%; background: #f5b041; }
-      .chapterRow.accepted .chapterDot { background: #4cd07d; }
-      .chapterRow.rejected .chapterDot { background: #777; }
-      .chapterRow.rejected .chapterTitle { text-decoration: line-through; opacity: 0.6; }
-      .chapterTitle { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .chapterFrames { flex: 0 0 auto; font-size: 11px; opacity: 0.7; font-variant-numeric: tabular-nums; }
-      .chapterEditor { padding: 4px 6px 8px; display: flex; flex-direction: column; gap: 4px; }
-      .chapterDetail { font-size: 11px; opacity: 0.75; white-space: pre-line; }
-      .chapterEditor input, .chapterEditor textarea {
-        width: 100%; box-sizing: border-box; font-size: 12px; font-family: inherit;
-        color: #eee; background: #0b1119; border: 1px solid #61738a; border-radius: 3px; padding: 2px 4px;
+      .chHeader { display: flex; align-items: flex-start; gap: 8px; }
+      .chTitles { flex: 1; min-width: 0; }
+      .chTitles h2 { margin: 0; font: var(--t-title); letter-spacing: -0.01em; }
+      .chSubtitle { margin: 2px 0 0; font: var(--t-footnote); color: var(--label-2); white-space: pre-line; }
+      .chHeaderActions { display: flex; gap: 2px; }
+      #toggleChaptersBtn svg { transition: transform .2s ease; }
+      #chapters.collapsed #toggleChaptersBtn svg { transform: rotate(180deg); }
+
+      .chProgress {
+        display: flex; height: 4px; margin: 12px 0 2px; border-radius: 2px; overflow: hidden;
+        background: var(--fill-3);
       }
-      #chaptersAi { font-size: 12px; margin-top: 6px; }
-      #chaptersAi summary { cursor: pointer; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-      #chaptersAiStatus { font-size: 11px; opacity: 0.8; flex: 1 1 140px; }
-      #chaptersAi label { display: block; font-size: 11px; margin: 6px 0 2px; opacity: 0.85; }
-      #chaptersAi input, #chaptersAi select {
-        width: 100%; box-sizing: border-box; font-size: 12px;
-        color: #eee; background: #0b1119; border: 1px solid #61738a; border-radius: 3px;
+      .chProgress span { display: block; height: 100%; transition: width .25s ease; }
+      .chProgress .acc { background: var(--green); }
+      .chProgress .rej { background: var(--red); }
+
+      /* AI assistant card */
+      .aiCard {
+        margin-top: 12px; padding: 10px 12px; border-radius: 12px;
+        background: linear-gradient(135deg, rgba(191,90,242,0.16), rgba(10,132,255,0.10));
+        border: 1px solid rgba(191,90,242,0.28);
       }
-      #chaptersAi .row select { flex: 1; min-width: 0; }
-      .chapterAi { font-size: 11px; color: #c9b6ff; display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
-      .chapterRow.aiArtifact .chapterTitle { color: #c9a35a; }
-      .chapterActions { display: flex; gap: 6px; flex-wrap: wrap; }
-      .chapterActions .review-accepted { color: #0b2a17; background: #4cd07d; border: 0; border-radius: 3px; padding: 2px 8px; }
-      .chapterActions .review-rejected { color: #fff; background: #a33; border: 0; border-radius: 3px; padding: 2px 8px; }
-      #chapterTrack { position: relative; height: 12px; margin: 2px 0 0; }
+      .aiRow { display: flex; align-items: center; gap: 10px; }
+      .aiBadge {
+        flex: 0 0 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+        background: rgba(191,90,242,0.25); color: var(--purple);
+      }
+      .aiText { flex: 1; min-width: 0; }
+      .aiTitle { font: var(--t-headline); }
+      .aiStatus { font: var(--t-footnote); color: var(--label-2); display: flex; align-items: center; gap: 6px; }
+      .aiStatus::before {
+        content: ""; flex: 0 0 6px; height: 6px; border-radius: 50%; background: var(--label-3);
+      }
+      .aiStatus[data-state="ready"]::before, .aiStatus[data-state="done"]::before { background: var(--green); }
+      .aiStatus[data-state="busy"]::before { background: var(--blue); animation: pulse 1s ease-in-out infinite; }
+      .aiStatus[data-state="error"] { color: var(--orange); }
+      .aiStatus[data-state="error"]::before { background: var(--orange); }
+      @keyframes pulse { 50% { opacity: 0.3; } }
+      .aiProgress { height: 3px; margin-top: 8px; border-radius: 2px; background: var(--fill-3); overflow: hidden; }
+      .aiProgress span { display: block; height: 100%; width: 0; background: var(--purple); transition: width .3s ease; }
+      .aiSettings { margin-top: 8px; }
+      .aiSettings summary, .chAdvanced summary {
+        cursor: pointer; font: var(--t-footnote); color: var(--label-2); list-style: none;
+        display: inline-flex; align-items: center; gap: 4px; border-radius: 6px;
+      }
+      .aiSettings summary::-webkit-details-marker, .chAdvanced summary::-webkit-details-marker { display: none; }
+      .aiSettings summary::before, .chAdvanced summary::before {
+        content: "›"; display: inline-block; transition: transform .15s ease; font-size: 14px; line-height: 1;
+      }
+      .aiSettings[open] summary::before, .chAdvanced[open] summary::before { transform: rotate(90deg); }
+      .settingsBody { display: grid; gap: 6px; margin-top: 8px; }
+      .settingsBody label { font: var(--t-caption); color: var(--label-2); margin: 2px 0 -2px; }
+      .settingsBody .hint { font: var(--t-caption); color: var(--label-3); margin: 2px 0 0; }
+
+      /* Toolbar: filter + prev/next */
+      .segmented {
+        display: flex; margin-top: 12px; padding: 2px; border-radius: 9px; background: var(--fill-3);
+      }
+      .chToolbar { display: flex; align-items: center; gap: 2px; margin: 10px 0 2px; padding-left: 8px; }
+      .chToolbar .chSectionTitle { flex: 1; }
+      .segmented button {
+        flex: 1; min-width: 0; border: 0; margin: 0; padding: 4px 4px; border-radius: 7px;
+        background: transparent; color: var(--label-1); font: var(--t-caption-strong); cursor: pointer;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .segmented button[aria-pressed="true"] { background: rgba(99,99,102,0.9); box-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+      .segmented .count { color: var(--label-2); font-weight: 400; margin-left: 3px; font-variant-numeric: tabular-nums; }
+
+      /* Event list */
+      #chaptersList { display: flex; flex-direction: column; gap: 2px; }
+      .chEmpty { padding: 18px 8px; text-align: center; font: var(--t-footnote); color: var(--label-2); }
+      .chRow { border-radius: 10px; }
+      .chRow.selected { background: var(--fill-2); }
+      .chRowHead {
+        all: unset; box-sizing: border-box; width: 100%; display: flex; align-items: flex-start; gap: 10px;
+        padding: 8px 8px; border-radius: 10px; cursor: pointer;
+      }
+      .chRowHead:hover { background: var(--fill-3); }
+      .chRowHead:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+      .statusGlyph { flex: 0 0 18px; height: 18px; margin-top: 1px; display: grid; place-items: center; }
+      .chRowText { flex: 1; min-width: 0; display: grid; gap: 3px; }
+      .chRowTitle { font: var(--t-body); color: var(--label-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .chRow.selected .chRowTitle { white-space: normal; }
+      .chRow.rejected .chRowTitle { color: var(--label-3); text-decoration: line-through; }
+      .chRowTitle .aiMark { color: var(--purple); margin-right: 4px; }
+      .chRowMeta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: var(--t-caption); color: var(--label-2); }
+      .pill {
+        display: inline-flex; align-items: center; gap: 3px; padding: 1px 7px; border-radius: 999px;
+        font: var(--t-caption-strong); background: var(--fill-2); color: var(--label-1);
+      }
+      .pill.warn { background: rgba(255,159,10,0.18); color: var(--orange); }
+      .frames { font-variant-numeric: tabular-nums; }
+
+      /* Selected event detail */
+      .chDetail { padding: 2px 10px 12px 36px; display: grid; gap: 10px; }
+      .chSection { display: grid; gap: 6px; }
+      .chSectionTitle { font: var(--t-caption-strong); color: var(--label-2); text-transform: uppercase; letter-spacing: 0.04em; }
+      .aiSuggestion {
+        padding: 9px 10px; border-radius: 10px; display: grid; gap: 4px;
+        background: rgba(191,90,242,0.12); border: 1px solid rgba(191,90,242,0.25);
+      }
+      .aiSuggestion .src { font: var(--t-caption); color: var(--purple); display: flex; align-items: center; gap: 4px; }
+      .aiSuggestion .text { font: var(--t-callout); color: var(--label-1); }
+      .aiSuggestion .why { font: var(--t-footnote); color: var(--label-2); }
+      .aiSuggestion .btn { justify-self: start; margin-top: 2px; }
+      .bondChips { display: flex; flex-wrap: wrap; gap: 4px; }
+      .bond {
+        font: var(--t-caption-strong); font-variant-numeric: tabular-nums; padding: 2px 7px; border-radius: 6px;
+      }
+      .bond.formed { background: rgba(48,209,88,0.16); color: var(--green); }
+      .bond.broken { background: rgba(255,69,58,0.16); color: var(--red); }
+      .bond.more { background: var(--fill-2); color: var(--label-2); }
+      .detectorLine { font: var(--t-footnote); color: var(--label-2); }
+      .chDetail input[type="text"], .chDetail textarea { width: 100%; }
+      .chDetail textarea { resize: vertical; min-height: 34px; }
+      .reviewBar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .reviewBar .btn { justify-content: center; min-height: 34px; }
+      .reviewBar .undo { grid-column: 1 / -1; justify-self: center; }
+
+      .chAdvanced { margin-top: 10px; }
+      .chAdvanced .settingsBody { grid-template-columns: 1fr auto; align-items: end; }
+      .chKeys {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 10px; padding-top: 10px;
+        border-top: 1px solid var(--separator); font: var(--t-caption); color: var(--label-3);
+      }
+      .chKeys span { display: inline-flex; align-items: center; gap: 3px; }
+      kbd {
+        font: 600 10.5px/1 var(--font); min-width: 16px; padding: 3px 4px; box-sizing: border-box; text-align: center;
+        border-radius: 5px; background: var(--fill-2); color: var(--label-1); border-bottom: 1px solid rgba(0,0,0,0.5);
+      }
+
+      /* Timeline markers under the frame slider */
+      #chapterTrack { position: relative; height: 14px; margin: 2px 0 2px; }
       #chapterTrack:empty { display: none; }
       .chapterMarker {
-        position: absolute; top: 0; width: 6px; height: 12px; margin: 0 0 0 -3px !important; padding: 0;
-        border: 0; border-radius: 2px; cursor: pointer; background: #f5b041;
+        position: absolute; top: 1px; width: 8px; height: 12px; margin: 0 0 0 -4px !important; padding: 0 !important;
+        border: 0 !important; border-radius: 3px !important; cursor: pointer; background: var(--orange) !important;
+        min-height: 0 !important; box-shadow: 0 0 0 1px rgba(0,0,0,0.35);
       }
-      .chapterMarker.accepted { background: #4cd07d; }
-      .chapterMarker.rejected { background: #666; }
-      .chapterMarker.selected { outline: 2px solid #fff; z-index: 1; }
+      .chapterMarker.accepted { background: var(--green) !important; }
+      .chapterMarker.rejected { background: var(--gray) !important; }
+      .chapterMarker.selected { box-shadow: 0 0 0 2px #fff; z-index: 1; }
       @media (max-width: 760px) {
-        #chapters { top: auto; bottom: 140px; max-height: 35vh; }
+        /* The VR button sits top-right; start the controls below it so Hide stays tappable. */
+        #ui { top: 52px; border-radius: 0 14px 14px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+        /* Sit above the playback bar and the collapsed Room bar. */
+        #chapters { top: auto; bottom: 206px; max-height: 34vh; }
       }
       #vrEntry {
         position: fixed; top: 12px; right: 16px; z-index: 20;
@@ -182,7 +278,95 @@
       .row button { flex: 0 0 auto; }
       #collabStatus { font-size: 11px; opacity: 0.82; margin-top: 6px; white-space: pre-line; }
       @media (max-width: 760px) {
-        body.has-playback #collaboration { bottom: 128px; }
+        body.has-playback #collaboration { bottom: 142px; }
+      }
+
+      /* ---- Design system ------------------------------------------------- *
+       * Apple-style dark materials: system font, semantic colors, frosted
+       * panels that defer to the 3D content, and one consistent control set. */
+      :root {
+        --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, system-ui, sans-serif;
+        --t-title: 600 17px/1.25 var(--font);
+        --t-headline: 600 13px/1.3 var(--font);
+        --t-body: 400 13px/1.35 var(--font);
+        --t-callout: 500 13px/1.35 var(--font);
+        --t-footnote: 400 12px/1.35 var(--font);
+        --t-caption: 400 11px/1.3 var(--font);
+        --t-caption-strong: 600 11px/1.3 var(--font);
+        --label-1: rgba(255,255,255,0.92);
+        --label-2: rgba(235,235,245,0.62);
+        --label-3: rgba(235,235,245,0.36);
+        --fill-1: rgba(120,120,128,0.36);
+        --fill-2: rgba(120,120,128,0.24);
+        --fill-3: rgba(118,118,128,0.18);
+        --separator: rgba(84,84,88,0.55);
+        --blue: #0a84ff; --green: #30d158; --red: #ff453a; --orange: #ff9f0a; --purple: #bf5af2; --gray: #8e8e93;
+        --material: rgba(30,30,32,0.72);
+      }
+      #ui, #collaboration, #playback, #isosurface, #chapters {
+        font-family: var(--font); color: var(--label-1);
+        background: var(--material);
+        -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+        -webkit-font-smoothing: antialiased;
+      }
+      #ui { border-radius: 0 0 14px 0; border-top: 0; border-left: 0; }
+      #collaboration, #playback, #isosurface, #chapters { border-radius: 14px; }
+      #ui h1 { font: var(--t-title); }
+      #collaboration h2, #isosurface h2 { font: var(--t-headline); font-size: 15px; }
+      #ui label, #collaboration label, #playback label { font: var(--t-footnote); color: var(--label-2); }
+      #status, #collabStatus, .roomHint, #isoHint { font: var(--t-footnote) !important; color: var(--label-2); opacity: 1 !important; }
+      .tutorialLink { color: var(--blue) !important; text-decoration: none; font: var(--t-footnote); }
+
+      /* Controls */
+      #ui button, #collaboration button, #playback button, #isosurface button,
+      .btn {
+        font: 500 12.5px/1 var(--font); color: var(--label-1);
+        background: var(--fill-2); border: 0; border-radius: 8px;
+        padding: 6px 11px; min-height: 28px; cursor: pointer;
+        display: inline-flex; align-items: center; gap: 5px;
+        transition: background-color .15s ease, opacity .15s ease, transform .1s ease;
+      }
+      #ui button:hover, #collaboration button:hover, #playback button:hover, #isosurface button:hover, .btn:hover { background: var(--fill-1); }
+      button:active { transform: scale(0.98); }
+      button:disabled, .btn:disabled { opacity: 0.4; cursor: default; transform: none; }
+      .btn.primary, #ui #loadUrlBtn, #collaboration #joinRoomBtn, #playback #playBtn { background: var(--blue); color: #fff; }
+      .btn.primary:hover, #ui #loadUrlBtn:hover, #collaboration #joinRoomBtn:hover, #playback #playBtn:hover { background: #3395ff; }
+      #collaboration #joinRoomBtn:disabled { background: var(--fill-2); color: var(--label-1); }
+      .btn.ai { background: var(--purple); color: #fff; }
+      .btn.ai:hover { background: #c977f5; }
+      .btn.ai.stop { background: var(--fill-1); }
+      .btn.accept { background: var(--green); color: #00260b; font-weight: 600; }
+      .btn.accept:hover { background: #5ade7d; }
+      .btn.reject { background: rgba(255,69,58,0.2); color: var(--red); font-weight: 600; }
+      .btn.reject:hover { background: rgba(255,69,58,0.3); }
+      .btn.on { box-shadow: inset 0 0 0 2px rgba(255,255,255,0.85); }
+      .btn.plain { background: transparent; color: var(--blue); padding-left: 6px; padding-right: 6px; }
+      .btn.plain:hover { background: var(--fill-3); }
+      .btn.tinted { background: rgba(191,90,242,0.22); color: #e2b8fa; }
+      .btn.tinted:hover { background: rgba(191,90,242,0.32); }
+      .btn kbd { background: rgba(0,0,0,0.18); color: inherit; border: 0; }
+      .iconBtn {
+        all: unset; box-sizing: border-box; width: 28px; height: 28px; border-radius: 8px;
+        display: inline-grid; place-items: center; color: var(--label-2); cursor: pointer;
+      }
+      .iconBtn:hover { background: var(--fill-3); color: var(--label-1); }
+      .iconBtn:disabled { opacity: 0.35; cursor: default; }
+      .iconBtn svg, .btn svg, .aiBadge svg, .statusGlyph svg { display: block; }
+      #ui input[type="text"], #collaboration input[type="text"], #chapters input, #chapters textarea, #chapters select,
+      #ui select, #fpsInput {
+        font: var(--t-body); color: var(--label-1); background: rgba(0,0,0,0.28);
+        border: 1px solid var(--separator); border-radius: 8px; padding: 5px 8px; box-sizing: border-box;
+      }
+      #chapters select { width: 100%; min-height: 30px; }
+      #roomInput { font-size: 20px !important; }
+      input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 0; border-color: var(--blue) !important; box-shadow: 0 0 0 3px rgba(10,132,255,0.35); }
+      button:focus-visible, summary:focus-visible, .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+      #frameSlider { accent-color: var(--blue); }
+      #frameLabel { font-variant-numeric: tabular-nums; color: var(--label-1); }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { transition: none !important; animation: none !important; }
       }
     </style>
   </head>
@@ -255,38 +439,88 @@
       <div id="isoList"></div>
       <div id="isoHint">Each row: color, isovalue, opacity, visibility. Use a negative isovalue for the opposite orbital lobe.</div>
     </div>
-    <div id="chapters" style="display:none">
-      <div class="panelHeader">
-        <h2>Chapters</h2>
-        <span class="chapterHeaderButtons">
-          <button id="chaptersDetectBtn" type="button" title="Re-run bond-change detection">Re-detect</button>
-          <button id="chaptersExportBtn" type="button" title="Download labels as JSON">Export</button>
-          <button id="toggleChaptersBtn" type="button">Hide</button>
-        </span>
-      </div>
-      <div id="chaptersContent">
-        <div id="chaptersSummary"></div>
-        <div class="row chapterNav">
-          <button id="chapterPrevBtn" type="button">◀ Prev</button>
-          <button id="chapterNextBtn" type="button">Next ▶</button>
-          <label title="Frames a new bond state must hold to count as an event">Persist
-            <input id="chaptersPersist" type="number" min="1" max="100" />
-          </label>
+    <section id="chapters" style="display:none" aria-label="Chapters">
+      <header class="chHeader">
+        <div class="chTitles">
+          <h2>Chapters</h2>
+          <p id="chaptersSummary" class="chSubtitle" aria-live="polite"></p>
         </div>
-        <details id="chaptersAi">
-          <summary><button id="chaptersAiBtn" type="button" title="Ask a local model to name events and flag likely artifacts">✨ AI name</button> <span id="chaptersAiStatus"></span></summary>
-          <label for="chaptersAiEndpoint">Ollama endpoint</label>
-          <input id="chaptersAiEndpoint" type="text" spellcheck="false" />
-          <label for="chaptersAiModel">Model</label>
-          <div class="row">
-            <select id="chaptersAiModel"></select>
-            <button id="chaptersAiRefresh" type="button">Refresh</button>
+        <div class="chHeaderActions">
+          <button id="chaptersExportBtn" class="iconBtn" type="button" aria-label="Export labels as JSON" title="Export labels (JSON)">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10V1.8M5 4.6 8 1.8l3 2.8M3.5 7.5v6h9v-6"/></svg>
+          </button>
+          <button id="toggleChaptersBtn" class="iconBtn" type="button" aria-label="Collapse Chapters" aria-expanded="true" aria-controls="chaptersContent" title="Collapse">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg>
+          </button>
+        </div>
+      </header>
+      <div id="chaptersContent">
+        <div id="chaptersProgress" class="chProgress" role="img" aria-label="Review progress"><span class="acc"></span><span class="rej"></span></div>
+
+        <div class="aiCard" id="chaptersAi">
+          <div class="aiRow">
+            <span class="aiBadge" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5 9.4 6.6 14.5 8 9.4 9.4 8 14.5 6.6 9.4 1.5 8l5.1-1.4z"/></svg>
+            </span>
+            <div class="aiText">
+              <div class="aiTitle">AI assistant</div>
+              <div id="chaptersAiStatus" class="aiStatus" aria-live="polite"></div>
+            </div>
+            <button id="chaptersAiBtn" class="btn ai" type="button" title="Ask the local model to name each event and flag likely artifacts">Name events</button>
+          </div>
+          <div id="chaptersAiProgress" class="aiProgress" hidden><span></span></div>
+          <details id="chaptersAiSettings" class="aiSettings">
+            <summary>Model &amp; connection</summary>
+            <div class="settingsBody">
+              <label for="chaptersAiModel">Model</label>
+              <div class="row">
+                <select id="chaptersAiModel" aria-label="Ollama model"></select>
+                <button id="chaptersAiRefresh" class="btn" type="button">Refresh</button>
+              </div>
+              <label for="chaptersAiEndpoint">Ollama address</label>
+              <input id="chaptersAiEndpoint" type="text" spellcheck="false" />
+              <p class="hint">Runs on this computer through Ollama. The model only suggests names; nothing counts until you accept it.</p>
+            </div>
+          </details>
+        </div>
+
+        <div id="chaptersFilter" class="segmented" role="group" aria-label="Show events">
+          <button type="button" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-filter="pending" aria-pressed="false">To review</button>
+          <button type="button" data-filter="accepted" aria-pressed="false">Accepted</button>
+          <button type="button" data-filter="rejected" aria-pressed="false">Rejected</button>
+        </div>
+        <div class="chToolbar">
+          <span class="chSectionTitle">Events</span>
+          <button id="chapterPrevBtn" class="iconBtn" type="button" aria-label="Previous event" title="Previous event ([)">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3.5-4.5 4.5 4.5 4.5"/></svg>
+          </button>
+          <button id="chapterNextBtn" class="iconBtn" type="button" aria-label="Next event" title="Next event (])">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg>
+          </button>
+        </div>
+
+        <div id="chaptersList" role="list" aria-label="Detected events"></div>
+
+        <details class="chAdvanced">
+          <summary>Detection settings</summary>
+          <div class="settingsBody">
+            <div>
+              <label for="chaptersPersist">A bond change must last (frames)</label>
+              <input id="chaptersPersist" type="number" min="1" max="100" />
+            </div>
+            <button id="chaptersDetectBtn" class="btn" type="button">Re-detect</button>
           </div>
         </details>
-        <div id="chaptersList"></div>
-        <div class="roomHint">Click an event or a timeline marker to jump to it. Keys: [ ] prev/next · A accept · R reject · U undo. Halos mark the atoms; green lines are bonds formed, red are bonds broken.</div>
+
+        <footer class="chKeys" aria-label="Keyboard shortcuts">
+          <span><kbd>[</kbd><kbd>]</kbd> Previous / next</span>
+          <span><kbd>A</kbd> Accept</span>
+          <span><kbd>R</kbd> Reject</span>
+          <span><kbd>U</kbd> Undo</span>
+        </footer>
       </div>
-    </div>
+    </section>
     <div id="vrEntry"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

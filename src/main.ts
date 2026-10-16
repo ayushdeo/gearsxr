@@ -211,6 +211,10 @@ const chaptersPanel = new ChaptersPanel({
   aiModelSelect: $<HTMLSelectElement>("chaptersAiModel"),
   aiRefreshBtn: $<HTMLButtonElement>("chaptersAiRefresh"),
   aiStatusEl: $("chaptersAiStatus"),
+  aiProgressEl: $("chaptersAiProgress"),
+  aiSettingsEl: $<HTMLDetailsElement>("chaptersAiSettings"),
+  progressEl: $("chaptersProgress"),
+  filterEl: $("chaptersFilter"),
   highlight: chapterHighlight,
   seek: (frame) => {
     if (!playback) return;

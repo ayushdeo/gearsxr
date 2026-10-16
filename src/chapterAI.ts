@@ -133,7 +133,8 @@ For every event return:
 - artifact: true only if this is probably not chemistry, e.g. two atoms of the same element touching in a dense phase, or distances barely crossing the cutoff and staying near it. Ordinary reactions in small molecules are not artifacts.
 - confidence: 0 to 1, how sure you are the label is right.
 - rationale: one short sentence citing distances or neighbors.
-Return one entry per input event, keeping its id.`;
+Return one entry per input event, keeping its id.
+Reply with JSON only, in this shape: {"events":[{"id":"e0","label":"...","artifact":false,"confidence":0.8,"rationale":"..."}]}`;
 
 const RESPONSE_SCHEMA = {
   type: "object",
@@ -185,23 +186,80 @@ const RETRY_DELAYS_MS = [2000, 5000];
 const TOKENS_PER_EVENT = 160;
 
 /** One request, retried after a dropped connection or a 5xx (Ollama reloading a model). */
-async function chat(settings: LlmSettings, userContent: string, events: number, signal: AbortSignal): Promise<RawSuggestion[]> {
+/** Per-run decoding mode; flips to plain JSON once the schema makes a model loop. */
+interface DecodeMode {
+  useSchema: boolean;
+}
+
+async function chat(
+  settings: LlmSettings,
+  userContent: string,
+  events: number,
+  signal: AbortSignal,
+  mode: DecodeMode,
+): Promise<RawSuggestion[]> {
+  // Schema-constrained decoding first. If the model loops (gemma2 can emit
+  // whitespace until the cap), switch to plain decoding for the rest of the
+  // run: the prompt states the JSON shape and the reply is parsed leniently.
+  let best: RawSuggestion[] = [];
   for (let attempt = 0; ; attempt++) {
+    const last = attempt >= RETRY_DELAYS_MS.length;
     try {
-      return await chatOnce(settings, userContent, events, signal);
+      const { suggestions, truncated } = await chatOnce(settings, userContent, events, signal, mode.useSchema);
+      if (suggestions.length > best.length) best = suggestions;
+      // Cut off with events missing: try again without the grammar.
+      if (!truncated || best.length >= events || last) return best;
+      mode.useSchema = false;
     } catch (err) {
       const retryable = (err as { retryable?: boolean }).retryable === true;
-      if (!retryable || attempt >= RETRY_DELAYS_MS.length || signal.aborted) throw err;
+      if (!retryable || last || signal.aborted) {
+        if (best.length && !signal.aborted) return best;
+        throw err;
+      }
+      if ((err as { incomplete?: boolean }).incomplete && mode.useSchema) {
+        mode.useSchema = false; // a decoding problem, not a server one: retry at once
+        continue;
+      }
       await new Promise((resolve) => setTimeout(resolve, RETRY_DELAYS_MS[attempt]));
     }
   }
+}
+
+/**
+ * Reads suggestions out of a reply that may be wrapped in prose or code
+ * fences, or cut off part-way. Each suggestion object is flat, so complete
+ * ones can be recovered even when the surrounding array never closed.
+ */
+function salvageSuggestions(content: string): RawSuggestion[] {
+  const text = content.replace(/```(?:json)?/gi, "");
+  try {
+    const parsed = JSON.parse(text.slice(text.indexOf("{"), text.lastIndexOf("}") + 1));
+    if (Array.isArray(parsed.events)) return parsed.events;
+  } catch {
+    // fall through to per-object recovery
+  }
+  const found: RawSuggestion[] = [];
+  for (const match of text.matchAll(/\{[^{}]*"label"[^{}]*\}/g)) {
+    try {
+      found.push(JSON.parse(match[0]));
+    } catch {
+      // an object cut off mid-way; skip it
+    }
+  }
+  return found;
 }
 
 function retryable(err: Error): Error {
   return Object.assign(err, { retryable: true });
 }
 
-async function chatOnce(settings: LlmSettings, userContent: string, events: number, signal: AbortSignal): Promise<RawSuggestion[]> {
+async function chatOnce(
+  settings: LlmSettings,
+  userContent: string,
+  events: number,
+  signal: AbortSignal,
+  useSchema: boolean,
+): Promise<{ suggestions: RawSuggestion[]; truncated: boolean }> {
   // Each attempt gets its own time limit, so a retry isn't born already expired.
   const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
   let response: Response;
@@ -213,7 +271,7 @@ async function chatOnce(settings: LlmSettings, userContent: string, events: numb
       body: JSON.stringify({
         model: settings.model,
         stream: false,
-        format: RESPONSE_SCHEMA,
+        ...(useSchema ? { format: RESPONSE_SCHEMA } : {}),
         options: { temperature: 0.2, num_predict: 64 + TOKENS_PER_EVENT * events },
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
@@ -235,14 +293,12 @@ async function chatOnce(settings: LlmSettings, userContent: string, events: numb
     throw response.status >= 500 ? retryable(error) : error;
   }
   const body = (await response.json()) as { message?: { content?: string }; done_reason?: string };
-  let parsed: { events?: unknown };
-  try {
-    parsed = JSON.parse(body.message?.content ?? "");
-  } catch {
+  const suggestions = salvageSuggestions(body.message?.content ?? "");
+  if (suggestions.length === 0) {
     const why = body.done_reason === "length" ? "it ran past the length limit" : "it wasn't valid JSON";
-    throw retryable(new Error(`${settings.model} returned an incomplete answer (${why}).`));
+    throw Object.assign(retryable(new Error(`${settings.model} returned an incomplete answer (${why}).`)), { incomplete: true });
   }
-  return Array.isArray(parsed.events) ? (parsed.events as RawSuggestion[]) : [];
+  return { suggestions, truncated: body.done_reason === "length" };
 }
 
 /**
@@ -284,6 +340,7 @@ export async function suggestChapterLabels(
   const header = `System: ${trajectory.numAtoms} atoms (${composition(trajectory)}), ${trajectory.numFrames} frames.`;
   const result: SuggestResult = { named: 0, ungrounded: 0, failedBatches: 0, lastError: null };
   let batches = 0;
+  const mode: DecodeMode = { useSchema: true };
   let failedInARow = 0;
 
   for (let start = 0; start < chapters.length; start += BATCH_SIZE) {
@@ -292,7 +349,7 @@ export async function suggestChapterLabels(
     batches++;
     let results: RawSuggestion[];
     try {
-      results = await chat(settings, `${header}\nEvents:\n${JSON.stringify(events)}`, batch.length, signal);
+      results = await chat(settings, `${header}\nEvents:\n${JSON.stringify(events)}`, batch.length, signal, mode);
     } catch (err) {
       if (signal.aborted) throw err;
       result.failedBatches++;

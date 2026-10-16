@@ -407,6 +407,7 @@ export class ChaptersPanel {
       if (this.aiRun === run) this.aiRun = null;
       const seconds = Math.round((performance.now() - started) / 1000);
       const notes: string[] = [];
+      if (result.conflicting) notes.push(`${result.conflicting} contradict the evidence`);
       if (result.ungrounded) notes.push(`${result.ungrounded} discarded for not naming the event's atoms`);
       if (result.failedBatches) notes.push(`${result.failedBatches} request${result.failedBatches === 1 ? "" : "s"} failed: ${result.lastError?.message ?? ""}`);
       const summary = `${result.named} of ${chapters.length} named by ${this.llm.model} in ${seconds} s`;
@@ -613,6 +614,11 @@ export class ChaptersPanel {
       warn.append(icon("warning"), "Possible artifact");
       head.append(warn);
     }
+    if (!chapter.humanLabel && chapter.ai?.conflicts?.length) {
+      const warn = el("span", "chWarn");
+      warn.append(icon("warning"), "Suggested name contradicts the evidence");
+      head.append(warn);
+    }
     row.append(head);
     return row;
   }
@@ -715,6 +721,15 @@ export class ChaptersPanel {
     suggestion.append(el("h4", undefined, "Suggestion"));
     if (ai) {
       suggestion.append(el("p", "chText", ai.label));
+      if (ai.conflicts?.length) {
+        const notice = el("div", "chNotice");
+        notice.setAttribute("role", "note");
+        notice.append(
+          icon("warning"),
+          el("span", undefined, `Doesn't match the evidence: ${ai.conflicts.join("; ")}. Compare with the bond table before using this name.`),
+        );
+        suggestion.append(notice);
+      }
       if (ai.rationale) suggestion.append(el("p", "chTextSecondary", ai.rationale));
       suggestion.append(el("p", "chTextSecondary", `${ai.model} · stated confidence ${Math.round(ai.confidence * 100)}%`));
       if (chapter.humanLabel !== ai.label) {

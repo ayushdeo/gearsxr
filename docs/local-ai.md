@@ -40,6 +40,10 @@ The model only **suggests**:
 - Suggestions that name none of the event's atoms (e.g. "Nitrogen gains hydrogen"), or that
   name atoms outside the event and its bonded neighbors, are dropped. The status line says
   how many.
+- Every suggestion is checked against the detected bond changes. If it claims something the
+  evidence contradicts, the row says **Suggested name contradicts the evidence**, and the
+  inspector shows what was claimed and what happened (e.g. "Si3–Ca58 breaks (evidence:
+  formed)"). On the benchmark, unflagged suggestions were about 97% fully correct.
 - The model never accepts or rejects anything; that's always you.
 - Exports keep the detector label, the AI suggestion (with the model name) and your label
   side by side. So the dataset also measures how often each model agrees with a human.

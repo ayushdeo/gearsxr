@@ -1,4 +1,5 @@
-// Checks what a model's label actually claims against the answer key.
+// Checks what a model's label claims against a set of bond changes: the
+// detector's evidence in the viewer, or the answer key in the benchmark.
 // "Atoms named" only asks whether the right atoms appear; this reads the
 // label and checks each claim, so "N1 swaps C0 for C2" is caught as wrong
 // when C0 really bonded to O3.
@@ -142,7 +143,13 @@ export function checkClaims(rawLabel: string, formed: [number, number][], broken
       [...verbs].reverse().find((v) => v.at < start && v.at > sentenceStart) ??
       verbs.find((v) => v.at >= end);
     if (!verb) continue;
-    claim(m, verb.broken ? isBroken(m[1], m[2]) : isFormed(m[1], m[2]));
+    const ok = verb.broken ? isBroken(m[1], m[2]) : isFormed(m[1], m[2]);
+    // Say what was claimed and what the bond actually did.
+    const actual = isFormed(m[1], m[2]) ? "formed" : isBroken(m[1], m[2]) ? "broke" : "did not change";
+    const text = `${m[1]}–${m[2]} ${verb.broken ? "breaks" : "forms"} (evidence: ${actual})`;
+    claim(Object.assign([text], { index: m.index! }) as RegExpMatchArray, ok);
+    consumed.pop();
+    consumed.push([start, end]);
   }
   return result;
 }

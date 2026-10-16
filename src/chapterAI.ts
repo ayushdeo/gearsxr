@@ -11,6 +11,7 @@
 
 import { BOND_TOLERANCE, HH_BOND_CUTOFF, bondCutoff } from "./bonds";
 import { localGraph, neighborContext } from "./chapterChemistry";
+import { checkClaims } from "./chapterClaims";
 import { DEFAULT_DETECT_OPTIONS } from "./chapterDetect";
 import type { Chapter } from "./chapterStore";
 import type { Trajectory } from "./xyzParser";
@@ -23,6 +24,12 @@ export interface AiSuggestion {
   rationale: string;
   model: string;
   at: string;
+  /**
+   * Claims in the label that contradict the detector's bond changes, e.g.
+   * "C1-C5 breaks" when that bond never changed. Empty when every recognizable
+   * claim matches; absent on suggestions saved before this check existed.
+   */
+  conflicts?: string[];
 }
 
 export interface LlmSettings {
@@ -317,6 +324,8 @@ export interface SuggestResult {
   named: number;
   /** Suggestions dropped for naming no event atom, or atoms outside the event. */
   ungrounded: number;
+  /** Named suggestions whose claims contradict the detected bond changes. */
+  conflicting: number;
   /** Batches that failed after retries; the run continues past them. */
   failedBatches: number;
   lastError: Error | null;
@@ -338,7 +347,7 @@ export async function suggestChapterLabels(
 ): Promise<SuggestResult> {
   if (!settings.model) throw new Error("Pick an Ollama model first.");
   const header = `System: ${trajectory.numAtoms} atoms (${composition(trajectory)}), ${trajectory.numFrames} frames.`;
-  const result: SuggestResult = { named: 0, ungrounded: 0, failedBatches: 0, lastError: null };
+  const result: SuggestResult = { named: 0, ungrounded: 0, conflicting: 0, failedBatches: 0, lastError: null };
   let batches = 0;
   const mode: DecodeMode = { useSchema: true };
   let failedInARow = 0;
@@ -375,6 +384,9 @@ export async function suggestChapterLabels(
         result.ungrounded++;
         return;
       }
+      // Self-check against the evidence; contradictions are flagged, not hidden.
+      suggestion.conflicts = checkClaims(suggestion.label, chapter.formed, chapter.broken).wrong;
+      if (suggestion.conflicts.length) result.conflicting++;
       chapter.ai = suggestion;
       result.named++;
     });

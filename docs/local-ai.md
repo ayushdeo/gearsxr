@@ -22,10 +22,16 @@ On the Transition1x benchmark, the models picked the right category only 5% (qwe
 33% (gemma2:9b) of the time, so that job moved to rules (see [benchmark.md](benchmark.md)).
 
 The model only **suggests**:
-- Its label appears in the list in purple. Events it flags as likely artifacts are shown in
-  amber with ⚠.
-- It never accepts or rejects anything; that's still you (**A** / **R**).
-- **Use AI label** copies its suggestion into your label.
+- The **AI assistant** card in the Chapters panel shows the connection state (Ready, Naming 6 of
+  12…, or what to fix). It has one button: **Name events** (Stop while running, Rename after).
+  The model and Ollama address sit under **Model & connection**, which opens by itself if
+  Ollama can't be reached.
+- In the list, a ✦ marks names the model wrote. Events it thinks aren't real chemistry carry an
+  amber **Possible artifact** pill.
+- Opening an event shows the model's suggestion and its reasoning first, then **What changed**
+  (green chips for bonds formed, red for bonds broken), then your own name and note.
+- The model never accepts or rejects anything; that's still you (**Accept** / **Reject**, or
+  **A** / **R**). **Use this name** copies its suggestion into your label.
 - Exports keep the detector label, the AI suggestion (with the model name) and your label
   side by side. So the dataset also measures how often each model agrees with a human.
 

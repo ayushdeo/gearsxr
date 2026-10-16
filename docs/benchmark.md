@@ -249,3 +249,39 @@ Fix (`src/chapterAI.ts`):
 
 Accuracy is unchanged at about 86% for gemma and 78% for qwen. qwen's 42 drops are labels
 with no atom names.
+
+## Seventh run: no errors, and a self-check (Oct 2026)
+
+| | gemma2:9b | qwen2.5:7b |
+|---|---|---|
+| Errors | 0 (was 46) | 0 |
+| Seconds / reaction | 3.9 (was 19.2) | 1.9 |
+| Reactions with a suggestion | 192 | 177 |
+| Labels fully correct | 83.7% (144/172) | 77.2% (112/145) |
+| Dropped as ungrounded | 8 | 23 |
+
+Switching to plain decoding after a loop removed every error. On the 144 reactions gemma
+labeled in both run 6 and this one, it was correct 117 vs 112 times and wrong 20 vs 21 times,
+so accuracy didn't change; the plain-decoded labels are just longer.
+
+The remaining wrong labels follow two patterns. One is an H transfer described in reverse
+("N0 transfers H7 to C2" when H7 moved from C2 to N0). The other is an extra bond invented in
+multi-bond events ("breaking O0-C1 and C1-C5" when C1-C5 never changed). Both contradict the
+detector's own evidence, so the viewer now checks them.
+
+**Self-check.** The claim checker moved into the app (`src/chapterClaims.ts`). Each
+suggestion's claims are checked against the event's detected bond changes. A contradiction is
+flagged in the list and in the inspector, for example "Si3–Ca58 breaks (evidence: formed)".
+Flagged suggestions stay visible rather than being removed. Applied offline to this run's
+labels:
+
+| | gemma2:9b | qwen2.5:7b |
+|---|---|---|
+| Flagged | 23, all really wrong | 29, all really wrong |
+| Wrong labels caught | 23 of 28 | 29 of 33 |
+| Fully correct among unflagged | **96.6%** | **96.6%** |
+
+On this benchmark the detector's evidence equals the answer key, so the check is as good as
+it can be. On real simulations it's only as reliable as the detector.
+
+`npm run bench` now reports this as "Self-check against the detector's evidence".

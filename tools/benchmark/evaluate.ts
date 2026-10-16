@@ -11,7 +11,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { listModels, suggestChapterLabels } from "../../src/chapterAI";
-import { checkClaims } from "./claims";
+import { checkClaims } from "../../src/chapterClaims";
 import { CHAPTER_CATEGORIES } from "../../src/chapterChemistry";
 import { DEFAULT_DETECT_OPTIONS, detectBondEvents, type DetectedEvent } from "../../src/chapterDetect";
 import { toChapters } from "../../src/chapterStore";
@@ -46,6 +46,8 @@ interface ModelResult {
   vague: boolean;
   /** Suggestions the client dropped for not naming the event's atoms. */
   ungrounded: number;
+  /** The client's own check flagged the main label as contradicting the detected bonds. */
+  selfFlagged: boolean;
   seconds: number;
   error?: string;
 }
@@ -131,7 +133,7 @@ async function evaluateModel(
 ): Promise<ModelResult> {
   const result: ModelResult = {
     model, label: null, confidence: null, falseArtifacts: 0, realEvents: 0, atomMention: null,
-    claims: 0, claimsCorrect: 0, wrongClaims: [], vague: false, ungrounded: 0, seconds: 0,
+    claims: 0, claimsCorrect: 0, wrongClaims: [], vague: false, ungrounded: 0, selfFlagged: false, seconds: 0,
   };
   if (events.length === 0) return result;
   const chapters = toChapters(events);
@@ -163,6 +165,7 @@ async function evaluateModel(
     result.claimsCorrect = check.correct;
     result.wrongClaims = check.wrong;
     result.vague = check.vague;
+    result.selfFlagged = (main.conflicts?.length ?? 0) > 0;
   }
   return result;
 }
@@ -261,6 +264,26 @@ function summarize(results: ReactionResult[], models: string[], persist: number,
       const fullyCorrect = checkable.filter((m) => m.claimsCorrect === m.claims).length;
       lines.push(
         `| ${model} | ${pct(fullyCorrect, checkable.length)} | ${checkable.length - fullyCorrect} | ${checkable.length} of ${rows.filter((m) => m.label).length} | ${rows.reduce((n, m) => n + (m.ungrounded ?? 0), 0)} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
+      );
+    }
+  }
+  if (models.length) {
+    lines.push(
+      ``,
+      `### Self-check against the detector's evidence`,
+      ``,
+      `The viewer checks each suggestion's claims against the bonds the detector found and flags contradictions. Here that flag is compared with the answer key.`,
+      ``,
+      `| Model | Flagged | Flagged and really wrong | Wrong labels caught | Fully correct among unflagged |`,
+      `|---|---|---|---|---|`,
+    );
+    for (const model of models) {
+      const rows = results.map((r) => r.models.find((m) => m.model === model)!).filter((m) => m && m.claims > 0);
+      const wrong = (m: ModelResult) => m.claimsCorrect < m.claims;
+      const flagged = rows.filter((m) => m.selfFlagged);
+      const unflagged = rows.filter((m) => !m.selfFlagged);
+      lines.push(
+        `| ${model} | ${flagged.length} | ${flagged.filter(wrong).length} | ${rows.filter((m) => wrong(m) && m.selfFlagged).length} of ${rows.filter(wrong).length} | ${pct(unflagged.filter((m) => !wrong(m)).length, unflagged.length)} |`,
       );
     }
   }

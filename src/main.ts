@@ -214,6 +214,8 @@ const chaptersPanel = new ChaptersPanel({
   aiProgressEl: $("chaptersAiProgress"),
   aiSettingsEl: $<HTMLDetailsElement>("chaptersAiSettings"),
   progressEl: $("chaptersProgress"),
+  progressTextEl: $("chaptersProgressText"),
+  inspectorEl: $("chaptersInspector"),
   filterEl: $("chaptersFilter"),
   highlight: chapterHighlight,
   seek: (frame) => {
@@ -883,6 +885,8 @@ async function loadTrajectoryFile(
     document.body.classList.add("has-playback");
 
     statusEl.textContent = `Loaded ${trajectory.numAtoms} atoms x ${trajectory.numFrames} frames`;
+    // On narrow screens the controls would sit under the Chapters panel; fold them once a trajectory is in.
+    if (trajectory.numFrames > 1 && window.matchMedia("(max-width: 760px)").matches) setControlsCollapsed(true);
     const fileName = sourceUrl ? decodeURIComponent(new URL(sourceUrl).pathname.split("/").pop() || "") : lastLocalName;
     void chaptersPanel.setTrajectory(trajectory, file, fileName || "trajectory.xyz");
     if (broadcastState) markPresenterStateDirty(true);

@@ -22,16 +22,22 @@ On the Transition1x benchmark, the models picked the right category only 5% (qwe
 33% (gemma2:9b) of the time, so that job moved to rules (see [benchmark.md](benchmark.md)).
 
 The model only **suggests**:
-- The **AI assistant** card in the Chapters panel shows the connection state (Ready, Naming 6 of
-  12…, or what to fix). It has one button: **Name events** (Stop while running, Rename after).
-  The model and Ollama address sit under **Model & connection**, which opens by itself if
-  Ollama can't be reached.
-- In the list, a ✦ marks names the model wrote. Events it thinks aren't real chemistry carry an
-  amber **Possible artifact** pill.
-- Opening an event shows the model's suggestion and its reasoning first, then **What changed**
-  (green chips for bonds formed, red for bonds broken), then your own name and note.
-- The model never accepts or rejects anything; that's still you (**Accept** / **Reject**, or
-  **A** / **R**). **Use this name** copies its suggestion into your label.
+- **Model suggestions** in the Chapters panel shows the connection state: Connected, a
+  request in progress (with Stop), Not connected, or the error Ollama returned. **Suggest
+  names** sends every event; it reads **Retry connection** when Ollama isn't reachable. The
+  model and Ollama address are under **Model and connection**, which opens by itself when
+  something needs fixing.
+- Each row says where its name came from: Detector name, Suggested name or Your name. Events
+  the model doubts show **Possible artifact** with a warning icon, in the list and at the
+  top of the inspector.
+- Selecting an event opens the inspector below the list, in review order:
+  - **Evidence:** the detector summary, and a table of the bonds that formed and broke with
+    their distances (Å) just before and after the event.
+  - **Suggestion:** the model's name, its reasoning, the model, and its stated confidence.
+    **Use suggested name** copies the name into your field.
+  - **Decision:** Name and Note fields, then **Accept** and **Reject** (**A** / **R**), and
+    **Clear decision** (**U**).
+- The model never accepts or rejects anything; that's always you.
 - Exports keep the detector label, the AI suggestion (with the model name) and your label
   side by side. So the dataset also measures how often each model agrees with a human.
 

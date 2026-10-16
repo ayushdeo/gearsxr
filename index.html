@@ -108,162 +108,159 @@
         color: #eee; background: rgba(255,255,255,0.08);
         border: 1px solid rgba(255,255,255,0.22); border-radius: 4px;
       }
-      /* ---- Chapters ---------------------------------------------------- */
+      /* ---- Chapters ------------------------------------------------------
+       * Select an event -> inspect evidence -> evaluate the suggestion ->
+       * record a decision. Spacing scale 4/8/12/16; radii 6 (controls) and 10
+       * (panel); blue is the only interaction accent. */
       #chapters {
         position: fixed; right: 16px; top: 56px; z-index: 12;
-        width: min(372px, calc(100vw - 32px)); box-sizing: border-box;
+        width: min(380px, calc(100vw - 32px)); box-sizing: border-box;
         max-height: calc(100vh - 140px); overflow-y: auto; overscroll-behavior: contain;
-        padding: 14px 14px 10px;
+        padding: 12px 0 8px;
       }
-      #chapters.collapsed { padding-bottom: 14px; }
       #chapters.collapsed #chaptersContent { display: none; }
-      .chHeader { display: flex; align-items: flex-start; gap: 8px; }
+      #chapters.collapsed { padding-bottom: 12px; }
+      .chHeader { display: flex; align-items: center; gap: 8px; padding: 0 12px 0 16px; }
       .chTitles { flex: 1; min-width: 0; }
-      .chTitles h2 { margin: 0; font: var(--t-title); letter-spacing: -0.01em; }
-      .chSubtitle { margin: 2px 0 0; font: var(--t-footnote); color: var(--label-2); white-space: pre-line; }
-      .chHeaderActions { display: flex; gap: 2px; }
+      .chTitles h2 { margin: 0; font: var(--t-title); }
+      .chSubtitle { margin: 2px 0 0; font: var(--t-sub); color: var(--label-2); }
       #toggleChaptersBtn svg { transition: transform .2s ease; }
       #chapters.collapsed #toggleChaptersBtn svg { transform: rotate(180deg); }
 
-      .chProgress {
-        display: flex; height: 4px; margin: 12px 0 2px; border-radius: 2px; overflow: hidden;
-        background: var(--fill-3);
-      }
-      .chProgress span { display: block; height: 100%; transition: width .25s ease; }
+      .chSection { padding: 12px 16px; border-top: 1px solid var(--separator); }
+      .chSection:first-child { border-top: 0; }
+      .chSectionHead { display: flex; align-items: center; gap: 8px; min-height: 28px; }
+      .chSectionHead h3 { flex: 1; margin: 0; font: var(--t-headline); color: var(--label-1); }
+
+      /* Review progress */
+      .chProgressBlock { padding: 10px 16px 12px; }
+      .chProgress { display: flex; height: 4px; border-radius: 2px; overflow: hidden; background: var(--fill-2); }
+      .chProgress span { display: block; height: 100%; transition: width .2s ease; }
       .chProgress .acc { background: var(--green); }
       .chProgress .rej { background: var(--red); }
+      .chProgressText { margin: 6px 0 0; font: var(--t-sub); color: var(--label-2); display: flex; flex-wrap: wrap; gap: 4px 12px; }
+      .chProgressText span { display: inline-flex; align-items: center; gap: 4px; }
 
-      /* AI assistant card */
-      .aiCard {
-        margin-top: 12px; padding: 10px 12px; border-radius: 12px;
-        background: linear-gradient(135deg, rgba(191,90,242,0.16), rgba(10,132,255,0.10));
-        border: 1px solid rgba(191,90,242,0.28);
-      }
-      .aiRow { display: flex; align-items: center; gap: 10px; }
-      .aiBadge {
-        flex: 0 0 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
-        background: rgba(191,90,242,0.25); color: var(--purple);
-      }
-      .aiText { flex: 1; min-width: 0; }
-      .aiTitle { font: var(--t-headline); }
-      .aiStatus { font: var(--t-footnote); color: var(--label-2); display: flex; align-items: center; gap: 6px; }
-      .aiStatus::before {
-        content: ""; flex: 0 0 6px; height: 6px; border-radius: 50%; background: var(--label-3);
-      }
-      .aiStatus[data-state="ready"]::before, .aiStatus[data-state="done"]::before { background: var(--green); }
-      .aiStatus[data-state="busy"]::before { background: var(--blue); animation: pulse 1s ease-in-out infinite; }
-      .aiStatus[data-state="error"] { color: var(--orange); }
-      .aiStatus[data-state="error"]::before { background: var(--orange); }
-      @keyframes pulse { 50% { opacity: 0.3; } }
-      .aiProgress { height: 3px; margin-top: 8px; border-radius: 2px; background: var(--fill-3); overflow: hidden; }
-      .aiProgress span { display: block; height: 100%; width: 0; background: var(--purple); transition: width .3s ease; }
-      .aiSettings { margin-top: 8px; }
-      .aiSettings summary, .chAdvanced summary {
-        cursor: pointer; font: var(--t-footnote); color: var(--label-2); list-style: none;
-        display: inline-flex; align-items: center; gap: 4px; border-radius: 6px;
-      }
-      .aiSettings summary::-webkit-details-marker, .chAdvanced summary::-webkit-details-marker { display: none; }
-      .aiSettings summary::before, .chAdvanced summary::before {
-        content: "›"; display: inline-block; transition: transform .15s ease; font-size: 14px; line-height: 1;
-      }
-      .aiSettings[open] summary::before, .chAdvanced[open] summary::before { transform: rotate(90deg); }
-      .settingsBody { display: grid; gap: 6px; margin-top: 8px; }
-      .settingsBody label { font: var(--t-caption); color: var(--label-2); margin: 2px 0 -2px; }
-      .settingsBody .hint { font: var(--t-caption); color: var(--label-3); margin: 2px 0 0; }
+      /* Status lines (connection, loading, errors) */
+      .chStatus { display: flex; align-items: flex-start; gap: 6px; margin: 4px 0 0; font: var(--t-sub); color: var(--label-2); }
+      .chStatus .ico { flex: 0 0 14px; height: 14px; margin-top: 1px; display: grid; place-items: center; }
+      .chStatus[data-state="error"], .chStatus[data-state="disconnected"] { color: var(--orange); }
+      .chStatus[data-state="ready"] .ico, .chStatus[data-state="done"] .ico { color: var(--green); }
+      .chBar { height: 3px; margin-top: 8px; border-radius: 2px; background: var(--fill-2); overflow: hidden; }
+      .chBar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s ease; }
+      .spin { animation: spin 0.9s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
 
-      /* Toolbar: filter + prev/next */
-      .segmented {
-        display: flex; margin-top: 12px; padding: 2px; border-radius: 9px; background: var(--fill-3);
+      /* Disclosures */
+      .chDisclosure { margin-top: 8px; }
+      .chDisclosure > summary {
+        list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+        font: var(--t-sub); color: var(--label-2); border-radius: 4px; padding: 2px 0;
       }
-      .chToolbar { display: flex; align-items: center; gap: 2px; margin: 10px 0 2px; padding-left: 8px; }
-      .chToolbar .chSectionTitle { flex: 1; }
-      .segmented button {
-        flex: 1; min-width: 0; border: 0; margin: 0; padding: 4px 4px; border-radius: 7px;
-        background: transparent; color: var(--label-1); font: var(--t-caption-strong); cursor: pointer;
-        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      .chDisclosure > summary::-webkit-details-marker { display: none; }
+      .chDisclosure > summary::before {
+        content: ""; width: 6px; height: 6px; margin: 0 3px 0 1px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+        transform: rotate(-45deg); transition: transform .15s ease;
       }
-      .segmented button[aria-pressed="true"] { background: rgba(99,99,102,0.9); box-shadow: 0 1px 3px rgba(0,0,0,0.35); }
-      .segmented .count { color: var(--label-2); font-weight: 400; margin-left: 3px; font-variant-numeric: tabular-nums; }
+      .chDisclosure[open] > summary::before { transform: rotate(45deg); }
+      .chDisclosure > summary:hover { color: var(--label-1); }
+      .chForm { display: grid; gap: 4px; margin-top: 8px; }
+      .chForm label, .chField label { font: var(--t-sub); color: var(--label-2); margin-top: 4px; }
+      .chForm .row { gap: 8px; }
+      .chHint { margin: 4px 0 0; font: var(--t-sub); color: var(--label-3); }
+      .chInline { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: end; }
 
       /* Event list */
-      #chaptersList { display: flex; flex-direction: column; gap: 2px; }
-      .chEmpty { padding: 18px 8px; text-align: center; font: var(--t-footnote); color: var(--label-2); }
-      .chRow { border-radius: 10px; }
-      .chRow.selected { background: var(--fill-2); }
+      .segmented { display: flex; margin-top: 8px; padding: 2px; border-radius: 7px; background: var(--fill-2); }
+      .segmented button {
+        flex: 1; min-width: 0; margin: 0; border: 0; padding: 4px 2px; border-radius: 5px; cursor: pointer;
+        background: transparent; color: var(--label-2); font: var(--t-sub); white-space: nowrap;
+      }
+      .segmented button:hover { color: var(--label-1); }
+      .segmented button[aria-pressed="true"] { background: var(--control-on); color: var(--label-1); font-weight: 600; }
+      .segmented .count { font-variant-numeric: tabular-nums; margin-left: 4px; color: var(--label-3); font-weight: 400; }
+      .segmented button[aria-pressed="true"] .count { color: var(--label-2); }
+      #chaptersList {
+        margin: 8px -8px 0; max-height: 232px; overflow-y: auto;
+        border-top: 1px solid var(--separator); border-bottom: 1px solid var(--separator);
+      }
+      .chEmpty { padding: 16px 8px; text-align: center; font: var(--t-sub); color: var(--label-2); }
       .chRowHead {
-        all: unset; box-sizing: border-box; width: 100%; display: flex; align-items: flex-start; gap: 10px;
-        padding: 8px 8px; border-radius: 10px; cursor: pointer;
+        all: unset; box-sizing: border-box; width: 100%; cursor: pointer;
+        display: grid; grid-template-columns: 16px 1fr; column-gap: 8px; row-gap: 2px;
+        padding: 7px 8px 7px 8px; border-bottom: 1px solid var(--separator-faint);
+        box-shadow: inset 2px 0 0 transparent;
       }
+      .chRow:last-child .chRowHead { border-bottom: 0; }
       .chRowHead:hover { background: var(--fill-3); }
-      .chRowHead:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
-      .statusGlyph { flex: 0 0 18px; height: 18px; margin-top: 1px; display: grid; place-items: center; }
-      .chRowText { flex: 1; min-width: 0; display: grid; gap: 3px; }
+      .chRowHead[aria-current="true"] { background: var(--selected); box-shadow: inset 2px 0 0 var(--accent); }
+      .chRowHead:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+      .statusIcon { grid-row: 1 / span 3; width: 16px; height: 16px; margin-top: 1px; }
       .chRowTitle { font: var(--t-body); color: var(--label-1); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      .chRow.selected .chRowTitle { white-space: normal; }
-      .chRow.rejected .chRowTitle { color: var(--label-3); text-decoration: line-through; }
-      .chRowTitle .aiMark { color: var(--purple); margin-right: 4px; }
-      .chRowMeta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font: var(--t-caption); color: var(--label-2); }
-      .pill {
-        display: inline-flex; align-items: center; gap: 3px; padding: 1px 7px; border-radius: 999px;
-        font: var(--t-caption-strong); background: var(--fill-2); color: var(--label-1);
-      }
-      .pill.warn { background: rgba(255,159,10,0.18); color: var(--orange); }
-      .frames { font-variant-numeric: tabular-nums; }
+      .chRow.rejected .chRowTitle { color: var(--label-2); }
+      .chRowMeta { font: var(--t-sub); color: var(--label-2); font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .chWarn { grid-column: 2; display: inline-flex; align-items: center; gap: 4px; font: var(--t-sub); color: var(--orange); }
+      .chWarn svg { flex: 0 0 auto; }
 
-      /* Selected event detail */
-      .chDetail { padding: 2px 10px 12px 36px; display: grid; gap: 10px; }
-      .chSection { display: grid; gap: 6px; }
-      .chSectionTitle { font: var(--t-caption-strong); color: var(--label-2); text-transform: uppercase; letter-spacing: 0.04em; }
-      .aiSuggestion {
-        padding: 9px 10px; border-radius: 10px; display: grid; gap: 4px;
-        background: rgba(191,90,242,0.12); border: 1px solid rgba(191,90,242,0.25);
+      /* Inspector */
+      .chInspector[hidden] { display: none; }
+      .chInspectorHead { display: grid; gap: 2px; }
+      .chInspectorTitle { margin: 0; font: var(--t-title); color: var(--label-1); overflow-wrap: anywhere; }
+      .chInspectorMeta { font: var(--t-sub); color: var(--label-2); font-variant-numeric: tabular-nums; }
+      .chDecisionState { display: inline-flex; align-items: center; gap: 4px; font: var(--t-sub); color: var(--label-2); }
+      .chDecisionState.accepted { color: var(--green); }
+      .chDecisionState.rejected { color: var(--red); }
+      .chNotice {
+        display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; padding: 8px 10px; border-radius: 6px;
+        background: var(--warn-bg); color: var(--label-1); font: var(--t-sub);
       }
-      .aiSuggestion .src { font: var(--t-caption); color: var(--purple); display: flex; align-items: center; gap: 4px; }
-      .aiSuggestion .text { font: var(--t-callout); color: var(--label-1); }
-      .aiSuggestion .why { font: var(--t-footnote); color: var(--label-2); }
-      .aiSuggestion .btn { justify-self: start; margin-top: 2px; }
-      .bondChips { display: flex; flex-wrap: wrap; gap: 4px; }
-      .bond {
-        font: var(--t-caption-strong); font-variant-numeric: tabular-nums; padding: 2px 7px; border-radius: 6px;
-      }
-      .bond.formed { background: rgba(48,209,88,0.16); color: var(--green); }
-      .bond.broken { background: rgba(255,69,58,0.16); color: var(--red); }
-      .bond.more { background: var(--fill-2); color: var(--label-2); }
-      .detectorLine { font: var(--t-footnote); color: var(--label-2); }
-      .chDetail input[type="text"], .chDetail textarea { width: 100%; }
-      .chDetail textarea { resize: vertical; min-height: 34px; }
-      .reviewBar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-      .reviewBar .btn { justify-content: center; min-height: 34px; }
-      .reviewBar .undo { grid-column: 1 / -1; justify-self: center; }
+      .chNotice svg { flex: 0 0 auto; color: var(--orange); margin-top: 1px; }
+      .chSub { margin-top: 12px; }
+      .chSub h4 { margin: 0 0 4px; font: var(--t-headline); color: var(--label-2); }
+      .chText { margin: 0; font: var(--t-body); color: var(--label-1); overflow-wrap: anywhere; }
+      .chTextSecondary { margin: 2px 0 0; font: var(--t-sub); color: var(--label-2); overflow-wrap: anywhere; }
+      .bondTable { width: 100%; border-collapse: collapse; font: var(--t-sub); font-variant-numeric: tabular-nums; margin-top: 4px; }
+      .bondTable th { font-weight: 400; color: var(--label-3); text-align: left; padding: 2px 4px 4px 0; border-bottom: 1px solid var(--separator); }
+      .bondTable th.num, .bondTable td.num { text-align: right; padding-right: 0; padding-left: 8px; }
+      .bondTable td { padding: 3px 4px 3px 0; border-bottom: 1px solid var(--separator-faint); color: var(--label-1); white-space: nowrap; }
+      .bondTable tr:last-child td { border-bottom: 0; }
+      .bondTable .chg { display: inline-flex; align-items: center; gap: 4px; }
+      .bondTable .formed { color: var(--green); }
+      .bondTable .broken { color: var(--red); }
+      .bondTable .pair { font-family: var(--mono); }
+      .chField { display: grid; gap: 4px; margin-top: 8px; }
+      .chField input, .chField textarea { width: 100%; }
+      .chField textarea { resize: vertical; min-height: 44px; }
+      .decisionBar { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+      .decisionBar .btn { justify-content: center; min-height: 32px; }
+      .decision.accept[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #002a0d; }
+      .decision.reject[aria-pressed="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+      .decisionFoot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; min-height: 24px; }
 
-      .chAdvanced { margin-top: 10px; }
-      .chAdvanced .settingsBody { grid-template-columns: 1fr auto; align-items: end; }
-      .chKeys {
-        display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 10px; padding-top: 10px;
-        border-top: 1px solid var(--separator); font: var(--t-caption); color: var(--label-3);
-      }
-      .chKeys span { display: inline-flex; align-items: center; gap: 3px; }
+      .chFooter { padding: 8px 16px 0; border-top: 1px solid var(--separator); }
+      .chKeys { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; font: var(--t-caption); color: var(--label-3); }
+      .chKeys span { display: inline-flex; align-items: center; gap: 4px; }
       kbd {
-        font: 600 10.5px/1 var(--font); min-width: 16px; padding: 3px 4px; box-sizing: border-box; text-align: center;
-        border-radius: 5px; background: var(--fill-2); color: var(--label-1); border-bottom: 1px solid rgba(0,0,0,0.5);
+        font: 500 11px/1 var(--font); min-width: 18px; padding: 3px 4px; box-sizing: border-box; text-align: center;
+        border-radius: 4px; border: 1px solid var(--separator); color: var(--label-2); background: transparent;
       }
 
       /* Timeline markers under the frame slider */
-      #chapterTrack { position: relative; height: 14px; margin: 2px 0 2px; }
+      #chapterTrack { position: relative; height: 14px; margin: 2px 0; }
       #chapterTrack:empty { display: none; }
-      .chapterMarker {
-        position: absolute; top: 1px; width: 8px; height: 12px; margin: 0 0 0 -4px !important; padding: 0 !important;
-        border: 0 !important; border-radius: 3px !important; cursor: pointer; background: var(--orange) !important;
-        min-height: 0 !important; box-shadow: 0 0 0 1px rgba(0,0,0,0.35);
+      #playback .chapterMarker {
+        position: absolute; top: 1px; width: 6px; height: 12px; margin: 0 0 0 -3px; padding: 0; min-height: 0;
+        border: 0; border-radius: 2px; cursor: pointer; background: var(--label-2);
       }
-      .chapterMarker.accepted { background: var(--green) !important; }
-      .chapterMarker.rejected { background: var(--gray) !important; }
-      .chapterMarker.selected { box-shadow: 0 0 0 2px #fff; z-index: 1; }
+      #playback .chapterMarker:hover { background: var(--label-1); }
+      #playback .chapterMarker.accepted { background: var(--green); }
+      #playback .chapterMarker.rejected { background: var(--red); }
+      #playback .chapterMarker.selected { box-shadow: 0 0 0 2px var(--accent); z-index: 1; }
       @media (max-width: 760px) {
         /* The VR button sits top-right; start the controls below it so Hide stays tappable. */
-        #ui { top: 52px; border-radius: 0 14px 14px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+        #ui { top: 52px; border-radius: 0 10px 10px 0; border-top: 1px solid var(--panel-border); }
         /* Sit above the playback bar and the collapsed Room bar. */
-        #chapters { top: auto; bottom: 206px; max-height: 34vh; }
+        #chapters { top: auto; bottom: 206px; max-height: max(34vh, calc(100vh - 330px)); }
       }
       #vrEntry {
         position: fixed; top: 12px; right: 16px; z-index: 20;
@@ -281,92 +278,96 @@
         body.has-playback #collaboration { bottom: 142px; }
       }
 
-      /* ---- Design system ------------------------------------------------- *
-       * Apple-style dark materials: system font, semantic colors, frosted
-       * panels that defer to the 3D content, and one consistent control set. */
+      /* ---- Design system -------------------------------------------------
+       * Neutral surfaces, one interaction accent (blue), status colors only for
+       * meaningful states, one type scale and one control set. */
       :root {
         --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", Roboto, system-ui, sans-serif;
-        --t-title: 600 17px/1.25 var(--font);
-        --t-headline: 600 13px/1.3 var(--font);
-        --t-body: 400 13px/1.35 var(--font);
-        --t-callout: 500 13px/1.35 var(--font);
-        --t-footnote: 400 12px/1.35 var(--font);
-        --t-caption: 400 11px/1.3 var(--font);
-        --t-caption-strong: 600 11px/1.3 var(--font);
+        --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        --t-title: 600 15px/1.3 var(--font);
+        --t-headline: 600 13px/1.35 var(--font);
+        --t-body: 400 13px/1.4 var(--font);
+        --t-sub: 400 12px/1.4 var(--font);
+        --t-caption: 400 11px/1.35 var(--font);
         --label-1: rgba(255,255,255,0.92);
-        --label-2: rgba(235,235,245,0.62);
-        --label-3: rgba(235,235,245,0.36);
-        --fill-1: rgba(120,120,128,0.36);
-        --fill-2: rgba(120,120,128,0.24);
-        --fill-3: rgba(118,118,128,0.18);
-        --separator: rgba(84,84,88,0.55);
-        --blue: #0a84ff; --green: #30d158; --red: #ff453a; --orange: #ff9f0a; --purple: #bf5af2; --gray: #8e8e93;
-        --material: rgba(30,30,32,0.72);
+        --label-2: rgba(235,235,245,0.64);
+        --label-3: rgba(235,235,245,0.42);
+        --fill-1: rgba(120,120,128,0.32);
+        --fill-2: rgba(120,120,128,0.2);
+        --fill-3: rgba(120,120,128,0.12);
+        --separator: rgba(84,84,88,0.6);
+        --separator-faint: rgba(84,84,88,0.3);
+        --surface: rgba(28,28,30,0.95);
+        --panel-border: rgba(255,255,255,0.1);
+        --control: rgba(255,255,255,0.06);
+        --control-border: rgba(255,255,255,0.16);
+        --control-on: rgba(99,99,102,0.8);
+        --accent: #0a84ff;
+        --selected: rgba(10,132,255,0.16);
+        --green: #30d158; --red: #ff453a; --orange: #ff9f0a;
+        --warn-bg: rgba(255,159,10,0.12);
       }
       #ui, #collaboration, #playback, #isosurface, #chapters {
         font-family: var(--font); color: var(--label-1);
-        background: var(--material);
-        -webkit-backdrop-filter: blur(24px) saturate(170%); backdrop-filter: blur(24px) saturate(170%);
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+        background: var(--surface);
+        -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+        border: 1px solid var(--panel-border);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
         -webkit-font-smoothing: antialiased;
       }
-      #ui { border-radius: 0 0 14px 0; border-top: 0; border-left: 0; }
-      #collaboration, #playback, #isosurface, #chapters { border-radius: 14px; }
+      #ui { border-radius: 0 0 10px 0; border-top: 0; border-left: 0; }
+      #collaboration, #playback, #isosurface, #chapters { border-radius: 10px; }
       #ui h1 { font: var(--t-title); }
-      #collaboration h2, #isosurface h2 { font: var(--t-headline); font-size: 15px; }
-      #ui label, #collaboration label, #playback label { font: var(--t-footnote); color: var(--label-2); }
-      #status, #collabStatus, .roomHint, #isoHint { font: var(--t-footnote) !important; color: var(--label-2); opacity: 1 !important; }
-      .tutorialLink { color: var(--blue) !important; text-decoration: none; font: var(--t-footnote); }
+      #collaboration h2, #isosurface h2 { font: var(--t-title); }
+      #ui label, #collaboration label, #playback label { font: var(--t-sub); color: var(--label-2); }
+      #status, #collabStatus, .roomHint, #isoHint { font: var(--t-sub) !important; color: var(--label-2); opacity: 1 !important; }
+      .tutorialLink { color: var(--accent) !important; text-decoration: none; font: var(--t-sub); }
+      .tutorialLink:hover { text-decoration: underline; }
 
-      /* Controls */
-      #ui button, #collaboration button, #playback button, #isosurface button,
-      .btn {
-        font: 500 12.5px/1 var(--font); color: var(--label-1);
-        background: var(--fill-2); border: 0; border-radius: 8px;
-        padding: 6px 11px; min-height: 28px; cursor: pointer;
-        display: inline-flex; align-items: center; gap: 5px;
-        transition: background-color .15s ease, opacity .15s ease, transform .1s ease;
+      /* Controls: bordered by default, filled accent only for the primary action of a panel. */
+      #ui button, #collaboration button, #playback button:not(.chapterMarker), #isosurface button, .btn {
+        font: 500 13px/1 var(--font); color: var(--label-1);
+        background: var(--control); border: 1px solid var(--control-border); border-radius: 6px;
+        padding: 6px 12px; min-height: 28px; box-sizing: border-box; cursor: pointer;
+        display: inline-flex; align-items: center; gap: 6px;
+        transition: background-color .12s ease, border-color .12s ease;
       }
-      #ui button:hover, #collaboration button:hover, #playback button:hover, #isosurface button:hover, .btn:hover { background: var(--fill-1); }
-      button:active { transform: scale(0.98); }
-      button:disabled, .btn:disabled { opacity: 0.4; cursor: default; transform: none; }
-      .btn.primary, #ui #loadUrlBtn, #collaboration #joinRoomBtn, #playback #playBtn { background: var(--blue); color: #fff; }
-      .btn.primary:hover, #ui #loadUrlBtn:hover, #collaboration #joinRoomBtn:hover, #playback #playBtn:hover { background: #3395ff; }
-      #collaboration #joinRoomBtn:disabled { background: var(--fill-2); color: var(--label-1); }
-      .btn.ai { background: var(--purple); color: #fff; }
-      .btn.ai:hover { background: #c977f5; }
-      .btn.ai.stop { background: var(--fill-1); }
-      .btn.accept { background: var(--green); color: #00260b; font-weight: 600; }
-      .btn.accept:hover { background: #5ade7d; }
-      .btn.reject { background: rgba(255,69,58,0.2); color: var(--red); font-weight: 600; }
-      .btn.reject:hover { background: rgba(255,69,58,0.3); }
-      .btn.on { box-shadow: inset 0 0 0 2px rgba(255,255,255,0.85); }
-      .btn.plain { background: transparent; color: var(--blue); padding-left: 6px; padding-right: 6px; }
-      .btn.plain:hover { background: var(--fill-3); }
-      .btn.tinted { background: rgba(191,90,242,0.22); color: #e2b8fa; }
-      .btn.tinted:hover { background: rgba(191,90,242,0.32); }
-      .btn kbd { background: rgba(0,0,0,0.18); color: inherit; border: 0; }
+      #ui button:hover, #collaboration button:hover, #playback button:not(.chapterMarker):hover, #isosurface button:hover, .btn:hover {
+        background: var(--fill-2);
+      }
+      button:disabled, .btn:disabled { opacity: 0.4; cursor: default; }
+      #ui #loadUrlBtn, #collaboration #joinRoomBtn, #playback #playBtn { background: var(--accent); border-color: var(--accent); color: #fff; }
+      #ui #loadUrlBtn:hover, #collaboration #joinRoomBtn:hover, #playback #playBtn:hover { background: #2d93ff; }
+      #collaboration #joinRoomBtn:disabled { background: var(--control); border-color: var(--control-border); color: var(--label-1); }
+      .btn.link { background: transparent; border-color: transparent; color: var(--accent); padding: 4px 4px; min-height: 24px; }
+      .btn.link:hover { background: var(--fill-3); }
+      .btn kbd { margin-left: 2px; }
       .iconBtn {
-        all: unset; box-sizing: border-box; width: 28px; height: 28px; border-radius: 8px;
+        all: unset; box-sizing: border-box; width: 28px; height: 28px; border-radius: 6px;
         display: inline-grid; place-items: center; color: var(--label-2); cursor: pointer;
       }
-      .iconBtn:hover { background: var(--fill-3); color: var(--label-1); }
+      .iconBtn:hover { background: var(--fill-2); color: var(--label-1); }
       .iconBtn:disabled { opacity: 0.35; cursor: default; }
-      .iconBtn svg, .btn svg, .aiBadge svg, .statusGlyph svg { display: block; }
+      .iconBtn svg, .btn svg { display: block; }
       #ui input[type="text"], #collaboration input[type="text"], #chapters input, #chapters textarea, #chapters select,
       #ui select, #fpsInput {
-        font: var(--t-body); color: var(--label-1); background: rgba(0,0,0,0.28);
-        border: 1px solid var(--separator); border-radius: 8px; padding: 5px 8px; box-sizing: border-box;
+        font: var(--t-body); color: var(--label-1); background: rgba(0,0,0,0.3);
+        border: 1px solid var(--control-border); border-radius: 6px; padding: 5px 8px; box-sizing: border-box;
       }
-      #chapters select { width: 100%; min-height: 30px; }
+      #chapters input::placeholder, #chapters textarea::placeholder { color: var(--label-3); }
+      #chapters select { width: 100%; min-height: 28px; }
       #roomInput { font-size: 20px !important; }
-      input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 0; border-color: var(--blue) !important; box-shadow: 0 0 0 3px rgba(10,132,255,0.35); }
-      button:focus-visible, summary:focus-visible, .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-      #frameSlider { accent-color: var(--blue); }
+      input:focus-visible, textarea:focus-visible, select:focus-visible {
+        outline: 0; border-color: var(--accent) !important; box-shadow: 0 0 0 3px rgba(10,132,255,0.35);
+      }
+      button:focus-visible, summary:focus-visible, .btn:focus-visible, .iconBtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      #frameSlider { accent-color: var(--accent); }
       #frameLabel { font-variant-numeric: tabular-nums; color: var(--label-1); }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { transition: none !important; animation: none !important; }
+      }
+      @media (prefers-reduced-transparency: reduce) {
+        #ui, #collaboration, #playback, #isosurface, #chapters { background: rgb(28,28,30); backdrop-filter: none; }
       }
     </style>
   </head>
@@ -439,86 +440,84 @@
       <div id="isoList"></div>
       <div id="isoHint">Each row: color, isovalue, opacity, visibility. Use a negative isovalue for the opposite orbital lobe.</div>
     </div>
-    <section id="chapters" style="display:none" aria-label="Chapters">
+    <section id="chapters" style="display:none" aria-labelledby="chaptersTitle">
       <header class="chHeader">
         <div class="chTitles">
-          <h2>Chapters</h2>
+          <h2 id="chaptersTitle">Chapters</h2>
           <p id="chaptersSummary" class="chSubtitle" aria-live="polite"></p>
         </div>
-        <div class="chHeaderActions">
-          <button id="chaptersExportBtn" class="iconBtn" type="button" aria-label="Export labels as JSON" title="Export labels (JSON)">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10V1.8M5 4.6 8 1.8l3 2.8M3.5 7.5v6h9v-6"/></svg>
-          </button>
-          <button id="toggleChaptersBtn" class="iconBtn" type="button" aria-label="Collapse Chapters" aria-expanded="true" aria-controls="chaptersContent" title="Collapse">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg>
-          </button>
-        </div>
+        <button id="chaptersExportBtn" class="btn" type="button" title="Download every event, suggestion and decision as JSON">Export</button>
+        <button id="toggleChaptersBtn" class="iconBtn" type="button" aria-label="Collapse Chapters" aria-expanded="true" aria-controls="chaptersContent" title="Collapse">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg>
+        </button>
       </header>
       <div id="chaptersContent">
-        <div id="chaptersProgress" class="chProgress" role="img" aria-label="Review progress"><span class="acc"></span><span class="rej"></span></div>
+        <div class="chProgressBlock">
+          <div id="chaptersProgress" class="chProgress" role="img" aria-label="Review progress"><span class="acc"></span><span class="rej"></span></div>
+          <p id="chaptersProgressText" class="chProgressText"></p>
+        </div>
 
-        <div class="aiCard" id="chaptersAi">
-          <div class="aiRow">
-            <span class="aiBadge" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5 9.4 6.6 14.5 8 9.4 9.4 8 14.5 6.6 9.4 1.5 8l5.1-1.4z"/></svg>
-            </span>
-            <div class="aiText">
-              <div class="aiTitle">AI assistant</div>
-              <div id="chaptersAiStatus" class="aiStatus" aria-live="polite"></div>
-            </div>
-            <button id="chaptersAiBtn" class="btn ai" type="button" title="Ask the local model to name each event and flag likely artifacts">Name events</button>
+        <section class="chSection" aria-labelledby="chModelTitle">
+          <div class="chSectionHead">
+            <h3 id="chModelTitle">Model suggestions</h3>
+            <button id="chaptersAiBtn" class="btn" type="button">Suggest names</button>
           </div>
-          <div id="chaptersAiProgress" class="aiProgress" hidden><span></span></div>
-          <details id="chaptersAiSettings" class="aiSettings">
-            <summary>Model &amp; connection</summary>
-            <div class="settingsBody">
+          <p id="chaptersAiStatus" class="chStatus" role="status"></p>
+          <div id="chaptersAiProgress" class="chBar" hidden><span></span></div>
+          <details id="chaptersAiSettings" class="chDisclosure">
+            <summary>Model and connection</summary>
+            <div class="chForm">
               <label for="chaptersAiModel">Model</label>
               <div class="row">
-                <select id="chaptersAiModel" aria-label="Ollama model"></select>
+                <select id="chaptersAiModel"></select>
                 <button id="chaptersAiRefresh" class="btn" type="button">Refresh</button>
               </div>
               <label for="chaptersAiEndpoint">Ollama address</label>
               <input id="chaptersAiEndpoint" type="text" spellcheck="false" />
-              <p class="hint">Runs on this computer through Ollama. The model only suggests names; nothing counts until you accept it.</p>
+              <p class="chHint">Runs on this computer through Ollama. Suggestions never change a decision.</p>
             </div>
           </details>
-        </div>
+        </section>
 
-        <div id="chaptersFilter" class="segmented" role="group" aria-label="Show events">
-          <button type="button" data-filter="all" aria-pressed="true">All</button>
-          <button type="button" data-filter="pending" aria-pressed="false">To review</button>
-          <button type="button" data-filter="accepted" aria-pressed="false">Accepted</button>
-          <button type="button" data-filter="rejected" aria-pressed="false">Rejected</button>
-        </div>
-        <div class="chToolbar">
-          <span class="chSectionTitle">Events</span>
-          <button id="chapterPrevBtn" class="iconBtn" type="button" aria-label="Previous event" title="Previous event ([)">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3.5-4.5 4.5 4.5 4.5"/></svg>
-          </button>
-          <button id="chapterNextBtn" class="iconBtn" type="button" aria-label="Next event" title="Next event (])">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg>
-          </button>
-        </div>
-
-        <div id="chaptersList" role="list" aria-label="Detected events"></div>
-
-        <details class="chAdvanced">
-          <summary>Detection settings</summary>
-          <div class="settingsBody">
-            <div>
-              <label for="chaptersPersist">A bond change must last (frames)</label>
-              <input id="chaptersPersist" type="number" min="1" max="100" />
-            </div>
-            <button id="chaptersDetectBtn" class="btn" type="button">Re-detect</button>
+        <section class="chSection" aria-labelledby="chEventsTitle">
+          <div class="chSectionHead">
+            <h3 id="chEventsTitle">Events</h3>
+            <button id="chapterPrevBtn" class="iconBtn" type="button" aria-label="Previous event" title="Previous event ([)">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3.5-4.5 4.5 4.5 4.5"/></svg>
+            </button>
+            <button id="chapterNextBtn" class="iconBtn" type="button" aria-label="Next event" title="Next event (])">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg>
+            </button>
           </div>
-        </details>
+          <div id="chaptersFilter" class="segmented" role="group" aria-label="Show events">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="pending" aria-pressed="false">To review</button>
+            <button type="button" data-filter="accepted" aria-pressed="false">Accepted</button>
+            <button type="button" data-filter="rejected" aria-pressed="false">Rejected</button>
+          </div>
+          <div id="chaptersList" role="list" aria-label="Detected events"></div>
+        </section>
 
-        <footer class="chKeys" aria-label="Keyboard shortcuts">
-          <span><kbd>[</kbd><kbd>]</kbd> Previous / next</span>
-          <span><kbd>A</kbd> Accept</span>
-          <span><kbd>R</kbd> Reject</span>
-          <span><kbd>U</kbd> Undo</span>
-        </footer>
+        <section id="chaptersInspector" class="chSection chInspector" aria-label="Selected event" hidden></section>
+
+        <div class="chFooter">
+          <details class="chDisclosure">
+            <summary>Detection settings</summary>
+            <div class="chForm chInline">
+              <div class="chField">
+                <label for="chaptersPersist">Minimum duration of a bond change (frames)</label>
+                <input id="chaptersPersist" type="number" min="1" max="100" />
+              </div>
+              <button id="chaptersDetectBtn" class="btn" type="button">Re-detect</button>
+            </div>
+          </details>
+          <div class="chKeys" aria-label="Keyboard shortcuts">
+            <span><kbd>[</kbd><kbd>]</kbd> Previous, next</span>
+            <span><kbd>A</kbd> Accept</span>
+            <span><kbd>R</kbd> Reject</span>
+            <span><kbd>U</kbd> Clear decision</span>
+          </div>
+        </div>
       </div>
     </section>
     <div id="vrEntry"></div>

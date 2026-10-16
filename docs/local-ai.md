@@ -37,6 +37,9 @@ The model only **suggests**:
     **Use suggested name** copies the name into your field.
   - **Decision:** Name and Note fields, then **Accept** and **Reject** (**A** / **R**), and
     **Clear decision** (**U**).
+- Suggestions that name none of the event's atoms (e.g. "Nitrogen gains hydrogen"), or that
+  name atoms outside the event and its bonded neighbors, are dropped. The status line says
+  how many.
 - The model never accepts or rejects anything; that's always you.
 - Exports keep the detector label, the AI suggestion (with the model name) and your label
   side by side. So the dataset also measures how often each model agrees with a human.

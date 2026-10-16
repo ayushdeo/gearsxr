@@ -391,7 +391,7 @@ export class ChaptersPanel {
     this.setAiStatus("busy", `Requesting names for ${chapters.length} event${chapters.length === 1 ? "" : "s"} from ${this.llm.model}…`);
     const started = performance.now();
     try {
-      const named = await suggestChapterLabels(
+      const result = await suggestChapterLabels(
         this.llm,
         trajectory,
         chapters,
@@ -406,7 +406,12 @@ export class ChaptersPanel {
       );
       if (this.aiRun === run) this.aiRun = null;
       const seconds = Math.round((performance.now() - started) / 1000);
-      this.setAiStatus("done", `${named} of ${chapters.length} named by ${this.llm.model} in ${seconds} s`);
+      const notes: string[] = [];
+      if (result.ungrounded) notes.push(`${result.ungrounded} discarded for not naming the event's atoms`);
+      if (result.failedBatches) notes.push(`${result.failedBatches} request${result.failedBatches === 1 ? "" : "s"} failed: ${result.lastError?.message ?? ""}`);
+      const summary = `${result.named} of ${chapters.length} named by ${this.llm.model} in ${seconds} s`;
+      if (result.failedBatches) this.setAiStatus("error", `${summary}. ${notes.join("; ")}`);
+      else this.setAiStatus("done", notes.length ? `${summary}. ${notes.join("; ")}.` : summary);
     } catch (err) {
       if (this.aiRun === run) this.aiRun = null;
       if (run.signal.aborted) this.setAiStatus("ready", "Stopped. Names received so far are kept.");

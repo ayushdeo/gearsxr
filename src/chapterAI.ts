@@ -179,12 +179,16 @@ function toSuggestion(raw: RawSuggestion, model: string): AiSuggestion | null {
 }
 
 const RETRY_DELAYS_MS = [2000, 5000];
+// Output budget per event (label + rationale + JSON). With a JSON schema some
+// models (gemma2 on Ollama) can emit whitespace forever; a cap turns that 2-minute
+// hang into a quick, retryable "incomplete answer".
+const TOKENS_PER_EVENT = 160;
 
 /** One request, retried after a dropped connection or a 5xx (Ollama reloading a model). */
-async function chat(settings: LlmSettings, userContent: string, signal: AbortSignal): Promise<RawSuggestion[]> {
+async function chat(settings: LlmSettings, userContent: string, events: number, signal: AbortSignal): Promise<RawSuggestion[]> {
   for (let attempt = 0; ; attempt++) {
     try {
-      return await chatOnce(settings, userContent, signal);
+      return await chatOnce(settings, userContent, events, signal);
     } catch (err) {
       const retryable = (err as { retryable?: boolean }).retryable === true;
       if (!retryable || attempt >= RETRY_DELAYS_MS.length || signal.aborted) throw err;
@@ -197,7 +201,7 @@ function retryable(err: Error): Error {
   return Object.assign(err, { retryable: true });
 }
 
-async function chatOnce(settings: LlmSettings, userContent: string, signal: AbortSignal): Promise<RawSuggestion[]> {
+async function chatOnce(settings: LlmSettings, userContent: string, events: number, signal: AbortSignal): Promise<RawSuggestion[]> {
   // Each attempt gets its own time limit, so a retry isn't born already expired.
   const timeout = AbortSignal.timeout(REQUEST_TIMEOUT_MS);
   let response: Response;
@@ -210,7 +214,7 @@ async function chatOnce(settings: LlmSettings, userContent: string, signal: Abor
         model: settings.model,
         stream: false,
         format: RESPONSE_SCHEMA,
-        options: { temperature: 0.2 },
+        options: { temperature: 0.2, num_predict: 64 + TOKENS_PER_EVENT * events },
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           { role: "user", content: userContent },
@@ -230,19 +234,44 @@ async function chatOnce(settings: LlmSettings, userContent: string, signal: Abor
     const error = new Error(`Ollama returned HTTP ${response.status}${text ? `: ${text.slice(0, 200)}` : ""}`);
     throw response.status >= 500 ? retryable(error) : error;
   }
-  const body = (await response.json()) as { message?: { content?: string } };
+  const body = (await response.json()) as { message?: { content?: string }; done_reason?: string };
+  let parsed: { events?: unknown };
   try {
-    const parsed = JSON.parse(body.message?.content ?? "{}");
-    return Array.isArray(parsed.events) ? parsed.events : [];
+    parsed = JSON.parse(body.message?.content ?? "");
   } catch {
-    return [];
+    const why = body.done_reason === "length" ? "it ran past the length limit" : "it wasn't valid JSON";
+    throw retryable(new Error(`${settings.model} returned an incomplete answer (${why}).`));
   }
+  return Array.isArray(parsed.events) ? (parsed.events as RawSuggestion[]) : [];
+}
+
+/**
+ * A suggestion must be about the event: it names at least one atom that
+ * changed, and only atoms from the event or their bonded neighbors. Vague
+ * ("Nitrogen gains hydrogen") or ungrounded labels are dropped instead of
+ * being shown as if they were evidence-based.
+ */
+function grounded(label: string, eventAtoms: Set<string>, allowed: Set<string>): boolean {
+  const named = label.match(/\b[A-Z][a-z]?\d+\b/g) ?? [];
+  return named.some((n) => eventAtoms.has(n)) && named.every((n) => allowed.has(n));
+}
+
+export interface SuggestResult {
+  /** Chapters that received a grounded suggestion. */
+  named: number;
+  /** Suggestions dropped for naming no event atom, or atoms outside the event. */
+  ungrounded: number;
+  /** Batches that failed after retries; the run continues past them. */
+  failedBatches: number;
+  lastError: Error | null;
 }
 
 /**
  * Asks the model to name each chapter, in small batches (small local models
  * lose track of long lists). Calls onBatch after each batch so the panel can
- * show suggestions as they arrive. Returns how many chapters got a suggestion.
+ * show suggestions as they arrive. A batch that fails after its retries is
+ * skipped so one bad answer doesn't end the run; three failures in a row stop
+ * it. If every batch tried failed, the last error is thrown.
  */
 export async function suggestChapterLabels(
   settings: LlmSettings,
@@ -250,15 +279,30 @@ export async function suggestChapterLabels(
   chapters: Chapter[],
   onBatch: (done: number, total: number) => void,
   signal: AbortSignal,
-): Promise<number> {
+): Promise<SuggestResult> {
   if (!settings.model) throw new Error("Pick an Ollama model first.");
   const header = `System: ${trajectory.numAtoms} atoms (${composition(trajectory)}), ${trajectory.numFrames} frames.`;
-  let named = 0;
+  const result: SuggestResult = { named: 0, ungrounded: 0, failedBatches: 0, lastError: null };
+  let batches = 0;
+  let failedInARow = 0;
 
   for (let start = 0; start < chapters.length; start += BATCH_SIZE) {
     const batch = chapters.slice(start, start + BATCH_SIZE);
     const events = batch.map((chapter, i) => describeEvent(trajectory, chapter, `e${start + i}`));
-    const results = await chat(settings, `${header}\nEvents:\n${JSON.stringify(events)}`, signal);
+    batches++;
+    let results: RawSuggestion[];
+    try {
+      results = await chat(settings, `${header}\nEvents:\n${JSON.stringify(events)}`, batch.length, signal);
+    } catch (err) {
+      if (signal.aborted) throw err;
+      result.failedBatches++;
+      result.lastError = err as Error;
+      onBatch(Math.min(start + BATCH_SIZE, chapters.length), chapters.length);
+      // A server that keeps failing won't recover mid-run; stop and keep what we have.
+      if (++failedInARow >= 3) break;
+      continue;
+    }
+    failedInARow = 0;
 
     results.forEach((raw, i) => {
       // Match by id; fall back to position when the model mangles ids.
@@ -267,10 +311,18 @@ export async function suggestChapterLabels(
       if (!chapter || index < start || index >= start + batch.length) return;
       const suggestion = toSuggestion(raw, settings.model);
       if (!suggestion) return;
+      const described = events[index - start];
+      const eventAtoms = new Set(described.atoms.map((a) => a.atom));
+      const allowed = new Set(described.atoms.flatMap((a) => [a.atom, ...a.bonded_before, ...a.bonded_after]));
+      if (!grounded(suggestion.label, eventAtoms, allowed)) {
+        result.ungrounded++;
+        return;
+      }
       chapter.ai = suggestion;
-      named++;
+      result.named++;
     });
     onBatch(Math.min(start + BATCH_SIZE, chapters.length), chapters.length);
   }
-  return named;
+  if (result.failedBatches === batches && result.lastError) throw result.lastError;
+  return result;
 }

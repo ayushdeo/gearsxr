@@ -196,3 +196,32 @@ Fixes:
 - Each attempt gets its own time limit, and a timeout says so.
 - The prompt requires atom names (H7, C2) rather than "hydrogen" or "nitrogen".
 - The report has a "Vague" column.
+
+## Fifth run: models one at a time (Oct 2026)
+
+| | gemma2:9b | qwen2.5:7b |
+|---|---|---|
+| Labels fully correct | 85.8% (139/162) | 77.3% (102/132) |
+| Labels with a false claim | 23 | 30 |
+| Vague (no atom names) | 0 | 33 |
+| Errors | 31 (timeouts) | 0 |
+| Seconds / reaction | 125.8 | 1.9 |
+
+On the 163 reactions gemma labeled in both run 3 and this run, it was correct 140 vs 134 times.
+That's within run-to-run noise at temperature 0.2, so gemma is steady at roughly 86–90%.
+
+What the timings showed: a normal gemma request took about 8 s, but some hung until the
+120 s limit. 128 s means one hang and a retry, 253 s two, and 367 s three, which became an
+error. With a JSON schema, gemma2 on Ollama can keep emitting whitespace with nothing to
+stop it. qwen ignored the new "name atoms" instruction and got vaguer: 33 labels such as
+"Nitrogen gains hydrogen, loses carbon bond".
+
+Fixes in the model client (`src/chapterAI.ts`):
+
+- Output is capped at `num_predict` = 64 + 160 tokens per event. An answer that hits the cap,
+  or isn't valid JSON, is retried, so it doesn't hang.
+- Suggestions must be grounded. A label has to name at least one atom that changed, and only
+  atoms in the event or bonded to it. Others are dropped and counted; the report's column is
+  "Dropped as ungrounded".
+- A failed batch no longer ends a run. Three failures in a row stop it, keeping what was
+  named. The panel reports how many requests failed and why.

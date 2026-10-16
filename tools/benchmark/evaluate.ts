@@ -44,6 +44,8 @@ interface ModelResult {
   wrongClaims: string[];
   /** The label names no atoms at all ("Nitrogen gains hydrogen"). */
   vague: boolean;
+  /** Suggestions the client dropped for not naming the event's atoms. */
+  ungrounded: number;
   seconds: number;
   error?: string;
 }
@@ -129,13 +131,15 @@ async function evaluateModel(
 ): Promise<ModelResult> {
   const result: ModelResult = {
     model, label: null, confidence: null, falseArtifacts: 0, realEvents: 0, atomMention: null,
-    claims: 0, claimsCorrect: 0, wrongClaims: [], vague: false, seconds: 0,
+    claims: 0, claimsCorrect: 0, wrongClaims: [], vague: false, ungrounded: 0, seconds: 0,
   };
   if (events.length === 0) return result;
   const chapters = toChapters(events);
   const started = performance.now();
   try {
-    await suggestChapterLabels({ endpoint, model }, trajectory, chapters, () => {}, new AbortController().signal);
+    const outcome = await suggestChapterLabels({ endpoint, model }, trajectory, chapters, () => {}, new AbortController().signal);
+    if (outcome.lastError) result.error = outcome.lastError.message;
+    result.ungrounded = outcome.ungrounded;
   } catch (err) {
     result.error = (err as Error).message;
   }
@@ -243,7 +247,7 @@ function summarize(results: ReactionResult[], models: string[], persist: number,
       ``,
       `Labels are scored on the chapter that best matches the true reaction. A false artifact is a real event the model dismissed. "Labels fully correct" reads each label's claims (X moves from A to B, A-B breaks, X binds to Y, X swaps A for B, ...) and checks every one against the answer key; it covers labels with at least one recognizable claim.`,
       ``,
-      `| Model | Labels fully correct | Labels with a false claim | Checkable labels | Vague (no atom names) | False-artifact rate | Atoms named in label | Errors | Seconds / reaction |`,
+      `| Model | Labels fully correct | Labels with a false claim | Checkable labels | Dropped as ungrounded | False-artifact rate | Atoms named in label | Errors | Seconds / reaction |`,
       `|---|---|---|---|---|---|---|---|---|`,
     );
     for (const model of models) {
@@ -256,7 +260,7 @@ function summarize(results: ReactionResult[], models: string[], persist: number,
       const checkable = rows.filter((m) => m.claims > 0);
       const fullyCorrect = checkable.filter((m) => m.claimsCorrect === m.claims).length;
       lines.push(
-        `| ${model} | ${pct(fullyCorrect, checkable.length)} | ${checkable.length - fullyCorrect} | ${checkable.length} of ${rows.filter((m) => m.label).length} | ${rows.filter((m) => m.vague).length} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
+        `| ${model} | ${pct(fullyCorrect, checkable.length)} | ${checkable.length - fullyCorrect} | ${checkable.length} of ${rows.filter((m) => m.label).length} | ${rows.reduce((n, m) => n + (m.ungrounded ?? 0), 0)} | ${pct(falseArtifacts, real)} | ${(mention * 100).toFixed(1)}% | ${rows.filter((m) => m.error).length} | ${seconds.toFixed(1)} |`,
       );
     }
   }

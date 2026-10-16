@@ -47,7 +47,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 17.0495147
+     "ungrounded": 0,
+     "seconds": 25.444714100000002
     },
     {
      "model": "qwen2.5:7b",
@@ -60,7 +61,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 14.382346400000156
+     "ungrounded": 0,
+     "seconds": 14.467275000000372
     }
    ]
   },
@@ -93,7 +95,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 forms a bond with C5, breaking its bond with C1. C1 forms a bond with N6, breaking its bond with C5.",
+     "label": "O0 bonds with C5, C1 bonds with N6, breaking O0-C1 and C1-C5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -101,23 +103,28 @@
      "claims": 4,
      "claimsCorrect": 3,
      "wrongClaims": [
-      "C1 breaks bond with C5"
+      "C1-C5"
      ],
      "vague": false,
-     "seconds": 6.513667000000002
+     "ungrounded": 0,
+     "seconds": 34.6685373
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen moves from C1 to C5, forming a ring",
+     "label": "Oxygen and C5 form, C1-C5 and C1-N6 break",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.5,
-     "claims": 0,
+     "atomMention": 0.75,
+     "claims": 2,
      "claimsCorrect": 0,
-     "wrongClaims": [],
+     "wrongClaims": [
+      "C1-C5",
+      "C1-N6"
+     ],
      "vague": false,
-     "seconds": 1.9554737999998033
+     "ungrounded": 0,
+     "seconds": 1.6947022000001744
     }
    ]
   },
@@ -151,18 +158,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H7 on C0 to O5, forming O3-O5 and breaking C0-H7",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.75,
-     "claims": 3,
-     "claimsCorrect": 2,
-     "wrongClaims": [
-      "O3-O5"
-     ],
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 6.467893599999999
+     "ungrounded": 0,
+     "seconds": 39.54597509999999,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -177,7 +184,8 @@
       "H7 proton transfer to C4"
      ],
      "vague": false,
-     "seconds": 1.8034769999980926
+     "ungrounded": 0,
+     "seconds": 1.8001400000001304
     }
    ]
   },
@@ -218,21 +226,23 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.02439760000004,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 39.96390539999999,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen transfer from C3 to C2",
+     "label": "H7 moves from C3 to C2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
+     "atomMention": 1,
      "claims": 1,
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5899052000008524
+     "ungrounded": 0,
+     "seconds": 1.5730364000000991
     }
    ]
   },
@@ -274,20 +284,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.47115960000002
+     "ungrounded": 0,
+     "seconds": 19.579576
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-N6 bond forms, C1-C2 bond breaks, C2-C5 bond forms",
+     "label": "C1-N6 bond forms, C1-C2 bond breaks, ring changes",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": 0.75,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6976339999996126
+     "ungrounded": 0,
+     "seconds": 2.008963899999857
     }
    ]
   },
@@ -319,29 +331,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H9 and H10 form a bond, breaking their bonds with C4.",
+     "label": "H9 and H10 form a bond, breaking C4's bonds with them.",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 7.374708899999969
+     "ungrounded": 0,
+     "seconds": 18.573628800000005
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C4 H9 H10 form H2, C4 H9 H10 break bonds",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9786655000001192
+     "ungrounded": 1,
+     "seconds": 2.049743999999948
     }
    ]
   },
@@ -373,16 +387,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C2 exchanges bonding partner from N3 to O5",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.23764710000006
+     "ungrounded": 0,
+     "seconds": 40.569265400000006,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -395,7 +411,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5757982000000774
+     "ungrounded": 0,
+     "seconds": 1.6086967000002041
     }
    ]
   },
@@ -427,7 +444,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H11 transfers from C4 to O0",
+     "label": "Proton transfer from H11 on C4 to O0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -436,20 +453,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.08809749999992
+     "ungrounded": 0,
+     "seconds": 19.5787445
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen from C4 to O0 forms O-H, breaks C-H",
+     "label": "Hydrogen from C4 to O0 forms O0-H11, breaks C4-H11",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": 1,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.82936439999938
+     "ungrounded": 0,
+     "seconds": 2.069133400000166
     }
    ]
   },
@@ -490,11 +509,12 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.65837810000008
+     "ungrounded": 0,
+     "seconds": 34.655736600000004
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H8 moves from C0 to N2",
+     "label": "Hydrogen H8 transfers from C0 to N2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -503,7 +523,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6445945000015199
+     "ungrounded": 0,
+     "seconds": 1.7683300999999045
     }
    ]
   },
@@ -536,31 +557,33 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H10 on C4 to N0 on C1",
+     "label": "Proton transfer from C4-H10 to N0-C4, forming N0-C4 and C1-H10",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 0,
+     "claims": 3,
+     "claimsCorrect": 2,
      "wrongClaims": [
-      "from H10 on C4 to N0"
+      "from C4-H10 to N0"
      ],
      "vague": false,
-     "seconds": 5.057330700000049
+     "ungrounded": 0,
+     "seconds": 34.69669709999999
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen takes hydrogen from carbon, forming bond with carbon",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.8351664999984205
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.873562799999956
     }
    ]
   },
@@ -603,20 +626,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.50880149999995
+     "ungrounded": 0,
+     "seconds": 6.183855299999996
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen donates proton to oxygen, forming O-H bond",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7595452000014484
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.8064540999997407
     }
    ]
   },
@@ -657,20 +682,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.070074299999979
+     "ungrounded": 0,
+     "seconds": 7.204965199999977
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2-H10 moves to C5, breaking C2-C5 and forming C5-H10",
+     "label": "C2-H10 moves to C5, forming C5-H10",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.029021999999881
+     "ungrounded": 0,
+     "seconds": 1.7111655000001191
     }
    ]
   },
@@ -706,7 +733,7 @@
     {
      "model": "gemma2:9b",
      "label": "Proton transfer from N3-H9 to O0-H9, C1-H8 forms, C2-H8 breaks",
-     "confidence": 1,
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -714,11 +741,12 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 130.70512589999987
+     "ungrounded": 0,
+     "seconds": 8.601428000000015
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H8 forms, O0-H9 forms, C2-H8 breaks, N3-H9 breaks",
+     "label": "C1-H8 forms, O0-H9 forms; C2-H8 breaks, N3-H9 breaks",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -727,7 +755,8 @@
      "claimsCorrect": 4,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9362262999974191
+     "ungrounded": 0,
+     "seconds": 1.876368499999866
     }
    ]
   },
@@ -759,29 +788,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from C3-H9 to N6-H9, breaking C3-N6",
+     "label": "Proton transfer from H9 on C3 to N6, breaking C3-H9 and C3-N6 bonds",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.10676450000005
+     "ungrounded": 0,
+     "seconds": 18.72119500000001
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen gains hydrogen from carbon, loses bond to carbon",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7170515000000597
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.8479551999997348
     }
    ]
   },
@@ -814,7 +845,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O2 forms a bond with O5, breaking the C4-O5 and C3-O5 bonds.",
+     "label": "O2 forms a bond with O5, breaking C4-O5 and C3-O5 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -823,11 +854,12 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.565420200000052
+     "ungrounded": 0,
+     "seconds": 35.3840013
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen forms ring, C3-C4-H8",
+     "label": "Oxygen forms ring with C3 and C4, breaking C-O and C-C bonds",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -836,7 +868,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.661733100000769
+     "ungrounded": 0,
+     "seconds": 1.8356264999997802
     }
    ]
   },
@@ -877,20 +910,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.62606389999995
+     "ungrounded": 0,
+     "seconds": 19.07636699999997
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen from C4 to O5",
+     "label": "H10 moves from C4 to O5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
+     "atomMention": 1,
      "claims": 1,
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5024298999980092
+     "ungrounded": 0,
+     "seconds": 1.663588299999945
     }
    ]
   },
@@ -924,17 +959,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "O0 binds to C5, C3 binds to N6, breaking O0-C1 and C3-C5",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 4,
+     "claimsCorrect": 4,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.02523349999984,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 20.647551399999998
     },
     {
      "model": "qwen2.5:7b",
@@ -947,7 +982,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6578592999987305
+     "ungrounded": 0,
+     "seconds": 1.6911677000001073
     }
    ]
   },
@@ -979,29 +1015,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N6 accepts a proton from H7, forming N6-H7, and breaking C1-H7.",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 6.4927725999997925
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Nitrogen accepts hydrogen from carbon, forms bond with nitrogen",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.6330840000025928
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 40.39439289999998,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.7735438999999316
     }
    ]
   },
@@ -1034,29 +1073,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 and H8 form a bond, breaking the C1-H8 and N0-H7 bonds.",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.66340430000005
+     "ungrounded": 1,
+     "seconds": 18.174369999999996
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H7 and H8 form H2, C1-H8 and N0-H7 break",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.756552799999714
+     "ungrounded": 1,
+     "seconds": 1.7969788999999874
     }
    ]
   },
@@ -1090,21 +1131,8 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C3 bonds to C5, C5 breaks bonds with N6 and C1",
+     "label": "C3 and C5 form a bond, C5-N6 and C1-C4 break",
      "confidence": 0.95,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0.8,
-     "claims": 1,
-     "claimsCorrect": 1,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 6.608114400000079
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "C5-C3 bond forms, C1-C4 and C5-N6 break",
-     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -1112,7 +1140,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9791955999992787
+     "ungrounded": 0,
+     "seconds": 7.15099589999998
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C5 forms ring with C3, C4 breaks with C1, N6 moves",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.9530055000004358
     }
    ]
   },
@@ -1145,17 +1188,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "Proton transfer from O0 to C2, breaking C1-C2 and O0-H6 bonds.",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.02778850000004,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 6.729480599999952
     },
     {
      "model": "qwen2.5:7b",
@@ -1170,7 +1213,8 @@
       "C1-H6"
      ],
      "vague": false,
-     "seconds": 2.2719241999983786
+     "ungrounded": 0,
+     "seconds": 1.9992186000002548
     }
    ]
   },
@@ -1211,7 +1255,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.7870551
+     "ungrounded": 0,
+     "seconds": 36.23677600000001
     },
     {
      "model": "qwen2.5:7b",
@@ -1224,7 +1269,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6436878999993205
+     "ungrounded": 0,
+     "seconds": 1.6240866999998689
     }
    ]
   },
@@ -1265,8 +1311,9 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.02760309999996,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 40.821617599999996,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -1279,7 +1326,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5525743000023067
+     "ungrounded": 0,
+     "seconds": 1.5922500999998301
     }
    ]
   },
@@ -1311,7 +1359,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H8 on C4 to C5, breaking C4-C5 and C4-H8 bonds.",
+     "label": "C5 accepts a proton from H8, breaking the C4-H8 and C4-C5 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -1320,11 +1368,12 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.854896399999968
+     "ungrounded": 0,
+     "seconds": 5.947653399999952
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C4-H8 to C5-H8 proton transfer",
+     "label": "C5 gains H8 from C4; C4 loses H8",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -1333,7 +1382,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6386757000014185
+     "ungrounded": 0,
+     "seconds": 1.694409200000111
     }
    ]
   },
@@ -1365,16 +1415,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H9 transfers from N3 to O5",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 253.47536970000016
+     "ungrounded": 0,
+     "seconds": 41.64400219999999,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -1387,7 +1439,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5710487000010909
+     "ungrounded": 0,
+     "seconds": 1.585085699999705
     }
    ]
   },
@@ -1419,33 +1472,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 transfers a proton from H7 to C2, breaking the N0-H7 bond and forming the N0-C2 bond.",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 0,
-     "wrongClaims": [
-      "proton from H7 to C2",
-      "N0-H7",
-      "N0-C2"
-     ],
-     "vague": false,
-     "seconds": 8.652621900000144
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Nitrogen accepts hydrogen from carbon, forms new bond",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.678858599998057
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 40.22488549999998,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.5289544000001625
     }
    ]
   },
@@ -1477,29 +1529,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 exchanges bonding partner from C2 to N3",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.59102180000022
+     "ungrounded": 0,
+     "seconds": 40.71317920000001,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1 swaps C2 for N3",
+     "label": "carbon swap: C1 for C2 with N3",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5103005000017584
+     "ungrounded": 0,
+     "seconds": 1.6764637000001967
     }
    ]
   },
@@ -1532,29 +1587,33 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C6 gains H10 from C5, breaking C5-H10 and C4-C6",
+     "label": "H10 transfers from C5 to C6, breaking C5-H10 and C4-C6 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.7822420999999
+     "ungrounded": 0,
+     "seconds": 18.772250300000074
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C5-H10 moves from C5 to C6",
+     "label": "C5-H10 moves to C6, breaking C5-C6 and forming C6-H10",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 0.75,
-     "claims": 1,
-     "claimsCorrect": 1,
-     "wrongClaims": [],
+     "claims": 3,
+     "claimsCorrect": 2,
+     "wrongClaims": [
+      "C5-C6"
+     ],
      "vague": false,
-     "seconds": 1.851179999999702
+     "ungrounded": 0,
+     "seconds": 2.0371396000003443
     }
    ]
   },
@@ -1597,24 +1656,23 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.02097129999987,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 41.84232530000003,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1 forms N6, C3-C4, C4-C5 break",
+     "label": "C1-N6 bond forms, C1-C4 and C3-C5 bonds break",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 0,
-     "wrongClaims": [
-      "C3-C4",
-      "C4-C5"
-     ],
+     "claims": 3,
+     "claimsCorrect": 3,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8525491999983787
+     "ungrounded": 0,
+     "seconds": 2.0519416999998503
     }
    ]
   },
@@ -1646,7 +1704,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C3 accepts a proton from H10, breaking C4-H10 and C3-C4 bonds.",
+     "label": "C3 accepts a proton from H10, breaking the C4-H10 bond and the C3-C4 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -1655,7 +1713,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.576004999999888
+     "ungrounded": 0,
+     "seconds": 37.19153480000002
     },
     {
      "model": "qwen2.5:7b",
@@ -1668,7 +1727,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.030465300001204
+     "ungrounded": 0,
+     "seconds": 2.0797270999997854
     }
    ]
   },
@@ -1699,7 +1759,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 and C2 break their bond, C1 loses C2 as a neighbor.",
+     "label": "C1 and C2 break their bond, C1 loses connection to C2.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -1708,7 +1768,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.515861800000072
+     "ungrounded": 0,
+     "seconds": 7.720907299999962
     },
     {
      "model": "qwen2.5:7b",
@@ -1721,7 +1782,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.4756947999969126
+     "ungrounded": 0,
+     "seconds": 1.5107683999999426
     }
    ]
   },
@@ -1754,21 +1816,21 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "C0 binds to O5, breaking bonds between C1 and N3, and C0 and C1.",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0310408000001,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 5.161583599999896
     },
     {
      "model": "qwen2.5:7b",
-     "label": "N3 exchanges O5 with C0",
+     "label": "N3 exchanges O5 for C0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -1776,10 +1838,11 @@
      "claims": 1,
      "claimsCorrect": 0,
      "wrongClaims": [
-      "N3 exchanges O5 with C0"
+      "N3 exchanges O5 for C0"
      ],
      "vague": false,
-     "seconds": 1.6528296999968588
+     "ungrounded": 0,
+     "seconds": 1.757811400000006
     }
    ]
   },
@@ -1812,29 +1875,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 transfers H7 to O5, forming N0-C4 and breaking N0-H7",
+     "label": "Proton transfer from N0 to O5, breaking N0-H7 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": 0.75,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 130.31953750000008
+     "ungrounded": 0,
+     "seconds": 6.433334700000007
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen donates hydrogen to oxygen, forming O-H and breaking N-H",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.86463049999997
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.902681799999904
     }
    ]
   },
@@ -1875,7 +1940,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.370718399999663
+     "ungrounded": 0,
+     "seconds": 7.1348987999999665
     },
     {
      "model": "qwen2.5:7b",
@@ -1888,7 +1954,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.507795299999416
+     "ungrounded": 0,
+     "seconds": 1.6115546999997459
     }
    ]
   },
@@ -1931,20 +1998,22 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.68709360000025
+     "ungrounded": 0,
+     "seconds": 5.3193011999999875
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C4 loses H11 to N6, C3 gains H11; C5 forms with N6",
+     "label": "C4 loses H11 to N6, C3 gains H11",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": 0.8,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9350955999977886
+     "ungrounded": 0,
+     "seconds": 1.9411691999998875
     }
    ]
   },
@@ -1976,17 +2045,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "C1 exchanges bonding partner from C2 to O5",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0372497999994,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 17.450388600000064
     },
     {
      "model": "qwen2.5:7b",
@@ -1999,7 +2068,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5761878999993204
+     "ungrounded": 0,
+     "seconds": 1.604848000000231
     }
    ]
   },
@@ -2031,29 +2101,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 and H8 leave C3 to form H2, breaking C3-H7 and C3-H8",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 254.94330530000013
+     "ungrounded": 1,
+     "seconds": 6.652828800000018
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C3 H7 and H8 form H2, C3-H7 and C3-H8 break",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7796311999969185
+     "ungrounded": 1,
+     "seconds": 1.8486918999999762
     }
    ]
   },
@@ -2095,20 +2167,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.565439899999649
+     "ungrounded": 0,
+     "seconds": 6.206460599999991
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen shifts to form ring with O3",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.25,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5702386000007391
+     "ungrounded": 1,
+     "seconds": 2.198305000000168
     }
    ]
   },
@@ -2140,8 +2214,8 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from C5-H10 to N0, forming N0-H10 and breaking C5-H10",
-     "confidence": 1,
+     "label": "N0 accepts a proton from C5-H10, forming N0-H10 and N0-C5",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -2149,20 +2223,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.249194699999876
+     "ungrounded": 0,
+     "seconds": 6.978685500000021
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen gains hydrogen from carbon, loses hydrogen to carbon",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.8473781000003218
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.772311699999962
     }
    ]
   },
@@ -2203,7 +2279,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.485603400000371
+     "ungrounded": 0,
+     "seconds": 9.96407209999999
     },
     {
      "model": "qwen2.5:7b",
@@ -2216,7 +2293,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.688370499998331
+     "ungrounded": 0,
+     "seconds": 1.7262015999997966
     }
    ]
   },
@@ -2250,31 +2328,33 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Ring closure: C1, C4, O0, and O5 form bonds, breaking N3-O5.",
+     "label": "O0 bonds to C4, C1 bonds to O5, forming a new ring, breaking N3-O5",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 0,
+     "claims": 3,
+     "claimsCorrect": 2,
      "wrongClaims": [
       "N3-O5"
      ],
      "vague": false,
-     "seconds": 6.74999479999952
+     "ungrounded": 0,
+     "seconds": 34.430480300000056
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen forms new bonds, breaks old ones",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.533829800002277
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.5214039000002668
     }
    ]
   },
@@ -2317,22 +2397,22 @@
      "claimsCorrect": 4,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.2269115000004
+     "ungrounded": 0,
+     "seconds": 19.888386900000043
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H7 transfers to C0-N5",
+     "label": "C0-H7 moves to C1, N5 forms",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 0.8,
      "claims": 1,
-     "claimsCorrect": 0,
-     "wrongClaims": [
-      "H7 transfers to C0"
-     ],
+     "claimsCorrect": 1,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8217657000012695
+     "ungrounded": 0,
+     "seconds": 1.875002900000196
     }
    ]
   },
@@ -2374,20 +2454,24 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.42957310000062
+     "ungrounded": 0,
+     "seconds": 19.619383499999998
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H8 picks up H8 from C3",
+     "label": "C1-H8 picks up from C3, C3 loses H8, N2 gains H8",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.75,
-     "claims": 0,
+     "atomMention": 1,
+     "claims": 1,
      "claimsCorrect": 0,
-     "wrongClaims": [],
+     "wrongClaims": [
+      "C1-H8"
+     ],
      "vague": false,
-     "seconds": 1.7852028999999165
+     "ungrounded": 0,
+     "seconds": 1.9801447000000625
     }
    ]
   },
@@ -2419,29 +2503,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 transfers from C2 to N0",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.29378649999947
+     "ungrounded": 0,
+     "seconds": 40.73623030000005,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H7 moves from C2 to N0",
+     "label": "Hydrogen from C2 to N0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": 0.6666666666666666,
      "claims": 1,
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6826828000023961
+     "ungrounded": 0,
+     "seconds": 1.6029999000001698
     }
    ]
   },
@@ -2473,16 +2560,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H12 transfers from N5 to O4",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.9197145000007
+     "ungrounded": 0,
+     "seconds": 41.392096800000054,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -2495,7 +2584,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6907005000002682
+     "ungrounded": 0,
+     "seconds": 1.6842228000001052
     }
    ]
   },
@@ -2538,21 +2628,23 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0248656000001,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 42.0975266000001,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen ring forms, C-O bond breaks",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.6018727000020445
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.8302579999999142
     }
    ]
   },
@@ -2584,30 +2676,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 367.0140738999993,
-     "error": "gemma2:9b didn't answer within 120 s."
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Hydrogen from C3 to O2 forms O2-H8, breaks C3-H8",
+     "label": "H8 transfers from C3 to O2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9763641000017524
+     "ungrounded": 0,
+     "seconds": 18.387868299999973
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "Hydrogen from C3 to O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.6666666666666666,
+     "claims": 1,
+     "claimsCorrect": 1,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.7033294000001624
     }
    ]
   },
@@ -2649,23 +2742,23 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.01728789999987,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 41.085220100000036,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "N5 swaps H9 with C1",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
-     "claims": 1,
+     "atomMention": null,
+     "claims": 0,
      "claimsCorrect": 0,
-     "wrongClaims": [
-      "N5 swaps H9 with C1"
-     ],
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.801699200000614
+     "ungrounded": 1,
+     "seconds": 1.7288508999999612
     }
    ]
   },
@@ -2709,20 +2802,22 @@
      "claimsCorrect": 4,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.670331399999559
+     "ungrounded": 0,
+     "seconds": 6.621623499999987
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H6 and H10 form H2, C1 and C4 lose H",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8821857000030577
+     "ungrounded": 1,
+     "seconds": 1.9422563000000082
     }
    ]
   },
@@ -2757,7 +2852,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 transfers from C1 to C4, N0 loses H6 to O5",
+     "label": "Proton transfer from N0-H6 to O5, C1-H7 to C4",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -2766,7 +2861,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.10080169999972
+     "ungrounded": 0,
+     "seconds": 7.160888500000118
     },
     {
      "model": "qwen2.5:7b",
@@ -2779,7 +2875,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.0119100999981163
+     "ungrounded": 0,
+     "seconds": 2.0064836999997495
     }
    ]
   },
@@ -2812,7 +2909,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C3 gains H8 from C4, C4 loses H8, and C1-C4 breaks.",
+     "label": "C3 gains H8 from C4, C1-C4 bond breaks, C4 loses H8",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -2821,20 +2918,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.75432850000076
+     "ungrounded": 0,
+     "seconds": 6.151777999999933
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C4-H8 proton transfers to C3",
+     "label": "C4-H8 transfers to C3; C1-C4 breaks",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.75,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6386894000023604
+     "ungrounded": 0,
+     "seconds": 1.8699901999998838
     }
    ]
   },
@@ -2875,20 +2974,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.605165800000541
+     "ungrounded": 0,
+     "seconds": 6.525
     },
     {
      "model": "qwen2.5:7b",
-     "label": "carbon swaps nitrogen for oxygen",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.4994407000020147
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.489908400000073
     }
    ]
   },
@@ -2929,20 +3030,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 4.958838899999857
+     "ungrounded": 0,
+     "seconds": 4.656785399999936
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen from C1 to O5 forms O5-H8, breaks C1-H8",
+     "label": "H8 moves from C1 to O5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9637630000002682
+     "ungrounded": 0,
+     "seconds": 1.7025460000000894
     }
    ]
   },
@@ -2983,20 +3086,24 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.868294000000693
+     "ungrounded": 0,
+     "seconds": 5.617770000000019
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C5-H9 moves from C5 to C4",
+     "label": "C4-H9 transfers to C5, breaking C4-C5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
+     "claims": 2,
      "claimsCorrect": 1,
-     "wrongClaims": [],
+     "wrongClaims": [
+      "H9 transfers to C5"
+     ],
      "vague": false,
-     "seconds": 1.8192935999967157
+     "ungrounded": 0,
+     "seconds": 1.839130900000222
     }
    ]
   },
@@ -3032,18 +3139,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 forms bonds with C5 and breaks bonds with H7, C1 forms bonds with C3 and breaks bonds with H7, C2 forms bonds with C4",
+     "label": "O0 forms bonds with C5 and breaks bonds with H7, C1 forms a bond with C3 and breaks bonds with C2, C2 forms a bond with ",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
+     "atomMention": 0.8333333333333334,
+     "claims": 2,
      "claimsCorrect": 2,
-     "wrongClaims": [
-      "C2 forms bond with C4"
-     ],
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 130.19930840000043
+     "ungrounded": 0,
+     "seconds": 5.939738600000041
     },
     {
      "model": "qwen2.5:7b",
@@ -3056,7 +3162,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8014901000000536
+     "ungrounded": 0,
+     "seconds": 1.8023198000001721
     }
    ]
   },
@@ -3091,16 +3198,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C4 gains H8 from C3, C4 loses O5, C1 loses N2, and C3 loses H8",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.4221738
+     "ungrounded": 0,
+     "seconds": 39.48832400000002,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -3113,7 +3222,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6506504000015556
+     "ungrounded": 0,
+     "seconds": 1.6436626999997535
     }
    ]
   },
@@ -3146,29 +3256,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H9 on C3 to N0, breaking N0-C1 and C3-H9 bonds.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 253.5772246000003
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Nitrogen gains hydrogen from carbon, loses to nitrogen",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.9356033999994398
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 39.91979790000012,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.9466387999998405
     }
    ]
   },
@@ -3209,20 +3322,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.85631620000024
+     "ungrounded": 0,
+     "seconds": 19.45626559999981
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H10 moves from C4 to O5",
+     "label": "Hydrogen from C4 to O5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": 0.6666666666666666,
      "claims": 1,
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.764352800000459
+     "ungrounded": 0,
+     "seconds": 1.5488433000002988
     }
    ]
   },
@@ -3263,21 +3378,23 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.04390749999976,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 39.76967280000006,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1 donates H8 to C6, forming C6-H8",
+     "label": "C1 donates H8 to C6; C1-H8 breaks, C6-H8 forms",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7995500999987126
+     "ungrounded": 0,
+     "seconds": 1.8807826999998651
     }
    ]
   },
@@ -3318,8 +3435,9 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.02851659999976,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 40.85896060000011,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -3332,7 +3450,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6224967999979854
+     "ungrounded": 0,
+     "seconds": 1.621038500000257
     }
    ]
   },
@@ -3374,12 +3493,13 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0262003999995,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 39.9106603000001,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-C2 bond breaks, C1-C4 and C1-O5 form",
+     "label": "C1-C2 bond breaks, C1-C4 and C1-O5 bonds form",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -3390,7 +3510,8 @@
       "C1-C4"
      ],
      "vague": false,
-     "seconds": 1.7909312999993563
+     "ungrounded": 0,
+     "seconds": 1.7969588999999686
     }
    ]
   },
@@ -3422,8 +3543,8 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 exchanges bonding partner from C2 to O3",
-     "confidence": 1,
+     "label": "C1 exchanges bonding partner with O3, breaking C1-C2",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -3431,20 +3552,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.96682209999858
+     "ungrounded": 0,
+     "seconds": 5.596644099999918
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1 swaps C2 for O3",
+     "label": "carbon swap: C1 for C2 with O3",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5622118999995291
+     "ungrounded": 0,
+     "seconds": 1.6242595999999903
     }
    ]
   },
@@ -3485,20 +3608,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.71720529999956
+     "ungrounded": 0,
+     "seconds": 17.674004200000084
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H9 from C4 to O2",
+     "label": "Hydrogen from C4 to O2 forms O2-H9, breaks C4-H9",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.60498939999938
+     "ungrounded": 0,
+     "seconds": 1.9180446000001394
     }
    ]
   },
@@ -3539,7 +3664,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.01490929999947
+     "ungrounded": 0,
+     "seconds": 17.699319600000045
     },
     {
      "model": "qwen2.5:7b",
@@ -3552,7 +3678,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7219701999984682
+     "ungrounded": 0,
+     "seconds": 1.6700709999999963
     }
    ]
   },
@@ -3586,6 +3713,22 @@
    "models": [
     {
      "model": "gemma2:9b",
+     "label": "N0 forms bonds with O2 and C1, breaking O2-C3 bond.",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.8,
+     "claims": 3,
+     "claimsCorrect": 2,
+     "wrongClaims": [
+      "N0 forms bond with C1"
+     ],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 7.088851100000087
+    },
+    {
+     "model": "qwen2.5:7b",
      "label": null,
      "confidence": null,
      "falseArtifacts": 0,
@@ -3595,21 +3738,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0262037000004,
-     "error": "gemma2:9b didn't answer within 120 s."
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Oxygen rearranges in ring, bonds form, one breaks",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
-     "claims": 0,
-     "claimsCorrect": 0,
-     "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.6607807999998332
+     "ungrounded": 1,
+     "seconds": 1.7022206999999472
     }
    ]
   },
@@ -3641,8 +3771,23 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H8 transfers from C4 to N6",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 41.05541839999985,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "H8 from C4 to N6",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -3650,20 +3795,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.829012399999425
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Hydrogen from C4 to N6",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0.6666666666666666,
-     "claims": 1,
-     "claimsCorrect": 1,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 1.5816844999976456
+     "ungrounded": 0,
+     "seconds": 1.529372500000056
     }
    ]
   },
@@ -3695,7 +3828,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 and C4 form a bond, C4 and O5 break a bond",
+     "label": "N0 binds to C4, breaking the bond between C4 and O5.",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -3704,20 +3837,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.320292200000956
+     "ungrounded": 0,
+     "seconds": 9.119266700000036
     },
     {
      "model": "qwen2.5:7b",
-     "label": "carbon swaps oxygen for nitrogen",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.5098389999978243
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.5049169000000693
     }
    ]
   },
@@ -3751,7 +3886,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H6 on C0 to O5, forming O2-C4 bond",
+     "label": "Proton transfer from H6 on C0 to O5, forming O2-C4 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -3760,7 +3895,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.860449599999934
+     "ungrounded": 0,
+     "seconds": 5.488526599999983
     },
     {
      "model": "qwen2.5:7b",
@@ -3773,7 +3909,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.982856100000441
+     "ungrounded": 0,
+     "seconds": 1.981033400000073
     }
    ]
   },
@@ -3806,6 +3943,20 @@
     {
      "model": "gemma2:9b",
      "label": "C4 gains H9 from C2, breaking C2-C4 and C2-H9 bonds",
+     "confidence": 0.95,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 2,
+     "claimsCorrect": 2,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 6.659992500000167
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2-H9 moves to C4, breaking C2-C4",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -3814,20 +3965,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 131.02017040000112
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "C2-H9 moves to C4, breaking C2-C4 and forming C4-H9",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 1.911568900000304
+     "ungrounded": 0,
+     "seconds": 1.6524023000001908
     }
    ]
   },
@@ -3859,18 +3998,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 transfers H9 to C2, breaking C1-C2 and C2-H9 bonds.",
+     "label": "C1 accepts a proton from H9, breaking the C2-H9 bond and forming a C1-H9 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
      "claims": 3,
-     "claimsCorrect": 2,
-     "wrongClaims": [
-      "C1 transfers H9 to C2"
-     ],
+     "claimsCorrect": 3,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 5.80665160000138
+     "ungrounded": 0,
+     "seconds": 7.009099500000011
     },
     {
      "model": "qwen2.5:7b",
@@ -3883,7 +4021,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6290453999973833
+     "ungrounded": 0,
+     "seconds": 1.5949769999999552
     }
    ]
   },
@@ -3925,7 +4064,7 @@
     {
      "model": "gemma2:9b",
      "label": "C1 and C4 form a bond, creating a ring.",
-     "confidence": 0.95,
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 2,
      "atomMention": 0.5,
@@ -3933,23 +4072,27 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.133263000000268
+     "ungrounded": 0,
+     "seconds": 8.457688599999994
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-C4 bond forms, C1-N2, C1-O3 remain",
+     "label": "C1-C4 bond forms, C1-N2, C1-O3, C4-O3, C4-N2 remain",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 2,
      "atomMention": 0.75,
-     "claims": 3,
+     "claims": 5,
      "claimsCorrect": 1,
      "wrongClaims": [
       "C1-N2",
-      "C1-O3"
+      "C1-O3",
+      "C4-O3",
+      "C4-N2"
      ],
      "vague": false,
-     "seconds": 2.946577699996531
+     "ungrounded": 0,
+     "seconds": 3.511176999999676
     }
    ]
   },
@@ -3982,20 +4125,21 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 and C2 break their bond, N3 and C4 break their bond.",
+     "label": "C1-C2 and N3-C4 bonds break, forming a ring-change.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 253.34870270000025
+     "ungrounded": 0,
+     "seconds": 5.62020299999998
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-C2 bond breaks, C2-N3 forms",
+     "label": "C1-C2 bond breaks, C2-N3 bond forms",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -4006,7 +4150,8 @@
       "C2-N3"
      ],
      "vague": false,
-     "seconds": 1.6344429999999701
+     "ungrounded": 0,
+     "seconds": 1.6514788999999874
     }
    ]
   },
@@ -4039,16 +4184,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1, C2, and C5 rearrange, breaking bonds with N6, H7, and O0.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 254.611472000001
+     "ungrounded": 0,
+     "seconds": 41.25022840000014,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -4063,7 +4210,8 @@
       "C2-C5"
      ],
      "vague": false,
-     "seconds": 1.8268398000001906
+     "ungrounded": 0,
+     "seconds": 1.7125308000002988
     }
    ]
   },
@@ -4097,32 +4245,35 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "C0 transfers H9 to N1, breaking C0-N1 and N1-H9, forming C0-H9 and N1-C4",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
-     "wrongClaims": [],
+     "atomMention": 0.8,
+     "claims": 5,
+     "claimsCorrect": 4,
+     "wrongClaims": [
+      "C0 transfers H9 to N1"
+     ],
      "vague": false,
-     "seconds": 367.02188589999827,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 19.803531299999914
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C0-H9 moves to N1, breaking C0-N1",
+     "label": "C0-H9 moves from N1 to C4",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6,
-     "claims": 2,
-     "claimsCorrect": 1,
+     "atomMention": 0.8,
+     "claims": 1,
+     "claimsCorrect": 0,
      "wrongClaims": [
-      "H9 moves to N1"
+      "H9 moves from N1 to C4"
      ],
      "vague": false,
-     "seconds": 1.825311400000006
+     "ungrounded": 0,
+     "seconds": 1.7698355000000447
     }
    ]
   },
@@ -4163,11 +4314,12 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.65244260000065
+     "ungrounded": 0,
+     "seconds": 34.47962959999987
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen N6 donates H9 to N0",
+     "label": "Nitrogen atom N6 loses H9 to N0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -4176,7 +4328,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6336333999969066
+     "ungrounded": 0,
+     "seconds": 1.6054936999999918
     }
    ]
   },
@@ -4209,7 +4362,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N1 accepts a proton from H13, breaking its bond with C3 and forming a bond with H13.",
+     "label": "N1 accepts a proton from N5, breaking the N1-C3 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -4218,20 +4371,22 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.48785840000026
+     "ungrounded": 0,
+     "seconds": 18.395855199999875
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen 1 donates hydrogen 13 to carbon 3",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7784459000006319
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.7101288999998943
     }
    ]
   },
@@ -4275,20 +4430,22 @@
       "Proton transfer from O0 to C3"
      ],
      "vague": false,
-     "seconds": 6.459120999999344
+     "ungrounded": 0,
+     "seconds": 5.847377299999819
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen gains hydrogen from carbon, loses hydrogen to carbon",
+     "label": "Oxygen gains H7 from C4, loses H7 to C3",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": 0.75,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.6516057000011206
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.8514210000000895
     }
    ]
   },
@@ -4323,32 +4480,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from N3 to O0, H8 from C2 to O5",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0.8333333333333334,
-     "claims": 2,
-     "claimsCorrect": 2,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 127.60269600000046
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "O0-H9 gains H9, O5-H8 loses H8",
-     "confidence": 1,
+     "label": "Proton transfer from N3 to O0, and from C2 to O5",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 0.6666666666666666,
-     "claims": 2,
-     "claimsCorrect": 0,
-     "wrongClaims": [
-      "O0-H9",
-      "O5-H8"
-     ],
+     "claims": 1,
+     "claimsCorrect": 1,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.665974700000137
+     "ungrounded": 0,
+     "seconds": 6.3008584999998565
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "Oxygen gains H9, loses H8; N3 gains H9, loses H8",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 0.5,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.80219280000031
     }
    ]
   },
@@ -4394,23 +4550,22 @@
       "C2-H8"
      ],
      "vague": false,
-     "seconds": 6.03860840000026
+     "ungrounded": 0,
+     "seconds": 5.99996120000002
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O3-H6 gains H8, C2-H8 loses H6",
+     "label": "O3-H6 forms, C2-H8 forms, C2-O3 breaks, O0-H6 breaks, C1-H8 breaks",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
-     "claims": 2,
-     "claimsCorrect": 0,
-     "wrongClaims": [
-      "O3-H6",
-      "C2-H8"
-     ],
+     "atomMention": 1,
+     "claims": 5,
+     "claimsCorrect": 5,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8796815000027418
+     "ungrounded": 0,
+     "seconds": 2.0386730999997815
     }
    ]
   },
@@ -4452,21 +4607,23 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0177163000014,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 39.66505749999988,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen takes hydrogen from carbon, forms new bond",
+     "label": "Nitrogen gains H from C2, loses H to C5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": 0.3333333333333333,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7159869000017642
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.8873611000003294
     }
    ]
   },
@@ -4509,20 +4666,22 @@
       "Proton transfer from H7 to O0"
      ],
      "vague": false,
-     "seconds": 5.68647530000098
+     "ungrounded": 0,
+     "seconds": 5.459121499999892
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O0-H7 transfers to O0",
+     "label": "Oxygen gains H7, C1 loses H7",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 0.6666666666666666,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.721869399998337
+     "ungrounded": 0,
+     "seconds": 1.6654969000001438
     }
    ]
   },
@@ -4556,19 +4715,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C2 and C5 form a bond, C5-N6, C1-C4, and C1-C2 break",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 4,
-     "claimsCorrect": 2,
-     "wrongClaims": [
-      "C5-N6",
-      "C1-C4"
-     ],
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 128.80733249999955
+     "ungrounded": 0,
+     "seconds": 40.96515440000012,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -4581,7 +4739,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7013450000025332
+     "ungrounded": 0,
+     "seconds": 1.738587199999951
     }
    ]
   },
@@ -4613,7 +4772,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H8 on C4 to O3, breaking C4-H8 and C4-O3 bonds.",
+     "label": "Proton transfer from H8 on C4 to O3, breaking C4-H8 and C4-O3 bonds",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -4622,20 +4781,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.2559056000001725
+     "ungrounded": 0,
+     "seconds": 5.4115986000001435
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O3-H8 proton transfer from C4 to O3",
+     "label": "O3 gains H8, C4 loses H8",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.944879999998957
+     "ungrounded": 0,
+     "seconds": 1.842529000000097
     }
    ]
   },
@@ -4670,29 +4831,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 takes H10 from O3, forming O0-H10, while H6 and H9 bond to form H6-H9, breaking O0-H6, C2-H9, and O3-H10.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 5,
-     "claimsCorrect": 5,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 254.13093539999983
+     "ungrounded": 1,
+     "seconds": 8.039358899999876
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O0 and H10 form H2, O3-H10 breaks",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.5,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7689904999993742
+     "ungrounded": 1,
+     "seconds": 1.969432999999728
     }
    ]
   },
@@ -4734,13 +4897,14 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.04441480000133,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 41.67076059999992,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
      "label": "C2 swaps N6 for C5",
-     "confidence": 1,
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 0.6666666666666666,
@@ -4750,7 +4914,8 @@
       "C2 swaps N6 for C5"
      ],
      "vague": false,
-     "seconds": 1.7179690000005066
+     "ungrounded": 0,
+     "seconds": 1.7526843000003136
     }
    ]
   },
@@ -4782,17 +4947,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "Proton transfer from C2-H9 to N5, breaking C2-H9 and forming N5-H9",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0227199000008,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 20.65845849999995
     },
     {
      "model": "qwen2.5:7b",
@@ -4805,7 +4970,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7358114999979735
+     "ungrounded": 0,
+     "seconds": 1.7264843999999575
     }
    ]
   },
@@ -4838,7 +5004,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 accepts a proton from H10, breaking the C1-N3 and C4-H10 bonds.",
+     "label": "C1 accepts a proton from H10, breaking the C1-N3 bond and the C4-H10 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -4847,22 +5013,24 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 253.45443919999897
+     "ungrounded": 0,
+     "seconds": 6.87199450000003
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H10 transfers from N3 to C4",
+     "label": "C1-H10 moves from C1-N3 to C1-O2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": 0.75,
      "claims": 1,
      "claimsCorrect": 0,
      "wrongClaims": [
-      "H10 transfers from N3 to C4"
+      "from C1-N3 to C1"
      ],
      "vague": false,
-     "seconds": 1.7111898999996484
+     "ungrounded": 0,
+     "seconds": 1.919598800000269
     }
    ]
   },
@@ -4894,7 +5062,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C4 transfers H8 to C5, breaking C4-C5 and C4-H8 bonds.",
+     "label": "C4 transfers H8 to C5, breaking C4-C5 and C4-H8 bonds",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -4903,11 +5071,12 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.912461799999699
+     "ungrounded": 0,
+     "seconds": 34.22649660000019
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C5 gains H8, C4 loses H8",
+     "label": "C4 donates H8 to C5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -4916,7 +5085,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7206119999997318
+     "ungrounded": 0,
+     "seconds": 1.7279795999997296
     }
    ]
   },
@@ -4948,16 +5118,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C2 accepts a proton from H7, breaking the C1-H7 bond and the C1-C2 bond.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.50817700000107
+     "ungrounded": 0,
+     "seconds": 39.66343819999997,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -4970,7 +5142,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.591324399996549
+     "ungrounded": 0,
+     "seconds": 1.6823527000001632
     }
    ]
   },
@@ -5004,20 +5177,22 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 transfers H6 to C1, forming C1-H6 and N0-C4, N0-O5",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 4,
-     "claimsCorrect": 4,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.550776399999857
+     "ungrounded": 0,
+     "seconds": 38.53490300000016,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H6 transfers to C4, O5; N0-H6 breaks",
+     "label": "C1-H6 gains H6 from N0, C4-O5 forms",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -5025,10 +5200,11 @@
      "claims": 2,
      "claimsCorrect": 1,
      "wrongClaims": [
-      "H6 transfers to C4"
+      "C4-O5"
      ],
      "vague": false,
-     "seconds": 1.960525600001216
+     "ungrounded": 0,
+     "seconds": 1.9238233999996446
     }
    ]
   },
@@ -5062,29 +5238,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 transfers from C0 to N5, breaking C0-H7 and C1-O3 bonds.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 6.074090500000865
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Nitrogen gains Hydrogen, Carbon loses Hydrogen",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7176719000004232
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 39.10607779999985,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.689556599999778
     }
    ]
   },
@@ -5117,23 +5296,23 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 bonds with C5, C2 bonds with C3, C4 bonds with C5, and C2 breaks bonds with C1, C4, and C5.",
+     "label": "C1 and C5 form a bond, C2-C5 and C1-C2 break, and C2-C4 breaks, forming a new ring.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 1,
+     "claims": 4,
+     "claimsCorrect": 3,
      "wrongClaims": [
-      "C2 bonds with C3",
-      "C4 bonds with C5"
+      "C2-C4"
      ],
      "vague": false,
-     "seconds": 253.6419425999988
+     "ungrounded": 0,
+     "seconds": 7.1378445000001225
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2 moves from C1, C3, C4, C5 to C3, O6",
+     "label": "C2 moves from C1, C4, C5 to C3, O6",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -5142,7 +5321,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.16343219999969
+     "ungrounded": 0,
+     "seconds": 2.064092699999921
     }
    ]
   },
@@ -5175,18 +5355,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 accepts a proton from C1-H9, forming O0-H9 and breaking C4-H9.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 2,
-     "wrongClaims": [
-      "O0 accepts a proton from C1"
-     ],
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 7.750464099999517
+     "ungrounded": 0,
+     "seconds": 41.63328839999996,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -5199,7 +5379,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6390230000019073
+     "ungrounded": 0,
+     "seconds": 1.6730407000002452
     }
    ]
   },
@@ -5241,8 +5422,9 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0390242999997,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 41.34406400000001,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -5255,7 +5437,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7293616999983787
+     "ungrounded": 0,
+     "seconds": 1.8631362999998964
     }
    ]
   },
@@ -5297,22 +5480,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.29167939999886
+     "ungrounded": 0,
+     "seconds": 37.1965811999999
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O3-H10 gains H10 from N5, O3-C4 breaks",
+     "label": "O3 gains H10, C4 loses O3, N5 loses H10",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 1,
-     "wrongClaims": [
-      "O3-H10"
-     ],
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.856980000000447
+     "ungrounded": 0,
+     "seconds": 2.20855719999969
     }
    ]
   },
@@ -5353,8 +5536,8 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 and C2 break their bond.",
-     "confidence": 1,
+     "label": "C1 and C2 break their bond, C1 loses C2 as a neighbor.",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 2,
      "atomMention": 0.5,
@@ -5362,7 +5545,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 9.29900269999914
+     "ungrounded": 0,
+     "seconds": 9.249660099999979
     },
     {
      "model": "qwen2.5:7b",
@@ -5375,7 +5559,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 3.5317562999986114
+     "ungrounded": 1,
+     "seconds": 3.1230719999996945
     }
    ]
   },
@@ -5416,20 +5601,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.247147299999371
+     "ungrounded": 0,
+     "seconds": 5.385219200000167
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen from C3 to O2 forms O2-H9, breaks C3-H9",
+     "label": "H9 moves from C3 to O2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9485073000006379
+     "ungrounded": 0,
+     "seconds": 1.5418539999998175
     }
    ]
   },
@@ -5472,20 +5659,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.12181650000065
+     "ungrounded": 0,
+     "seconds": 6.641020300000441
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen gains hydrogen, carbon loses",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.775241700001061
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.6949577000001446
     }
    ]
   },
@@ -5526,7 +5715,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 130.1973895999994
+     "ungrounded": 0,
+     "seconds": 6.9341875
     },
     {
      "model": "qwen2.5:7b",
@@ -5539,7 +5729,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5893935000002384
+     "ungrounded": 0,
+     "seconds": 1.6710558000002056
     }
    ]
   },
@@ -5571,16 +5762,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from C1-H7 to C4-H7, breaking C1-C4 and C1-H7 bonds.",
+     "label": "C4 gains H7 from C1, breaking C1-C4 and C1-H7 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.117872099999339
+     "ungrounded": 0,
+     "seconds": 18.880892500000076
     },
     {
      "model": "qwen2.5:7b",
@@ -5593,7 +5785,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6282733999975025
+     "ungrounded": 0,
+     "seconds": 1.6245101000000723
     }
    ]
   },
@@ -5625,7 +5818,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C0 exchanges bonding partner with O2, breaking the C0-C1 bond.",
+     "label": "C0 exchanges bonding partner from C1 to O2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -5634,20 +5827,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 4.469430900000035
+     "ungrounded": 0,
+     "seconds": 17.462729000000284
     },
     {
      "model": "qwen2.5:7b",
-     "label": "carbon swap: C0 for C1 with O2",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.669479399997741
+     "ungrounded": 1,
+     "seconds": 1.9145232000001706
     }
    ]
   },
@@ -5680,29 +5875,34 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 and H8 form a bond and break bonds with C1 and C2",
+     "label": "H7 and H8 form a bond, breaking their bonds with C1 and C2.",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
-     "wrongClaims": [],
+     "claims": 5,
+     "claimsCorrect": 3,
+     "wrongClaims": [
+      "H8 breaks bond with C1",
+      "H7 breaks bond with C2"
+     ],
      "vague": false,
-     "seconds": 4.931370600000024
+     "ungrounded": 0,
+     "seconds": 5.1986520000002345
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H7 and H8 form H2, C2-H8 and C1-H7 break",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.073324099998921
+     "ungrounded": 1,
+     "seconds": 1.9999950000001117
     }
    ]
   },
@@ -5735,7 +5935,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from C5-H10 to O3, breaking C4-O3 and C5-H10 bonds",
+     "label": "Proton transfer from C5-H10 to O3, breaking C4-O3 and C5-H10",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -5744,20 +5944,24 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.898569799998775
+     "ungrounded": 0,
+     "seconds": 7.045761400000192
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O3-H10 proton transfer, C4-H8 reorganization",
-     "confidence": 0.95,
+     "label": "O3-H10 proton transfer from C4 to C5",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.75,
-     "claims": 0,
+     "atomMention": 1,
+     "claims": 1,
      "claimsCorrect": 0,
-     "wrongClaims": [],
+     "wrongClaims": [
+      "H10 proton transfer from C4 to C5"
+     ],
      "vague": false,
-     "seconds": 2.1646528999991714
+     "ungrounded": 0,
+     "seconds": 1.8193747999998742
     }
    ]
   },
@@ -5789,16 +5993,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C0 exchanges bonding partner with O2, breaking the C0-C1 bond.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 126.97346349999867
+     "ungrounded": 1,
+     "seconds": 5.116228400000371
     },
     {
      "model": "qwen2.5:7b",
@@ -5811,7 +6016,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6745788000002504
+     "ungrounded": 0,
+     "seconds": 1.6872639999999666
     }
    ]
   },
@@ -5855,11 +6061,12 @@
       "N1-O3"
      ],
      "vague": false,
-     "seconds": 253.66386620000006
+     "ungrounded": 0,
+     "seconds": 6.206769400000106
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O3 gains H10 from N4, N1 loses H10",
+     "label": "O3 gains H10 from N4, loses H10 to N1",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -5868,7 +6075,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.812227699998766
+     "ungrounded": 0,
+     "seconds": 1.8474419999998062
     }
    ]
   },
@@ -5900,7 +6108,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C4 gains H8 from C3, breaking C3-C4 and C3-H8 bonds",
+     "label": "C4 gains H8 from C3, breaking C3-C4 and C3-H8 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -5909,7 +6117,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.17930529999919
+     "ungrounded": 0,
+     "seconds": 6.119017799999565
     },
     {
      "model": "qwen2.5:7b",
@@ -5922,7 +6131,8 @@
      "claimsCorrect": 4,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.0244836999997498
+     "ungrounded": 0,
+     "seconds": 2.0341765000000596
     }
    ]
   },
@@ -5954,29 +6164,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C0 exchanges N1 for O3, forming a bond with O3 and breaking a bond with N1",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 6.798040000000968
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "carbon swaps nitrogen for oxygen",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.532956399999559
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 17.974668800000103
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.596310599999968
     }
    ]
   },
@@ -6008,16 +6220,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C0 binds to O4, breaking its bond with C1",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 4.736773500001058
+     "ungrounded": 1,
+     "seconds": 5.5362821000004185
     },
     {
      "model": "qwen2.5:7b",
@@ -6030,7 +6243,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.635811099998653
+     "ungrounded": 0,
+     "seconds": 1.654305999999866
     }
    ]
   },
@@ -6063,33 +6277,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H6 to O3, breaking C1-H6 and C1-C2 bonds.",
+     "label": "C1 loses bond to H6, O3 gains bond to H6, C1-C2 breaks",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 2,
-     "wrongClaims": [
-      "Proton transfer from H6 to O3"
-     ],
+     "claims": 1,
+     "claimsCorrect": 1,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 8.235023499999196
+     "ungrounded": 0,
+     "seconds": 7.382710700000171
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H6 moves to O3, C1-C2 breaks, C1-O3 forms",
+     "label": "C1 loses H6 to O3; forms O3-H6",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 2,
-     "wrongClaims": [
-      "C1-O3"
-     ],
+     "atomMention": 0.75,
+     "claims": 1,
+     "claimsCorrect": 1,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9739199999980628
+     "ungrounded": 0,
+     "seconds": 1.8547984000002034
     }
    ]
   },
@@ -6122,16 +6334,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 switches from bonding with C1 to C3, breaking C2-C3 and C1-O0 bonds.",
+     "label": "O0 switches from bonding with C1 to C3, breaking the C2-C3 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.59294950000012
+     "ungrounded": 0,
+     "seconds": 5.508167799999938
     },
     {
      "model": "qwen2.5:7b",
@@ -6144,7 +6357,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7184633000008762
+     "ungrounded": 0,
+     "seconds": 1.7412541000000201
     }
    ]
   },
@@ -6176,16 +6390,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 transfers from C0 to N1",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.4170203000009
+     "ungrounded": 0,
+     "seconds": 42.03350799999991,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -6198,7 +6414,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6038263000026345
+     "ungrounded": 0,
+     "seconds": 1.5657908999999053
     }
    ]
   },
@@ -6230,29 +6447,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C2 accepts a proton from H4, breaking C1-H4 and C1-C2 bonds.",
-     "confidence": 0.95,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 129.2649867999982
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Hydrogen moves from C1 to C2",
+     "label": "C1 loses bond with C2 and H4, C2 gains bond with H4",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6573872999995947
+     "ungrounded": 0,
+     "seconds": 5.611492399999872
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2 gains H4 from C1, loses C1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.7386905000000261
     }
    ]
   },
@@ -6284,16 +6503,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C3 transfers H8 to O5, breaking C3-H8 and C3-O5 bonds.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 7.029714199999347
+     "ungrounded": 0,
+     "seconds": 39.809988899999766,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -6306,7 +6527,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.981243599999696
+     "ungrounded": 0,
+     "seconds": 1.9178947000000626
     }
    ]
   },
@@ -6347,20 +6569,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.8888241000008
+     "ungrounded": 0,
+     "seconds": 20.76078519999981
     },
     {
      "model": "qwen2.5:7b",
-     "label": "carbon swaps oxygen for nitrogen",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.5156747999973594
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.4993128999997862
     }
    ]
   },
@@ -6401,20 +6625,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 7.675260199999436
+     "ungrounded": 0,
+     "seconds": 18.96566969999997
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Carbon 3 loses H8 to Carbon 4",
+     "label": "C3-H8 moves to C4",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.3333333333333333,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6492949000000954
+     "ungrounded": 0,
+     "seconds": 1.6368291000002064
     }
    ]
   },
@@ -6446,7 +6672,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 transfers from N0 to N2 in frames 18-22",
+     "label": "H7 transfers from N0 to N2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -6455,7 +6681,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.529048900000751
+     "ungrounded": 0,
+     "seconds": 18.83427069999976
     },
     {
      "model": "qwen2.5:7b",
@@ -6468,7 +6695,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6094248999990524
+     "ungrounded": 0,
+     "seconds": 1.5661827000002377
     }
    ]
   },
@@ -6511,8 +6739,9 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.03711969999966,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 40.93714650000027,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -6527,7 +6756,8 @@
       "N0-H6"
      ],
      "vague": false,
-     "seconds": 1.7428484000004827
+     "ungrounded": 0,
+     "seconds": 1.6877946999999696
     }
    ]
   },
@@ -6560,7 +6790,7 @@
     {
      "model": "gemma2:9b",
      "label": "C3 exchanges bonding partner from C1 to O2",
-     "confidence": 0.95,
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -6568,7 +6798,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.29322660000062
+     "ungrounded": 0,
+     "seconds": 4.984671300000046
     },
     {
      "model": "qwen2.5:7b",
@@ -6581,7 +6812,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6045194000005722
+     "ungrounded": 0,
+     "seconds": 1.5224435000000522
     }
    ]
   },
@@ -6633,7 +6865,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 10.442937700001522
+     "ungrounded": 0,
+     "seconds": 9.821860400000121
     },
     {
      "model": "qwen2.5:7b",
@@ -6646,7 +6879,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 3.16221950000152
+     "ungrounded": 0,
+     "seconds": 2.9458731999997982
     }
    ]
   },
@@ -6679,21 +6913,21 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "Proton transfer from C2-H9 to O0-H9, breaking C2-H9 and O0-C1",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.02391870000025,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 7.685547300000209
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O0-H9 forms, C2-H9 breaks, C1-O0 breaks",
+     "label": "O0-H9 forms, C2-H9 and O0-C1 break",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -6702,7 +6936,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.053621700000018
+     "ungrounded": 0,
+     "seconds": 1.951875800000038
     }
    ]
   },
@@ -6734,29 +6969,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C3 forms a bond with O2 and breaks its bond with C1",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 6.00085929999873
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "carbon swap: C3 replaces C1 with O2",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6853359999991953
+     "ungrounded": 0,
+     "seconds": 40.15646510000015,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C3 swaps C1 for O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.5031430999999866
     }
    ]
   },
@@ -6796,11 +7034,12 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.01116079999879
+     "ungrounded": 0,
+     "seconds": 6.605693900000304
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C4-C5 bond breaks",
+     "label": "C4-C5 bond breaks, ring opens",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -6809,7 +7048,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6025646000020206
+     "ungrounded": 0,
+     "seconds": 1.4754004000001586
     }
    ]
   },
@@ -6841,16 +7081,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H8 transfers from C1 to C5",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.75361039999873
+     "ungrounded": 0,
+     "seconds": 41.304382600000125,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -6863,7 +7105,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6891816000007094
+     "ungrounded": 0,
+     "seconds": 1.5998963999999687
     }
    ]
   },
@@ -6895,29 +7138,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 forms a bond with O5 and breaks its bond with C1",
+     "label": "Nitrogen N0 exchanges bonding partner from C1 to O5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 131.34319150000064
+     "ungrounded": 0,
+     "seconds": 19.345438900000417
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen swaps carbon for oxygen",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.8248517999984324
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.755035600000061
     }
    ]
   },
@@ -6959,20 +7204,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.367070199999958
+     "ungrounded": 0,
+     "seconds": 6.032343000000343
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2-H10 to C4-H10 proton transfer",
+     "label": "C4-H10 forms, C2-H10 breaks",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7779476000033319
+     "ungrounded": 0,
+     "seconds": 1.7053004000000656
     }
    ]
   },
@@ -7005,20 +7252,21 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1-C4 and C2-O3 bonds break, forming a new ring.",
+     "label": "C2 and C1 break bonds with O3 and each other, forming a new ring.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "atomMention": 0.75,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.893808599999175
+     "ungrounded": 0,
+     "seconds": 6.314325000000187
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-C4 and C2-O3 break, ring opens",
+     "label": "C1-C4 and C2-O3 break, forming a ring",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -7027,7 +7275,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7916028999984264
+     "ungrounded": 0,
+     "seconds": 1.7377007000003941
     }
    ]
   },
@@ -7060,16 +7309,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 loses H6 and H8, forming H2 from H6 and H8",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.75,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.515935599999502
+     "ungrounded": 0,
+     "seconds": 40.392470499999824,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -7084,7 +7335,8 @@
       "C1-H6"
      ],
      "vague": false,
-     "seconds": 1.842501400001347
+     "ungrounded": 0,
+     "seconds": 1.7276365000000224
     }
    ]
   },
@@ -7118,7 +7370,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 transfers from C1 to C4, C3 gains H10, and O2 loses C3",
+     "label": "N0 transfers from C1 to C4, C3 gains H10, O2 loses bond to C3, and C4 loses bond to H10",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -7129,20 +7381,22 @@
       "N0 transfers from C1 to C4"
      ],
      "vague": false,
-     "seconds": 5.861494500000029
+     "ungrounded": 0,
+     "seconds": 7.299832200000062
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen takes hydrogen from carbon, forms new bond",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7013830999992787
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.8219276000000537
     }
    ]
   },
@@ -7183,12 +7437,13 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0303950999994,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 42.32468420000002,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H9 moves from N4 to O3",
+     "label": "H9 proton transfer from N4 to O3",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -7197,7 +7452,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.676381099998951
+     "ungrounded": 0,
+     "seconds": 1.6909844999997876
     }
    ]
   },
@@ -7238,20 +7494,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.31921239999868
+     "ungrounded": 0,
+     "seconds": 5.784981399999931
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H7 moves from C0 to N1",
+     "label": "Hydrogen transfer from C0 to N1",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
+     "atomMention": 0.6666666666666666,
      "claims": 1,
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5780491999983788
+     "ungrounded": 0,
+     "seconds": 1.67524860000005
     }
    ]
   },
@@ -7283,16 +7541,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 loses bond to H8, C2 gains bond to H8, C1-C2 breaks, C2-H8 forms",
+     "label": "C2 accepts a proton from H8, breaking the C1-H8 bond and forming a C2-H8 bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 7.367917899999767
+     "ungrounded": 0,
+     "seconds": 7.558253400000278
     },
     {
      "model": "qwen2.5:7b",
@@ -7305,7 +7564,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6650141999982297
+     "ungrounded": 0,
+     "seconds": 1.7004165999996477
     }
    ]
   },
@@ -7337,21 +7597,8 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 transfers H7 to C2, breaking C1-H7 and C1-C2 bonds",
+     "label": "C1 loses bond to H7, C2 gains bond to H7, C1-C2 bond breaks",
      "confidence": 0.95,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 131.65851699999905
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "C1-H7 moves to C2",
-     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -7359,7 +7606,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.578654699999839
+     "ungrounded": 0,
+     "seconds": 7.864071800000034
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C2 gains H7 from C1, C1 loses H7",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.8315735999997704
     }
    ]
   },
@@ -7400,11 +7662,12 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.184800599999726
+     "ungrounded": 0,
+     "seconds": 5.113234299999662
     },
     {
      "model": "qwen2.5:7b",
-     "label": "carbon swap: C2 replaces C1 with O0",
+     "label": "carbon swap: C2 for O0-C1",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -7413,7 +7676,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6367996999993921
+     "ungrounded": 0,
+     "seconds": 1.9403734999997542
     }
    ]
   },
@@ -7457,25 +7721,24 @@
       "C1-H6"
      ],
      "vague": false,
-     "seconds": 7.977726400002838
+     "ungrounded": 0,
+     "seconds": 6.692202200000175
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H6 and H6-H7 form, C1-H7, O0-H6, C1-H6 break",
+     "label": "C1-H6 and H6-H7 bond formation, C1-H7 and O0-H6 break",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 5,
-     "claimsCorrect": 1,
+     "claims": 4,
+     "claimsCorrect": 3,
      "wrongClaims": [
-      "C1-H6",
-      "C1-H7",
-      "O0-H6",
       "C1-H6"
      ],
      "vague": false,
-     "seconds": 1.9048880999982356
+     "ungrounded": 0,
+     "seconds": 1.7982828999999911
     }
    ]
   },
@@ -7516,7 +7779,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.622208000000566
+     "ungrounded": 0,
+     "seconds": 8.470868500000332
     },
     {
      "model": "qwen2.5:7b",
@@ -7529,7 +7793,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6320744999982417
+     "ungrounded": 0,
+     "seconds": 1.6712156000002287
     }
    ]
   },
@@ -7570,7 +7835,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 130.00378720000015
+     "ungrounded": 0,
+     "seconds": 8.099661299999804
     },
     {
      "model": "qwen2.5:7b",
@@ -7585,7 +7851,8 @@
       "C4-H10"
      ],
      "vague": false,
-     "seconds": 1.838038899999112
+     "ungrounded": 0,
+     "seconds": 1.8642444000001996
     }
    ]
   },
@@ -7618,31 +7885,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from C2-H10 to O0-H10, breaking C2-H10 and O0-C1",
+     "label": "Proton transfer from C2-H10 to O0-H10, breaking O0-C1",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 254.24977820000052
+     "ungrounded": 0,
+     "seconds": 20.40897160000028
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O0-H10 proton transfer, C2-H10 breaks",
+     "label": "O0-H10 proton transfer",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.75,
-     "claims": 2,
-     "claimsCorrect": 1,
-     "wrongClaims": [
-      "O0-H10"
-     ],
+     "atomMention": 0.5,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.91141079999879
+     "ungrounded": 0,
+     "seconds": 1.8298283999999985
     }
    ]
   },
@@ -7675,29 +7942,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from N4 to O1, breaking O1-C2 and N4-H8 bonds.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 128.702371799998
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "O1 gains H8, N4 loses H8",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0.75,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7042193000018597
+     "ungrounded": 0,
+     "seconds": 40.02631850000005,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "O1 gains H8, N4 loses H8, C2 loses O1",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.9707118999999949
     }
    ]
   },
@@ -7738,21 +8008,22 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0165481000021,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 1,
+     "seconds": 18.68450630000001
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2 H8 and H7 form H2, C2 H7 and C2 H8 break",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.872174399998039
+     "ungrounded": 1,
+     "seconds": 1.77706520000007
     }
    ]
   },
@@ -7794,7 +8065,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.869886000003666
+     "ungrounded": 0,
+     "seconds": 5.980321899999864
     },
     {
      "model": "qwen2.5:7b",
@@ -7807,7 +8079,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5604853999987245
+     "ungrounded": 0,
+     "seconds": 1.535908900000155
     }
    ]
   },
@@ -7839,21 +8112,21 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "H4 transfers from C1 to O0",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0180067999996,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 34.73601439999975
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen transfer from C1 to O0",
+     "label": "Hydrogen from C1 to O0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -7862,7 +8135,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.700854399997741
+     "ungrounded": 0,
+     "seconds": 1.5244873999999835
     }
    ]
   },
@@ -7903,11 +8177,12 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.399767599999905
+     "ungrounded": 0,
+     "seconds": 33.14681649999972
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen H8 transfers from C3 to O0",
+     "label": "H8 moves from C3 to O0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -7916,7 +8191,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7218557000011205
+     "ungrounded": 0,
+     "seconds": 1.6998053999999538
     }
    ]
   },
@@ -7949,17 +8225,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "C1 bonds with C6, C4-C6 and C1-C2 break, forming a new ring",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0235885000005,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 20.02164070000034
     },
     {
      "model": "qwen2.5:7b",
@@ -7972,7 +8248,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.0268651000000535
+     "ungrounded": 0,
+     "seconds": 2.080969500000123
     }
    ]
   },
@@ -8006,29 +8283,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 exchanges bonding partners with C2, breaking C4-O5 and C2-O3",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 128.78233189999685
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Nitrogen takes oxygen's place in carbon chain",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.653557999998331
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 39.33802690000041,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": null,
+     "confidence": null,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.8009070000001228
     }
    ]
   },
@@ -8061,29 +8341,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 and O5 break bond, O2-C3 also breaks, forming a ring",
+     "label": "C1 and O5 break bond, O2 and C3 break bond.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 252.86952070000024
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "C1 and O2 form, C1 and O5 break",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0.75,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6414734000004827
+     "ungrounded": 0,
+     "seconds": 4.910749399999622
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "C1 and O2 lose neighbors, C3 and O5 gain",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 2.007431299999822
     }
    ]
   },
@@ -8116,31 +8398,33 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C0 binds to O3, breaking its bond with N1 and C2's bond with O3",
+     "label": "C0 exchanges N1 for O3, breaking C0-N1 and C2-O3 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
      "claims": 3,
-     "claimsCorrect": 2,
-     "wrongClaims": [
-      "C0 breaks bond with C2"
-     ],
+     "claimsCorrect": 3,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 6.388565299998969
+     "ungrounded": 0,
+     "seconds": 5.842409400000237
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Carbon exchanges oxygen partners",
+     "label": "C0 exchanges O3 for N1",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
-     "claims": 0,
+     "atomMention": 0.75,
+     "claims": 1,
      "claimsCorrect": 0,
-     "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7590657999999821
+     "wrongClaims": [
+      "C0 exchanges O3 for N1"
+     ],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.6004265000000597
     }
    ]
   },
@@ -8172,17 +8456,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "C1 exchanges bonding partner from C5 to N6",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0243938000016,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 18.33659819999989
     },
     {
      "model": "qwen2.5:7b",
@@ -8195,7 +8479,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6355752000026405
+     "ungrounded": 0,
+     "seconds": 1.6236196999996901
     }
    ]
   },
@@ -8236,12 +8521,13 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.04032950000095,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 41.15360529999994,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H9 moves from C4 to N5",
+     "label": "H9 from C4 to N5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -8250,7 +8536,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6322852999977768
+     "ungrounded": 0,
+     "seconds": 1.8985131999999285
     }
    ]
   },
@@ -8282,29 +8569,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N3 accepts a proton from H10, breaking the C4-H10 bond and the N3-C4 bond.",
+     "label": "N3 accepts a proton from H10, breaking its bond with C4 and forming a bond with H10.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 7.380096500001848
+     "ungrounded": 0,
+     "seconds": 7.180317199999932
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen transfers hydrogen to carbon",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7157960000000894
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.7094069999996573
     }
    ]
   },
@@ -8346,20 +8635,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.604497600000352
+     "ungrounded": 0,
+     "seconds": 5.795411700000055
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H7 and H11 form H2, C1 and C4 lose H",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8646372999995946
+     "ungrounded": 1,
+     "seconds": 2.0439148999997414
     }
    ]
   },
@@ -8391,29 +8682,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from C5-H9 to C6-H9, breaking C5-C6 bond.",
+     "label": "Proton transfer from H9 on C5 to C6, breaking C5-H9 and C5-C6 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.710973400000483
+     "ungrounded": 0,
+     "seconds": 19.33066569999978
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C5-H9 moves to C6, forming C6-H9, breaking C5-H9 and C5-C6",
+     "label": "C5-H9 moves to C6",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 4,
-     "claimsCorrect": 4,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.067203299999237
+     "ungrounded": 0,
+     "seconds": 1.5868675000001677
     }
    ]
   },
@@ -8446,7 +8739,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from N3-H10 to C1-H10, breaking C1-C4 and C4-H10",
+     "label": "H10 transfers from N3 to C1, breaking C1-C4 and C4-H10 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -8457,22 +8750,22 @@
       "C4-H10"
      ],
      "vague": false,
-     "seconds": 6.383585799999535
+     "ungrounded": 0,
+     "seconds": 7.434724100000225
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-H10 transfers to C4; N3-H10 breaks",
+     "label": "C1-H10 moves from N3 to C1",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
+     "atomMention": 0.75,
+     "claims": 1,
      "claimsCorrect": 1,
-     "wrongClaims": [
-      "H10 transfers to C4"
-     ],
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8554013000018894
+     "ungrounded": 0,
+     "seconds": 1.777271599999629
     }
    ]
   },
@@ -8513,12 +8806,13 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.03344839999824,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 41.232028699999674,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H9 from N6 to O5",
+     "label": "H9 proton transfer from N6 to O5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -8527,7 +8821,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7163658999986946
+     "ungrounded": 0,
+     "seconds": 1.5753239000001922
     }
    ]
   },
@@ -8562,7 +8857,7 @@
     {
      "model": "gemma2:9b",
      "label": "O0 forms bonds with C5, C4-N6 bond forms, C2-C4 bond breaks",
-     "confidence": 0.95,
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -8570,20 +8865,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 255.54822929999978
+     "ungrounded": 0,
+     "seconds": 6.678696300000418
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen forms, C-C bond breaks, ring changes",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.8383520999997853
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.8469464999996126
     }
    ]
   },
@@ -8627,20 +8924,22 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.197727699998766
+     "ungrounded": 0,
+     "seconds": 6.471287100000307
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen accepts hydrogen from carbon, forming a new bond",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.863982000000775
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.8713599999998696
     }
    ]
   },
@@ -8684,11 +8983,12 @@
       "C1 forms bond with C5"
      ],
      "vague": false,
-     "seconds": 254.36340340000018
+     "ungrounded": 0,
+     "seconds": 20.374464099999983
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-O2 breaks, C1-N6 and O2-C5 form",
+     "label": "O2-C5 bond forms, C1-N6 bond forms, C1-O2 bond breaks",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -8697,7 +8997,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7111754000000656
+     "ungrounded": 0,
+     "seconds": 2.2016997000002303
     }
    ]
   },
@@ -8731,7 +9032,7 @@
     {
      "model": "gemma2:9b",
      "label": "O0 and N6 form a bond, C1-C5 and O0-C1 bonds break",
-     "confidence": 0.95,
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -8741,20 +9042,22 @@
       "C1-C5"
      ],
      "vague": false,
-     "seconds": 8.48433689999953
+     "ungrounded": 0,
+     "seconds": 21.706479799999855
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen moves to nitrogen, closing a ring",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7656149000003933
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.663629900000058
     }
    ]
   },
@@ -8795,7 +9098,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.37134470000118
+     "ungrounded": 0,
+     "seconds": 5.492148600000422
     },
     {
      "model": "qwen2.5:7b",
@@ -8808,7 +9112,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6348953999988736
+     "ungrounded": 0,
+     "seconds": 1.6235960000003689
     }
    ]
   },
@@ -8841,7 +9146,7 @@
     {
      "model": "gemma2:9b",
      "label": "H6 transfers from C0 to O2",
-     "confidence": 1,
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -8849,7 +9154,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 126.99789539999887
+     "ungrounded": 0,
+     "seconds": 4.703808000000194
     },
     {
      "model": "qwen2.5:7b",
@@ -8862,7 +9168,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6289342999979854
+     "ungrounded": 0,
+     "seconds": 1.6151465000002645
     }
    ]
   },
@@ -8903,20 +9210,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.56399410000071
+     "ungrounded": 0,
+     "seconds": 18.040693999999668
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2 swaps C4 for N5",
+     "label": "carbon swap: C2 for C4 with N5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6480366999991238
+     "ungrounded": 0,
+     "seconds": 1.6856099999998697
     }
    ]
   },
@@ -8949,7 +9258,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C2 and C5 form a bond, C4-C5 and C2-C3 break",
+     "label": "C2 and C5 form a bond, C4-C5 and C2-C3 break.",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -8958,11 +9267,12 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.5812666000016
+     "ungrounded": 0,
+     "seconds": 5.223835200000089
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2-C5 bond forms, C2-C3 and C4-C5 break",
+     "label": "C2-C5 bond forms, C2-C3 and C4-C5 bonds break",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -8971,7 +9281,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.0584021000005306
+     "ungrounded": 0,
+     "seconds": 1.826404300000053
     }
    ]
   },
@@ -9004,31 +9315,35 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 forms bonds with C1 and C2, breaking C2-O3 and forming C1-O3 and N0-C2",
+     "label": "N0 forms bonds with C1 and C2, C1 forms a bond with O3, and C2 breaks its bond with O3.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 5,
-     "claimsCorrect": 4,
+     "claims": 4,
+     "claimsCorrect": 3,
      "wrongClaims": [
       "N0 forms bond with C1"
      ],
      "vague": false,
-     "seconds": 6.933417499996722
+     "ungrounded": 0,
+     "seconds": 6.439532999999821
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-O3 bond forms, C2-O3 bond breaks, ring changes",
+     "label": "C1-N0 bond forms, C2-O3 bond breaks, ring changes",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.75,
+     "atomMention": 1,
      "claims": 2,
-     "claimsCorrect": 2,
-     "wrongClaims": [],
+     "claimsCorrect": 1,
+     "wrongClaims": [
+      "C1-N0"
+     ],
      "vague": false,
-     "seconds": 1.7675529999993742
+     "ungrounded": 0,
+     "seconds": 1.677966499999631
     }
    ]
   },
@@ -9069,8 +9384,9 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0301781000011,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 41.61078220000025,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -9083,7 +9399,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6273336999975145
+     "ungrounded": 0,
+     "seconds": 1.6789287999998779
     }
    ]
   },
@@ -9115,29 +9432,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 loses bond with H7, C2 gains bond with H7, C1-C2 breaks, C2-H7 forms",
-     "confidence": 1,
+     "label": "C1 loses bond to H7, C2 gains bond to H7, C1-C2 breaks",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.039197200000286
+     "ungrounded": 0,
+     "seconds": 7.109016999999993
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2 gains H7 from C1, loses C1 bond",
+     "label": "Hydrogen moves from C1 to C2",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 0.6666666666666666,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8958392999991776
+     "ungrounded": 0,
+     "seconds": 1.733031899999827
     }
    ]
   },
@@ -9170,29 +9489,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from C4-H10 to O2, breaking N3-C4.",
+     "label": "Proton transfer from H10 on C4 to O2, breaking C4-H10 and N3-C4 bonds",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.713519100002944
+     "ungrounded": 0,
+     "seconds": 19.72711869999999
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen loses hydrogen to oxygen, forming OH",
-     "confidence": 0.95,
+     "label": "O2 gains H10, C4 loses H10, N3 loses C4",
+     "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": 1,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7647842999994754
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 2.0897919999998993
     }
    ]
   },
@@ -9224,17 +9545,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": null,
-     "confidence": null,
+     "label": "C3 exchanges bonding partner with O5, breaking the C3-C4 bond.",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": null,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0374222999997,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 0,
+     "seconds": 4.22281119999988
     },
     {
      "model": "qwen2.5:7b",
@@ -9247,7 +9568,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5631852000020445
+     "ungrounded": 0,
+     "seconds": 1.501522399999667
     }
    ]
   },
@@ -9279,16 +9601,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C3 accepts a proton from H10, breaking the C3-C4 bond and the C4-H10 bond.",
+     "label": "C3 transfers H10 to itself, breaking C3-C4 and C4-H10",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 7.845146500002593
+     "ungrounded": 0,
+     "seconds": 8.1619402999999
     },
     {
      "model": "qwen2.5:7b",
@@ -9301,7 +9624,8 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.085530799999833
+     "ungrounded": 0,
+     "seconds": 1.9995181999998166
     }
    ]
   },
@@ -9343,7 +9667,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.74706560000033
+     "ungrounded": 0,
+     "seconds": 5.767248000000138
     },
     {
      "model": "qwen2.5:7b",
@@ -9356,7 +9681,8 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8055307999998331
+     "ungrounded": 0,
+     "seconds": 1.7526672000000254
     }
    ]
   },
@@ -9391,16 +9717,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from N6-H11 to O0-H11, breaking C5-H9 and N6-H11 bonds",
+     "label": "Proton transfer from N6-H11 to O0-H11, C1-H9 to C5-H9",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.8333333333333334,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": 1,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.103493400000035
+     "ungrounded": 0,
+     "seconds": 7.728343900000211
     },
     {
      "model": "qwen2.5:7b",
@@ -9415,7 +9742,8 @@
       "O0-H11"
      ],
      "vague": false,
-     "seconds": 2.084242399998009
+     "ungrounded": 0,
+     "seconds": 1.9074210000000895
     }
    ]
   },
@@ -9457,19 +9785,6 @@
     {
      "model": "gemma2:9b",
      "label": "O2 breaks its bond with C3.",
-     "confidence": 0.95,
-     "falseArtifacts": 0,
-     "realEvents": 2,
-     "atomMention": 0.5,
-     "claims": 1,
-     "claimsCorrect": 1,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 8.115445000000298
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "C3-O2 bond breaks",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 2,
@@ -9478,7 +9793,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 3.414361400000751
+     "ungrounded": 0,
+     "seconds": 8.157476999999956
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "Carbon C3 detaches from oxygen O2",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 2,
+     "atomMention": 0.5,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 3.3875368000003507
     }
    ]
   },
@@ -9510,7 +9840,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 bonds to C4, C1-C4 and O0-C1 break",
+     "label": "O0 bonds with C4, C1-C4 and O0-C1 break",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -9519,20 +9849,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 128.90435779999942
+     "ungrounded": 0,
+     "seconds": 7.020947900000028
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Oxygen shifts to form a new bond, breaking two others",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.808037799999118
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.753875299999956
     }
    ]
   },
@@ -9564,7 +9896,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H10 transfers from C3 to N6",
+     "label": "Proton transfer from H10 on C3 to N6",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -9573,7 +9905,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 253.34878339999915
+     "ungrounded": 0,
+     "seconds": 5.294538900000044
     },
     {
      "model": "qwen2.5:7b",
@@ -9586,7 +9919,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7823508000001311
+     "ungrounded": 0,
+     "seconds": 1.5048237999998963
     }
    ]
   },
@@ -9618,29 +9952,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 forms a bond with N3, breaking bonds with C4 and N3 with C4",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 254.74888419999928
+     "ungrounded": 0,
+     "seconds": 40.01852650000015,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C1-N3 bond forms, C1-C4 and N3-C4 break",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.992998100001365
+     "ungrounded": 1,
+     "seconds": 1.783559299999848
     }
    ]
   },
@@ -9673,29 +10010,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N1 transfers H9 to C4, breaking C2-C4 and N1-H9 bonds.",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
-     "vague": false,
-     "seconds": 253.6232819999978
-    },
-    {
-     "model": "qwen2.5:7b",
-     "label": "Nitrogen donates proton to carbon, forming C-H, breaking C-C and N-H",
-     "confidence": 1,
-     "falseArtifacts": 0,
-     "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 2.135918600000441
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 38.43711820000038,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
+    },
+    {
+     "model": "qwen2.5:7b",
+     "label": "N1 donates H9 to C4, C2 loses H9",
+     "confidence": 1,
+     "falseArtifacts": 0,
+     "realEvents": 1,
+     "atomMention": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 2.032026800000109
     }
    ]
   },
@@ -9728,8 +10068,8 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H9 and H10 form a bond, breaking the C4-H10 and N3-H9 bonds.",
-     "confidence": 1,
+     "label": "H9 and H10 form a bond, breaking C4-H10 and N3-H9",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -9737,20 +10077,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 8.117598200000822
+     "ungrounded": 0,
+     "seconds": 7.036806300000287
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H9 and H10 form H2, C4-H10 and N3-H9 break",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.1915971000008283
+     "ungrounded": 1,
+     "seconds": 2.246336300000083
     }
    ]
   },
@@ -9792,22 +10134,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.171792700000108
+     "ungrounded": 0,
+     "seconds": 17.994498299999627
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O3-H7 transfers from C1 to C4",
+     "label": "O3 gains H7, C1 loses H7",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
+     "atomMention": 0.75,
+     "claims": 0,
      "claimsCorrect": 0,
-     "wrongClaims": [
-      "H7 transfers from C1 to C4"
-     ],
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7681583000011742
+     "ungrounded": 0,
+     "seconds": 1.778851600000169
     }
    ]
   },
@@ -9842,29 +10184,33 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C5 accepts a proton from H7, breaking C1-H7 and forming C5-H7, while C4-N6 weakens.",
+     "label": "C5 accepts a proton from H7, forming C5-H7, while C4-N6 forms and C1-H7, C2-C4 break.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.8333333333333334,
-     "claims": 4,
+     "atomMention": 1,
+     "claims": 5,
      "claimsCorrect": 4,
-     "wrongClaims": [],
+     "wrongClaims": [
+      "C1-H7"
+     ],
      "vague": false,
-     "seconds": 129.01726099999993
+     "ungrounded": 0,
+     "seconds": 7.457111399999819
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C5-H7 moves from C1 to C5, C4-N6 forms",
+     "label": "C5-H7 moves from C1 to C5, N6 forms",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.8333333333333334,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "atomMention": 0.6666666666666666,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 2.1401022999994455
+     "ungrounded": 0,
+     "seconds": 1.9743072999999858
     }
    ]
   },
@@ -9897,16 +10243,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 forms bonds with C4, C1 breaks bond with O0, and C1 forms bond with C3",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.494924300000071
+     "ungrounded": 0,
+     "seconds": 40.67237569999974,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -9919,7 +10267,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.991821400001645
+     "ungrounded": 0,
+     "seconds": 1.8344050999996253
     }
    ]
   },
@@ -9952,16 +10301,19 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 accepts a proton from H9, breaking the C1-C3 bond and O4-H9 bond.",
+     "label": "H9 transfers from O4 to C1, breaking C1-C3 and C3-H9 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
      "claims": 3,
-     "claimsCorrect": 3,
-     "wrongClaims": [],
+     "claimsCorrect": 2,
+     "wrongClaims": [
+      "C3-H9"
+     ],
      "vague": false,
-     "seconds": 5.699001099999994
+     "ungrounded": 0,
+     "seconds": 6.532619100000244
     },
     {
      "model": "qwen2.5:7b",
@@ -9977,7 +10329,8 @@
       "C3-H9"
      ],
      "vague": false,
-     "seconds": 2.1259243000000714
+     "ungrounded": 0,
+     "seconds": 2.0449085999997334
     }
    ]
   },
@@ -10018,7 +10371,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.5701845999993385
+     "ungrounded": 0,
+     "seconds": 5.025772200000007
     },
     {
      "model": "qwen2.5:7b",
@@ -10031,7 +10385,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7321411999985576
+     "ungrounded": 0,
+     "seconds": 1.64725410000002
     }
    ]
   },
@@ -10072,20 +10427,24 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.172663300000131
+     "ungrounded": 0,
+     "seconds": 7.015877099999693
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2-H10 takes H10 from C5",
+     "label": "C2-H10 gains H10 from C5, C5-H10 breaks",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 0,
-     "claimsCorrect": 0,
-     "wrongClaims": [],
+     "claims": 2,
+     "claimsCorrect": 1,
+     "wrongClaims": [
+      "C2-H10"
+     ],
      "vague": false,
-     "seconds": 1.8286694000028074
+     "ungrounded": 0,
+     "seconds": 1.9049290999998338
     }
    ]
   },
@@ -10126,7 +10485,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.4555538999997
+     "ungrounded": 0,
+     "seconds": 4.266168200000189
     },
     {
      "model": "qwen2.5:7b",
@@ -10139,7 +10499,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6898774999976158
+     "ungrounded": 0,
+     "seconds": 1.619778299999889
     }
    ]
   },
@@ -10171,8 +10532,8 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H9 transfers from C4 to O5, breaking C4-H9 and C4-O5 bonds.",
-     "confidence": 1,
+     "label": "C4 transfers H9 to O5, breaking C4-H9 and C4-O5 bonds",
+     "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
@@ -10180,11 +10541,12 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 9.879976100001484
+     "ungrounded": 0,
+     "seconds": 33.06899759999989
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O5 gains H9 from C4",
+     "label": "O5 gains H9 from C4, forms O-H, breaks C-O and C-H",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -10193,7 +10555,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6119457000009716
+     "ungrounded": 0,
+     "seconds": 1.9124723999998532
     }
    ]
   },
@@ -10225,16 +10588,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C1 accepts a proton from H7, breaking the C1-C2 bond and C2-H7 bond.",
+     "label": "C1 gains H7 from C2, breaking C1-C2 and C2-H7 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.937055599998683
+     "ungrounded": 0,
+     "seconds": 6.8893353000003845
     },
     {
      "model": "qwen2.5:7b",
@@ -10247,7 +10611,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6771768000014127
+     "ungrounded": 0,
+     "seconds": 1.6912593999998644
     }
    ]
   },
@@ -10288,11 +10653,12 @@
      "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.273554400000721
+     "ungrounded": 0,
+     "seconds": 18.399241599999833
     },
     {
      "model": "qwen2.5:7b",
-     "label": "O3 exchanges C2 for N5",
+     "label": "O3 swaps C2 for N5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -10301,7 +10667,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7323735000006855
+     "ungrounded": 0,
+     "seconds": 1.5800233999998308
     }
    ]
   },
@@ -10333,31 +10700,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from N3 to C2: C2-N3 breaks, C2-H10 forms",
+     "label": "Proton transfer: N3 donates H10 to C2, breaking C2-N3 and N3-H10 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 2,
+     "claimsCorrect": 2,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.983211500000208
+     "ungrounded": 0,
+     "seconds": 6.814095900000073
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2-H10 gains H10 from N3, C2-N3 breaks",
+     "label": "C2-H10 gains H10 from N3",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 1,
-     "wrongClaims": [
-      "C2-H10"
-     ],
+     "claims": 0,
+     "claimsCorrect": 0,
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 2.038981400001794
+     "ungrounded": 0,
+     "seconds": 1.7592853999999352
     }
    ]
   },
@@ -10402,20 +10769,22 @@
       "H8 breaks bond with C5"
      ],
      "vague": false,
-     "seconds": 5.024054000001401
+     "ungrounded": 0,
+     "seconds": 5.195236000000033
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C3-H8 and C5-H9 break, H8-H9 form",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9576830000020564
+     "ungrounded": 1,
+     "seconds": 1.839375299999956
     }
    ]
   },
@@ -10458,20 +10827,22 @@
      "claimsCorrect": 4,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 254.56676989999787
+     "ungrounded": 0,
+     "seconds": 7.422539799999911
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen accepts hydrogen from carbon, forms bond with carbon",
+     "label": "Proton transfer: H7 from C1 to N6",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
-     "claims": 0,
-     "claimsCorrect": 0,
+     "atomMention": 0.6,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.780902499999851
+     "vague": false,
+     "ungrounded": 0,
+     "seconds": 1.6731984999999403
     }
    ]
   },
@@ -10503,16 +10874,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "H7 transfers from C3 to N0",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 4.912621100001037
+     "ungrounded": 0,
+     "seconds": 41.03368200000003,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -10525,7 +10898,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6537509000003339
+     "ungrounded": 0,
+     "seconds": 1.6255486999996938
     }
    ]
   },
@@ -10558,16 +10932,18 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C4-C6 and C2-O3 bonds break, forming a ring",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 2,
-     "claimsCorrect": 2,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.120363900002092
+     "ungrounded": 0,
+     "seconds": 41.041664899999745,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
@@ -10580,7 +10956,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.810040300000459
+     "ungrounded": 0,
+     "seconds": 1.8118487999998032
     }
    ]
   },
@@ -10613,7 +10990,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C2, C3, and C2-O6 bonds break, forming a new ring.",
+     "label": "C2, C3, and C2-O6 bond break, ring opens",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -10622,7 +10999,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 253.97467220000178
+     "ungrounded": 0,
+     "seconds": 19.196079200000035
     },
     {
      "model": "qwen2.5:7b",
@@ -10639,7 +11017,8 @@
       "C2-O6"
      ],
      "vague": false,
-     "seconds": 2.1488117999993266
+     "ungrounded": 0,
+     "seconds": 2.1157881000000054
     }
    ]
   },
@@ -10680,20 +11059,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 5.3061090999990705
+     "ungrounded": 0,
+     "seconds": 18.937023800000084
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Hydrogen from C4 to O5",
+     "label": "H10 moves from C4 to O5",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0.6666666666666666,
+     "atomMention": 1,
      "claims": 1,
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5671019000001252
+     "ungrounded": 0,
+     "seconds": 1.677874700000044
     }
    ]
   },
@@ -10734,20 +11115,22 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.97513470000028
+     "ungrounded": 0,
+     "seconds": 5.295923700000159
     },
     {
      "model": "qwen2.5:7b",
-     "label": "H7 from C1 to O0 forms O0-H7, breaks C1-H7",
+     "label": "H7 moves from C1 to O0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 3,
-     "claimsCorrect": 3,
+     "claims": 1,
+     "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8662616999968886
+     "ungrounded": 0,
+     "seconds": 1.614496900000144
     }
    ]
   },
@@ -10779,29 +11162,32 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "N0 forms a bond with C2, breaking the bond between C1 and C2.",
-     "confidence": 1,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "atomMention": null,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 255.7633972999975
+     "ungrounded": 0,
+     "seconds": 39.766793099999894,
+     "error": "gemma2:9b returned an incomplete answer (it ran past the length limit)."
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2 swaps C1 for N0",
+     "label": "carbon swap: C2 replaces C1 with N0",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6540900999978185
+     "ungrounded": 0,
+     "seconds": 1.668796999999322
     }
    ]
   },
@@ -10842,7 +11228,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 127.05737829999998
+     "ungrounded": 0,
+     "seconds": 18.58889099999983
     },
     {
      "model": "qwen2.5:7b",
@@ -10855,7 +11242,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.7935736999996006
+     "ungrounded": 0,
+     "seconds": 1.7551190999997779
     }
    ]
   },
@@ -10890,31 +11278,31 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "O0 transfers H7 to C3, breaking C2-C3 and C1-H9, forming C3-H7 and C2-H9",
+     "label": "Proton transfer from O0 to C3, breaking C2-C3 and O0-H7 bonds.",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 1,
-     "claims": 5,
-     "claimsCorrect": 5,
+     "atomMention": 0.6666666666666666,
+     "claims": 3,
+     "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 129.48184230000155
+     "ungrounded": 0,
+     "seconds": 19.342286199999972
     },
     {
      "model": "qwen2.5:7b",
-     "label": "C2-H9 gains H7, C3 loses H7",
+     "label": "C2 gains H7, C3 loses H7; O0 loses H7",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 0.6666666666666666,
-     "claims": 1,
+     "claims": 0,
      "claimsCorrect": 0,
-     "wrongClaims": [
-      "C2-H9"
-     ],
+     "wrongClaims": [],
      "vague": false,
-     "seconds": 1.9464703999981283
+     "ungrounded": 0,
+     "seconds": 2.2284648000001908
     }
    ]
   },
@@ -10955,7 +11343,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.58201769999786
+     "ungrounded": 0,
+     "seconds": 18.165022900000213
     },
     {
      "model": "qwen2.5:7b",
@@ -10968,7 +11357,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.6959018000029027
+     "ungrounded": 0,
+     "seconds": 1.7226909000007435
     }
    ]
   },
@@ -11001,7 +11391,7 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "Proton transfer from H6 on N0 to O5, breaking C1-O5 and N0-H6 bonds",
+     "label": "Proton transfer from N0 to O5, breaking C1-O5 and N0-H6 bonds",
      "confidence": 0.95,
      "falseArtifacts": 0,
      "realEvents": 1,
@@ -11010,20 +11400,22 @@
      "claimsCorrect": 3,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 6.4680041999965905
+     "ungrounded": 0,
+     "seconds": 35.608269400000104
     },
     {
      "model": "qwen2.5:7b",
-     "label": "Nitrogen donates hydrogen to oxygen",
-     "confidence": 0.95,
+     "label": null,
+     "confidence": null,
      "falseArtifacts": 0,
      "realEvents": 1,
-     "atomMention": 0,
+     "atomMention": null,
      "claims": 0,
      "claimsCorrect": 0,
      "wrongClaims": [],
-     "vague": true,
-     "seconds": 1.7681443000026047
+     "vague": false,
+     "ungrounded": 1,
+     "seconds": 1.7555001999996602
     }
    ]
   },
@@ -11055,16 +11447,17 @@
    "models": [
     {
      "model": "gemma2:9b",
-     "label": "C3 exchanges bonding partner from C5 to N6",
+     "label": "C3 exchanges its bond with C5 for a bond with N6",
      "confidence": 1,
      "falseArtifacts": 0,
      "realEvents": 1,
      "atomMention": 1,
-     "claims": 1,
-     "claimsCorrect": 1,
+     "claims": 0,
+     "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 252.7942146999985
+     "ungrounded": 0,
+     "seconds": 6.703217699999921
     },
     {
      "model": "qwen2.5:7b",
@@ -11077,7 +11470,8 @@
      "claimsCorrect": 1,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.5695148999989033
+     "ungrounded": 0,
+     "seconds": 1.563720900000073
     }
    ]
   },
@@ -11120,8 +11514,8 @@
      "claimsCorrect": 0,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 367.0475769999996,
-     "error": "gemma2:9b didn't answer within 120 s."
+     "ungrounded": 1,
+     "seconds": 34.89937719999999
     },
     {
      "model": "qwen2.5:7b",
@@ -11134,7 +11528,8 @@
      "claimsCorrect": 4,
      "wrongClaims": [],
      "vague": false,
-     "seconds": 1.8268327000029385
+     "ungrounded": 0,
+     "seconds": 1.8086629999997095
     }
    ]
   }

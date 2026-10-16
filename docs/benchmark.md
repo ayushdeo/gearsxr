@@ -225,3 +225,27 @@ Fixes in the model client (`src/chapterAI.ts`):
   "Dropped as ungrounded".
 - A failed batch no longer ends a run. Three failures in a row stop it, keeping what was
   named. The panel reports how many requests failed and why.
+
+## Sixth run: bounded output (Oct 2026)
+
+| | gemma2:9b | qwen2.5:7b |
+|---|---|---|
+| Labels fully correct | 85.6% (119/139) | 77.6% (90/116) |
+| Dropped as ungrounded | 8 | 42 |
+| Errors | 46 | 0 |
+| Seconds / reaction | 19.2 (was 125.8) | 1.9 |
+
+The output cap ended the 2-minute hangs, and gemma's median request is now 18 s. All 46 of its
+errors are the same: three attempts, each hitting the cap (224 tokens for one event, when an
+answer needs about 80). So gemma isn't being verbose. Schema-constrained decoding lets it
+emit whitespace indefinitely, and the same request reproduces the loop.
+
+Fix (`src/chapterAI.ts`):
+- Once a reply is cut off, the rest of the run uses plain decoding. The prompt states the
+  JSON shape, and the reply is parsed leniently: code fences are tolerated, and complete
+  suggestion objects are recovered from a reply that stopped part-way.
+- If a cut-off reply still recovered some suggestions, the missing ones are requested again
+  without the schema, and the more complete answer is kept.
+
+Accuracy is unchanged at about 86% for gemma and 78% for qwen. qwen's 42 drops are labels
+with no atom names.

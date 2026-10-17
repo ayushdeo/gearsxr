@@ -34,15 +34,24 @@ Labels are scored on the chapter that best matches the true reaction. A false ar
 
 | Model | Labels fully correct | Labels with a false claim | Checkable labels | Dropped as ungrounded | False-artifact rate | Atoms named in label | Errors | Seconds / reaction |
 |---|---|---|---|---|---|---|---|---|
-| gemma2:9b | 83.7% | 28 | 172 of 192 | 8 | 0.0% | 97.4% | 0 | 3.9 |
-| qwen2.5:7b | 77.2% | 33 | 145 of 177 | 23 | 0.0% | 91.1% | 0 | 1.9 |
+| gemma2:9b | 82.3% | 32 | 181 of 199 | 1 | 0.0% | 96.5% | 0 | 3.7 |
+| qwen2.5:7b | 82.8% | 28 | 163 of 192 | 9 | 0.0% | 93.3% | 0 | 1.8 |
+
+### Self-check against the detector's evidence
+
+The viewer checks each suggestion's claims against the bonds the detector found and flags contradictions. Here that flag is compared with the answer key.
+
+| Model | Flagged | Flagged and really wrong | Wrong labels caught | Fully correct among unflagged |
+|---|---|---|---|---|
+| gemma2:9b | 25 | 25 | 25 of 32 | 95.5% |
+| qwen2.5:7b | 24 | 24 | 24 of 28 | 97.1% |
 
 ### Labels fully correct, by true category
 
 | True category | gemma2:9b | qwen2.5:7b |
 |---|---|---|
-| h2-elimination | 3/6 | 4/9 |
-| ligand-exchange | 29/30 | 24/26 |
-| other | 0/0 | 1/1 |
-| proton-transfer | 98/113 | 71/89 |
-| ring-change | 14/23 | 12/20 |
+| h2-elimination | 12/12 | 11/13 |
+| ligand-exchange | 29/30 | 24/29 |
+| other | 0/0 | 1/2 |
+| proton-transfer | 88/112 | 83/94 |
+| ring-change | 20/27 | 16/25 |

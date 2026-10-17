@@ -33,13 +33,18 @@ The model only **suggests**:
 - Each row says where its name came from: Detector name, Suggested name or Your name. Events
   the model doubts show **Possible artifact** with a warning icon, in the list and at the
   top of the inspector.
-- Selecting an event opens the inspector below the list, in review order:
-  - **Evidence:** the detector summary, and a table of the bonds that formed and broke with
-    their distances (Å) just before and after the event.
-  - **Suggestion:** the model's name, its reasoning, the model, and its stated confidence.
-    **Use suggested name** copies the name into your field.
-  - **Decision:** Name and Note fields, then **Accept** and **Reject** (**A** / **R**), and
-    **Clear decision** (**U**).
+- Selecting an event jumps to it, turns the camera to its atoms and opens three numbered steps
+  below the list:
+  1. **What changed:** the detector's description and a table of the bonds that formed or
+     broke, with distances (Å) before and after and the bonding cutoff for each pair.
+     **Play this event** replays it slowly from just before to just after.
+  2. **What the model suggests:** the model's name, its reasoning, the model, and its stated
+     confidence. **Use suggested name** copies it into your field.
+  3. **Your review:** an optional name and note, then **Accept** or **Reject** (**A** / **R**),
+     and **Clear decision** (**U**).
+- **Show** filters the list: all events, still to review, accepted or rejected.
+- Pointing at any atom in the 3D view shows its name (e.g. "O0 Oxygen") and what it is bonded
+  to in the current frame.
 - Suggestions that name none of the event's atoms (e.g. "Nitrogen gains hydrogen"), or that
   name atoms outside the event and its bonded neighbors, are dropped. The status line says
   how many.

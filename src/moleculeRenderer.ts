@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import type { Trajectory } from "./xyzParser";
 import { getElementInfo } from "./elements";
-import { computeBonds } from "./bonds";
+import { bondCutoff, computeBonds } from "./bonds";
 
 const ATOM_SPHERE_SCALE = 0.35; // shrink covalent radius for a ball-and-stick look
 const BOND_RADIUS = 0.08;
@@ -209,6 +209,28 @@ export class MoleculeRenderer {
 
   getAtomMeshes(): THREE.InstancedMesh[] {
     return Array.from(this.atomMeshes.values());
+  }
+
+  /** Element and bonded neighbors of an atom in the frame on screen (for hover labels). */
+  atomInfo(atomIndex: number): { symbol: string; neighbors: Array<{ atom: number; symbol: string; distance: number }> } {
+    const t = this.trajectory;
+    const frame = Math.max(this.currentFrame, 0);
+    const base = frame * t.numAtoms * 3;
+    const p = t.positions;
+    const symbol = getAtomSymbol(t, frame, atomIndex);
+    const ax = p[base + atomIndex * 3], ay = p[base + atomIndex * 3 + 1], az = p[base + atomIndex * 3 + 2];
+    const neighbors: Array<{ atom: number; symbol: string; distance: number }> = [];
+    for (let j = 0; j < t.numAtoms; j++) {
+      if (j === atomIndex) continue;
+      const dx = p[base + j * 3] - ax, dy = p[base + j * 3 + 1] - ay, dz = p[base + j * 3 + 2] - az;
+      const d2 = dx * dx + dy * dy + dz * dz;
+      if (d2 > 25) continue; // no bond is longer than 5 Å
+      const other = getAtomSymbol(t, frame, j);
+      const distance = Math.sqrt(d2);
+      if (distance <= bondCutoff(symbol, other)) neighbors.push({ atom: j, symbol: other, distance });
+    }
+    neighbors.sort((a, b) => a.distance - b.distance);
+    return { symbol, neighbors };
   }
 
   getAtomWorldPosition(atomIndex: number, target: THREE.Vector3): THREE.Vector3 {

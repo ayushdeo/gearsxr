@@ -134,6 +134,22 @@
 
       /* Review progress */
       .chProgressBlock { padding: 10px 16px 12px; }
+      .chGuide { padding: 0 16px 12px; }
+      .chGuide > summary {
+        list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+        font: var(--t-headline); color: var(--label-1); padding: 2px 0;
+      }
+      .chGuide > summary::-webkit-details-marker { display: none; }
+      .chGuide > summary::before {
+        content: ""; width: 6px; height: 6px; margin: 0 4px 0 1px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+        transform: rotate(-45deg); transition: transform .15s ease;
+      }
+      .chGuide[open] > summary::before { transform: rotate(45deg); }
+      .chGuide ol { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 4px; font: var(--t-sub); color: var(--label-2); }
+      .chGuide li::marker { color: var(--label-3); font-variant-numeric: tabular-nums; }
+      .chCheck { display: flex !important; align-items: center; gap: 8px; color: var(--label-1) !important; margin-top: 8px !important; cursor: pointer; }
+      #chapters .chCheck input { width: auto; margin: 0; accent-color: var(--accent); }
+      .chDecisionHint { margin: 10px 0 0; font: var(--t-sub); color: var(--label-2); }
       .chProgress { display: flex; height: 4px; border-radius: 2px; overflow: hidden; background: var(--fill-2); }
       .chProgress span { display: block; height: 100%; transition: width .2s ease; }
       .chProgress .acc { background: var(--green); }
@@ -385,6 +401,13 @@
         <label for="urlInput" style="margin-top:8px">Or load from a URL (direct link, a Google Drive / Dropbox / OneDrive share link) or a Materials Project ID (e.g. mp-149)</label>
         <input id="urlInput" type="text" placeholder="https://.../trajectory.xyz, a share link, or mp-149" />
         <button id="loadUrlBtn" style="margin-top:4px">Load URL</button>
+        <label for="exampleSelect" style="margin-top:8px">Examples</label>
+        <select id="exampleSelect">
+          <option value="">Choose an example…</option>
+          <option value="samples/example-reactions.xyz">Four small-molecule reactions (validated)</option>
+          <option value="samples/tobe.xyz">Tobermorite crystal, 1,408 atoms (solids not yet validated)</option>
+          <option value="samples/orbital.cube">Molecular orbital (isosurface)</option>
+        </select>
         <label for="backgroundSelect" style="margin-top:8px">Background</label>
         <select id="backgroundSelect"></select>
         <div id="status"></div>
@@ -457,6 +480,15 @@
           <p id="chaptersProgressText" class="chProgressText"></p>
         </div>
 
+        <details id="chaptersGuide" class="chGuide" open>
+          <summary>How to review</summary>
+          <ol>
+            <li>Each event is a moment where chemical bonds form or break. Its name says what happened.</li>
+            <li>Select an event. The viewer jumps to that frame and highlights the atoms: green lines are bonds forming, red lines are bonds breaking.</li>
+            <li>Check the bond table. Accept if the name is right. Reject if it isn't a real event or the name is wrong; you can type a better name first.</li>
+          </ol>
+        </details>
+
         <section class="chSection" aria-labelledby="chModelTitle">
           <div class="chSectionHead">
             <h3 id="chModelTitle">Model suggestions</h3>
@@ -474,6 +506,7 @@
               </div>
               <label for="chaptersAiEndpoint">Ollama address</label>
               <input id="chaptersAiEndpoint" type="text" spellcheck="false" />
+              <label class="chCheck" for="chaptersAiAuto"><input id="chaptersAiAuto" type="checkbox" /> Suggest names automatically when a file loads</label>
               <p class="chHint">Runs on this computer through Ollama. Suggestions never change a decision.</p>
             </div>
           </details>

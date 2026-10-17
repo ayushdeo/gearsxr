@@ -45,9 +45,11 @@ export interface ChaptersPanelOptions {
   aiStatusEl: HTMLElement;
   aiProgressEl: HTMLElement;
   aiSettingsEl: HTMLDetailsElement;
+  aiAutoInput: HTMLInputElement;
+  guideEl: HTMLDetailsElement;
   highlight: ChapterHighlight;
-  /** Jump playback to a frame (and pause). */
-  seek: (frame: number) => void;
+  /** Jump playback to a frame (and pause), and bring the event's atoms into view. */
+  seek: (frame: number, atoms: number[]) => void;
   annotator: () => string;
 }
 
@@ -132,6 +134,8 @@ export class ChaptersPanel {
   private aiRun: AbortController | null = null;
   private aiState: AiState = "checking";
   private modelsLoaded = false;
+  /** Auto-suggest runs at most once per loaded file, so Stop is respected. */
+  private autoTried = false;
   private scanning: number | null = null;
   private notice = "";
 
@@ -166,6 +170,14 @@ export class ChaptersPanel {
       this.setAiStatus("ready", `Connected · ${this.llm.model}`);
     });
     opts.aiRefreshBtn.addEventListener("click", () => void this.refreshModels());
+    opts.aiAutoInput.checked = readFlag(AUTO_KEY, true);
+    opts.aiAutoInput.addEventListener("change", () => {
+      writeFlag(AUTO_KEY, opts.aiAutoInput.checked);
+      if (opts.aiAutoInput.checked) this.maybeAutoSuggest();
+    });
+    // The guide starts open until someone closes it.
+    opts.guideEl.open = readFlag(GUIDE_KEY, true);
+    opts.guideEl.addEventListener("toggle", () => writeFlag(GUIDE_KEY, opts.guideEl.open));
     opts.aiBtn.addEventListener("click", () => {
       if (this.aiRun) this.aiRun.abort();
       else if (this.aiState === "disconnected" || this.aiState === "checking") void this.refreshModels();
@@ -188,6 +200,9 @@ export class ChaptersPanel {
     this.chapters = [];
     this.selectedIndex = -1;
     this.notice = "";
+    this.autoTried = false;
+    // The last file's suggestion summary doesn't describe this one.
+    if (this.aiState === "done" || this.aiState === "error") this.setAiStatus("ready", `Connected · ${this.llm.model}`);
     this.opts.highlight.setTrajectory(trajectory);
     this.info = { name, sha256: null, sizeBytes: file.size, numFrames: trajectory.numFrames, numAtoms: trajectory.numAtoms };
     if (trajectory.numFrames < 2) {
@@ -293,6 +308,7 @@ export class ChaptersPanel {
     this.render();
     // Keep the assistant's button label in step with whether names exist.
     if (this.aiState === "ready" || this.aiState === "done") this.setAiStatus(this.aiState, this.opts.aiStatusEl.textContent ?? "");
+    this.maybeAutoSuggest();
   }
 
   private runWorker(trajectory: Trajectory, token: number): Promise<DetectedEvent[]> {
@@ -375,18 +391,31 @@ export class ChaptersPanel {
     aiModelSelect.value = this.llm.model;
     if (models.length) {
       this.setAiStatus("ready", `Connected · ${this.llm.model}`);
+      this.maybeAutoSuggest();
     } else {
       this.setAiStatus("disconnected", "Ollama is running but has no models. Install one with: ollama pull gemma2:9b");
       this.opts.aiSettingsEl.open = true;
     }
   }
 
-  private async runAi() {
+  /** Suggest names on its own once per file, when connected and nothing is named yet. */
+  private maybeAutoSuggest() {
+    if (!this.opts.aiAutoInput.checked || this.autoTried || this.aiRun || this.scanning !== null) return;
+    if (this.aiState !== "ready" && this.aiState !== "done") return;
+    if (this.chapters.length === 0 || this.chapters.every((c) => c.ai)) return;
+    this.autoTried = true;
+    void this.runAi(true);
+  }
+
+  /** onlyMissing: ask only about events that have no suggestion yet (automatic runs). */
+  private async runAi(onlyMissing = false) {
     const trajectory = this.trajectory;
     if (!trajectory || this.chapters.length === 0) return;
+    const all = this.chapters;
+    const chapters = onlyMissing ? all.filter((c) => !c.ai) : all;
+    if (chapters.length === 0) return;
     const run = new AbortController();
     this.aiRun = run;
-    const chapters = this.chapters;
     const bar = this.opts.aiProgressEl.firstElementChild as HTMLElement;
     this.setAiStatus("busy", `Requesting names for ${chapters.length} event${chapters.length === 1 ? "" : "s"} from ${this.llm.model}…`);
     const started = performance.now();
@@ -396,7 +425,7 @@ export class ChaptersPanel {
         trajectory,
         chapters,
         (done, total) => {
-          if (run.signal.aborted || chapters !== this.chapters) return;
+          if (run.signal.aborted || all !== this.chapters) return;
           this.setAiStatus("busy", `Received ${done} of ${total} from ${this.llm.model}…`);
           bar.style.width = `${(100 * done) / total}%`;
           this.persist();
@@ -419,7 +448,7 @@ export class ChaptersPanel {
       else this.setAiStatus("error", `Suggestions failed: ${(err as Error).message}`);
     } finally {
       if (this.aiRun === run) this.aiRun = null;
-      if (chapters === this.chapters) {
+      if (all === this.chapters) {
         this.persist();
         this.render();
       }
@@ -440,7 +469,7 @@ export class ChaptersPanel {
     // Keep the selection visible: drop a filter that would hide it.
     if (this.filter !== "all" && chapter.status !== this.filter) this.filter = "all";
     this.opts.highlight.show(chapter);
-    this.opts.seek(chapter.startFrame);
+    this.opts.seek(chapter.startFrame, chapter.atoms);
     this.render();
     this.opts.listEl.querySelector('[aria-current="true"]')?.scrollIntoView({ block: "nearest" });
   }
@@ -802,7 +831,32 @@ export class ChaptersPanel {
     clear.addEventListener("click", () => this.review("pending"));
     foot.append(el("span", "chTextSecondary", "Decisions save automatically."), clear);
 
-    decision.append(nameField, noteField, bar, foot);
+    const hint = el(
+      "p",
+      "chDecisionHint",
+      "Accept if the name describes what happened. Reject if this isn't a real event or the name is wrong.",
+    );
+    decision.append(nameField, noteField, hint, bar, foot);
     inspector.append(decision);
+  }
+}
+
+const AUTO_KEY = "gearsxr.chapters.autoSuggest";
+const GUIDE_KEY = "gearsxr.chapters.guideOpen";
+
+function readFlag(key: string, fallback: boolean): boolean {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? fallback : value === "1";
+  } catch {
+    return fallback;
+  }
+}
+
+function writeFlag(key: string, value: boolean) {
+  try {
+    localStorage.setItem(key, value ? "1" : "0");
+  } catch {
+    // Storage blocked: the setting just won't persist.
   }
 }

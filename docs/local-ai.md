@@ -21,6 +21,9 @@ and a one-line rationale. Ollama enforces the response format with a JSON schema
 On the Transition1x benchmark, the models picked the right category only 5% (qwen2.5:7b) and
 33% (gemma2:9b) of the time, so that job moved to rules (see [benchmark.md](benchmark.md)).
 
+When Ollama is connected, names are suggested automatically for any event that doesn't
+have one yet, once per loaded file. You can turn this off under **Model and connection**.
+
 The model only **suggests**:
 - **Model suggestions** in the Chapters panel shows the connection state: Connected, a
   request in progress (with Stop), Not connected, or the error Ollama returned. **Suggest

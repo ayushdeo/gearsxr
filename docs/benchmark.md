@@ -285,3 +285,12 @@ On this benchmark the detector's evidence equals the answer key, so the check is
 it can be. On real simulations it's only as reliable as the detector.
 
 `npm run bench` now reports this as "Self-check against the detector's evidence".
+
+## Note before the next run: H₂ names were being dropped
+
+The grounding filter read "H2" in "H6 and H8 form H2" as an atom named H2. That atom wasn't in
+the event, so every correct H₂-elimination name was discarded as ungrounded. That explains
+gemma's low H₂ counts (3 of 6 checkable in run 7). Molecule formulas (H2, O2, N2, …) that
+aren't atom names in the event are now ignored by the filter. The detector's own names are
+also in plain language now ("H11 moves from C4 to O0", "12 bonds change around Si9: 9 form,
+3 break"), and all 166 checkable ones agree with their bonds under the claim checker.

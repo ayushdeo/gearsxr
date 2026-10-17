@@ -52,3 +52,16 @@ const SYMBOLS_BY_ATOMIC_NUMBER = [
 export function symbolForAtomicNumber(z: number): string {
   return SYMBOLS_BY_ATOMIC_NUMBER[z] ?? "X";
 }
+
+const ELEMENT_NAMES: Record<string, string> = {
+  H: "Hydrogen", He: "Helium", Li: "Lithium", Be: "Beryllium", B: "Boron", C: "Carbon", N: "Nitrogen",
+  O: "Oxygen", F: "Fluorine", Ne: "Neon", Na: "Sodium", Mg: "Magnesium", Al: "Aluminium", Si: "Silicon",
+  P: "Phosphorus", S: "Sulfur", Cl: "Chlorine", Ar: "Argon", K: "Potassium", Ca: "Calcium", Ti: "Titanium",
+  Cr: "Chromium", Mn: "Manganese", Fe: "Iron", Co: "Cobalt", Ni: "Nickel", Cu: "Copper", Zn: "Zinc",
+  Br: "Bromine", Ag: "Silver", I: "Iodine", Pt: "Platinum", Au: "Gold", Pb: "Lead",
+};
+
+/** Full element name for a symbol, or the symbol itself when unknown. */
+export function elementName(symbol: string): string {
+  return ELEMENT_NAMES[symbol] ?? symbol;
+}

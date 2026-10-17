@@ -150,6 +150,18 @@
       .chCheck { display: flex !important; align-items: center; gap: 8px; color: var(--label-1) !important; margin-top: 8px !important; cursor: pointer; }
       #chapters .chCheck input { width: auto; margin: 0; accent-color: var(--accent); }
       .chDecisionHint { margin: 10px 0 0; font: var(--t-sub); color: var(--label-2); }
+      .chShow { font: var(--t-sub); color: var(--label-2); }
+      #chapters select.chShowSelect { width: auto; min-height: 26px; padding: 2px 6px; font: var(--t-sub); }
+      .chSub h4 { display: flex; align-items: center; gap: 8px; color: var(--label-1); }
+      .stepNum {
+        flex: 0 0 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center;
+        font: 600 11px/1 var(--font); color: var(--label-1); border: 1px solid var(--control-border);
+      }
+      .chStepHint { margin: 0 0 6px 26px; font: var(--t-sub); color: var(--label-2); }
+      .chSub > .chText, .chSub > .chTextSecondary, .chSub > .bondTable, .chSub > .btn.link, .chSub > .chNotice,
+      .chSub > .chField, .chSub > .decisionBar, .chSub > .decisionFoot, .chSub > .chDecisionHint { margin-left: 26px; }
+      .chSub > .bondTable { width: calc(100% - 26px); }
+      .chPlaceholder { padding: 12px 0; font: var(--t-sub); color: var(--label-2); text-align: center; }
       .chProgress { display: flex; height: 4px; border-radius: 2px; overflow: hidden; background: var(--fill-2); }
       .chProgress span { display: block; height: 100%; transition: width .2s ease; }
       .chProgress .acc { background: var(--green); }
@@ -187,15 +199,6 @@
       .chInline { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: end; }
 
       /* Event list */
-      .segmented { display: flex; margin-top: 8px; padding: 2px; border-radius: 7px; background: var(--fill-2); }
-      .segmented button {
-        flex: 1; min-width: 0; margin: 0; border: 0; padding: 4px 2px; border-radius: 5px; cursor: pointer;
-        background: transparent; color: var(--label-2); font: var(--t-sub); white-space: nowrap;
-      }
-      .segmented button:hover { color: var(--label-1); }
-      .segmented button[aria-pressed="true"] { background: var(--control-on); color: var(--label-1); font-weight: 600; }
-      .segmented .count { font-variant-numeric: tabular-nums; margin-left: 4px; color: var(--label-3); font-weight: 400; }
-      .segmented button[aria-pressed="true"] .count { color: var(--label-2); }
       #chaptersList {
         margin: 8px -8px 0; max-height: 232px; overflow-y: auto;
         border-top: 1px solid var(--separator); border-bottom: 1px solid var(--separator);
@@ -379,6 +382,15 @@
       button:focus-visible, summary:focus-visible, .btn:focus-visible, .iconBtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
       #frameSlider { accent-color: var(--accent); }
       #frameLabel { font-variant-numeric: tabular-nums; color: var(--label-1); }
+      #atomTooltip {
+        position: fixed; left: 0; top: 0; z-index: 30; pointer-events: none;
+        max-width: 260px; padding: 6px 9px; border-radius: 6px;
+        font: var(--t-sub); color: var(--label-1); background: var(--surface);
+        border: 1px solid var(--panel-border); box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+      }
+      #atomTooltip .tipTitle { font: var(--t-body); }
+      #atomTooltip .tipTitle b { font-weight: 600; font-variant-numeric: tabular-nums; }
+      #atomTooltip .tipBonds { color: var(--label-2); margin-top: 1px; }
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { transition: none !important; animation: none !important; }
       }
@@ -484,8 +496,9 @@
           <summary>How to review</summary>
           <ol>
             <li>Each event is a moment where chemical bonds form or break. Its name says what happened.</li>
-            <li>Select an event. The viewer jumps to that frame and highlights the atoms: green lines are bonds forming, red lines are bonds breaking.</li>
-            <li>Check the bond table. Accept if the name is right. Reject if it isn't a real event or the name is wrong; you can type a better name first.</li>
+            <li>Select an event. The viewer jumps to it and highlights the atoms: green lines are bonds forming, red lines are bonds breaking. Use <b>Play this event</b> to watch it happen, and point at any atom to see which one it is.</li>
+            <li>Check what changed, compare the model's suggestion, then Accept if the name is right or Reject if it isn't a real event or the name is wrong. You can type a better name first.</li>
+            <li>Use <b>Show</b> to list only the events you still need to review.</li>
           </ol>
         </details>
 
@@ -515,18 +528,19 @@
         <section class="chSection" aria-labelledby="chEventsTitle">
           <div class="chSectionHead">
             <h3 id="chEventsTitle">Events</h3>
+            <label class="chShow" for="chaptersFilter">Show</label>
+            <select id="chaptersFilter" class="chShowSelect" title="Filter the list by your review">
+              <option value="all">All events</option>
+              <option value="pending">Still to review</option>
+              <option value="accepted">Accepted</option>
+              <option value="rejected">Rejected</option>
+            </select>
             <button id="chapterPrevBtn" class="iconBtn" type="button" aria-label="Previous event" title="Previous event ([)">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 3.5-4.5 4.5 4.5 4.5"/></svg>
             </button>
             <button id="chapterNextBtn" class="iconBtn" type="button" aria-label="Next event" title="Next event (])">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg>
             </button>
-          </div>
-          <div id="chaptersFilter" class="segmented" role="group" aria-label="Show events">
-            <button type="button" data-filter="all" aria-pressed="true">All</button>
-            <button type="button" data-filter="pending" aria-pressed="false">To review</button>
-            <button type="button" data-filter="accepted" aria-pressed="false">Accepted</button>
-            <button type="button" data-filter="rejected" aria-pressed="false">Rejected</button>
           </div>
           <div id="chaptersList" role="list" aria-label="Detected events"></div>
         </section>
@@ -535,14 +549,15 @@
 
         <div class="chFooter">
           <details class="chDisclosure">
-            <summary>Detection settings</summary>
+            <summary>Detection sensitivity (advanced)</summary>
             <div class="chForm chInline">
               <div class="chField">
-                <label for="chaptersPersist">Minimum duration of a bond change (frames)</label>
+                <label for="chaptersPersist">Ignore bond changes that last fewer than (frames)</label>
                 <input id="chaptersPersist" type="number" min="1" max="100" />
               </div>
-              <button id="chaptersDetectBtn" class="btn" type="button">Re-detect</button>
+              <button id="chaptersDetectBtn" class="btn" type="button">Apply</button>
             </div>
+            <p class="chHint">Very brief changes are usually atoms vibrating near the bonding distance. Raise the number to see fewer, longer-lasting events; lower it to catch short ones.</p>
           </details>
           <div class="chKeys" aria-label="Keyboard shortcuts">
             <span><kbd>[</kbd><kbd>]</kbd> Previous, next</span>
@@ -553,6 +568,7 @@
         </div>
       </div>
     </section>
+    <div id="atomTooltip" role="tooltip" hidden></div>
     <div id="vrEntry"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

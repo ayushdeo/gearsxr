@@ -3,7 +3,7 @@ import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { parseExtendedXYZ, type Trajectory } from "./xyzParser";
 import { parseCubeVolume, type CubeVolume } from "./cubeParser";
-import { symbolForAtomicNumber } from "./elements";
+import { elementName, symbolForAtomicNumber } from "./elements";
 import { MoleculeRenderer } from "./moleculeRenderer";
 import { IsosurfacePanel } from "./isosurfacePanel";
 import { VRObjectManipulator } from "./vrInteraction";
@@ -220,9 +220,21 @@ const chaptersPanel = new ChaptersPanel({
   progressEl: $("chaptersProgress"),
   progressTextEl: $("chaptersProgressText"),
   inspectorEl: $("chaptersInspector"),
-  filterEl: $("chaptersFilter"),
+  filterEl: $<HTMLSelectElement>("chaptersFilter"),
   highlight: chapterHighlight,
+  playRange: (from, to, atoms) => {
+    if (!playback) return;
+    endEventReplay();
+    eventReplay = { stopAt: to, fps: playback.fps };
+    playback.fps = EVENT_REPLAY_FPS;
+    playback.setFrame(from);
+    focusAtoms(atoms);
+    playback.playing = true;
+    syncPlayButton();
+    markPresenterStateDirty(true);
+  },
   seek: (frame, atoms) => {
+    endEventReplay();
     if (!playback) return;
     playback.playing = false;
     syncPlayButton();
@@ -689,6 +701,65 @@ renderer.domElement.addEventListener("pointercancel", () => {
   pointerSelectStart = null;
 });
 
+// Hover labels: which atom is under the pointer and what it is bonded to in
+// the frame on screen. One raycast per animation frame at most.
+const atomTooltip = $("atomTooltip");
+let hoverEvent: PointerEvent | null = null;
+const MAX_LISTED_NEIGHBORS = 6;
+
+renderer.domElement.addEventListener("pointermove", (event: PointerEvent) => {
+  if (event.pointerType === "touch") return;
+  hoverEvent = event;
+});
+renderer.domElement.addEventListener("pointerleave", () => {
+  hoverEvent = null;
+  atomTooltip.hidden = true;
+});
+
+function hideHover() {
+  atomTooltip.hidden = true;
+  renderer.domElement.style.cursor = "";
+}
+
+function updateHover() {
+  const event = hoverEvent;
+  hoverEvent = null;
+  if (!event) return;
+  // Hide while orbiting (a button is held), in VR, or with nothing loaded.
+  if (!moleculeRenderer || event.buttons !== 0 || renderer.xr.isPresenting) return hideHover();
+  const rect = renderer.domElement.getBoundingClientRect();
+  pointerNdc.set(((event.clientX - rect.left) / rect.width) * 2 - 1, -((event.clientY - rect.top) / rect.height) * 2 + 1);
+  raycaster.setFromCamera(pointerNdc, camera);
+  const hit = raycaster.intersectObjects(moleculeRenderer.getAtomMeshes(), false)[0];
+  const resolved = hit && hit.instanceId !== undefined ? moleculeRenderer.resolveAtomHit(hit.object, hit.instanceId) : null;
+  if (!resolved) return hideHover();
+
+  const { symbol, neighbors } = moleculeRenderer.atomInfo(resolved.atomIndex);
+  const title = document.createElement("div");
+  title.className = "tipTitle";
+  const id = document.createElement("b");
+  id.textContent = `${symbol}${resolved.atomIndex}`;
+  title.append(id, ` ${elementName(symbol)}`);
+  const bonds = document.createElement("div");
+  bonds.className = "tipBonds";
+  if (neighbors.length === 0) {
+    bonds.textContent = "No bonds in this frame";
+  } else {
+    const listed = neighbors.slice(0, MAX_LISTED_NEIGHBORS).map((n) => `${n.symbol}${n.atom}`);
+    const more = neighbors.length - listed.length;
+    bonds.textContent = `Bonded to ${listed.join(", ")}${more > 0 ? ` and ${more} more` : ""}`;
+  }
+  atomTooltip.replaceChildren(title, bonds);
+  atomTooltip.hidden = false;
+  renderer.domElement.style.cursor = "pointer";
+  // Beside the cursor, kept inside the window.
+  const pad = 14;
+  const box = atomTooltip.getBoundingClientRect();
+  const x = Math.min(event.clientX + pad, window.innerWidth - box.width - 8);
+  const y = event.clientY + pad + box.height > window.innerHeight - 8 ? event.clientY - pad - box.height : event.clientY + pad;
+  atomTooltip.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+}
+
 window.addEventListener("keydown", (e) => {
   if (chaptersPanel.handleKey(e)) {
     e.preventDefault();
@@ -766,6 +837,22 @@ function frameMolecule(trajectory: Trajectory) {
   camera.far = Math.max(1000, distance * 10);
   camera.updateProjectionMatrix();
   orbitControls.update();
+}
+
+// "Play this event": play from just before an event to just after it, slowly,
+// then stop and restore the user's speed.
+const EVENT_REPLAY_FPS = 5;
+let eventReplay: { stopAt: number; fps: number } | null = null;
+
+function endEventReplay() {
+  if (!eventReplay || !playback) {
+    eventReplay = null;
+    return;
+  }
+  playback.fps = eventReplay.fps;
+  playback.playing = false;
+  eventReplay = null;
+  syncPlayButton();
 }
 
 /** Desktop only: turn the camera to the given atoms and come close enough to see them. */
@@ -915,6 +1002,7 @@ async function loadTrajectoryFile(
     playback = new Playback(trajectory.numFrames, (frame) => {
       moleculeRenderer?.setFrame(frame);
       chaptersPanel.onFrame(frame);
+      if (eventReplay && frame >= eventReplay.stopAt) endEventReplay();
       frameSlider.value = String(frame);
       frameLabel.textContent = `${frame} / ${trajectory.numFrames - 1}`;
       markPresenterStateDirty();
@@ -1027,11 +1115,13 @@ loadUrlBtn.addEventListener("click", async () => {
 });
 
 frameSlider.addEventListener("input", () => {
+  endEventReplay();
   playback?.setFrame(parseInt(frameSlider.value, 10));
 });
 
 playBtn.addEventListener("click", () => {
   if (!playback) return;
+  endEventReplay();
   playback.playing = !playback.playing;
   syncPlayButton();
   markPresenterStateDirty(true);
@@ -1123,6 +1213,7 @@ renderer.setAnimationLoop(() => {
     }
   }
   orbitControls.update();
+  updateHover();
   flushPresenterState();
   renderer.render(scene, camera);
 });

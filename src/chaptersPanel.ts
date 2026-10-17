@@ -20,6 +20,7 @@ import {
 } from "./chapterStore";
 import { listModels, loadLlmSettings, saveLlmSettings, suggestChapterLabels, type LlmSettings } from "./chapterAI";
 import { bracketFrames, type ChapterCategory } from "./chapterChemistry";
+import { bondCutoff } from "./bonds";
 import type { ChapterHighlight } from "./chapterHighlight";
 import type { Trajectory } from "./xyzParser";
 
@@ -31,7 +32,7 @@ export interface ChaptersPanelOptions {
   summaryEl: HTMLElement;
   progressEl: HTMLElement;
   progressTextEl: HTMLElement;
-  filterEl: HTMLElement;
+  filterEl: HTMLSelectElement;
   trackEl: HTMLElement;
   detectBtn: HTMLButtonElement;
   exportBtn: HTMLButtonElement;
@@ -50,6 +51,8 @@ export interface ChaptersPanelOptions {
   highlight: ChapterHighlight;
   /** Jump playback to a frame (and pause), and bring the event's atoms into view. */
   seek: (frame: number, atoms: number[]) => void;
+  /** Play frames from..to once (slowly) with the event's atoms in view. */
+  playRange: (from: number, to: number, atoms: number[]) => void;
   annotator: () => string;
 }
 
@@ -67,7 +70,13 @@ const CATEGORY_NAME: Record<ChapterCategory, string> = {
 };
 
 const STATUS_NAME: Record<ReviewStatus, string> = { pending: "Not reviewed", accepted: "Accepted", rejected: "Rejected" };
-const FILTER_NAME: Record<Filter, string> = { all: "All", pending: "To review", accepted: "Accepted", rejected: "Rejected" };
+const FILTER_NAME: Record<Filter, string> = { all: "All events", pending: "Still to review", accepted: "Accepted", rejected: "Rejected" };
+const FILTER_EMPTY: Record<Filter, string> = {
+  all: "No events.",
+  pending: "Nothing left to review.",
+  accepted: "No accepted events yet.",
+  rejected: "No rejected events.",
+};
 
 // Icons are fixed markup defined here, never built from data.
 const ICON = {
@@ -151,10 +160,8 @@ export class ChaptersPanel {
       opts.toggleBtn.setAttribute("aria-label", collapsed ? "Expand Chapters" : "Collapse Chapters");
       opts.toggleBtn.title = collapsed ? "Expand" : "Collapse";
     });
-    opts.filterEl.addEventListener("click", (e) => {
-      const button = (e.target as HTMLElement).closest<HTMLButtonElement>("button[data-filter]");
-      if (!button) return;
-      this.filter = button.dataset.filter as Filter;
+    opts.filterEl.addEventListener("change", () => {
+      this.filter = opts.filterEl.value as Filter;
       this.render();
     });
     opts.aiEndpointInput.value = this.llm.endpoint;
@@ -572,13 +579,12 @@ export class ChaptersPanel {
 
   private renderFilter() {
     const counts = this.counts();
-    for (const button of Array.from(this.opts.filterEl.querySelectorAll<HTMLButtonElement>("button[data-filter]"))) {
-      const filter = button.dataset.filter as Filter;
+    for (const option of Array.from(this.opts.filterEl.options)) {
+      const filter = option.value as Filter;
       const n = filter === "all" ? this.chapters.length : counts[filter];
-      button.setAttribute("aria-pressed", String(filter === this.filter));
-      button.replaceChildren(FILTER_NAME[filter], el("span", "count", String(n)));
-      button.setAttribute("aria-label", `${FILTER_NAME[filter]}, ${n}`);
+      option.textContent = `${FILTER_NAME[filter]} (${n})`;
     }
+    this.opts.filterEl.value = this.filter;
   }
 
   private renderTrack() {
@@ -615,7 +621,7 @@ export class ChaptersPanel {
     }
     const visible = this.visibleIndices();
     if (visible.length === 0) {
-      list.append(el("div", "chEmpty", `No ${FILTER_NAME[this.filter].toLowerCase()} events.`));
+      list.append(el("div", "chEmpty", FILTER_EMPTY[this.filter]));
       return;
     }
     for (const index of visible) list.append(this.renderRow(this.chapters[index], index));
@@ -652,6 +658,11 @@ export class ChaptersPanel {
     return row;
   }
 
+  private symbolAt(chapter: Chapter, atom: number): string {
+    const t = this.trajectory!;
+    return t.frameSymbols[chapter.startFrame * t.numAtoms + atom] ?? t.symbols[atom] ?? "X";
+  }
+
   private atomName(chapter: Chapter, atom: number): string {
     const t = this.trajectory;
     const symbol = t ? (t.frameSymbols[chapter.startFrame * t.numAtoms + atom] ?? t.symbols[atom]) : "";
@@ -668,9 +679,15 @@ export class ChaptersPanel {
   private renderInspector() {
     const inspector = this.opts.inspectorEl;
     const chapter = this.chapters[this.selectedIndex];
-    if (!chapter || !this.trajectory || this.scanning !== null) {
+    if (!this.trajectory || this.scanning !== null || this.chapters.length === 0) {
       inspector.hidden = true;
       inspector.replaceChildren();
+      return;
+    }
+    if (!chapter) {
+      // Say what to do next instead of showing nothing.
+      inspector.hidden = false;
+      inspector.replaceChildren(el("p", "chPlaceholder", "Select an event above to see what changed and review it."));
       return;
     }
     inspector.hidden = false;
@@ -700,19 +717,31 @@ export class ChaptersPanel {
 
     // 2. Evidence.
     const evidence = el("div", "chSub");
-    evidence.append(el("h4", undefined, "Evidence"), el("p", "chText", `Detector: ${chapter.label}`));
+    evidence.append(
+      step(1, "What changed"),
+      el("p", "chStepHint", "The bonds the detector saw form or break. Two atoms count as bonded when they are closer than the cutoff for that pair of elements."),
+      el("p", "chText", `Detector's description: ${chapter.label}`),
+    );
     const { before, after } = bracketFrames(this.trajectory, chapter, this.detectOptions.minPersistFrames);
     const bonds = [
       ...chapter.formed.map((pair) => ({ pair, formed: true })),
       ...chapter.broken.map((pair) => ({ pair, formed: false })),
     ];
     const table = el("table", "bondTable");
-    const caption = el("caption", undefined, `Bond changes, distances in Å at frames ${before} and ${after}`);
+    const caption = el("caption", undefined, `Bond changes, distances in ångström before (frame ${before}) and after (frame ${after}), with each pair's bonding cutoff`);
     caption.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
     const thead = el("thead");
     const hr = el("tr");
-    for (const [text, cls] of [["Change", ""], ["Atoms", ""], [`Frame ${before}`, "num"], [`Frame ${after}`, "num"]]) {
+    const headers: Array<[string, string, string]> = [
+      ["Change", "", "Whether the bond formed or broke"],
+      ["Atoms", "", "The two atoms, named by element and index"],
+      ["Before", "num", `Distance in Å at frame ${before}, just before the event`],
+      ["After", "num", `Distance in Å at frame ${after}, once the event has settled`],
+      ["Cutoff", "num", "Bonded when closer than this distance (Å)"],
+    ];
+    for (const [text, cls, tip] of headers) {
       const th = el("th", cls || undefined, text);
+      th.title = tip;
       th.scope = "col";
       hr.append(th);
     }
@@ -729,11 +758,16 @@ export class ChaptersPanel {
         el("td", "pair", `${this.atomName(chapter, pair[0])}–${this.atomName(chapter, pair[1])}`),
         el("td", "num", this.distance(before, pair).toFixed(2)),
         el("td", "num", this.distance(after, pair).toFixed(2)),
+        el("td", "num", bondCutoff(this.symbolAt(chapter, pair[0]), this.symbolAt(chapter, pair[1])).toFixed(2)),
       );
       tbody.append(tr);
     }
     table.append(caption, thead, tbody);
     evidence.append(table);
+    const replay = el("button", "btn link", `Play this event (frames ${before}–${after})`);
+    replay.type = "button";
+    replay.addEventListener("click", () => this.opts.playRange(before, after, chapter.atoms));
+    evidence.append(replay);
     if (bonds.length > BOND_ROWS) {
       const more = el("button", "btn link", this.showAllBonds ? "Show fewer bonds" : `Show all ${bonds.length} bonds`);
       more.type = "button";
@@ -747,7 +781,10 @@ export class ChaptersPanel {
 
     // 3. Suggestion.
     const suggestion = el("div", "chSub");
-    suggestion.append(el("h4", undefined, "Suggestion"));
+    suggestion.append(
+      step(2, "What the model suggests"),
+      el("p", "chStepHint", "A local language model's description of the event. It can be wrong; a warning appears when it contradicts the table above."),
+    );
     if (ai) {
       suggestion.append(el("p", "chText", ai.label));
       if (ai.conflicts?.length) {
@@ -772,16 +809,19 @@ export class ChaptersPanel {
         suggestion.append(use);
       }
     } else {
-      suggestion.append(el("p", "chTextSecondary", "No model suggestion for this event. Use Suggest names above to request one."));
+      suggestion.append(el("p", "chTextSecondary", "No suggestion yet. Start Ollama, or use Suggest names under Model suggestions."));
     }
     inspector.append(suggestion);
 
     // 4. Decision.
     const decision = el("div", "chSub");
-    decision.append(el("h4", undefined, "Decision"));
+    decision.append(
+      step(3, "Your review"),
+      el("p", "chStepHint", "Accept if the name describes what happened. Reject if this isn't a real event or the name is wrong."),
+    );
     const id = chapter.id.replace(/[^a-z0-9]/gi, "_");
     const nameField = el("div", "chField");
-    const nameLabel = el("label", undefined, "Name");
+    const nameLabel = el("label", undefined, "Your name for it (optional, leave blank to keep the one shown)");
     nameLabel.htmlFor = `chName-${id}`;
     const name = el("input");
     name.id = `chName-${id}`;
@@ -795,7 +835,7 @@ export class ChaptersPanel {
     });
     nameField.append(nameLabel, name);
     const noteField = el("div", "chField");
-    const noteLabel = el("label", undefined, "Note");
+    const noteLabel = el("label", undefined, "Note (optional)");
     noteLabel.htmlFor = `chNote-${id}`;
     const note = el("textarea");
     note.id = `chNote-${id}`;
@@ -831,12 +871,7 @@ export class ChaptersPanel {
     clear.addEventListener("click", () => this.review("pending"));
     foot.append(el("span", "chTextSecondary", "Decisions save automatically."), clear);
 
-    const hint = el(
-      "p",
-      "chDecisionHint",
-      "Accept if the name describes what happened. Reject if this isn't a real event or the name is wrong.",
-    );
-    decision.append(nameField, noteField, hint, bar, foot);
+    decision.append(nameField, noteField, bar, foot);
     inspector.append(decision);
   }
 }
@@ -859,4 +894,11 @@ function writeFlag(key: string, value: boolean) {
   } catch {
     // Storage blocked: the setting just won't persist.
   }
+}
+
+/** A numbered step heading in the inspector: 1 What changed, 2 ..., 3 Your review. */
+function step(n: number, title: string): HTMLElement {
+  const h = el("h4");
+  h.append(el("span", "stepNum", String(n)), title);
+  return h;
 }

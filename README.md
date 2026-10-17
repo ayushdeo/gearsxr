@@ -27,7 +27,7 @@ GEARS XR (Extended Reality) is a browser-based molecular dynamics trajectory vie
 
 ## Quick Start
 
-1. Run `npm run dev` and open the printed local URL — the URL field is prefilled with the bundled demo trajectory.
+1. Run `npm run dev` and open the printed local URL. The URL field is prefilled with a validated example: four small-molecule reactions in one trajectory. More examples, including the tobermorite crystal, are in the **Examples** menu.
 2. Click **Load URL**.
 3. Click **Play** in the bottom-left playback panel.
 

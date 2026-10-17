@@ -315,9 +315,13 @@ async function chatOnce(
  * being shown as if they were evidence-based.
  */
 function grounded(label: string, eventAtoms: Set<string>, allowed: Set<string>): boolean {
-  const named = label.match(/\b[A-Z][a-z]?\d+\b/g) ?? [];
+  // "H2", "O2", "N2"... read as molecules when no atom in the event has that name,
+  // so "H44 and H45 form H2" isn't mistaken for naming atom H2.
+  const named = (label.match(/\b[A-Z][a-z]?\d+\b/g) ?? []).filter((n) => allowed.has(n) || !MOLECULE.test(n));
   return named.some((n) => eventAtoms.has(n)) && named.every((n) => allowed.has(n));
 }
+
+const MOLECULE = /^(H2|O2|N2|F2|Cl2|Br2|I2)$/;
 
 export interface SuggestResult {
   /** Chapters that received a grounded suggestion. */

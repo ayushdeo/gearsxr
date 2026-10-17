@@ -248,39 +248,69 @@ function atomName(symbols: string[], atom: number) {
   return `${symbols[atom] ?? "X"}${atom}`;
 }
 
+/** Plain-language list: "A", "A and B", "A, B and C". */
+function joinList(items: string[]): string {
+  return items.length <= 1 ? items.join("") : `${items.slice(0, -1).join(", ")} and ${items[items.length - 1]}`;
+}
+
+/**
+ * Names an event in plain words a non-specialist can follow. The phrasing
+ * stays within what chapterClaims.ts reads ("X moves from A to B",
+ * "A–B bond forms", "X swaps A for B", "X and Y form H2"), so the detector's
+ * own names are checkable the same way as model suggestions.
+ */
 function describe(group: BondChange[], symbols: string[]): { kind: ChapterKind; label: string } {
   const formed = group.filter((c) => c.formed);
   const broken = group.filter((c) => !c.formed);
-  const pair = (c: BondChange) => `${atomName(symbols, c.a)}–${atomName(symbols, c.b)}`;
+  const name = (atom: number) => atomName(symbols, atom);
+  const pair = (c: BondChange) => `${name(c.a)}–${name(c.b)}`;
+  const key = (c: BondChange) => `${Math.min(c.a, c.b)}-${Math.max(c.a, c.b)}`;
 
-  // One atom leaves one partner and binds another: a transfer (e.g. H+).
+  // One atom leaves one partner and binds another: a transfer (e.g. H+) or a swap.
   if (formed.length === 1 && broken.length === 1) {
     const f = formed[0];
     const k = broken[0];
-    const shared = [f.a, f.b].find((atom) => atom === k.a || atom === k.b);
-    const samePair = Math.min(f.a, f.b) === Math.min(k.a, k.b) && Math.max(f.a, f.b) === Math.max(k.a, k.b);
-    if (samePair) {
-      return { kind: "rearrangement", label: `Transient ${pair(k)} break and re-form` };
+    if (key(f) === key(k)) {
+      return { kind: "rearrangement", label: `${pair(k)} bond breaks and re-forms` };
     }
+    const shared = [f.a, f.b].find((atom) => atom === k.a || atom === k.b);
     if (shared !== undefined) {
       const from = k.a === shared ? k.b : k.a;
       const to = f.a === shared ? f.b : f.a;
       const label =
         symbols[shared] === "H"
-          ? `${atomName(symbols, shared)} transfer ${atomName(symbols, from)} → ${atomName(symbols, to)}`
-          : `${atomName(symbols, shared)} swaps ${atomName(symbols, from)} for ${atomName(symbols, to)}`;
+          ? `${name(shared)} moves from ${name(from)} to ${name(to)}`
+          : `${name(shared)} swaps ${name(from)} for ${name(to)}`;
       return { kind: "transfer", label };
     }
   }
   if (group.length === 1) {
     const c = group[0];
     return c.formed
-      ? { kind: "bond-form", label: `Bond formed ${pair(c)}` }
-      : { kind: "bond-break", label: `Bond broken ${pair(c)}` };
+      ? { kind: "bond-form", label: `${pair(c)} bond forms` }
+      : { kind: "bond-break", label: `${pair(c)} bond breaks` };
   }
-  if (broken.length === 0) return { kind: "bond-form", label: `${formed.length} bonds formed` };
-  if (formed.length === 0) return { kind: "bond-break", label: `${broken.length} bonds broken` };
-  return { kind: "rearrangement", label: `Rearrangement: ${formed.length} formed, ${broken.length} broken` };
+
+  const kind: ChapterKind = broken.length === 0 ? "bond-form" : formed.length === 0 ? "bond-break" : "rearrangement";
+  // Two H atoms that each lost a partner bond to each other: H2 forms.
+  const brokenAtoms = new Set(broken.flatMap((c) => [c.a, c.b]));
+  const h2 = formed.find((c) => symbols[c.a] === "H" && symbols[c.b] === "H" && brokenAtoms.has(c.a) && brokenAtoms.has(c.b));
+  if (h2) {
+    return { kind, label: `${name(h2.a)} and ${name(h2.b)} form H2 (${broken.length} bonds break)` };
+  }
+
+  // A few bonds: list them. Many: summarize around the most involved atom.
+  if (group.length <= 3) {
+    const parts: string[] = [];
+    if (formed.length) parts.push(`${joinList(formed.map(pair))} ${formed.length === 1 ? "forms" : "form"}`);
+    if (broken.length) parts.push(`${joinList(broken.map(pair))} ${broken.length === 1 ? "breaks" : "break"}`);
+    return { kind, label: parts.join(", ") };
+  }
+  const counts = new Map<number, number>();
+  for (const c of group) for (const atom of [c.a, c.b]) counts.set(atom, (counts.get(atom) ?? 0) + 1);
+  const center = [...counts].sort((x, y) => y[1] - x[1] || x[0] - y[0])[0][0];
+  const tally = [formed.length && `${formed.length} form`, broken.length && `${broken.length} break`].filter(Boolean).join(", ");
+  return { kind, label: `${group.length} bonds change around ${name(center)}: ${tally}` };
 }
 
 export function detectBondEvents(

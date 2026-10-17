@@ -48,8 +48,10 @@ const toggleRoomBtn = $<HTMLButtonElement>("toggleRoomBtn");
 const fileInput = $<HTMLInputElement>("fileInput");
 const urlInput = $<HTMLInputElement>("urlInput");
 // Prefill the bundled demo from wherever this page is served, not a hosted site.
-if (location.protocol.startsWith("http")) urlInput.value = new URL("samples/tobe.xyz", location.href).href;
+// The default is the validated small-molecule example; tobermorite is in Examples.
+if (location.protocol.startsWith("http")) urlInput.value = new URL("samples/example-reactions.xyz", location.href).href;
 const loadUrlBtn = $<HTMLButtonElement>("loadUrlBtn");
+const exampleSelect = $<HTMLSelectElement>("exampleSelect");
 const backgroundSelect = $<HTMLSelectElement>("backgroundSelect");
 const vrEntryEl = $("vrEntry");
 const isosurfaceEl = $("isosurface");
@@ -74,7 +76,7 @@ const collabStatusEl = $("collabStatus");
 
 // Controls only the presenter (or a solo user) may operate.
 const presenterControls = [
-  fileInput, urlInput, loadUrlBtn, frameSlider, playBtn, stepBack, stepFwd, fpsInput, backgroundSelect,
+  fileInput, urlInput, loadUrlBtn, exampleSelect, frameSlider, playBtn, stepBack, stepFwd, fpsInput, backgroundSelect,
 ];
 
 // Surface otherwise-silent runtime errors in the UI status line, since most
@@ -213,16 +215,19 @@ const chaptersPanel = new ChaptersPanel({
   aiStatusEl: $("chaptersAiStatus"),
   aiProgressEl: $("chaptersAiProgress"),
   aiSettingsEl: $<HTMLDetailsElement>("chaptersAiSettings"),
+  aiAutoInput: $<HTMLInputElement>("chaptersAiAuto"),
+  guideEl: $<HTMLDetailsElement>("chaptersGuide"),
   progressEl: $("chaptersProgress"),
   progressTextEl: $("chaptersProgressText"),
   inspectorEl: $("chaptersInspector"),
   filterEl: $("chaptersFilter"),
   highlight: chapterHighlight,
-  seek: (frame) => {
+  seek: (frame, atoms) => {
     if (!playback) return;
     playback.playing = false;
     syncPlayButton();
     playback.setFrame(frame);
+    focusAtoms(atoms);
     markPresenterStateDirty(true);
   },
   annotator: () => userNameInput.value.trim() || "anonymous",
@@ -736,6 +741,46 @@ function atomsCentroid(volume: CubeVolume): [number, number, number] {
   return [centroid[0] / n, centroid[1] / n, centroid[2] / n];
 }
 
+/**
+ * Desktop only: point the camera at the structure and back off until its
+ * first-frame bounding sphere fits the view. VR keeps its own placement, and
+ * room followers take the presenter's camera.
+ */
+function frameMolecule(trajectory: Trajectory) {
+  if (renderer.xr.isPresenting || applyingRemoteState || trajectory.numAtoms === 0) return;
+  const p = trajectory.positions;
+  const n = trajectory.numAtoms;
+  const center = new THREE.Vector3();
+  for (let i = 0; i < n; i++) center.add(new THREE.Vector3(p[i * 3], p[i * 3 + 1], p[i * 3 + 2]));
+  center.divideScalar(n);
+  let radius = 0;
+  for (let i = 0; i < n; i++) {
+    radius = Math.max(radius, Math.hypot(p[i * 3] - center.x, p[i * 3 + 1] - center.y, p[i * 3 + 2] - center.z));
+  }
+  const halfFov = THREE.MathUtils.degToRad(camera.fov / 2);
+  const fit = Math.min(halfFov, Math.atan(Math.tan(halfFov) * camera.aspect));
+  const distance = Math.max((radius + 1.5) / Math.sin(fit), 4);
+  // The renderer centres the molecule on the origin.
+  orbitControls.target.set(0, 0, 0);
+  camera.position.copy(new THREE.Vector3(0, 0.35, 1).normalize().multiplyScalar(distance));
+  camera.far = Math.max(1000, distance * 10);
+  camera.updateProjectionMatrix();
+  orbitControls.update();
+}
+
+/** Desktop only: turn the camera to the given atoms and come close enough to see them. */
+function focusAtoms(atoms: number[]) {
+  if (!moleculeRenderer || atoms.length === 0 || renderer.xr.isPresenting) return;
+  const points = atoms.map((atom) => moleculeRenderer!.getAtomWorldPosition(atom, new THREE.Vector3()));
+  const center = points.reduce((sum, p) => sum.add(p), new THREE.Vector3()).divideScalar(points.length);
+  const spread = Math.max(...points.map((p) => p.distanceTo(center)));
+  const direction = camera.position.clone().sub(orbitControls.target).normalize();
+  const distance = Math.max(6, spread * 3 + 5);
+  orbitControls.target.copy(center);
+  camera.position.copy(center).addScaledVector(direction, distance);
+  orbitControls.update();
+}
+
 function mountMolecule(trajectory: Trajectory, sourceUrl: string | null) {
   if (moleculeRenderer) {
     moleculeRoot.remove(moleculeRenderer.group);
@@ -750,6 +795,7 @@ function mountMolecule(trajectory: Trajectory, sourceUrl: string | null) {
   lastObservedTransform = objectTransformSignature(moleculeRoot);
   measurementTool.clear();
   currentTrajectoryUrl = sourceUrl;
+  frameMolecule(trajectory);
 }
 
 /**
@@ -962,6 +1008,14 @@ window.addEventListener("drop", (e) => {
   uiEl.style.outline = "none";
   const file = e.dataTransfer?.files?.[0];
   if (file) loadTrajectoryFile(file, null, true);
+});
+
+exampleSelect.addEventListener("change", () => {
+  const path = exampleSelect.value;
+  exampleSelect.value = "";
+  if (!path || !location.protocol.startsWith("http")) return;
+  urlInput.value = new URL(path, location.href).href;
+  void loadTrajectoryFromUrl(urlInput.value, true);
 });
 
 loadUrlBtn.addEventListener("click", async () => {

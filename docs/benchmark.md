@@ -294,3 +294,21 @@ gemma's low H₂ counts (3 of 6 checkable in run 7). Molecule formulas (H2, O2, 
 aren't atom names in the event are now ignored by the filter. The detector's own names are
 also in plain language now ("H11 moves from C4 to O0", "12 bonds change around Si9: 9 form,
 3 break"), and all 166 checkable ones agree with their bonds under the claim checker.
+
+## Eighth run: H₂ fix confirmed (17 Oct 2026, commit 21f809e)
+
+| | gemma2:9b | qwen2.5:7b |
+|---|---|---|
+| Labels fully correct | 82.3% (149 of 181 checkable) | 82.8% (135 of 163) |
+| Dropped as ungrounded | 1 (was 8) | 9 (was 23) |
+| H₂-elimination names correct | 12/12 (was 3/6) | 11/13 (was 4/9) |
+| Self-check: flagged and really wrong | 25 of 25 | 24 of 24 |
+| Wrong labels caught | 25 of 32 | 24 of 28 |
+| Fully correct among unflagged | **95.5%** | **97.1%** |
+| Seconds per reaction, median (95th pct.) | 3.5 (5.8) | 1.7 (2.1) |
+| Errors | 0 | 0 |
+
+The fix worked. gemma's percentage dipped slightly, but more of its labels are now kept and
+checked (181 vs 172), so it got more names right in total (149 vs 144). qwen gained the most
+(112 → 135 correct) and now matches gemma's accuracy at twice the speed. gemma still gives a
+usable name for more events, so it stays the default.

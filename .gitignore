@@ -8,3 +8,6 @@ dist/
 # Benchmark data and reports (generated locally)
 bench/
 *.h5
+
+# Baseline run scratch files (tools/baselines/run_baselines.py)
+tools/baselines/work/

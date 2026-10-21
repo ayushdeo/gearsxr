@@ -1,0 +1,10 @@
+{
+  "title": "GEARS XR with Simulation Chapters",
+  "upload_type": "software",
+  "description": "Browser and WebXR molecular dynamics viewer that detects bond-change events in trajectories, suggests names for them with a local language model checked against the detected bonds, and records a scientist's accept or reject decision as labelled data. Includes the Transition1x-based benchmark, baseline comparisons with ReacNetGenerator and LAMMPS fix reaxff/species, and the test suite.",
+  "license": "MIT",
+  "keywords": ["molecular dynamics", "virtual reality", "WebXR", "reaction detection", "human-in-the-loop", "large language models"],
+  "creators": [
+    { "name": "Ayush", "affiliation": "University of Southern California" }
+  ]
+}

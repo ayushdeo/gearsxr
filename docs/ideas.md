@@ -49,7 +49,8 @@ JSON export. No LLM needed for the first demo.
 
 **Status: v1 implemented.**
 - `src/chapterDetect.ts` is the bond-diff detector. It applies a persistence filter, groups
-  related changes, and ignores atoms that jump (periodic-boundary wraps).
+  related changes, and ignores atoms that jump. In periodic cells (`src/cell.ts`) bonds and
+  displacements use the nearest image, so bonds across cell walls count and wrapping is not a jump.
 - `src/chapterWorker.ts` runs detection in a Web Worker.
 - `src/chapterStore.ts` saves reviews in localStorage per file SHA-256 and builds the
   `gearsxr-chapters` v1 JSON export.
@@ -63,8 +64,16 @@ JSON export. No LLM needed for the first demo.
   scores the detector and each local model with no hand labeling; see
   [benchmark.md](benchmark.md).
 
-Next steps: room sync of reviews, review from inside VR, an import for labels, a hosted-model
-route through our own Worker, and periodic-cell-aware bonds.
+- `src/lammpsDump.ts` reads LAMMPS text dumps (orthogonal and triclinic boxes).
+- `tools/baselines/` runs ReacNetGenerator and LAMMPS `fix reaxff/species` on the same ReaxFF
+  trajectory as Chapters; see [baselines.md](baselines.md).
+
+The milestones from here (solids, liquids, gases, scaling) and their pass tests are in the
+roadmap tab of the literature review. Done so far: 0.1 CI, 0.2 LAMMPS dumps, 0.3 cell vectors,
+0.4 baselines runnable, 1.1 periodic boundaries.
+
+Later: room sync of reviews, review from inside VR, an import for labels, and a hosted-model
+route through our own Worker.
 
 ---
 

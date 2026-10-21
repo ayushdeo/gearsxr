@@ -1,6 +1,6 @@
 # GEARS XR
 
-GEARS XR (Extended Reality) is a browser-based molecular dynamics trajectory viewer for extended XYZ files, with desktop controls and WebXR support for virtual reality headsets.
+GEARS XR (Extended Reality) is a browser-based molecular dynamics trajectory viewer for extended XYZ files and LAMMPS dumps, with desktop controls and WebXR support for virtual reality headsets.
 
 > **Fork notice.** This is `ayushdeo/gearsxr`, an independent fork used for local development of new
 > features (see [docs/ideas.md](docs/ideas.md)). It uses none of the upstream project's hosted
@@ -10,12 +10,14 @@ GEARS XR (Extended Reality) is a browser-based molecular dynamics trajectory vie
 - Tutorial: `public/tutorial.html` (served at `/tutorial.html` by the dev server)
 - Simulation Chapters with a local AI model: [docs/local-ai.md](docs/local-ai.md)
 - Known-answer benchmark for Chapters (no hand labeling): [docs/benchmark.md](docs/benchmark.md)
+- Comparison with ReacNetGenerator and LAMMPS `fix reaxff/species`: [docs/baselines.md](docs/baselines.md)
 
 ![GEARS XR screenshot](docs/screenshot.png)
 
 ## Features
 
-- Load extended XYZ trajectories from a local file, drag-and-drop, or URL — including Google Drive, Dropbox, OneDrive, and GitHub share links.
+- Load extended XYZ trajectories and LAMMPS text dumps from a local file, drag-and-drop, or URL — including Google Drive, Dropbox, OneDrive, and GitHub share links.
+- Periodic cells (extended-XYZ `Lattice`, LAMMPS box bounds, orthogonal or triclinic): bonds across cell walls are found and drawn, and atoms wrapping through a wall keep their bonds.
 - Load crystal structures straight from the [Materials Project](https://next-gen.materialsproject.org/) by ID (e.g. `mp-149`) via its keyless OPTIMADE endpoint.
 - Play multi-frame trajectories with a frame slider, step buttons, and FPS control.
 - Color atoms by element and compute bonds per frame from covalent radii.
@@ -44,7 +46,11 @@ Element x y z ...
 Element x y z ...
 ```
 
-For extended XYZ files, the parser reads `Properties=...` metadata to find species, position, and atom-ID columns. When atom IDs are present, each frame is reordered to the first frame's ID order so atom identity stays stable across the trajectory. Atom types are stored per frame, so color and bond-radius logic follow the current frame. URL loads accept only `https://` links, and when the URL shows a file name it must end in `.xyz`, `.extxyz`, `.cube`, or `.cub`.
+For extended XYZ files, the parser reads `Properties=...` metadata to find species, position, and atom-ID columns. When atom IDs are present, each frame is reordered to the first frame's ID order so atom identity stays stable across the trajectory. Atom types are stored per frame, so color and bond-radius logic follow the current frame. When a frame has `Lattice="ax ay az bx by bz cx cy cz"` (and optionally `pbc="T T T"`), distances use the nearest periodic image. URL loads accept only `https://` links, and when the URL shows a file name it must end in `.xyz`, `.extxyz`, `.dump`, `.lammpstrj`, `.cube`, or `.cub`.
+
+### LAMMPS dumps
+
+Text dumps from `dump custom` or `dump atom` (`.dump`, `.lammpstrj`, or any file starting with `ITEM: TIMESTEP`). Positions are read from `x y z`, `xu yu zu`, `xs ys zs` or `xsu ysu zsu`; the box, orthogonal or triclinic, becomes the periodic cell. Atoms are kept in atom-ID order, so the dump needs an `id` column. Elements come from an `element` column (`dump_modify ... element Ca Si O H`); without one, the viewer asks once which element each atom type is (e.g. `1=Ca 2=Si 3=O 4=H`) and remembers the answer. The number of atoms must stay the same in every frame. For exact positions, write floats with more digits than LAMMPS's default six (`dump_modify ... format float %.10g`).
 
 ### Gaussian Cube (volumetric)
 
@@ -59,7 +65,12 @@ npm run dev:http     # frontend dev server over plain http
 npm run build        # production build into dist/
 npm run worker:dev   # room server (Cloudflare Worker) on :8787
 npm run worker:deploy  # deploy the room server
+npm test             # unit tests (claim checker, detector, periodic cells, LAMMPS dumps)
+npm run bench -- bench/ --check   # detector benchmark against its published numbers
 ```
+
+Every push to this fork runs the type check, `npm test` and the benchmark check in GitHub
+Actions (`.github/workflows/ci.yml`).
 
 Local only for now: `npm run dev` plus `npm run worker:dev` gives you the viewer and a local room
 server on `ws://127.0.0.1:8787` with no remote services involved.

@@ -6,6 +6,7 @@
 // Layout follows the review workflow: select an event in the list, inspect
 // its evidence, evaluate the model's suggestion, record a decision.
 
+import { pairDistance } from "./cell";
 import ChapterWorker from "./chapterWorker?worker&inline";
 import { DEFAULT_DETECT_OPTIONS, type BondPair, type DetectOptions, type DetectedEvent } from "./chapterDetect";
 import {
@@ -670,10 +671,7 @@ export class ChaptersPanel {
   }
 
   private distance(frame: number, [a, b]: BondPair): number {
-    const t = this.trajectory!;
-    const base = frame * t.numAtoms * 3;
-    const p = t.positions;
-    return Math.hypot(p[base + a * 3] - p[base + b * 3], p[base + a * 3 + 1] - p[base + b * 3 + 1], p[base + a * 3 + 2] - p[base + b * 3 + 2]);
+    return pairDistance(this.trajectory!, frame, a, b);
   }
 
   private renderInspector() {

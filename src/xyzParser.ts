@@ -4,6 +4,9 @@
 //   line 2: comment/properties (may contain Lattice=".." Properties=species:S:1:pos:R:3 ..." etc.)
 //   next natoms lines: "<symbol> x y z [extra columns]"
 
+import { parseCell, type Cell } from "./cell";
+import { createLineReader } from "./lineReader";
+
 // Upper bound on atoms per frame, so a malformed or hostile file can't trigger
 // a runaway Float32Array allocation. Comfortably above any real MD system.
 const MAX_ATOMS_PER_FRAME = 2_000_000;
@@ -19,6 +22,8 @@ export interface Trajectory {
   positions: Float32Array;
   /** Per-frame comment line, kept for reference (e.g. lattice, energy). */
   comments: string[];
+  /** Per-frame periodic cell from the Lattice field; absent when no frame has one. */
+  cells?: (Cell | null)[];
 }
 
 export interface ParseProgress {
@@ -158,43 +163,16 @@ export async function parseExtendedXYZ(
   onProgress?: (p: ParseProgress) => void,
 ): Promise<Trajectory> {
   const totalBytes = file.size;
-  const reader = file.stream().getReader();
-  const decoder = new TextDecoder();
-
-  let buffer = "";
-  let done = false;
-  let bytesRead = 0;
-
-  async function nextLine(): Promise<string | null> {
-    while (true) {
-      const nlIndex = buffer.indexOf("\n");
-      if (nlIndex !== -1) {
-        const line = buffer.slice(0, nlIndex).replace(/\r$/, "");
-        buffer = buffer.slice(nlIndex + 1);
-        return line;
-      }
-      if (done) {
-        if (buffer.length > 0) {
-          const line = buffer;
-          buffer = "";
-          return line;
-        }
-        return null;
-      }
-      const { value, done: streamDone } = await reader.read();
-      if (streamDone) {
-        done = true;
-        continue;
-      }
-      bytesRead += value.byteLength;
-      buffer += decoder.decode(value, { stream: true });
-    }
-  }
+  const lines = createLineReader(file);
+  const nextLine = lines.next;
 
   let numAtoms = -1;
   const symbols: string[] = [];
   const frameSymbols: string[] = [];
   const comments: string[] = [];
+  const cells: (Cell | null)[] = [];
+  // Most trajectories repeat one Lattice string; parse each distinct one once.
+  const cellCache = new Map<string, Cell | null>();
   let positions: Float32Array | null = null;
   let frameCapacity = 0;
   let numFrames = 0;
@@ -234,6 +212,13 @@ export async function parseExtendedXYZ(
 
     const comment = (await nextLine()) ?? "";
     comments.push(comment);
+    const cellKey = `${comment.match(/Lattice=("[^"]*"|'[^']*'|\S+)/i)?.[0] ?? ""} ${comment.match(/pbc=("[^"]*"|'[^']*'|\S+)/i)?.[0] ?? ""}`;
+    let cell = cellCache.get(cellKey);
+    if (cell === undefined) {
+      cell = parseCell(comment);
+      cellCache.set(cellKey, cell);
+    }
+    cells.push(cell);
     const layout = getFrameLayout(comment);
 
     ensureCapacity(numFrames + 1);
@@ -287,7 +272,7 @@ export async function parseExtendedXYZ(
     }
 
     numFrames++;
-    onProgress?.({ framesParsed: numFrames, bytesRead, totalBytes });
+    onProgress?.({ framesParsed: numFrames, bytesRead: lines.bytesRead(), totalBytes });
   }
 
   if (numAtoms === -1 || !positions) {
@@ -301,5 +286,6 @@ export async function parseExtendedXYZ(
     frameSymbols,
     positions: (positions as Float32Array).slice(0, numFrames * numAtoms * 3),
     comments,
+    ...(cells.some(Boolean) ? { cells } : {}),
   };
 }

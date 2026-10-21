@@ -2,6 +2,7 @@ import * as THREE from "three";
 import type { Trajectory } from "./xyzParser";
 import { getElementInfo } from "./elements";
 import { bondCutoff, computeBonds } from "./bonds";
+import { frameCell, separation } from "./cell";
 
 const ATOM_SPHERE_SCALE = 0.35; // shrink covalent radius for a ball-and-stick look
 const BOND_RADIUS = 0.08;
@@ -149,27 +150,39 @@ export class MoleculeRenderer {
       frameIndex,
       this.trajectory.numAtoms,
       this.frameSymbolsScratch,
+      frameCell(this.trajectory, frameIndex),
     );
-
-    if (bonds.length > this.bondCapacity) {
-      this.growBondCapacity(bonds.length);
-    }
 
     const { positions, numAtoms } = this.trajectory;
     const base = frameIndex * numAtoms * 3;
 
-    for (let i = 0; i < bonds.length; i++) {
-      const bond = bonds[i];
-      this.bondStart.set(
-        positions[base + bond.a * 3],
-        positions[base + bond.a * 3 + 1],
-        positions[base + bond.a * 3 + 2],
-      );
-      this.bondEnd.set(
-        positions[base + bond.b * 3],
-        positions[base + bond.b * 3 + 1],
-        positions[base + bond.b * 3 + 2],
-      );
+    // A bond across a periodic cell wall is drawn as two halves, each from its
+    // atom toward the partner's nearest image, rather than one long cylinder
+    // through the box.
+    const segments: number[] = [];
+    for (const bond of bonds) {
+      const a = base + bond.a * 3;
+      const b = base + bond.b * 3;
+      const [dx, dy, dz] = separation(this.trajectory, frameIndex, bond.a, bond.b);
+      const direct = Math.abs(positions[b] - positions[a] - dx) + Math.abs(positions[b + 1] - positions[a + 1] - dy) +
+        Math.abs(positions[b + 2] - positions[a + 2] - dz) < 1e-3;
+      if (direct) {
+        segments.push(positions[a], positions[a + 1], positions[a + 2], positions[b], positions[b + 1], positions[b + 2]);
+      } else {
+        segments.push(positions[a], positions[a + 1], positions[a + 2], positions[a] + dx / 2, positions[a + 1] + dy / 2, positions[a + 2] + dz / 2);
+        segments.push(positions[b], positions[b + 1], positions[b + 2], positions[b] - dx / 2, positions[b + 1] - dy / 2, positions[b + 2] - dz / 2);
+      }
+    }
+
+    const count = segments.length / 6;
+    if (count > this.bondCapacity) {
+      this.growBondCapacity(count);
+    }
+
+    for (let i = 0; i < count; i++) {
+      const s = i * 6;
+      this.bondStart.set(segments[s], segments[s + 1], segments[s + 2]);
+      this.bondEnd.set(segments[s + 3], segments[s + 4], segments[s + 5]);
       this.bondMidpoint.copy(this.bondStart).add(this.bondEnd).multiplyScalar(0.5);
       this.bondDirection.copy(this.bondEnd).sub(this.bondStart);
       const len = this.bondDirection.length();
@@ -182,7 +195,7 @@ export class MoleculeRenderer {
       this.bondTransform.updateMatrix();
       this.bondMesh.setMatrixAt(i, this.bondTransform.matrix);
     }
-    this.bondMesh.count = bonds.length;
+    this.bondMesh.count = count;
     this.bondMesh.instanceMatrix.needsUpdate = true;
   }
 
@@ -215,14 +228,11 @@ export class MoleculeRenderer {
   atomInfo(atomIndex: number): { symbol: string; neighbors: Array<{ atom: number; symbol: string; distance: number }> } {
     const t = this.trajectory;
     const frame = Math.max(this.currentFrame, 0);
-    const base = frame * t.numAtoms * 3;
-    const p = t.positions;
     const symbol = getAtomSymbol(t, frame, atomIndex);
-    const ax = p[base + atomIndex * 3], ay = p[base + atomIndex * 3 + 1], az = p[base + atomIndex * 3 + 2];
     const neighbors: Array<{ atom: number; symbol: string; distance: number }> = [];
     for (let j = 0; j < t.numAtoms; j++) {
       if (j === atomIndex) continue;
-      const dx = p[base + j * 3] - ax, dy = p[base + j * 3 + 1] - ay, dz = p[base + j * 3 + 2] - az;
+      const [dx, dy, dz] = separation(t, frame, atomIndex, j);
       const d2 = dx * dx + dy * dy + dz * dz;
       if (d2 > 25) continue; // no bond is longer than 5 Å
       const other = getAtomSymbol(t, frame, j);

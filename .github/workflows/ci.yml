@@ -1,0 +1,28 @@
+name: Tests
+
+# Roadmap milestone 0.1: every push runs the type check, the unit tests
+# (claim checker, detector, periodic cells, LAMMPS dumps) and the detector
+# benchmark, which fails if bond-change precision, recall or exact matches
+# drop below 100% or rule categories below 99%.
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # Run on this fork only.
+    if: github.repository == 'ayushdeo/gearsxr'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run bench -- bench/ --check

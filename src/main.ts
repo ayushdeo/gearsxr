@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { parseExtendedXYZ, type Trajectory } from "./xyzParser";
+import { parseExtendedXYZ, type ParseProgress, type Trajectory } from "./xyzParser";
+import { looksLikeLammpsDump, MissingTypeMapError, parseLammpsDump } from "./lammpsDump";
 import { parseCubeVolume, type CubeVolume } from "./cubeParser";
 import { elementName, symbolForAtomicNumber } from "./elements";
 import { MoleculeRenderer } from "./moleculeRenderer";
@@ -768,7 +769,7 @@ window.addEventListener("keydown", (e) => {
   if (e.key === "c" || e.key === "C") measurementTool.clear();
 });
 
-type TrajectoryFormat = "xyz" | "cube";
+type TrajectoryFormat = "xyz" | "cube" | "lammps";
 
 function looksLikeCubeHead(head: string): boolean {
   const lines = head.split(/\r?\n/);
@@ -785,8 +786,52 @@ async function detectTrajectoryFormat(file: Blob, sourceUrl: string | null): Pro
   const name = (sourceUrl ?? (file as File).name ?? "").toLowerCase();
   if (name.endsWith(".cube") || name.endsWith(".cub")) return "cube";
   if (name.endsWith(".xyz") || name.endsWith(".extxyz")) return "xyz";
+  if (/\.(dump|lammpstrj|lammps)$/.test(name)) return "lammps";
   // Extension-less (e.g. Drive download URLs): peek at the first bytes.
-  return looksLikeCubeHead(await file.slice(0, 1024).text()) ? "cube" : "xyz";
+  const head = await file.slice(0, 1024).text();
+  if (looksLikeLammpsDump(head)) return "lammps";
+  return looksLikeCubeHead(head) ? "cube" : "xyz";
+}
+
+const LAMMPS_TYPES_KEY = "gearsxr.lammpsTypes";
+
+/** "1=Ca 2=Si 3=O" -> {1: "Ca", 2: "Si", 3: "O"}; null if nothing parses. */
+function parseTypeMap(text: string): Record<number, string> | null {
+  const map: Record<number, string> = {};
+  for (const [, type, element] of text.matchAll(/(\d+)\s*[=:]\s*([A-Z][a-z]?)/g)) map[Number(type)] = element;
+  return Object.keys(map).length ? map : null;
+}
+
+/**
+ * Parses a LAMMPS dump. A dump without an element column needs each atom
+ * type's element: the last answer is remembered, and the user is asked when
+ * it doesn't cover the file's types.
+ */
+async function parseLammpsWithTypes(file: Blob, onProgress: (p: ParseProgress) => void): Promise<Trajectory> {
+  let saved: string | null = null;
+  try {
+    saved = localStorage.getItem(LAMMPS_TYPES_KEY);
+  } catch {
+    // storage unavailable
+  }
+  try {
+    return await parseLammpsDump(file, { typeElements: parseTypeMap(saved ?? "") ?? undefined }, onProgress);
+  } catch (err) {
+    if (!(err instanceof MissingTypeMapError)) throw err;
+    const example = err.types.map((t) => `${t}=?`).join(" ");
+    const answer = window.prompt(
+      `This LAMMPS dump has no element column. Which element is each atom type?\nExample: 1=Ca 2=Si 3=O 4=H`,
+      saved ?? example,
+    );
+    const map = answer ? parseTypeMap(answer) : null;
+    if (!map) throw new Error("A LAMMPS dump without an element column needs an element for each atom type.");
+    try {
+      localStorage.setItem(LAMMPS_TYPES_KEY, answer!);
+    } catch {
+      // storage unavailable
+    }
+    return parseLammpsDump(file, { typeElements: map }, onProgress);
+  }
 }
 
 function cubeToTrajectory(volume: CubeVolume): Trajectory {
@@ -990,11 +1035,13 @@ async function loadTrajectoryFile(
   try {
     // Loading an XYZ trajectory clears any cube isosurface from a prior load.
     isoPanel.hide();
-    const trajectory = await parseExtendedXYZ(file, (p) => {
+    const onParseProgress = (p: ParseProgress) => {
       if (loadVersion !== trajectoryLoadVersion) return;
       const pct = ((p.bytesRead / p.totalBytes) * 100).toFixed(0);
       statusEl.textContent = `Parsing... ${pct}% (${p.framesParsed} frames)`;
-    });
+    };
+    const trajectory =
+      format === "lammps" ? await parseLammpsWithTypes(file, onParseProgress) : await parseExtendedXYZ(file, onParseProgress);
     if (loadVersion !== trajectoryLoadVersion) return;
 
     mountMolecule(trajectory, sourceUrl);

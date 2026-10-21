@@ -15,6 +15,7 @@
     "worker:secret": "XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs wrangler secret put SHARE_SIGNING_KEY",
     "worker:secrets": "XDG_CONFIG_HOME=.wrangler/config WRANGLER_LOG_PATH=.wrangler/logs wrangler secret list",
     "bench": "tsx tools/benchmark/evaluate.ts",
+    "test": "tsx --test tests/*.test.ts",
     "typecheck": "tsc --noEmit -p . && tsc --noEmit -p tools"
   },
   "devDependencies": {

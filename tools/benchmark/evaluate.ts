@@ -6,6 +6,8 @@
 //   npm run bench -- bench/ --models qwen2.5:7b,gemma2:9b # plus local models
 //
 // Options: --models a,b  --endpoint http://localhost:11434  --limit N  --persist N  --window N
+//          --check  verify the detector against the thresholds below without
+//                   writing reports (exit code 1 on failure; used by CI)
 // Writes bench/report.json (every reaction) and bench/report.md (summary).
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -70,7 +72,7 @@ interface ReactionResult {
 }
 
 function parseArgs(argv: string[]) {
-  const args = { dir: "", models: [] as string[], endpoint: "http://localhost:11434", limit: Infinity, persist: 0, window: 0 };
+  const args = { dir: "", models: [] as string[], endpoint: "http://localhost:11434", limit: Infinity, persist: 0, window: 0, check: false };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--models") args.models = argv[++i].split(",").map((m) => m.trim()).filter(Boolean);
@@ -78,10 +80,11 @@ function parseArgs(argv: string[]) {
     else if (a === "--limit") args.limit = Number(argv[++i]);
     else if (a === "--persist") args.persist = Number(argv[++i]);
     else if (a === "--window") args.window = Number(argv[++i]);
+    else if (a === "--check") args.check = true;
     else if (!a.startsWith("--")) args.dir = a;
   }
   if (!args.dir) {
-    console.error("Usage: npm run bench -- <benchmark dir> [--models a,b] [--endpoint URL] [--limit N] [--persist N] [--window N]");
+    console.error("Usage: npm run bench -- <benchmark dir> [--models a,b] [--endpoint URL] [--limit N] [--persist N] [--window N] [--check]");
     process.exit(1);
   }
   return args;
@@ -179,6 +182,31 @@ function median(values: number[]) {
   const sorted = [...values].sort((a, b) => a - b);
   const mid = Math.floor(sorted.length / 2);
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/**
+ * Detector thresholds for CI (roadmap milestone 0.1): any regression from
+ * the published numbers fails the build. Prints one line per check.
+ */
+const CHECKS = { precision: 1, recall: 1, exact: 1, category: 0.99 };
+
+function check(results: ReactionResult[]): boolean {
+  const sum = (f: (r: ReactionResult) => number) => results.reduce((s, r) => s + f(r), 0);
+  const tp = sum((r) => r.tp), fp = sum((r) => r.fp), fn = sum((r) => r.fn);
+  const scored = results.filter((r) => r.category !== null);
+  const measured = {
+    precision: tp / Math.max(tp + fp, 1),
+    recall: tp / Math.max(tp + fn, 1),
+    exact: results.filter((r) => r.exact).length / Math.max(results.length, 1),
+    category: scored.filter((r) => r.categoryCorrect).length / Math.max(scored.length, 1),
+  };
+  let ok = true;
+  for (const [name, min] of Object.entries(CHECKS) as [keyof typeof CHECKS, number][]) {
+    const pass = measured[name] >= min;
+    ok &&= pass;
+    console.log(`${pass ? "PASS" : "FAIL"} ${name} ${(measured[name] * 100).toFixed(1)}% (minimum ${(min * 100).toFixed(1)}%)`);
+  }
+  return ok;
 }
 
 function summarize(results: ReactionResult[], models: string[], persist: number, window: number): string {
@@ -363,7 +391,7 @@ async function main() {
       models: [],
     });
     inputs.push({ trajectory, events, answer, truthPairs });
-    process.stdout.write(`\rdetector ${index + 1}/${answers.length} reactions`);
+    if (!args.check) process.stdout.write(`\rdetector ${index + 1}/${answers.length} reactions`);
   }
   process.stdout.write("\n");
 
@@ -376,6 +404,10 @@ async function main() {
       process.stdout.write(`\r${model} ${index + 1}/${inputs.length} reactions`);
     }
     process.stdout.write("\n");
+  }
+
+  if (args.check) {
+    process.exit(check(results) ? 0 : 1);
   }
 
   const report = summarize(results, args.models, options.minPersistFrames, options.groupWindowFrames);

@@ -7,6 +7,7 @@
 // explain events, which is where it adds value.
 
 import { computeBonds } from "./bonds";
+import { separation } from "./cell";
 import type { BondPair } from "./chapterDetect";
 import type { Trajectory } from "./xyzParser";
 
@@ -52,13 +53,19 @@ export function bracketFrames(trajectory: Trajectory, event: ChapterGeometry, se
   };
 }
 
-function bondsAmong(trajectory: Trajectory, frame: number, atoms: number[]): BondPair[] {
-  const base = frame * trajectory.numAtoms * 3;
+/**
+ * Bonds among a few nearby atoms in one frame. Positions are taken relative
+ * to `center` at their minimum image, so a neighborhood split by a periodic
+ * cell wall is reassembled before bonding (the radius is far below any cell
+ * size, so no cell is needed afterwards).
+ */
+function bondsAmong(trajectory: Trajectory, frame: number, atoms: number[], center: number): BondPair[] {
   const sub = new Float32Array(atoms.length * 3);
   atoms.forEach((atom, i) => {
-    sub[i * 3] = trajectory.positions[base + atom * 3];
-    sub[i * 3 + 1] = trajectory.positions[base + atom * 3 + 1];
-    sub[i * 3 + 2] = trajectory.positions[base + atom * 3 + 2];
+    const [x, y, z] = separation(trajectory, frame, center, atom);
+    sub[i * 3] = x;
+    sub[i * 3 + 1] = y;
+    sub[i * 3 + 2] = z;
   });
   const symbols = atoms.map((atom) => symbolAt(trajectory, frame, atom));
   return computeBonds(sub, 0, atoms.length, symbols).map(({ a, b }): BondPair => [atoms[a], atoms[b]]);
@@ -66,20 +73,21 @@ function bondsAmong(trajectory: Trajectory, frame: number, atoms: number[]): Bon
 
 export function localGraph(trajectory: Trajectory, event: ChapterGeometry, settleFrames: number): LocalGraph {
   const { before, after } = bracketFrames(trajectory, event, settleFrames);
-  const p = trajectory.positions;
-  const base = before * trajectory.numAtoms * 3;
   const limitSq = LOCAL_RADIUS * LOCAL_RADIUS;
   const atoms: number[] = [];
   for (let i = 0; i < trajectory.numAtoms; i++) {
     const near = event.atoms.some((c) => {
-      const dx = p[base + i * 3] - p[base + c * 3];
-      const dy = p[base + i * 3 + 1] - p[base + c * 3 + 1];
-      const dz = p[base + i * 3 + 2] - p[base + c * 3 + 2];
+      const [dx, dy, dz] = separation(trajectory, before, c, i);
       return dx * dx + dy * dy + dz * dz <= limitSq;
     });
     if (near) atoms.push(i);
   }
-  return { atoms, before: bondsAmong(trajectory, before, atoms), after: bondsAmong(trajectory, after, atoms) };
+  const center = event.atoms[0];
+  return {
+    atoms,
+    before: bondsAmong(trajectory, before, atoms, center),
+    after: bondsAmong(trajectory, after, atoms, center),
+  };
 }
 
 /** Independent ring count of a graph: edges - vertices + connected components. */

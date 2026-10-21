@@ -14,13 +14,17 @@
 // partners), so an atom's consecutive changes in opposite directions (a break
 // then a formation, or a formation then a break) link within
 // `transferWindowFrames`.
+// In a periodic cell (extended-XYZ Lattice) bonds and displacements use the
+// minimum image, so bonds across a cell wall are seen and an atom wrapping
+// through a wall is neither a jump nor an event.
 
 import { computeBonds } from "./bonds";
+import { frameCell, minimumImage } from "./cell";
 import { classifyChapter, localGraph, type ChapterCategory } from "./chapterChemistry";
 import type { Trajectory } from "./xyzParser";
 
 export const DETECTOR_NAME = "bond-diff";
-export const DETECTOR_VERSION = 2;
+export const DETECTOR_VERSION = 3;
 
 export interface DetectOptions {
   /** Frames a new bond state must hold before it counts as a change. */
@@ -81,7 +85,8 @@ function frameSymbols(trajectory: Trajectory, frame: number): string[] {
 }
 
 /**
- * Atoms that moved more than the threshold since the previous frame, or whose
+ * Atoms that moved more than the threshold since the previous frame (by the
+ * minimum image in a periodic cell, so wrapping is not moving), or whose
  * element changed (files without stable atom IDs reuse indices for different
  * atoms). Either way the index no longer tracks one continuous atom.
  */
@@ -92,11 +97,14 @@ function jumpedAtoms(trajectory: Trajectory, frame: number, threshold: number): 
   const cur = frame * numAtoms * 3;
   const prev = cur - numAtoms * 3;
   const limitSq = threshold * threshold;
+  const cell = frameCell(trajectory, frame);
+  const d = new Float64Array(3);
   for (let i = 0; i < numAtoms; i++) {
-    const dx = positions[cur + i * 3] - positions[prev + i * 3];
-    const dy = positions[cur + i * 3 + 1] - positions[prev + i * 3 + 1];
-    const dz = positions[cur + i * 3 + 2] - positions[prev + i * 3 + 2];
-    if (dx * dx + dy * dy + dz * dz > limitSq) jumped.add(i);
+    d[0] = positions[cur + i * 3] - positions[prev + i * 3];
+    d[1] = positions[cur + i * 3 + 1] - positions[prev + i * 3 + 1];
+    d[2] = positions[cur + i * 3 + 2] - positions[prev + i * 3 + 2];
+    if (cell) minimumImage(cell, d);
+    if (d[0] * d[0] + d[1] * d[1] + d[2] * d[2] > limitSq) jumped.add(i);
     else if (species[frame * numAtoms + i] !== species[(frame - 1) * numAtoms + i]) jumped.add(i);
   }
   return jumped;
@@ -114,7 +122,8 @@ function detectBondChanges(trajectory: Trajectory, options: DetectOptions, onPro
 
   const bondKeys = (frame: number) => {
     const keys = new Set<number>();
-    for (const bond of computeBonds(trajectory.positions, frame, numAtoms, frameSymbols(trajectory, frame))) {
+    const symbols = frameSymbols(trajectory, frame);
+    for (const bond of computeBonds(trajectory.positions, frame, numAtoms, symbols, frameCell(trajectory, frame))) {
       keys.add(keyOf(bond.a, bond.b));
     }
     return keys;

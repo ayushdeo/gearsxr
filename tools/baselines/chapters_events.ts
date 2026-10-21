@@ -1,6 +1,7 @@
 // Runs the Chapters detector on a trajectory and writes what it finds in the
 // shared baseline format (see run_baselines.py): each event with its bond
-// changes and a species-level equation, and the molecule counts per frame.
+// changes, a species-level equation and the same reaction split into
+// ReacNetGenerator's species-to-species form, and molecule counts per frame.
 //
 //   npx tsx tools/baselines/chapters_events.ts <trajectory.dump|.xyz> <out.json> [C H O]
 //
@@ -54,17 +55,40 @@ function speciesCounts(t: Trajectory, frame: number): Record<string, number> {
   return counts;
 }
 
+/** Atoms of each molecule that holds one of `atoms`, in a frame. */
+function moleculesOf(t: Trajectory, frame: number, atoms: number[]): number[][] {
+  const comp = molecules(t, frame);
+  const roots = [...new Set(atoms.map((a) => comp[a]))];
+  return roots.map((root) => [...comp.keys()].filter((i) => comp[i] === root));
+}
+
+const formulaOf = (t: Trajectory, frame: number, members: number[]) =>
+  hillFormula(members.map((i) => t.frameSymbols[frame * t.numAtoms + i]));
+
 /** "A + B -> C + D" from the molecules holding the event's atoms before and after it. */
 function equation(t: Trajectory, atoms: number[], before: number, after: number): string {
-  const side = (frame: number) => {
-    const comp = molecules(t, frame);
-    const roots = [...new Set(atoms.map((a) => comp[a]))];
-    return roots
-      .map((root) => hillFormula([...comp.keys()].filter((i) => comp[i] === root).map((i) => t.frameSymbols[frame * t.numAtoms + i])))
-      .sort()
-      .join(" + ");
-  };
+  const side = (frame: number) => moleculesOf(t, frame, atoms).map((m) => formulaOf(t, frame, m)).sort().join(" + ");
   return `${side(before)} -> ${side(after)}`;
+}
+
+/**
+ * The event as ReacNetGenerator counts reactions: one "A -> B" per molecule
+ * before and molecule after that share atoms, skipping a molecule that comes
+ * out with exactly its atoms (unchanged). CH4 + O2 -> CH3 + HO2 is
+ * CH4 -> CH3, CH4 -> HO2 and O2 -> HO2.
+ */
+function flows(t: Trajectory, atoms: number[], before: number, after: number): string[] {
+  const reactants = moleculesOf(t, before, atoms);
+  const products = moleculesOf(t, after, atoms);
+  const out: string[] = [];
+  for (const r of reactants) {
+    for (const p of products) {
+      const shared = r.some((i) => p.includes(i));
+      const same = r.length === p.length && r.every((i) => p.includes(i));
+      if (shared && !same) out.push(`${formulaOf(t, before, r)} -> ${formulaOf(t, after, p)}`);
+    }
+  }
+  return out.sort();
 }
 
 async function main() {
@@ -102,6 +126,7 @@ async function main() {
             category: e.category,
             label: e.label,
             equation: equation(t, e.atoms, before, after),
+            flows: flows(t, e.atoms, before, after),
           };
         }),
         species: t.comments.map((_, frame) => speciesCounts(t, frame)),

@@ -1,0 +1,155 @@
+{
+ "system": {
+  "atoms": 180,
+  "steps": 50000,
+  "dump_every": 50,
+  "frames": 1001,
+  "timestep_fs": 0.1
+ },
+ "species_agreement": {
+  "mean": 0.8570511659242176,
+  "min": 0.6805555555555556,
+  "steps_compared": 1001,
+  "largest_differences": [
+   [
+    "H",
+    4862
+   ],
+   [
+    "CH4",
+    4398
+   ],
+   [
+    "CH3",
+    4071
+   ],
+   [
+    "CH2",
+    376
+   ],
+   [
+    "O2",
+    85
+   ],
+   [
+    "CH4O2",
+    39
+   ],
+   [
+    "HO2",
+    32
+   ],
+   [
+    "CH3O2",
+    19
+   ],
+   [
+    "CH",
+    7
+   ],
+   [
+    "CH2O2",
+    2
+   ]
+  ]
+ },
+ "reactions": {
+  "chapters_events": 18,
+  "chapters_distinct": 6,
+  "reacnetgenerator_distinct": 4,
+  "reacnetgenerator_top20_found_by_chapters": 3,
+  "reacnetgenerator_top20": [
+   [
+    "O2 -> O2",
+    6,
+    0
+   ],
+   [
+    "O2 -> HO2",
+    1,
+    1
+   ],
+   [
+    "CH4 -> HO2",
+    1,
+    1
+   ],
+   [
+    "CH4 -> CH3",
+    1,
+    4
+   ]
+  ],
+  "chapters_top20": [
+   [
+    "CH4 -> CH3",
+    4,
+    1
+   ],
+   [
+    "CH3 -> CH4",
+    3,
+    0
+   ],
+   [
+    "CH4 -> HO2",
+    1,
+    1
+   ],
+   [
+    "O2 -> HO2",
+    1,
+    1
+   ],
+   [
+    "CH4 -> CH2",
+    1,
+    0
+   ],
+   [
+    "CH4 -> H",
+    1,
+    0
+   ]
+  ],
+  "chapters_equations": [
+   [
+    "CH4 -> CH4",
+    7
+   ],
+   [
+    "CH3 -> CH4",
+    3
+   ],
+   [
+    "CH3 + O2 -> CH3 + O2",
+    3
+   ],
+   [
+    "CH4 -> CH3",
+    1
+   ],
+   [
+    "CH4 + O2 -> CH3 + HO2",
+    1
+   ],
+   [
+    "CH4 -> CH2",
+    1
+   ],
+   [
+    "CH4 + O2 -> CH3 + O2",
+    1
+   ],
+   [
+    "CH4 -> CH3 + H",
+    1
+   ]
+  ]
+ },
+ "seconds": {
+  "lammps": 197,
+  "reacnetgenerator": 3,
+  "chapters": 0.5049225329999999
+ }
+}

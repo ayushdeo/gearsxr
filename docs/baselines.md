@@ -38,6 +38,32 @@ python tools/baselines/run_baselines.py --steps 3000         # quick check, ~20 
 Results go to `bench/baselines/methane-combustion/report.md` and `report.json`; scratch files
 (trajectory, bond orders) to `tools/baselines/work/`, which is not committed.
 
-## Results
+## Results (21 Oct 2026)
 
-Pending: the first full run is in progress.
+180 atoms, 5 ps at 4000 K, 1001 frames. Full tables in
+[bench/baselines/methane-combustion/report.md](../bench/baselines/methane-combustion/report.md).
+
+| | Chapters | ReacNetGenerator | fix reaxff/species |
+|---|---|---|---|
+| Real reactions found (CH₄ + O₂ → CH₃ + HO₂, frame 760) | 1 of 1 | 1 of 1 | (counts only) |
+| Other reported changes | 17 events, mostly C–H bonds breaking and re-forming | 6 "O₂ → O₂": one O₂ switching between two bond-order notations ([O][O] and [O]=[O]), no atom moves | |
+| Molecule counts the same as fix reaxff/species | 85.7% per step on average (lowest 68.1%) | | reference |
+| Run time | 0.5 s | 3 s | inside the 197 s LAMMPS run |
+
+What this shows:
+
+- **The one real reaction is found by both tools.** Chapters names it "H76 moves from C75 to
+  O121". Split the way ReacNetGenerator counts reactions, it is the same three conversions:
+  CH₄ → CH₃, CH₄ → HO₂, O₂ → HO₂.
+- **Chapters reports bond flicker that ReacNetGenerator filters out.** At 4000 K, C–H bonds
+  stretch past Chapters' 1.28 Å cutoff for longer than its 3-frame persistence (15 fs here):
+  11 of the 18 events are "bond breaks and re-forms", and most of the molecule-count gap is
+  the same stretching (extra H and CH₃, missing CH₄). ReacNetGenerator's hidden Markov model
+  removes this noise. Two cutoffs (form below one distance, break above a larger one) and
+  persistence set in femtoseconds are milestone 2.2; this run is now its first test case.
+- **The rules call those flickers "ligand exchange"**, because the same atom loses and gains a
+  partner. A break-and-re-form of the same bond should get its own category; that belongs with
+  the decoy test (milestone 1.4).
+
+So Phase 0's baseline step is in place, and the first comparison already points at the main
+weakness to fix before liquids and gases: telling vibration from reaction.

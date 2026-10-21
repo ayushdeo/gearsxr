@@ -159,7 +159,8 @@ def smiles_formula(smiles):
 
 
 def read_reacnetgenerator(path):
-    """'.reaction' file: '<count> A+B->C+D' per line, species as SMILES."""
+    """'.reaction' file: '<count> A->B' per line (a species turning into another that shares
+    atoms with it), species as SMILES; '+' sides are split the same way if present."""
     reactions = collections.Counter()
     with open(path) as f:
         for line in f:
@@ -189,8 +190,11 @@ def compare(work, out, natoms, steps, every, seconds):
         for name in set(ours) | set(theirs):
             differences[name] += abs(ours[name] - theirs[name])
 
-    # Formula-level reactions: a reaction and its reverse are counted separately, as both tools do.
-    ours = collections.Counter(e["equation"] for e in chapters["events"] if e["equation"].split(" -> ")[0] != e["equation"].split(" -> ")[1])
+    # ReacNetGenerator counts species-to-species conversions ("A -> B" for molecules that share
+    # atoms), so Chapters' events are compared in that form; a reaction and its reverse count
+    # separately in both.
+    ours = collections.Counter(flow for e in chapters["events"] for flow in e["flows"])
+    equations = collections.Counter(e["equation"] for e in chapters["events"])
     top_rng = [r for r, _ in rng.most_common(20)]
     found = [r for r in top_rng if ours[r] > 0]
 
@@ -209,6 +213,7 @@ def compare(work, out, natoms, steps, every, seconds):
             "reacnetgenerator_top20_found_by_chapters": len(found),
             "reacnetgenerator_top20": [[r, rng[r], ours[r]] for r in top_rng],
             "chapters_top20": [[r, n, rng[r]] for r, n in ours.most_common(20)],
+            "chapters_equations": equations.most_common(),
         },
         "seconds": seconds,
     }
@@ -234,9 +239,13 @@ def compare(work, out, natoms, steps, every, seconds):
         "",
         "## Reactions: Chapters vs ReacNetGenerator",
         "",
-        f"Chapters found {r['chapters_events']} events ({r['chapters_distinct']} distinct formula-level reactions);",
-        f"ReacNetGenerator found {r['reacnetgenerator_distinct']} distinct reactions.",
-        f"Of ReacNetGenerator's 20 most frequent reactions, Chapters found {r['reacnetgenerator_top20_found_by_chapters']}.",
+        "ReacNetGenerator lists a reaction as one species turning into another that shares atoms with it",
+        "(\"A -> B\"), so each Chapters event is split the same way: CH4 + O2 -> CH3 + HO2 counts as",
+        "CH4 -> CH3, CH4 -> HO2 and O2 -> HO2.",
+        "",
+        f"Chapters found {r['chapters_events']} events ({r['chapters_distinct']} distinct A -> B conversions);",
+        f"ReacNetGenerator found {r['reacnetgenerator_distinct']} distinct conversions.",
+        f"Of ReacNetGenerator's {min(20, r['reacnetgenerator_distinct'])} most frequent conversions, Chapters found {r['reacnetgenerator_top20_found_by_chapters']}.",
         "",
         "| ReacNetGenerator's top reactions | ReacNetGenerator count | Chapters count |",
         "|---|---|---|",
@@ -245,6 +254,12 @@ def compare(work, out, natoms, steps, every, seconds):
         "| Chapters' top reactions | Chapters count | ReacNetGenerator count |",
         "|---|---|---|",
         *[f"| {eq} | {a} | {b} |" for eq, a, b in r["chapters_top20"]],
+        "",
+        "Chapters' events as whole equations:",
+        "",
+        "| Equation | Events |",
+        "|---|---|",
+        *[f"| {eq} | {n} |" for eq, n in r["chapters_equations"]],
         "",
         f"Run times: LAMMPS {seconds['lammps']:.0f} s, ReacNetGenerator {seconds['reacnetgenerator']:.0f} s, Chapters {seconds['chapters']:.1f} s.",
         "",
@@ -265,20 +280,25 @@ def main():
     p.add_argument("--temperature", type=float, default=3500.0)
     p.add_argument("--work", default=os.path.join(ROOT, "tools", "baselines", "work"))
     p.add_argument("--out", default=os.path.join(ROOT, "bench", "baselines", "methane-combustion"))
+    p.add_argument("--reuse", action="store_true", help="reuse the LAMMPS and ReacNetGenerator outputs in --work")
     args = p.parse_args()
     os.makedirs(args.work, exist_ok=True)
-    seconds = {}
+    timing = os.path.join(args.work, "timing.json")
+    seconds = json.load(open(timing)) if args.reuse else {}
 
-    t = time.time()
-    natoms = run_lammps(args.work, args.steps, args.every, args.ch4, args.o2, args.box, args.temperature)
-    seconds["lammps"] = time.time() - t
-    print(f"LAMMPS: {natoms} atoms, {args.steps} steps ({seconds['lammps']:.0f} s)", file=sys.stderr)
+    if not args.reuse:
+        t = time.time()
+        natoms = run_lammps(args.work, args.steps, args.every, args.ch4, args.o2, args.box, args.temperature)
+        seconds["lammps"] = time.time() - t
+        print(f"LAMMPS: {natoms} atoms, {args.steps} steps ({seconds['lammps']:.0f} s)", file=sys.stderr)
 
-    t = time.time()
-    rng_bin = os.path.join(os.path.dirname(sys.executable), "reacnetgenerator")
-    subprocess.run([rng_bin, "--type", "bond", "-i", "bonds.reaxff", "-a", "C", "H", "O", "-n", "4"], cwd=args.work, check=True,
-                   stdout=subprocess.DEVNULL)
-    seconds["reacnetgenerator"] = time.time() - t
+        t = time.time()
+        rng_bin = os.path.join(os.path.dirname(sys.executable), "reacnetgenerator")
+        subprocess.run([rng_bin, "--type", "bond", "-i", "bonds.reaxff", "-a", "C", "H", "O", "-n", "4"], cwd=args.work,
+                       check=True, stdout=subprocess.DEVNULL)
+        seconds["reacnetgenerator"] = time.time() - t
+        json.dump({**seconds, "natoms": natoms}, open(timing, "w"))
+    natoms = seconds.pop("natoms", None) or json.load(open(timing))["natoms"]
 
     t = time.time()
     subprocess.run(["npx", "tsx", os.path.join(ROOT, "tools", "baselines", "chapters_events.ts"),

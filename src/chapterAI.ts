@@ -10,6 +10,7 @@
 // each atom as context, so its label and its artifact call are grounded.
 
 import { BOND_TOLERANCE, HH_BOND_CUTOFF, bondCutoff } from "./bonds";
+import { pairDistance } from "./cell";
 import { localGraph, neighborContext } from "./chapterChemistry";
 import { checkClaims } from "./chapterClaims";
 import { DEFAULT_DETECT_OPTIONS } from "./chapterDetect";
@@ -92,15 +93,6 @@ function composition(trajectory: Trajectory): string {
   return [...counts].sort((a, b) => b[1] - a[1]).map(([s, n]) => `${s}${n}`).join(" ");
 }
 
-function distance(trajectory: Trajectory, frame: number, a: number, b: number): number {
-  const base = frame * trajectory.numAtoms * 3;
-  const p = trajectory.positions;
-  const dx = p[base + a * 3] - p[base + b * 3];
-  const dy = p[base + a * 3 + 1] - p[base + b * 3 + 1];
-  const dz = p[base + a * 3 + 2] - p[base + b * 3 + 2];
-  return Math.sqrt(dx * dx + dy * dy + dz * dz);
-}
-
 function describeEvent(trajectory: Trajectory, chapter: Chapter, key: string) {
   const offset = chapter.startFrame * trajectory.numAtoms;
   const symbol = (atom: number) => trajectory.frameSymbols[offset + atom] ?? trajectory.symbols[atom] ?? "X";
@@ -112,8 +104,8 @@ function describeEvent(trajectory: Trajectory, chapter: Chapter, key: string) {
     const cutoff = bondCutoff(symbol(a), symbol(b));
     return {
       pair: `${name(a)}-${name(b)}`,
-      before_A: +distance(trajectory, before, a, b).toFixed(2),
-      after_A: +distance(trajectory, after, a, b).toFixed(2),
+      before_A: +pairDistance(trajectory, before, a, b).toFixed(2),
+      after_A: +pairDistance(trajectory, after, a, b).toFixed(2),
       cutoff_A: +cutoff.toFixed(2),
     };
   };

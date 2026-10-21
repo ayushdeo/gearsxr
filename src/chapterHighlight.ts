@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { separation } from "./cell";
 import type { Chapter } from "./chapterStore";
 import type { Trajectory } from "./xyzParser";
 
@@ -94,10 +95,12 @@ export class ChapterHighlight {
       if (!lines) return;
       const attr = lines.geometry.getAttribute("position") as THREE.BufferAttribute;
       pairs.forEach(([a, b], i) => {
+        // To b's nearest periodic image, so a pair split by a cell wall
+        // doesn't draw a line across the box.
         const offA = base + a * 3;
-        const offB = base + b * 3;
+        const [dx, dy, dz] = separation(trajectory, frame, a, b);
         attr.setXYZ(i * 2, p[offA], p[offA + 1], p[offA + 2]);
-        attr.setXYZ(i * 2 + 1, p[offB], p[offB + 1], p[offB + 2]);
+        attr.setXYZ(i * 2 + 1, p[offA] + dx, p[offA + 1] + dy, p[offA + 2] + dz);
       });
       attr.needsUpdate = true;
     };

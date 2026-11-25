@@ -67,7 +67,7 @@ The model only **suggests**:
    ```bash
    git clone https://github.com/ayushdeo/gearsxr
    cd gearsxr
-   git checkout claude/gears-xr-project-ideas-gzowvl
+   git checkout gearsxr-chapters
    npm install
    ```
 

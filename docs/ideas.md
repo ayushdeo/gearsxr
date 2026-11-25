@@ -100,7 +100,7 @@ Quest browser (GEARS XR)                 Your GPU box (cloud credits)
  │                                        └─ adds spring force k·(target − x_i)
  ◀──── positions @ 30–60 Hz ──────────── stream frames (Float32, binary)
  │
- └─ event log ──────────────────────────▶ agent (Claude via your Worker or the sim server)
+ └─ event log ──────────────────────────▶ agent (an LLM via your Worker or the sim server)
                                           reads: pull history, energies, bond events
                                           (same detectors as Chapters), speaks/labels in VR
 ```
